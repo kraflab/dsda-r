@@ -15,6 +15,7 @@ gem 'faker',                   '1.7.2'
 gem 'will_paginate',           '3.1.5'
 gem 'bootstrap-will_paginate', '0.0.10'
 gem 'bootstrap-sass',          '3.3.7'
+gem 'thor', '0.19.1'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'

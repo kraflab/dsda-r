@@ -1,0 +1,14 @@
+<div class="navbar navbar-default">
+  <div class="navbar-header navbar-brand">
+    WADs
+  </div>
+  <div class="collapse navbar-collapse">
+    <ul class="nav navbar-nav">
+      <% ( ('A'..'Z').to_a + ["#"] ).each do |char| %>
+        <li class="wad-letter">
+          <%= link_to char, "#" %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
