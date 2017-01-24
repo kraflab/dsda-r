@@ -1,0 +1,19 @@
+<% provide(:title, 'Players') %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">List of Players</h3>
+  </div>
+  
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Demos</th>
+        <th>Length</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render @players %>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,29 @@
+<% provide(:title, @player.name) %>
+<div class="page-header">
+  <h1>
+    <%= @player.name %>
+    <small>
+      23 demos, 1:23:45
+      <ul class="nav nav-pills pull-right">
+        <% if !@player.twitch.empty? %>
+          <li role="presentation">
+            <a href="<%= @player.twitch_url %>">Twitch</a>
+          </li>
+        <% else %>
+          <li role="presentation" class="disabled">
+            <a href="#">Twitch</a>
+          </li>
+        <% end %>
+        <% if !@player.youtube.empty? %>
+          <li role="presentation">
+            <a href="<%= @player.youtube_url %>">YouTube</a>
+          </li>
+        <% else %>
+          <li role="presentation" class="disabled">
+            <a href="#">YouTube</a>
+          </li>
+        <% end %>
+      </ul>
+    </small>
+  </h1>
+</div>

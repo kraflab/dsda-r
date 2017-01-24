@@ -12,10 +12,27 @@ class Player < ApplicationRecord
     name.downcase.strip.gsub(/\s+/, '_').gsub(/[^a-z\d_]+/, '')
   end
   
+  # Return the player's twitch url
+  def twitch_url
+    "https://www.twitch.tv/" + twitch
+  end
+  
+  # Return the player's youtube url
+  def youtube_url
+    "https://www.youtube.com/" + youtube
+  end
+  
+  # Override path
+  def to_param
+    username
+  end
+  
   private
   
     # Downcase and remove whitespace
     def clean_strings
+      self.twitch   ||= ""
+      self.youtube  ||= ""
       self.twitch   = twitch.downcase.gsub(/\s+/, '')
       self.youtube  = youtube.downcase.gsub(/\s+/, '')
       self.name     = name.gsub(/\s+/, ' ')
