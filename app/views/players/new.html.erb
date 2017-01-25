@@ -1,2 +1,9 @@
-<h1>Players#new</h1>
-<p>Find me in app/views/players/new.html.erb</p>
+<% provide(:title, 'New Player') %>
+
+<%= bootstrap_form_for(@player) do |f| %>
+  <%= f.text_field :name %>
+  <%= f.text_field :username, :placeholder => "leave blank for automatic generation" %>
+  <%= f.text_field :twitch,   :placeholder => "just the username itself (optional)" %>
+  <%= f.text_field :youtube,  :placeholder => "just the username itself (optional)" %>
+  <%= f.submit "Create Player" %>
+<% end %>
