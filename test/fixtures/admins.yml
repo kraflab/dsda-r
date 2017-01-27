@@ -1,0 +1,3 @@
+kraflab:
+  username: kraflab
+  password_digest: <%= Admin.digest('password1234') %>

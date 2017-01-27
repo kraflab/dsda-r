@@ -6,7 +6,7 @@ class PlayerTest < ActiveSupport::TestCase
     @player = Player.new(name: "Example Player", username: "example_player", twitch: "ExamplePlayer", youtube: "ExamplePlayer")
   end
   
-  test "setup player should be valid" do
+  test "should be valid" do
     assert @player.valid?
   end
   
@@ -71,5 +71,11 @@ class PlayerTest < ActiveSupport::TestCase
     @player.save
     assert_equal "badlink123", @player.reload.twitch
     assert_equal "badlink123", @player.reload.youtube
+  end
+  
+  test "username should be unique" do
+    duplicate_player = @player.dup
+    @player.save
+    assert_not duplicate_player.valid?
   end
 end

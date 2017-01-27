@@ -37,6 +37,11 @@
         <li>
           <a href="#">Settings</a>
         </li>
+        <% if logged_in? %>
+          <li>
+            <%= link_to "Log Out", logout_path, method: "delete" %>
+          </li>
+        <% end %>
       </ul>
     </div>
   </div>

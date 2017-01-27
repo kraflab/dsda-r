@@ -2,6 +2,7 @@ class Player < ApplicationRecord
   VALID_USERNAME_REGEX = /\A[a-z\d_]+\z/
   validates :name,     presence: true, length: { maximum: 50 }
   validates :username, presence: true, length: { maximum: 50 },
+                       uniqueness: true,
                        format: { with: VALID_USERNAME_REGEX }
   validates :twitch,  length: { maximum: 50 }
   validates :youtube, length: { maximum: 50 }
@@ -35,6 +36,6 @@ class Player < ApplicationRecord
       self.youtube  ||= ""
       self.twitch   = twitch.downcase.gsub(/\s+/, '')
       self.youtube  = youtube.downcase.gsub(/\s+/, '')
-      self.name     = name.gsub(/\s+/, ' ')
+      self.name     = name.strip.gsub(/\s+/, ' ')
     end
 end
