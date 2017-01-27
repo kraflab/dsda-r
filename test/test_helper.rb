@@ -14,7 +14,7 @@ class ActiveSupport::TestCase
   
   # Logs in a test admin
   def log_in_as(admin, options = {})
-    password    = options[:password]    || 'password1234'
+    password = options[:password] || 'password1234'
     if integration_test?
       post login_path, params: { session: { username: admin.username,
                                             password: password } }

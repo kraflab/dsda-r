@@ -1,5 +1,6 @@
 class PlayersController < ApplicationController
   before_action :admin_session, except: [:index, :show]
+  
   def index
     @players = Player.all
   end
