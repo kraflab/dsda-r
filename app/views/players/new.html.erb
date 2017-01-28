@@ -1,6 +1,6 @@
 <% provide(:title, 'New Player') %>
 
-<%= bootstrap_form_for(@player) do |f| %>
+<%= bootstrap_form_for(@player, label_errors: true) do |f| %>
   <%= f.text_field :name %>
   <%= f.text_field :username, :placeholder => "leave blank for automatic generation" %>
   <%= f.text_field :twitch,   :placeholder => "just the username itself (optional)" %>

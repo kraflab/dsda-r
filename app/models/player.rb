@@ -4,12 +4,15 @@ class Player < ApplicationRecord
   validates :username, presence: true, length: { maximum: 50 },
                        uniqueness: true,
                        format: { with: VALID_USERNAME_REGEX }
-  validates :twitch,  length: { maximum: 50 }
-  validates :youtube, length: { maximum: 50 }
-  before_save :clean_strings
+  validates :twitch,   length: { maximum: 50 }, allow_blank: true,
+                       format: { with: VALID_USERNAME_REGEX }
+  validates :youtube,  length: { maximum: 50 }, allow_blank: true,
+                       format: { with: VALID_USERNAME_REGEX }
+  before_save   :clean_strings
+  before_update :clean_strings
   
   # Convert name to valid username
-  def default_username
+  def Player.default_username(name)
     name.downcase.strip.gsub(/\s+/, '_').gsub(/[^a-z\d_]+/, '')
   end
   
@@ -30,12 +33,10 @@ class Player < ApplicationRecord
   
   private
   
-    # Downcase and remove whitespace
+    # Remove excess whitespace
     def clean_strings
       self.twitch   ||= ""
       self.youtube  ||= ""
-      self.twitch   = twitch.downcase.gsub(/\s+/, '')
-      self.youtube  = youtube.downcase.gsub(/\s+/, '')
       self.name     = name.strip.gsub(/\s+/, ' ')
     end
 end

@@ -3,7 +3,8 @@ require 'test_helper'
 class PlayerTest < ActiveSupport::TestCase
   
   def setup
-    @player = Player.new(name: "Example Player", username: "example_player", twitch: "ExamplePlayer", youtube: "ExamplePlayer")
+    @player = Player.new(name: "Example Player", username: "exampleplayer",
+                         twitch: "exampleplayer", youtube: "exampleplayer")
   end
   
   test "should be valid" do
@@ -48,7 +49,7 @@ class PlayerTest < ActiveSupport::TestCase
   
   test "username should be fixed" do
     @player.name = "  7x7 #Should be fixed\t\n"
-    assert_equal "7x7_should_be_fixed", @player.default_username
+    assert_equal "7x7_should_be_fixed", Player.default_username(@player.name)
   end
   
   test "username should match regex" do
@@ -65,12 +66,20 @@ class PlayerTest < ActiveSupport::TestCase
     assert @player.valid?
   end
   
-  test "social links should be lower case and whitespace-free" do
-    @player.twitch  = "Bad Link123"
-    @player.youtube = "Bad Link123"
+  test "social links should match regex" do
+    bad_link  = "Bad Link"
+    good_link = "good_link"
+    @player.twitch = bad_link
+    assert_not @player.valid?
+    @player.twitch = good_link
+    assert @player.valid?
+    @player.youtube = bad_link
+    assert_not @player.valid?
+    @player.youtube = good_link
+    assert @player.valid?
     @player.save
-    assert_equal "badlink123", @player.reload.twitch
-    assert_equal "badlink123", @player.reload.youtube
+    assert_equal @player.reload.twitch,  good_link
+    assert_equal @player.reload.youtube, good_link
   end
   
   test "username should be unique" do

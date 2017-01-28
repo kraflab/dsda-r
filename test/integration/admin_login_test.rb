@@ -28,11 +28,13 @@ class AdminLoginTest < ActionDispatch::IntegrationTest
     post login_path, params: { session: { username: @admin.username,
                                           password: 'password1234' } }
     assert is_logged_in?
-    assert_redirected_to root_path
+    assert_not flash.empty?
+    assert_redirected_to root_url
     follow_redirect!
     assert_select "a[href=?]", logout_path
     delete logout_path
     assert_not is_logged_in?
+    assert_not flash.empty?
     assert_redirected_to root_url
     assert_select "a[href=?]", logout_path, count: 0
   end

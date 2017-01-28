@@ -23,5 +23,14 @@ body {
 }
 
 table a:not(.btn), .table a:not(.btn) {
-    text-decoration: none;
+  text-decoration: none;
+}
+
+.panel-modest {
+  display: inline-block;
+  min-width: 50%;
+}
+
+.panel-title > a.label-info {
+  color: $state-info-text;
 }

@@ -4,26 +4,23 @@
     <%= @player.name %>
     <small>
       23 demos, 1:23:45
-      <ul class="nav nav-pills pull-right">
-        <% if !@player.twitch.empty? %>
-          <li role="presentation">
-            <a href="<%= @player.twitch_url %>">Twitch</a>
-          </li>
-        <% else %>
-          <li role="presentation" class="disabled">
-            <a href="#">Twitch</a>
-          </li>
-        <% end %>
-        <% if !@player.youtube.empty? %>
-          <li role="presentation">
-            <a href="<%= @player.youtube_url %>">YouTube</a>
-          </li>
-        <% else %>
-          <li role="presentation" class="disabled">
-            <a href="#">YouTube</a>
-          </li>
-        <% end %>
-      </ul>
+      
     </small>
+    <div class="pull-right">
+      <% if !@player.twitch.empty? %>
+        <a href="<%= @player.twitch_url %>">Twitch</a>
+      <% end %>
+      <% if !@player.youtube.empty? %>
+        <%= " | " if !@player.twitch.empty? %>
+        <a href="<%= @player.youtube_url %>">YouTube</a>
+      <% end %>
+      <% if logged_in? %>
+        <%= link_to "Edit", edit_player_path(@player),
+            :class => "label label-info" %>
+        <%= link_to "Delete", @player, method: :delete,
+            data: { confirm: "Are you sure?" },
+            :class => "label label-danger" %>
+      <% end %>
+    </div>
   </h1>
 </div>
