@@ -8,4 +8,9 @@
                                                  youtube: youtube)
 end
 
+Iwad.create!(name: "Doom", username: "doom", author: "id Software")
+Iwad.create!(name: "Doom II", username: "doom2", author: "id Software")
+Iwad.create!(name: "Heretic", username: "heretic", author: "Raven Software")
+Iwad.create!(name: "Hexen", username: "hexen", author: "Raven Software")
+
 Admin.create!(username: "kraflab", password: "password1234")

@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   patch  'edit' => 'admins#update'
   
   resources :players
+  resources :iwads
 end

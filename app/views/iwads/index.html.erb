@@ -1,0 +1,28 @@
+<% provide(:title, 'Iwads') %>
+<div style="text-align: center">
+  <div class="panel panel-default panel-modest" style="text-align: left">
+    <div class="panel-heading">
+      <h3 class="panel-title">
+        List of Iwads
+        <% if logged_in? %>
+          <%= link_to "Create New Iwad", new_iwad_path, :class => "label label-info pull-right" %>
+        <% end %>
+      </h3>
+    </div>
+    
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Author</th>
+          <th>Wads</th>
+          <th>Demos</th>
+          <th>Length</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render @iwads %>
+      </tbody>
+    </table>
+  </div>
+</div>

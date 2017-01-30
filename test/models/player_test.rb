@@ -3,8 +3,8 @@ require 'test_helper'
 class PlayerTest < ActiveSupport::TestCase
   
   def setup
-    @player = Player.new(name: "Example Player", username: "exampleplayer",
-                         twitch: "exampleplayer", youtube: "exampleplayer")
+    @player = Player.new(name:   "Example Player", username: "exampleplayer",
+                         twitch: "exampleplayer",  youtube:  "exampleplayer")
   end
   
   test "should be valid" do

@@ -1,0 +1,20 @@
+<% provide(:title, @iwad.name) %>
+<div class="page-header">
+  <h1>
+    <%= @iwad.name %>
+    <small>
+      23 wads, 23 demos, 1:23:45
+      
+    </small>
+    <div class="pull-right">
+      <%= @iwad.author %>
+      <% if logged_in? %>
+        <%= link_to "Edit", edit_iwad_path(@iwad),
+            :class => "label label-info" %>
+        <%= link_to "Delete", @iwad, method: :delete,
+            data: { confirm: "Are you sure?" },
+            :class => "label label-danger" %>
+      <% end %>
+    </div>
+  </h1>
+</div>

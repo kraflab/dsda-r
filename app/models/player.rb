@@ -1,5 +1,5 @@
 class Player < ApplicationRecord
-  VALID_USERNAME_REGEX = /\A[a-z\d_]+\z/
+  VALID_USERNAME_REGEX = /\A[a-z\d_-]+\z/
   validates :name,     presence: true, length: { maximum: 50 }
   validates :username, presence: true, length: { maximum: 50 },
                        uniqueness: true,
@@ -13,7 +13,7 @@ class Player < ApplicationRecord
   
   # Convert name to valid username
   def Player.default_username(name)
-    name.downcase.strip.gsub(/\s+/, '_').gsub(/[^a-z\d_]+/, '')
+    name.downcase.strip.gsub(/\s+/, '_').gsub(/[^a-z\d_-]+/, '')
   end
   
   # Return the player's twitch url
