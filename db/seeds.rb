@@ -8,9 +8,16 @@
                                                  youtube: youtube)
 end
 
-Iwad.create!(name: "Doom", username: "doom", author: "id Software")
+doom = Iwad.create!(name: "Doom", username: "doom", author: "id Software")
 Iwad.create!(name: "Doom II", username: "doom2", author: "id Software")
 Iwad.create!(name: "Heretic", username: "heretic", author: "Raven Software")
 Iwad.create!(name: "Hexen", username: "hexen", author: "Raven Software")
+
+50.times do
+  name     = Faker::App.unique.name
+  username = name.gsub(/\s+/, '').slice(0, 8).downcase
+  author   = Faker::Name.name
+  doom.wads.create!(name: name, username: username, author: author, file: "")
+end
 
 Admin.create!(username: "kraflab", password: "password1234")

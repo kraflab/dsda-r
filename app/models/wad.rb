@@ -1,9 +1,13 @@
-class Iwad < ApplicationRecord
-  has_many :wads, dependent: :destroy
+class Wad < ApplicationRecord
+  belongs_to :iwad
+  default_scope -> { order(:username) }
+  validates :iwad_id, presence: true
   VALID_USERNAME_REGEX = /\A[a-z\d_-]+\z/
   validates :name,     presence: true, length: { maximum: 50 }
   validates :username, presence: true, length: { maximum: 50 },
                        uniqueness: true,
+                       format: { with: VALID_USERNAME_REGEX }
+  validates :file,     length: { maximum: 50 }, allow_blank: true,
                        format: { with: VALID_USERNAME_REGEX }
   validates :author,   presence: true, length: { maximum: 50 }
   before_save   :clean_strings
