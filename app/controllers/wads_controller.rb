@@ -1,0 +1,2 @@
+class WadsController < ApplicationController
+end

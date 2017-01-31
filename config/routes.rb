@@ -10,4 +10,5 @@ Rails.application.routes.draw do
   
   resources :players
   resources :iwads
+  resources :wads
 end

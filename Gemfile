@@ -17,11 +17,7 @@ gem 'bootstrap-will_paginate', '0.0.10'
 gem 'bootstrap-sass',          '3.3.7'
 gem 'bootstrap_form',          '2.5.3'
 gem 'thor',                    '0.19.1'
-
-# Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 3.0'
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+gem 'secure_headers'
 
 group :development, :test do
   gem 'byebug', platform: :mri

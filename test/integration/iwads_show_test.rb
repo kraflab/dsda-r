@@ -13,10 +13,8 @@ class IwadsShowTest < ActionDispatch::IntegrationTest
     assert_select "h1 > small"
     assert_match @iwad.name, response.body
     assert_select "a[href=?]", edit_iwad_path(@iwad), 0
-    assert_select "a[data-method=delete][href=?]", iwad_path(@iwad), 0
     log_in_as(@admin)
     get iwad_path(@iwad)
     assert_select "a[href=?]", edit_iwad_path(@iwad)
-    assert_select "a[data-method=delete][href=?]", iwad_path(@iwad)
   end
 end

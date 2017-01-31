@@ -7,6 +7,7 @@ class IwadsController < ApplicationController
   
   def show
     @iwad = Iwad.find_by(username: params[:id])
+    @wads = @iwad.wads
   end
   
   def new

@@ -20,10 +20,8 @@ class PlayersShowTest < ActionDispatch::IntegrationTest
     assert_select "h1 > small"
     assert_match @player.name, response.body
     assert_select "a[href=?]", edit_player_path(@player), 0
-    assert_select "a[data-method=delete][href=?]", player_path(@player), 0
     log_in_as(@admin)
     get player_path(@player)
     assert_select "a[href=?]", edit_player_path(@player)
-    assert_select "a[data-method=delete][href=?]", player_path(@player)
   end
 end

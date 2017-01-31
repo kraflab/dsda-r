@@ -20,4 +20,10 @@ module SessionsHelper
   def logged_in?
     !current_admin.nil?
   end
+  
+  # DRY delete pattern
+  def delete_me(object)
+    link_to "Delete", object, method: :delete,
+    data: { confirm: "Are you sure?" }, :class => "label label-danger"
+  end
 end

@@ -34,3 +34,23 @@ table a:not(.btn), .table a:not(.btn) {
 .panel-title > a.label-info {
   color: $state-info-text;
 }
+
+.center-text {
+  text-align: center;
+}
+
+.left-text {
+  text-align: left;
+}
+
+.wadfile {
+  font-family: "Lucida Console", Monaco, monospace;
+}
+
+a.btn {
+  border-width: 0px;
+}
+
+span.glyphicon {
+  top: 2px;
+}
