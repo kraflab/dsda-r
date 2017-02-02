@@ -53,7 +53,7 @@ class WadsController < ApplicationController
   def edit
     @wad = Wad.find_by(username: params[:id])
     @old_username = @wad.username
-    @iwad_username = Iwad.find_by(username: @wad.iwad_id)
+    @iwad_username = @wad.iwad.username
   end
   
   def update

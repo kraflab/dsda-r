@@ -1,0 +1,13 @@
+btsx:
+  name: Back to Saturn X
+  username: btsx
+  author: Various
+  iwad: doom2
+
+<% 20.times do |n| %>
+wad_<%= n %>:
+  name: <%= Faker::App.unique.name %>
+  username: <%= Faker::App.unique.name.gsub(/\s+/, '').slice(0, 8).downcase %>
+  author: <%= Faker::Name.name %>
+  iwad: doom
+<% end %>
