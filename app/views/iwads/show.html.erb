@@ -11,14 +11,14 @@
       <% end %>
     <% end %>
   </h1>
-  <p><%= @iwad.wads.count %> wads, 113 demos, 1:23:45</p>
+  <p><%= pluralize(@iwad.wads.count, "wad") %>, 113 demos, 1:23:45</p>
   
   <div class="panel panel-default panel-modest left-text">
     <div class="panel-heading">
       <h3 class="panel-title">
         List of Wads
         <% if logged_in? %>
-          <%= link_to "Create New Wad", new_wad_path, :class => "label label-info pull-right" %>
+          <%= link_to "Create New Wad", new_wad_path(:iwad_username => @iwad.username), :class => "label label-info pull-right" %>
         <% end %>
       </h3>
     </div>

@@ -25,29 +25,24 @@ class PlayersController < ApplicationController
   end
   
   def destroy
-    @player = Player.find_by(username: params[:id])
-    if @player
-      @player.destroy
-      flash[:info] = "Player successfully deleted"
-    else
-      flash[:danger] = "Delete failed, unknown username"
-    end
+    Player.find_by(username: params[:id]).destroy
+    flash[:info] = "Player successfully deleted"
     redirect_to players_url
   end
   
   def edit
     @player = Player.find_by(username: params[:id])
+    @old_username = @player.username
   end
   
   def update
-    old_username = params[:player][:old_username]
-    @player = Player.find_by(username: old_username)
+    @old_username = params[:player][:old_username]
+    @player = Player.find_by(username: @old_username)
     these_params = check_username(player_params)
-    if @player && @player.update_attributes(these_params)
+    if @player.update_attributes(these_params)
       flash[:info] = "Player successfully updated"
       redirect_to @player
     else
-      @player = Player.find_by(username: params[:id])
       render 'edit'
     end
   end

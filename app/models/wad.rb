@@ -18,6 +18,14 @@ class Wad < ApplicationRecord
     username
   end
   
+  def iwad_username
+    if iwad_id
+      Iwad.find(iwad_id).username
+    else
+      ""
+    end
+  end
+  
   private
   
     # Remove excess whitespace

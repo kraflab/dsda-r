@@ -21,6 +21,7 @@ gem 'secure_headers'
 
 group :development, :test do
   gem 'byebug', platform: :mri
+  gem 'sqlite3_ar_regexp', '~> 2.2'
 end
 
 group :test do

@@ -35,13 +35,6 @@ class PlayersEditTest < ActionDispatch::IntegrationTest
     new_name = "Good"
     patch player_path(@player), params: { player:
                                           { name: new_name, 
-                                            old_username: "wrong", 
-                                            username: "",
-                                            twitch: "", youtube: "" } }
-    assert_select "input.btn[value=?]", "Edit Player"
-    assert_not_equal @player.reload.name, new_name
-    patch player_path(@player), params: { player:
-                                          { name: new_name, 
                                             old_username: @player.username, 
                                             username: "",
                                             twitch: "bad link", youtube: "" } }

@@ -2,11 +2,12 @@
   <div class="collapse navbar-collapse">
     <ul class="nav navbar-nav">
       <li class="wad-letter">
-        <a class="navbar-brand" href="#">WADs</a>
+        <%= link_to "WADs", wads_path, :class => "navbar-brand" %>
       </li>
-      <% ( ('A'..'Z').to_a + ["#"] ).each do |char| %>
+      <% ( ["#"] + ('A'..'Z').to_a).each do |char| %>
         <li class="wad-letter">
-          <%= link_to char, "#" %>
+          <% letter = char == "#" ? "9" : char.downcase %>
+          <%= link_to char, wads_path(:letter => letter) %>
         </li>
       <% end %>
     </ul>

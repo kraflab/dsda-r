@@ -1,0 +1,28 @@
+<% provide(:title, 'Wads') %>
+<div class="center-text">
+  <div class="panel panel-default panel-modest left-text">
+    <div class="panel-heading">
+      <h3 class="panel-title">
+        List of Wads
+        <% if logged_in? %>
+          <%= link_to "Create New Wad", new_wad_path, :class => "label label-info pull-right" %>
+        <% end %>
+      </h3>
+    </div>
+    
+    <table class="table">
+      <thead>
+        <tr>
+          <th>File</th>
+          <th>Name</th>
+          <th>Author</th>
+          <th>Demos</th>
+          <th>Length</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render @wads %>
+      </tbody>
+    </table>
+  </div>
+</div>

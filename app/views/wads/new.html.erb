@@ -1,0 +1,10 @@
+<% provide(:title, 'New Wad') %>
+
+<%= bootstrap_form_for(@wad, label_errors: true) do |f| %>
+  <%= f.text_field :name %>
+  <%= f.text_field :username, :label => "/wads/***", :placeholder => "doom, chex, etc" %>
+  <%= f.text_field :author %>
+  <%= f.text_field :file %>
+  <%= f.text_field :iwad_username, :label => "Iwad", :placeholer => "doom, chex, etc", :value => @iwad_username %>
+  <%= f.submit "Create Wad" %>
+<% end %>

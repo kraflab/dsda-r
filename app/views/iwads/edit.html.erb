@@ -2,7 +2,7 @@
 
 <%= bootstrap_form_for(@iwad, label_errors: true) do |f| %>
   <%= f.text_field   :name %>
-  <%= f.hidden_field :old_username, :value => @iwad.username %>
+  <%= f.hidden_field :old_username, :value => @old_username %>
   <%= f.text_field   :username, :label => "/iwads/***", :placeholder => "doom, chex, etc" %>
   <%= f.text_field   :author %>
   <%= f.submit "Edit Iwad" %>

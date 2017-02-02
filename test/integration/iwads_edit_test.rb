@@ -34,13 +34,6 @@ class IwadsEditTest < ActionDispatch::IntegrationTest
     new_name = "Good"
     patch iwad_path(@iwad), params: { iwad:
                                           { name: new_name, 
-                                            old_username: "wrong", 
-                                            username: @iwad.username,
-                                            author: "" } }
-    assert_select "input.btn[value=?]", "Edit Iwad"
-    assert_not_equal @iwad.reload.name, new_name
-    patch iwad_path(@iwad), params: { iwad:
-                                          { name: new_name, 
                                             old_username: @iwad.username, 
                                             username: " $$doom",
                                             author: "" } }

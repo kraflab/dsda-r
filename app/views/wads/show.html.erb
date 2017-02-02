@@ -1,0 +1,15 @@
+<% provide(:title, @wad.name) %>
+<div class="center-text">
+  <h1>
+    <%= @wad.name %>
+    <small>
+      <%= @wad.author %>
+    </small>
+    <% if logged_in? %>
+      <%= link_to edit_wad_path(@wad), :class => 'btn btn-info btn-xs' do %>
+        <span class="glyphicon glyphicon-cog" aria-hidden="true" aria-label="Edit"></span>
+      <% end %>
+    <% end %>
+  </h1>
+  <p>113 demos, 1:23:45</p>
+</div>
