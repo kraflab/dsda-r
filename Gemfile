@@ -18,6 +18,7 @@ gem 'bootstrap-sass',          '3.3.7'
 gem 'bootstrap_form',          '2.5.3'
 gem 'thor',                    '0.19.1'
 gem 'secure_headers'
+gem 'chartkick'
 
 group :development, :test do
   gem 'byebug', platform: :mri
