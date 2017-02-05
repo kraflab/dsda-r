@@ -2,7 +2,6 @@ class Wad < ApplicationRecord
   belongs_to :iwad
   default_scope -> { order(:username) }
   validates :iwad_id, presence: true
-  VALID_USERNAME_REGEX = /\A[a-z\d_-]+\z/
   validates :name,     presence: true, length: { maximum: 50 }
   validates :username, presence: true, length: { maximum: 50 },
                        uniqueness: true,

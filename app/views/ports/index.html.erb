@@ -1,0 +1,29 @@
+<% provide(:title, 'Ports') %>
+<div class="center-text">
+  <div class="panel panel-default panel-modest left-text">
+    <div class="panel-heading">
+      <h3 class="panel-title">
+        List of Ports
+        <% if logged_in? %>
+          <%= link_to "Create New Port", new_port_path, :class => "label label-info pull-right" %>
+        <% end %>
+      </h3>
+    </div>
+    
+    <table class="table">
+      <tbody>
+        <% @ports.chunk { |i| i.family }.each do |chunk| %>
+          <tr>
+            <td><%= chunk[0] %></td>
+            <td>
+              <%= chunk[1].shift.version %>
+              <% chunk[1].each do |port| %>
+                  , <%= port.version %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

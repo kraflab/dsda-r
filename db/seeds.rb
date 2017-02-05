@@ -21,3 +21,8 @@ Iwad.create!(name: "Hexen", username: "hexen", author: "Raven Software")
 end
 
 Admin.create!(username: "kraflab", password: "password1234")
+
+Port.create!(family: "PRBoom+", version: "v2.5.1.4")
+Port.create!(family: "GZDoom",  version: "v2.0.05")
+Port.create!(family: "CNDoom",  version: "v2.0.3.2")
+Port.create!(family: "PRBoom+", version: "v2.5.1.5")

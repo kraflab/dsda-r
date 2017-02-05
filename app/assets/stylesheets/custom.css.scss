@@ -54,3 +54,21 @@ a.btn {
 span.glyphicon {
   top: 2px;
 }
+
+.chart-style {
+  height: 300px;
+  width: 100%;
+  text-align: center;
+  color: #999;
+  line-height: 300px;
+  font-size: 14px;
+  font-family: 'Lucida Grande', 'Lucida Sans Unicode', Verdana, Arial, Helvetica, sans-serif;
+}
+
+.table > tbody > tr > td.middle-text {
+  vertical-align: middle;
+}
+
+.no-stripe {
+  background-color: white;
+}

@@ -1,6 +1,5 @@
 class Iwad < ApplicationRecord
   has_many :wads, dependent: :destroy
-  VALID_USERNAME_REGEX = /\A[a-z\d_-]+\z/
   validates :name,     presence: true, length: { maximum: 50 }
   validates :username, presence: true, length: { maximum: 50 },
                        uniqueness: true,
