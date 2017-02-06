@@ -18,11 +18,11 @@ class Wad < ApplicationRecord
   end
   
   def iwad_username
-    if iwad_id
-      Iwad.find(iwad_id).username
-    else
-      ""
-    end
+    iwad.username if iwad
+  end
+  
+  def iwad_username=(name)
+    self.iwad = Iwad.find_by(username: name) unless name.blank?
   end
   
   private

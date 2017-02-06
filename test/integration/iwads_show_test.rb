@@ -19,6 +19,6 @@ class IwadsShowTest < ActionDispatch::IntegrationTest
     log_in_as(@admin)
     get iwad_path(@iwad)
     assert_select "a[href=?]", edit_iwad_path(@iwad)
-    assert_select "a[href=?]", new_wad_path + "?iwad_username=" + @iwad.username
+    assert_select "a[href=?]", new_wad_path + "?iwad=" + @iwad.username
   end
 end

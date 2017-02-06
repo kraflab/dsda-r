@@ -19,6 +19,8 @@ gem 'bootstrap_form',          '2.5.3'
 gem 'thor',                    '0.19.1'
 gem 'secure_headers'
 gem 'chartkick'
+gem 'jquery-ui-rails'
+gem 'rails-jquery-autocomplete'
 
 group :development, :test do
   gem 'byebug', platform: :mri

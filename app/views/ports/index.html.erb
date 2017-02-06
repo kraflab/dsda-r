@@ -16,9 +16,17 @@
           <tr>
             <td><%= chunk[0] %></td>
             <td>
-              <%= chunk[1].shift.version %>
-              <% chunk[1].each do |port| %>
-                  , <%= port.version %>
+              <% if logged_in? %>
+                <% port = chunk[1].shift %>
+                <%= link_to port.version, edit_port_path(port) %>
+                <% chunk[1].each do |port| %>
+                  , <%= link_to port.version, edit_port_path(port) %>
+                <% end %>
+              <% else %>
+                <%= chunk[1].shift.version %>
+                <% chunk[1].each do |port| %>
+                    , <%= port.version %>
+                <% end %>
               <% end %>
             </td>
           </tr>

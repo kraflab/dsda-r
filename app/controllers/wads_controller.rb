@@ -20,26 +20,15 @@ class WadsController < ApplicationController
   
   def new
     @wad = Wad.new
-    @iwad_username = params[:iwad_username] || ""
+    @wad.iwad_username = params[:iwad]
   end
   
   def create
-    @iwad_username = params[:wad][:iwad_username]
-    iwad = Iwad.find_by(username: @iwad_username)
-    these_params = wad_params
-    if iwad
-      these_params[:iwad_id] = iwad.id
-      @wad = Wad.new(these_params)
-      if @wad.save
-        flash[:info] = "Wad successfully created"
-        redirect_to wad_path(@wad)
-      else
-        render 'new'
-      end
+    @wad = Wad.new(wad_params)
+    if @wad.save
+      flash[:info] = "Wad successfully created"
+      redirect_to wad_path(@wad)
     else
-      these_params[:iwad_id] = nil
-      @wad = Wad.new(these_params)
-      flash.now[:danger] = "Iwad not found"
       render 'new'
     end
   end
@@ -53,25 +42,15 @@ class WadsController < ApplicationController
   def edit
     @wad = Wad.find_by(username: params[:id])
     @old_username = @wad.username
-    @iwad_username = @wad.iwad.username
   end
   
   def update
     @old_username  = params[:wad][:old_username]
-    @iwad_username = params[:wad][:iwad_username]
-    these_params  = wad_params
     @wad = Wad.find_by(username: @old_username)
-    iwad = Iwad.find_by(username: @iwad_username)
-    if iwad
-      these_params[:iwad_id] = iwad.id
-      if @wad.update_attributes(these_params)
-        flash[:info] = "Wad successfully updated"
-        redirect_to @wad
-      else
-        render 'edit'
-      end
+    if @wad.update_attributes(wad_params)
+      flash[:info] = "Wad successfully updated"
+      redirect_to @wad
     else
-      flash.now[:danger] = "Iwad not found"
       render 'edit'
     end
   end
@@ -79,7 +58,7 @@ class WadsController < ApplicationController
   private
   
     def wad_params
-      params.require(:wad).permit(:name, :username, :author, :file)
+      params.require(:wad).permit(:name, :username, :author, :file, :iwad_username)
     end
     
     # Confirms an admin session

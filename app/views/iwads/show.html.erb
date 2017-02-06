@@ -18,7 +18,7 @@
       <h3 class="panel-title">
         List of Wads
         <% if logged_in? %>
-          <%= link_to "Create New Wad", new_wad_path(:iwad_username => @iwad.username), :class => "label label-info pull-right" %>
+          <%= link_to "Create New Wad", new_wad_path(:iwad => @iwad.username), :class => "label label-info pull-right" %>
         <% end %>
       </h3>
     </div>

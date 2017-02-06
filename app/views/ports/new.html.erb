@@ -1,0 +1,8 @@
+<% provide(:title, 'New Port') %>
+
+<%= bootstrap_form_for(@port, label_errors: true) do |f| %>
+  <%= f.text_field :family,  label: "Port", placeholder: "PRBoom+",
+                   "data-autocomplete" => autocomplete_port_family_ports_path %>
+  <%= f.text_field :version, placeholder: "v2.5.1.4" %>
+  <%= f.submit "Create Port" %>
+<% end %>

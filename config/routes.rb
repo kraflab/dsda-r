@@ -12,5 +12,7 @@ Rails.application.routes.draw do
   resources :players
   resources :iwads
   resources :wads
-  resources :ports, except: :show, :id => /([^\/])+/
+  resources :ports, except: :show, :id => /([^\/])+/ do
+    get :autocomplete_port_family, :on => :collection
+  end
 end

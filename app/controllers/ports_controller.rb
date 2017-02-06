@@ -1,4 +1,7 @@
 class PortsController < ApplicationController
+  autocomplete :port, :family do |items|
+    ActiveSupport::JSON.encode(items.uniq{ |i| i["value"] })
+  end
   before_action :admin_session, except: [:index]
   
   def index
@@ -13,7 +16,7 @@ class PortsController < ApplicationController
     @port = Port.new(port_params)
     if @port.save
       flash[:info] = "Port successfully created"
-      redirect_to port_path(@port)
+      redirect_to ports_url
     else
       render 'new'
     end
@@ -28,16 +31,15 @@ class PortsController < ApplicationController
   
   def edit
     family, version = parse_id
+    puts "> #{family} #{version} <"
     @port = Port.find_by(family: family, version: version)
-    @old_id = @port.id
   end
   
   def update
-    @old_id = params[:port][:old_id]
-    @port = Port.find(@old_id)
+    @port = Port.find(params[:port][:old_id])
     if @port.update_attributes(port_params)
       flash[:info] = "Port successfully updated"
-      redirect_to @port
+      redirect_to ports_url
     else
       render 'edit'
     end
@@ -50,7 +52,7 @@ class PortsController < ApplicationController
     end
     
     def parse_id
-      params[:id].split(':')
+      CGI::unescape(params[:id]).split(':')
     end
 
     # Confirms an admin session
