@@ -1,5 +1,8 @@
 # README
 
-# Doomed Speed Demos Archive - R
+# Doomed Speed Demos Archive
 
-Ruby 2.4.0; Rails 5.0.1
+Uses Ruby  2.4.0
+Uses Rails 5.0.1
+
+Author: Ryan Krafnick aka Kraflab

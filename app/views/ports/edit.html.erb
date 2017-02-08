@@ -1,9 +1,9 @@
-<% provide(:title, 'New Port') %>
+<% provide(:title, 'Edit Port') %>
 
 <%= bootstrap_form_for(@port, label_errors: true) do |f| %>
   <%= f.hidden_field :old_id, :value => @port.id %>
   <%= f.text_field :family,  label: "Port", placeholder: "PRBoom+",
                    "data-autocomplete" => autocomplete_port_family_ports_path %>
   <%= f.text_field :version, placeholder: "v2.5.1.4" %>
-  <%= f.submit "Create Port" %>
+  <%= f.submit "Edit Port" %>
 <% end %>

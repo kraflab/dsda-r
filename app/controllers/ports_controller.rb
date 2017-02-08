@@ -31,7 +31,6 @@ class PortsController < ApplicationController
   
   def edit
     family, version = parse_id
-    puts "> #{family} #{version} <"
     @port = Port.find_by(family: family, version: version)
   end
   
