@@ -1,8 +1,10 @@
-# README
+# Doom Speed Demo Archive
 
-# Doomed Speed Demos Archive
+The goal of this project is to create a new dsda, from scratch, implementing
+a variety of features and improvements, such as support for additional
+categories, heretic / hexen demos, zandronum demos, and extra stats / options.
 
-Uses Ruby  2.4.0
+Uses Ruby  2.4.0  
 Uses Rails 5.0.1
 
 Author: Ryan Krafnick aka Kraflab

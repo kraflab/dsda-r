@@ -4,4 +4,7 @@ class StaticPagesController < ApplicationController
   
   def stats
   end
+  
+  def tools
+  end
 end

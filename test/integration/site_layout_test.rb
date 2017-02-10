@@ -13,6 +13,7 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", wads_url
     assert_select "a[href=?]", ports_url
     assert_select "a[href=?]", stats_url
+    assert_select "a[href=?]", tools_url
     assert_select "a[href=?]", "https://www.doomworld.com/vb/doom-speed-demos/"
   end
 end
