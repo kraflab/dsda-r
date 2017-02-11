@@ -3,9 +3,11 @@ Rails.application.routes.draw do
   get 'stats' => 'static_pages#stats'
   get 'tools' => 'static_pages#tools'
 
-  get    'login'  => 'sessions#new'
-  post   'login'  => 'sessions#create'
-  delete 'logout' => 'sessions#destroy'
+  get    'login'    => 'sessions#new'
+  post   'login'    => 'sessions#create'
+  delete 'logout'   => 'sessions#destroy'
+  get    'settings' => 'sessions#settings'
+  patch  'settings' => 'sessions#set'
   
   get    'edit' => 'admins#edit'
   patch  'edit' => 'admins#update'

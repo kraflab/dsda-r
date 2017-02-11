@@ -1,7 +1,9 @@
-<tr>
-  <td><%= link_to iwad.name, iwad %></td>
-  <td><%= iwad.author %></td>
-  <td><%= iwad.wads.count %></td>
-  <td>123</td>
-  <td>1:23:45</td>
-</tr>
+<% if show_iwad?(iwad.id) %>
+  <tr>
+    <td><%= link_to iwad.name, iwad %></td>
+    <td><%= iwad.author %></td>
+    <td><%= iwad.wads.count %></td>
+    <td>123</td>
+    <td>1:23:45</td>
+  </tr>
+<% end %>

@@ -21,6 +21,11 @@ module SessionsHelper
     !current_admin.nil?
   end
   
+  # Returns true if the iwad's wads should be displayed
+  def show_iwad?(iwad)
+    !(cookies["iwad:#{iwad}"] == "0")
+  end
+  
   # DRY delete pattern
   def delete_me(object)
     link_to "Delete", object, method: :delete,

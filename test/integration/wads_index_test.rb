@@ -4,6 +4,7 @@ class WadsIndexTest < ActionDispatch::IntegrationTest
   
   def setup
     @admin = admins(:elim)
+    @iwad  = iwads(:doom)
   end
   
   test "index layout" do
@@ -24,5 +25,13 @@ class WadsIndexTest < ActionDispatch::IntegrationTest
     log_in_as(@admin)
     get wads_path
     assert_select 'a[href=?]', new_wad_path
+  end
+  
+  test "cookie should hide wads" do
+    cookies["iwad:#{@iwad.id}"] = "0"
+    get wads_path
+    wads.each do |wad|
+      assert_select 'a[href=?]', wad_path(wad), wad.iwad_id == @iwad.id ? 0 : 1
+    end
   end
 end

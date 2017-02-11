@@ -19,4 +19,14 @@ class SessionsController < ApplicationController
     flash[:info] = 'You are now logged out'
     redirect_to root_url
   end
+  
+  def settings
+  end
+  
+  def set
+    Iwad.all.each do |iwad|
+      cookies.permanent["iwad:#{iwad.id}"] = params["iwad:#{iwad.id}"]
+    end
+    render 'settings'
+  end
 end

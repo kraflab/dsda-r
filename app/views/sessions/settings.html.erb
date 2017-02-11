@@ -1,0 +1,24 @@
+<% provide(:title, "Settings") %>
+
+<div class="center-text">
+  <div class="panel panel-default panel-modest left-text">
+    <div class="panel-heading">
+      <h3 class="panel-title">
+        Settings
+      </h3>
+    </div>
+    <div class="panel-body">
+      <%= bootstrap_form_tag url: settings_path, method: "patch" do |f| %>
+        <%= f.form_group :iwads, label: { text: "Iwad Visibility" },
+                                 help: "Uncheck to hide related wads and demos" do %>
+          <% Iwad.all.each do |iwad| %>
+            <%= f.check_box "iwad:#{iwad.id}", label:   iwad.username,
+                                               checked: show_iwad?(iwad.id) %>
+          <% end %>
+        <% end %>
+        
+        <%= f.submit "Save Settings" %>
+      <% end %>
+    </div>
+  </div>
+</div>
