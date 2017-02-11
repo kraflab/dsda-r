@@ -17,4 +17,16 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", settings_url
     assert_select "a[href=?]", "https://www.doomworld.com/vb/doom-speed-demos/"
   end
+  
+  test "tools page" do
+    get tools_path
+    assert_select "title", "Tools | DSDA"
+    assert_select "div.panel-heading", "List of Tools"
+  end
+  
+  test "stats page" do
+    get stats_path
+    assert_select "title", "Stats | DSDA"
+    assert_select "div.page-header", "Stats & Charts"
+  end
 end
