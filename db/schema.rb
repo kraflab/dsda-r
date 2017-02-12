@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170210172818) do
+ActiveRecord::Schema.define(version: 20170211224206) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "username"
@@ -53,6 +53,13 @@ ActiveRecord::Schema.define(version: 20170210172818) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["family", "version"], name: "index_ports_on_family_and_version", unique: true
+  end
+
+  create_table "sub_categories", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "style"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "wads", force: :cascade do |t|
