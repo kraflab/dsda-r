@@ -40,3 +40,11 @@ Category.create!(name: "NoMo",        description: "Exit as fast as possible, us
 Category.create!(name: "NoMo 100S",   description: "Exit with all secrets collected, using the -nomonsters parameter.")
 Category.create!(name: "Collector",   description: "Exit with all weapons picked up, using the -nomonsters parameter.")
 Category.create!(name: "Other",       description: "Nonstandard category or movie.")
+
+player = Player.first
+100.times do
+  cat  = Category.order("RANDOM()").first
+  port = Port.first
+  wad  = Wad.reorder("RANDOM()").first
+  player.demos.create!(tics: rand(100000) + 1, map: rand(32) + 1, levelstat: "0:00.97, 0:12.09", recorded_at: rand(1000).minutes.ago, wad: wad, category: cat, port: port)
+end

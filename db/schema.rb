@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170211224206) do
+ActiveRecord::Schema.define(version: 20170213175123) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "username"
@@ -25,6 +25,25 @@ ActiveRecord::Schema.define(version: 20170211224206) do
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "demos", force: :cascade do |t|
+    t.integer  "tics"
+    t.integer  "map"
+    t.datetime "recorded_at"
+    t.text     "levelstat"
+    t.string   "file"
+    t.integer  "player_id"
+    t.integer  "wad_id"
+    t.integer  "category_id"
+    t.integer  "port_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["category_id"], name: "index_demos_on_category_id"
+    t.index ["player_id"], name: "index_demos_on_player_id"
+    t.index ["port_id"], name: "index_demos_on_port_id"
+    t.index ["wad_id", "map", "category_id", "tics"], name: "index_demos_on_wad_id_and_map_and_category_id_and_tics"
+    t.index ["wad_id"], name: "index_demos_on_wad_id"
   end
 
   create_table "iwads", force: :cascade do |t|

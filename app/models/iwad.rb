@@ -1,5 +1,6 @@
 class Iwad < ApplicationRecord
   has_many :wads, dependent: :destroy
+  default_scope -> { order(:username) }
   validates :name,     presence: true, length: { maximum: 50 }
   validates :username, presence: true, length: { maximum: 50 },
                        uniqueness: true,

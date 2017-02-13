@@ -17,5 +17,45 @@
       <% end %>
     </small>
   </h1>
-  <p>23 demos, 1:23:45</p>
+  <p><%= demo_details(@player) %></p>
+  
+  <div class="panel panel-default panel-modest left-text">
+    <div class="panel-heading">
+      <h3 class="panel-title">
+        List of Demos
+      </h3>
+    </div>
+    
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Wad</th>
+          <th>Map</th>
+          <th>Category</th>
+          <th>Engine</th>
+          <th>Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @demos.chunk { |i| i.wad.username }.each do |chunk| %>
+          <% first = chunk[1].shift %>
+          <tr>
+            <td class="wadfile middle-text" rowspan="<%= chunk[1].count + 1 %>"><%= link_to chunk[0], first.wad %></td>
+            <td><%= first.map %></td>
+            <td><%= first.category.name %></td>
+            <td><%= first.port.family %></td>
+            <td><%= first.time %></td>
+          </tr>
+          <% chunk[1].each do |demo| %>
+            <tr>
+              <td><%= demo.map %></td>
+              <td><%= demo.category.name %></td>
+              <td><%= demo.port.family %></td>
+              <td><%= demo.time %></td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>

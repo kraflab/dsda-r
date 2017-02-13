@@ -7,5 +7,11 @@ categories, heretic / hexen demos, zandronum demos, and extra stats / options.
 Uses Ruby  2.4.0  
 Uses Rails 5.0.1
 
+# To Do
+Test:  
+iwad: show, _
+wad: show, _
+player: show, _
+
 # Author
 Ryan Krafnick aka Kraflab
