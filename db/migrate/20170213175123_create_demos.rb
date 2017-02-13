@@ -2,7 +2,8 @@ class CreateDemos < ActiveRecord::Migration[5.0]
   def change
     create_table :demos do |t|
       t.integer :tics
-      t.integer :map
+      t.integer :cl
+      t.string :level
       t.datetime :recorded_at
       t.text :levelstat
       t.string :file
@@ -13,6 +14,6 @@ class CreateDemos < ActiveRecord::Migration[5.0]
 
       t.timestamps
     end
-    add_index :demos, [:wad_id, :map, :category_id, :tics]
+    add_index :demos, [:wad_id, :level, :category_id, :tics]
   end
 end

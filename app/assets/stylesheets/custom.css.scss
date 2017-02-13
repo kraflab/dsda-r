@@ -1,10 +1,10 @@
 @import "bootstrap-sprockets";
-@import "bootswatch/flatly/variables";
+@import "bootswatch/simplex/variables";
 @import "bootstrap";
-@import "bootswatch/flatly/bootswatch";
+@import "bootswatch/simplex/bootswatch";
 
 body {
-  padding-top: 80px;
+  padding-top: 60px;
 }
 
 .wad-letter {
@@ -12,18 +12,12 @@ body {
   margin-right: -2px;
 }
 
-.table-split {
-  border-top-width: 2px;
-  border-top-style: solid;
-  border-top-color: inherit;
-}
-
-.panel-body-short {
-  margin-bottom: 0px;
-}
-
 table a:not(.btn), .table a:not(.btn) {
   text-decoration: none;
+}
+
+.p-short {
+  margin-top: -10px;
 }
 
 .panel-modest {
@@ -32,7 +26,11 @@ table a:not(.btn), .table a:not(.btn) {
 }
 
 .panel-title > a.label-info {
-  color: $state-info-text;
+  color: white;
+}
+
+.panel-body-short {
+  padding-top: 5px;
 }
 
 .center-text {
@@ -65,7 +63,9 @@ span.glyphicon {
   font-family: 'Lucida Grande', 'Lucida Sans Unicode', Verdana, Arial, Helvetica, sans-serif;
 }
 
-.table > tbody > tr > td.middle-text {
+.table > thead > tr > th, .table > thead > tr > td,
+.table > tbody > tr > th, .table > tbody > tr > td,
+.table > tfoot > tr > th, .table > tfoot > tr > td {
   vertical-align: middle;
 }
 
@@ -84,4 +84,8 @@ span.glyphicon {
 
 .checkbox {
   margin-top: 0px;
+}
+
+.cell-no-wrap {
+  white-space: nowrap;
 }

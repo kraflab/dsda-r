@@ -46,5 +46,12 @@ player = Player.first
   cat  = Category.order("RANDOM()").first
   port = Port.first
   wad  = Wad.reorder("RANDOM()").first
-  player.demos.create!(tics: rand(100000) + 1, map: rand(32) + 1, levelstat: "0:00.97, 0:12.09", recorded_at: rand(1000).minutes.ago, wad: wad, category: cat, port: port)
+  player.demos.create!(tics:        rand(100000) + 1,
+                       level:       "Map #{rand(32) + 1}",
+                       levelstat:   "0:00.97, 0:12.09",
+                       recorded_at: rand(1000).minutes.ago,
+                       wad:         wad,
+                       category:    cat,
+                       port:        port,
+                       cl:          9)
 end

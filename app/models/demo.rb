@@ -3,13 +3,15 @@ class Demo < ApplicationRecord
   belongs_to :wad
   belongs_to :category
   belongs_to :port
-  default_scope -> { order(:category_id, :map) }
+  default_scope -> { order(:category_id, :level) }
   validates :player_id,   presence: true
   validates :wad_id,      presence: true
   validates :category_id, presence: true
   validates :port_id,     presence: true
   validates :tics,        presence: true, numericality: { greater_than: 0 }
-  validates :map,         presence: true, numericality: { greater_than: 0 }
+  validates :cl,          presence: true
+  validates :level,       presence: true, length: { maximum: 10 },
+                          format: { with: VALID_PORT_REGEX }
   validates :recorded_at, presence: true
   validates :levelstat,   presence: true, length: { maximum: 500 }
   validates :file,    length: { maximum: 50 }, allow_blank: true,

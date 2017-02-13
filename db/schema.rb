@@ -29,7 +29,8 @@ ActiveRecord::Schema.define(version: 20170213175123) do
 
   create_table "demos", force: :cascade do |t|
     t.integer  "tics"
-    t.integer  "map"
+    t.integer  "cl"
+    t.string   "level"
     t.datetime "recorded_at"
     t.text     "levelstat"
     t.string   "file"
@@ -42,7 +43,7 @@ ActiveRecord::Schema.define(version: 20170213175123) do
     t.index ["category_id"], name: "index_demos_on_category_id"
     t.index ["player_id"], name: "index_demos_on_player_id"
     t.index ["port_id"], name: "index_demos_on_port_id"
-    t.index ["wad_id", "map", "category_id", "tics"], name: "index_demos_on_wad_id_and_map_and_category_id_and_tics"
+    t.index ["wad_id", "level", "category_id", "tics"], name: "index_demos_on_wad_id_and_level_and_category_id_and_tics"
     t.index ["wad_id"], name: "index_demos_on_wad_id"
   end
 
