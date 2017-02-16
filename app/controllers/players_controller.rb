@@ -8,7 +8,7 @@ class PlayersController < ApplicationController
   def show
     @player = Player.find_by(username: params[:id])
     @demos  = @player.demos.includes(:wad).reorder("wads.username",
-                                                   :category_id, :map)
+                                                   :level, :category_id)
   end
   
   def new

@@ -1,15 +1,17 @@
 class Demo < ApplicationRecord
-  belongs_to :player
   belongs_to :wad
   belongs_to :category
   belongs_to :port
-  default_scope -> { order(:category_id, :level) }
-  validates :player_id,   presence: true
+  has_many :demo_players, dependent: :destroy
+  has_many :players, through: :demo_players
+  default_scope -> { order(:level, :category_id) }
   validates :wad_id,      presence: true
   validates :category_id, presence: true
   validates :port_id,     presence: true
   validates :tics,        presence: true, numericality: { greater_than: 0 }
-  validates :cl,          presence: true
+  validates :complevel,   presence: true
+  validates :tas,         presence: true
+  validates :guys,        presence: true, numericality: { greater_than: 0 }
   validates :level,       presence: true, length: { maximum: 10 },
                           format: { with: VALID_PORT_REGEX }
   validates :recorded_at, presence: true
@@ -19,6 +21,19 @@ class Demo < ApplicationRecord
   
   def time
     Demo.tics_to_string(tics)
+  end
+  
+  def note
+    "#{"C#{guys} " if guys > 1}#{"T#{tas}" if tas > 0}"
+  end
+  
+  def players_text
+    names = players.collect { |i| i.name }
+    str = "#{names.shift}"
+    names.each do |name|
+      str += "\n#{name}"
+    end
+    str
   end
   
   def self.tics_to_string(t)

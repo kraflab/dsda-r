@@ -33,27 +33,34 @@
             <th>Wad</th>
             <th>Level</th>
             <th>Category</th>
+            <th>Player(s)</th>
             <th>Engine</th>
+            <th>Notes</th>
             <th>Time</th>
           </tr>
         </thead>
         <tbody>
-          <% @demos.chunk { |i| i.wad.username }.each do |chunk| %>
-            <% first = chunk[1].shift %>
-            <tr>
-              <td class="wadfile" rowspan="<%= chunk[1].count + 1 %>"><%= link_to chunk[0], first.wad %></td>
-              <td><%= first.level %></td>
-              <td><%= first.category.name %></td>
-              <td><%= first.port.family %></td>
-              <td><%= first.time %></td>
-            </tr>
-            <% chunk[1].each do |demo| %>
-              <tr>
-                <td><%= demo.level %></td>
-                <td><%= demo.category.name %></td>
-                <td><%= demo.port.family %></td>
-                <td><%= demo.time %></td>
-              </tr>
+          <% @demos.chunk { |i| i.wad.username }.each do |chunk_w| %>
+            <% chunk_w[1].chunk { |i| i.level }.each do |chunk_l| %>
+              <% chunk_l[1].chunk { |i| i.category }.each do |chunk_c| %>
+                <% chunk_c[1].each do |demo| %>
+                  <tr>
+                    <% if demo == chunk_w[1].first %>
+                      <td class="wadfile" rowspan="<%= chunk_w[1].count %>"><%= link_to chunk_w[0], demo.wad %></td>
+                    <% end %>
+                    <% if demo == chunk_l[1].first %>
+                      <td rowspan="<%= chunk_l[1].count %>"><%= demo.level %></td>
+                    <% end %>
+                    <% if demo == chunk_c[1].first %>
+                      <td rowspan="<%= chunk_c[1].count %>"><%= demo.category.name %></td>
+                    <% end %>
+                    <td class="player-cell"><%= demo.players_text %></td>
+                    <td><%= demo.port.family %></td>
+                    <td class="right-text"><%= demo.note %></td>
+                    <td class="right-text"><%= demo.time %></td>
+                  </tr>
+                <% end %>
+              <% end %>
             <% end %>
           <% end %>
         </tbody>

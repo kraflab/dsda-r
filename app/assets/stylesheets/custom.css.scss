@@ -41,6 +41,10 @@ table a:not(.btn), .table a:not(.btn) {
   text-align: left;
 }
 
+.right-text {
+  text-align: right;
+}
+
 .wadfile {
   font-family: "Lucida Console", Monaco, monospace;
 }
@@ -88,4 +92,8 @@ span.glyphicon {
 
 .cell-no-wrap {
   white-space: nowrap;
+}
+
+.player-cell {
+  white-space: pre;
 }

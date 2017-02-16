@@ -12,6 +12,7 @@ Test:
 iwad: show, _
 wad: show, _
 player: show, _
+flash on settings change
 
 # Author
 Ryan Krafnick aka Kraflab

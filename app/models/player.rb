@@ -1,5 +1,6 @@
 class Player < ApplicationRecord
-  has_many :demos, dependent: :destroy
+  has_many :player_demos, class_name: "DemoPlayer", dependent: :destroy
+  has_many :demos, through: :player_demos, dependent: :destroy
   default_scope -> { order(:username) }
   validates :name,     presence: true, length: { maximum: 50 }
   validates :username, presence: true, length: { maximum: 50 },
