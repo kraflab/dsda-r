@@ -7,6 +7,17 @@ body {
   padding-top: 60px;
 }
 
+.table-modest {
+  width: auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: auto;
+}
+
+.table-left {
+  border-left: thin solid $table-border-color;
+}
+
 .wad-letter {
   margin-left: -2px;
   margin-right: -2px;
@@ -46,7 +57,11 @@ table a:not(.btn), .table a:not(.btn) {
 }
 
 .wadfile {
-  font-family: "Lucida Console", Monaco, monospace;
+  font-family: $font-family-monospace;
+}
+
+.demo-time {
+  font-family: $font-family-monospace;
 }
 
 a.btn {
@@ -73,8 +88,12 @@ span.glyphicon {
   vertical-align: middle;
 }
 
-.no-stripe {
-  background-color: white;
+.no-stripe-bg {
+  background-color: $body-bg;
+}
+
+.no-stripe-panel {
+  background-color: $panel-bg;
 }
 
 .ui-autocomplete {

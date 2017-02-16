@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   
   get    'edit' => 'admins#edit'
   patch  'edit' => 'admins#update'
+  
+  get    'feed' => 'demos#feed'
 
   resources :players
   resources :iwads

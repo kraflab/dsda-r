@@ -12,6 +12,7 @@ Test:
 iwad: show, _
 wad: show, _
 player: show, _
+demo: feed
 flash on settings change
 
 # Author

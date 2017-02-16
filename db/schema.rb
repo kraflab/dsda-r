@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170215222037) do
+ActiveRecord::Schema.define(version: 20170216025240) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "username"
@@ -90,6 +90,16 @@ ActiveRecord::Schema.define(version: 20170215222037) do
     t.integer  "style"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.integer  "sub_category_id"
+    t.integer  "demo_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["demo_id"], name: "index_tags_on_demo_id"
+    t.index ["sub_category_id", "demo_id"], name: "index_tags_on_sub_category_id_and_demo_id", unique: true
+    t.index ["sub_category_id"], name: "index_tags_on_sub_category_id"
   end
 
   create_table "wads", force: :cascade do |t|

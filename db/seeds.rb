@@ -51,10 +51,18 @@ player = Player.first
                       levelstat:   "0:00.97, 0:12.09",
                       tas:         0,
                       guys:        1,
-                      recorded_at: rand(1000).minutes.ago,
+                      recorded_at: rand(100).days.ago,
+                      created_at:  rand(100).days.ago,
                       wad:         wad,
                       category:    cat,
                       port:        port,
                       complevel:   9)
   player.player_demos.create(demo: demo)
 end
+
+subcategory = SubCategory.new(name: "-fast")
+subcategory.show
+subcategory.mod
+subcategory.save!
+
+Tag.create!(sub_category: subcategory, demo: Demo.first)

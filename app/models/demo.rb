@@ -2,6 +2,8 @@ class Demo < ApplicationRecord
   belongs_to :wad
   belongs_to :category
   belongs_to :port
+  has_many :tags, dependent: :destroy
+  has_many :sub_categories, through: :tags
   has_many :demo_players, dependent: :destroy
   has_many :players, through: :demo_players
   default_scope -> { order(:level, :category_id) }
@@ -24,7 +26,7 @@ class Demo < ApplicationRecord
   end
   
   def note
-    "#{"C#{guys} " if guys > 1}#{"T#{tas}" if tas > 0}"
+    "#{"C#{guys} " if guys > 1}#{"T#{tas}" if tas > 0}#{sub_categories.count > 0 ? sub_categories.first.name : ""}"
   end
   
   def players_text
