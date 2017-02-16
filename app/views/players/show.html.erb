@@ -39,19 +39,25 @@
             <% chunk_c[1].each do |demo| %>
               <tr>
                 <% if demo == chunk_w[1].first %>
-                  <td class="wadfile no-stripe-panel" rowspan="<%= chunk_w[1].count %>"><%= link_to chunk_w[0], demo.wad %></td>
+                  <td class="wadfile no-stripe-panel" rowspan="<%= chunk_w[1].count + 2*Tag.where(demo: chunk_w[1]).distinct.count(:demo_id) %>"><%= link_to chunk_w[0], demo.wad %></td>
                 <% end %>
                 <% if demo == chunk_l[1].first %>
-                  <td class="no-stripe-panel" rowspan="<%= chunk_l[1].count %>"><%= demo.level %></td>
+                  <td class="no-stripe-panel" rowspan="<%= chunk_l[1].count + 2*Tag.where(demo: chunk_l[1]).distinct.count(:demo_id) %>"><%= demo.level %></td>
                 <% end %>
                 <% if demo == chunk_c[1].first %>
-                  <td class="no-stripe-panel" rowspan="<%= chunk_c[1].count %>"><%= demo.category.name %></td>
+                  <td class="no-stripe-panel" rowspan="<%= chunk_c[1].count + 2*Tag.where(demo: chunk_c[1]).distinct.count(:demo_id) %>"><%= demo.category.name %></td>
                 <% end %>
                 <td class="player-cell"><%= demo.players_text %></td>
                 <td><%= demo.port.family %></td>
                 <td class="right-text"><%= demo.note %></td>
                 <td class="right-text"><%= demo.time %></td>
               </tr>
+              <% if demo.sub_categories.count > 0 %>
+                <tr></tr>
+                <tr>
+                  <td class="tag-text" colspan="4"><%= demo.tags_text %></td>
+                </tr>
+              <% end %>
             <% end %>
           <% end %>
         <% end %>

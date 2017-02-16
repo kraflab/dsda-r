@@ -11,8 +11,8 @@ class SubCategory < ApplicationRecord
       style & mask > 0
     end
     
-    define_method("#{sty}") do
-      self.style |= mask
+    define_method("#{sty}=") do |on|
+      on ? self.style |= mask : self.style &= ~mask
     end
   end
 end

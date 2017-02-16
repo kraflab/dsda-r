@@ -26,7 +26,15 @@ class Demo < ApplicationRecord
   end
   
   def note
-    "#{"C#{guys} " if guys > 1}#{"T#{tas}" if tas > 0}#{sub_categories.count > 0 ? sub_categories.first.name : ""}"
+    "#{"C#{guys} " if guys > 1}#{"T#{tas}" if tas > 0}"
+  end
+  
+  def tags_text
+    str = "Also "
+    sub_categories.each do |tag|
+      str += tag.name + " "
+    end
+    str
   end
   
   def players_text

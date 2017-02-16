@@ -116,3 +116,9 @@ span.glyphicon {
 .player-cell {
   white-space: pre;
 }
+
+.table > tbody > tr > td.tag-text {
+  font-size: 12px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
