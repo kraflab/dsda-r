@@ -14,6 +14,7 @@ class Demo < ApplicationRecord
   validates :complevel,   presence: true
   validates :tas,         presence: true
   validates :guys,        presence: true, numericality: { greater_than: 0 }
+  validates :has_tics,    presence: true
   validates :level,       presence: true, length: { maximum: 10 },
                           format: { with: VALID_PORT_REGEX }
   validates :recorded_at, presence: true
@@ -21,12 +22,20 @@ class Demo < ApplicationRecord
   validates :file,    length: { maximum: 50 }, allow_blank: true,
                       format: { with: VALID_USERNAME_REGEX }
   
+  def file_path
+    "#"
+  end
+  
   def time
     Demo.tics_to_string(tics)
   end
   
   def note
-    "#{"C#{guys} " if guys > 1}#{"T#{tas}" if tas > 0}"
+    "#{"C#{guys} " if guys > 1}#{"T#{tas}" if tas > 0}".strip
+  end
+  
+  def port_text
+    "#{port.full_name} #{complevel >= 0 ? "cl#{complevel}" : ""}"
   end
   
   def tags_text

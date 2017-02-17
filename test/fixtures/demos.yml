@@ -1,0 +1,12 @@
+bt01speed:
+  wad: btsx
+  category: uvspeed
+  port: prboom
+  tics: 999
+  complevel: 9
+  tas: 0
+  guys: 2
+  has_tics: true
+  level: Map 01
+  recorded_at: <%= 20.days.ago %>
+  levelstat: 0:02.97

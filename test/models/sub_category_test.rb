@@ -32,7 +32,7 @@ class SubCategoryTest < ActiveSupport::TestCase
   
   test "style change should work" do
     assert_not @sub.show?
-    @sub.show
+    @sub.show = true
     assert @sub.show?
   end
 end

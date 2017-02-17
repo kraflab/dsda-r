@@ -1,3 +1,5 @@
+<% provide(:title, "Feed") %>
+
 <div class="center-text">
   <h1>Recent Demos</h1>
   <table class="table table-striped table-modest">
@@ -25,7 +27,7 @@
           <td class="player-cell"><%= demo.players_text %></td>
           <td><%= demo.port.family %></td>
           <td class="right-text"><%= demo.note %></td>
-          <td class="right-text demo-time"><%= link_to demo.time, "#" %></td>
+          <td class="right-text demo-time"><%= link_to demo.time, demo.file_path %></td>
         </tr>
       <% end %>
     </tbody>

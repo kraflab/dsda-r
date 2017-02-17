@@ -5,6 +5,6 @@ module DemosHelper
   end
   
   def demo_details(thing)
-    "#{pluralize(thing.demos.count, "demos")}, #{total_time(thing)}"
+    "#{pluralize(thing.demos.count, "demo")}, #{total_time(thing)}"
   end
 end

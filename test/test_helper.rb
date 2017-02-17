@@ -23,6 +23,11 @@ class ActiveSupport::TestCase
     end
   end
   
+  # get total time for thing's demos
+  def total_demo_time(thing)
+    Demo.tics_to_string(thing.demos.sum(:tics))
+  end
+  
   private
   
     # Returns true inside an integration test.

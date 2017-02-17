@@ -9,6 +9,7 @@ class CreateDemos < ActiveRecord::Migration[5.0]
       t.datetime :recorded_at
       t.text :levelstat
       t.string :file
+      t.boolean :has_tics
       t.references :wad, foreign_key: true, index: true
       t.references :category, foreign_key: true
       t.references :port, foreign_key: true

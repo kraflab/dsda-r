@@ -1,21 +1,21 @@
 <% provide(:title, 'Players') %>
+
 <div class="center-text">
+  <h1>Player List</h1>
+  <p class="p-short">
+    <%= pluralize(@players.count, "player") %>
+    <% if logged_in? %>
+      <%= link_to "Create New Player", new_player_path, :class => "label label-info" %>
+    <% end %>
+  </p>
+  
   <div class="panel panel-default panel-modest left-text">
-    <div class="panel-heading">
-      <h3 class="panel-title">
-        List of Players
-        <% if logged_in? %>
-          <%= link_to "Create New Player", new_player_path, :class => "label label-info pull-right" %>
-        <% end %>
-      </h3>
-    </div>
-    
-    <table class="table">
+    <table class="table table-striped">
       <thead>
         <tr>
           <th>Name</th>
           <th>Demos</th>
-          <th>Length</th>
+          <th class="center-text">Length</th>
         </tr>
       </thead>
       <tbody>

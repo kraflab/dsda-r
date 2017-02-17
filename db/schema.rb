@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20170216025240) do
     t.datetime "recorded_at"
     t.text     "levelstat"
     t.string   "file"
+    t.boolean  "has_tics"
     t.integer  "wad_id"
     t.integer  "category_id"
     t.integer  "port_id"
