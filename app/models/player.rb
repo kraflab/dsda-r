@@ -15,7 +15,7 @@ class Player < ApplicationRecord
   
   # Convert name to valid username
   def Player.default_username(name)
-    name.downcase.strip.gsub(/\s+/, '_').gsub(/[^a-z\d_-]+/, '')
+    I18n.transliterate(name).downcase.strip.gsub(/\s+/, '_').gsub(/[^a-z\d_-]+/, '')
   end
   
   # Return the player's twitch url
