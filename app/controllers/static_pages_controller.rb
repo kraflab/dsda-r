@@ -7,4 +7,7 @@ class StaticPagesController < ApplicationController
   
   def tools
   end
+  
+  def about
+  end
 end

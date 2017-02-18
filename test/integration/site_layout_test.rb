@@ -16,6 +16,7 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", stats_url
     assert_select "a[href=?]", tools_url
     assert_select "a[href=?]", settings_url
+    assert_select "a[href=?]", about_url
     assert_select "a[href=?]", "https://www.doomworld.com/vb/doom-speed-demos/"
   end
   
@@ -29,5 +30,12 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     get stats_path
     assert_select "title", "Stats | DSDA"
     assert_select "div.page-header", "Stats & Charts"
+  end
+  
+  test "about page" do
+    get about_path
+    assert_match "Andy Olivera", response.body
+    assert_match "Opulent", response.body
+    assert_select "h1", "History"
   end
 end

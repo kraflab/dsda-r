@@ -9,10 +9,14 @@ Uses Rails 5.0.1
 
 # To Do
 Test:  
-iwad: show, _
-wad: show, _
-demo: feed
-flash on settings change
+iwad demo inclusion  
+wad: demo inclusion  
+demo: feed  
+demo model, demo_player model  
+  
+flash on settings change  
+demo new / edit / delete  
+history page  
 
 # Author
 Ryan Krafnick aka Kraflab

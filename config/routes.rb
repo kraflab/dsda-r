@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root 'static_pages#home'
   get 'stats' => 'static_pages#stats'
   get 'tools' => 'static_pages#tools'
+  get 'about' => 'static_pages#about'
 
   get    'login'    => 'sessions#new'
   post   'login'    => 'sessions#create'
