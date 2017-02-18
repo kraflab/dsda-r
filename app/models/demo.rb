@@ -1,5 +1,5 @@
 class Demo < ApplicationRecord
-  belongs_to :wad
+  belongs_to :wad, touch: true
   belongs_to :category
   belongs_to :port
   has_many :tags, dependent: :destroy
@@ -21,6 +21,7 @@ class Demo < ApplicationRecord
   validates :levelstat,   presence: true, length: { maximum: 500 }
   validates :file,    length: { maximum: 50 }, allow_blank: true,
                       format: { with: VALID_USERNAME_REGEX }
+  after_save :update_players
   
   def file_path
     "#"
@@ -66,4 +67,11 @@ class Demo < ApplicationRecord
     h.to_s + ":" + str.rjust(6, '0') if h > 0
     str
   end
+  
+  private
+  
+    # touch players when attributes change
+    def update_players
+      players.each { |i| i.touch }
+    end
 end

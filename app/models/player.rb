@@ -12,6 +12,7 @@ class Player < ApplicationRecord
                        format: { with: VALID_USERNAME_REGEX }
   before_save   :clean_strings
   before_update :clean_strings
+  after_save :update_demos
   
   # Convert name to valid username
   def Player.default_username(name)
@@ -34,6 +35,10 @@ class Player < ApplicationRecord
   end
   
   private
+  
+    def update_demos
+      demos.each { |i| i.touch }
+    end
   
     # Remove excess whitespace
     def clean_strings

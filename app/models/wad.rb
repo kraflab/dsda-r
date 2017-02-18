@@ -1,5 +1,5 @@
 class Wad < ApplicationRecord
-  belongs_to :iwad
+  belongs_to :iwad, touch: true
   has_many :demos, dependent: :destroy
   default_scope -> { order(:username) }
   validates :iwad_id, presence: true
