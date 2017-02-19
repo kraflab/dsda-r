@@ -9,18 +9,22 @@ class WadsIndexTest < ActionDispatch::IntegrationTest
   
   test "index layout" do
     get wads_path
-    assert_select "div.panel-heading", "List of Wads"
-    wads = Wad.all
+    assert_select "h1", "Wad List"
+    assert_select "div.pagination"
+    wads = Wad.paginate(page: nil)
     wads.each do |wad|
       assert_select 'a[href=?]', wad_path(wad)
     end
     assert_select 'a[href=?]', new_wad_path, 0
     ('a'..'z').to_a.each do |letter|
-      get wads_path(:letter => letter)
+      get wads_path, params: { letter: letter }
       wads = Wad.where("username LIKE ?", "#{letter}%")
       wads.each do |wad|
         assert_select 'a[href=?]', wad_path(wad)
+        assert_select 'td', wad.demos.count.to_s
+        assert_select 'td', total_demo_time(wad)
       end
+      assert_select "div.pagination", 0
     end
     log_in_as(@admin)
     get wads_path

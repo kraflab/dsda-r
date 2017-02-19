@@ -1,16 +1,16 @@
 <% provide(:title, 'Wads') %>
+
 <div class="center-text">
+  <h1>Wad List</h1>
+  <p class="p-short">
+    <%= pluralize(@wads.count, "wad") %>
+    <% if logged_in? %>
+      <%= link_to "Create New Wad", new_wad_path, :class => "label label-info" %>
+    <% end %>
+  </p>
+  
   <div class="panel panel-default panel-modest left-text">
-    <div class="panel-heading">
-      <h3 class="panel-title">
-        List of Wads
-        <% if logged_in? %>
-          <%= link_to "Create New Wad", new_wad_path, :class => "label label-info pull-right" %>
-        <% end %>
-      </h3>
-    </div>
-    
-    <table class="table">
+    <table class="table table-striped">
       <thead>
         <tr>
           <th>File</th>
@@ -18,12 +18,15 @@
           <th>Author</th>
           <th>Iwad</th>
           <th>Demos</th>
-          <th>Length</th>
+          <th class="center-text">Length</th>
         </tr>
       </thead>
       <tbody>
         <%= render @wads %>
       </tbody>
     </table>
+  </div>
+  <div class="short-pagination">
+    <%= will_paginate @wads if @is_paginated %>
   </div>
 </div>

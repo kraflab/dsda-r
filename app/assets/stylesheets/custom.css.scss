@@ -121,4 +121,10 @@ span.glyphicon {
   font-size: 12px;
   padding-top: 2px;
   padding-bottom: 2px;
+  white-space: pre;
+}
+
+.short-pagination > div.pagination,
+.short-pagination > div > .pagination {
+  margin: 0;
 }

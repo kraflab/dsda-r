@@ -21,7 +21,7 @@
         <tr>
           <td><%= demo.created_at.to_date.to_s %></td>
           <td class="wadfile"><%= link_to demo.wad.username, demo.wad %></td>
-          <td class="wadfile"><%=link_to demo.wad.iwad.username, demo.wad.iwad %></td>
+          <td class="wadfile"><%= link_to demo.wad.iwad.username, demo.wad.iwad %></td>
           <td><%= demo.level %></td>
           <td><%= demo.category.name %></td>
           <td class="player-cell"><%= demo.players_text %></td>

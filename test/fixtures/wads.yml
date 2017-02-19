@@ -4,7 +4,7 @@ btsx:
   author: Various
   iwad: doom2
 
-<% 20.times do |n| %>
+<% 40.times do |n| %>
 wad_<%= n %>:
   name: <%= Faker::App.unique.name %>
   username: <%= Faker::App.unique.name.gsub(/\s+/, '').slice(0, 8).downcase %>

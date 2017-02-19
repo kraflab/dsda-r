@@ -40,20 +40,11 @@ class Demo < ApplicationRecord
   end
   
   def tags_text
-    str = "Also "
-    sub_categories.each do |tag|
-      str += tag.name + " "
-    end
-    str
+    cell_names(sub_categories)
   end
   
   def players_text
-    names = players.collect { |i| i.name }
-    str = "#{names.shift}"
-    names.each do |name|
-      str += "\n#{name}"
-    end
-    str
+    cell_names(players)
   end
   
   def self.tics_to_string(t)
@@ -73,5 +64,15 @@ class Demo < ApplicationRecord
     # touch players when attributes change
     def update_players
       players.each { |i| i.touch }
+    end
+    
+    # collect names for table cell
+    def cell_names(thing)
+      names = thing.collect { |i| i.name }
+      str = "#{names.shift}"
+      names.each do |name|
+        str += "\n#{name}"
+      end
+      str
     end
 end

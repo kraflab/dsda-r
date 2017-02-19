@@ -10,12 +10,14 @@ class WadsController < ApplicationController
         @wads = Wad.where("username LIKE ?", "#{letter}%")
       end
     else
-      @wads = Wad.all
+      @wads = Wad.paginate(page: params[:page])
+      @is_paginated = true
     end
   end
   
   def show
     @wad = Wad.find_by(username: params[:id])
+    @demos = @wad.demos
   end
   
   def new
