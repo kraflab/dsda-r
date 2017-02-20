@@ -44,7 +44,6 @@ Category.create!(name: "Other",       description: "Nonstandard category or movi
 player = Player.first
 100.times do
   cat  = Category.order("RANDOM()").first
-  port = Port.first
   wad  = Wad.first #reorder("RANDOM()").first
   demo = Demo.create!(tics:        rand(100000) + 1,
                       has_tics:    true,
@@ -56,8 +55,7 @@ player = Player.first
                       created_at:  rand(100).days.ago,
                       wad:         wad,
                       category:    cat,
-                      port:        port,
-                      complevel:   9)
+                      engine:      "PRBoom+ v2.5.1.4 cl9")
   player.player_demos.create(demo: demo)
 end
 

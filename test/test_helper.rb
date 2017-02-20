@@ -24,8 +24,8 @@ class ActiveSupport::TestCase
   end
   
   # get total time for thing's demos
-  def total_demo_time(thing)
-    Demo.tics_to_string(thing.demos.sum(:tics))
+  def total_demo_time(thing, with_tics = true)
+    Demo.tics_to_string(thing.demos.sum(:tics), with_tics)
   end
   
   private

@@ -12,10 +12,7 @@ Test:
 demo: feed  
 demo model, demo_player model  
   
-flash on settings change  
 demo new / edit / delete  
-new ports index  
-new iwad index / show  
 
 # Author
 Ryan Krafnick aka Kraflab

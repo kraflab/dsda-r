@@ -27,6 +27,7 @@ class SessionsController < ApplicationController
     Iwad.all.each do |iwad|
       cookies.permanent["iwad:#{iwad.id}"] = params["iwad:#{iwad.id}"]
     end
+    flash.now[:info] = 'Your settings have been updated'
     render 'settings'
   end
 end

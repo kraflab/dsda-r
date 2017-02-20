@@ -1,5 +1,4 @@
 class Port < ApplicationRecord
-  has_many :demos, dependent: :destroy
   default_scope -> { order(:family, :version) }
   validates :family,  presence: true, length: { maximum: 50},
                       format: { with: VALID_PORT_REGEX }
@@ -18,6 +17,10 @@ class Port < ApplicationRecord
   
   def full_name
     return "#{family} #{version}"
+  end
+  
+  def file_path
+    return "#"
   end
   
   private

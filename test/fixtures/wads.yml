@@ -9,5 +9,5 @@ wad_<%= n %>:
   name: <%= Faker::App.unique.name %>
   username: <%= Faker::App.unique.name.gsub(/\s+/, '').slice(0, 8).downcase %>
   author: <%= Faker::Name.name %>
-  iwad: doom
+  iwad: doom2
 <% end %>

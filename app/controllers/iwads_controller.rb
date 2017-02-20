@@ -30,22 +30,6 @@ class IwadsController < ApplicationController
     redirect_to iwads_url
   end
   
-  def edit
-    @iwad = Iwad.find_by(username: params[:id])
-    @old_username = @iwad.username
-  end
-  
-  def update
-    @old_username = params[:iwad][:old_username]
-    @iwad = Iwad.find_by(username: @old_username)
-    if @iwad.update_attributes(iwad_params)
-      flash[:info] = "Iwad successfully updated"
-      redirect_to @iwad
-    else
-      render 'edit'
-    end
-  end
-  
   private
   
     def iwad_params

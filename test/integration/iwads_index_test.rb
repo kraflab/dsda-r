@@ -8,10 +8,11 @@ class IwadsIndexTest < ActionDispatch::IntegrationTest
   
   test "index layout" do
     get iwads_path
-    assert_select "div.panel-heading", "List of Iwads"
+    assert_select "h1", "Iwad List"
     iwads = Iwad.all
     iwads.each do |iwad|
       assert_select 'a[href=?]', iwad_path(iwad)
+      assert_select 'td', iwad.wads.count.to_s
     end
     assert_select 'a[href=?]', new_iwad_path, 0
     log_in_as(@admin)

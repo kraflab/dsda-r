@@ -48,7 +48,7 @@
                     <td class="no-stripe-panel" rowspan="<%= chunk_c[1].count + 2*Tag.where(demo: chunk_c[1]).distinct.count(:demo_id) %>"><%= demo.category.name %></td>
                   <% end %>
                   <td class="player-cell"><%= demo.players_text %></td>
-                  <td><%= demo.port_text %></td>
+                  <td class="engine-cell"><%= demo.engine %></td>
                   <td class="right-text"><%= demo.note %></td>
                   <td class="right-text demo-time"><%= link_to demo.time, demo.file_path %></td>
                 </tr>

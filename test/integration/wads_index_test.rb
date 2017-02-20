@@ -22,7 +22,7 @@ class WadsIndexTest < ActionDispatch::IntegrationTest
       wads.each do |wad|
         assert_select 'a[href=?]', wad_path(wad)
         assert_select 'td', wad.demos.count.to_s
-        assert_select 'td', total_demo_time(wad)
+        assert_select 'td', total_demo_time(wad, false)
       end
       assert_select "div.pagination", 0
     end

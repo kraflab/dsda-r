@@ -2,7 +2,6 @@ class CreateDemos < ActiveRecord::Migration[5.0]
   def change
     create_table :demos do |t|
       t.integer :tics
-      t.integer :complevel
       t.integer :tas
       t.integer :guys
       t.string :level
@@ -10,9 +9,9 @@ class CreateDemos < ActiveRecord::Migration[5.0]
       t.text :levelstat
       t.string :file
       t.boolean :has_tics
+      t.string :engine
       t.references :wad, foreign_key: true, index: true
       t.references :category, foreign_key: true
-      t.references :port, foreign_key: true
 
       t.timestamps
     end

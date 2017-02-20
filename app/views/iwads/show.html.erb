@@ -11,31 +11,36 @@
       <% end %>
     <% end %>
   </h1>
-  <p class="p-short"><%= pluralize(@iwad.wads.count, "wad") %></p>
+  <p class="p-short">
+    <%= pluralize(@iwad.wads.count, "wad") %>
+    <% if logged_in? %>
+      <%= link_to "Create New Wad", new_wad_path(:iwad => @iwad.username), :class => "label label-info pull-right" %>
+    <% end %>
+  </p>
   
   <div class="panel panel-default panel-modest left-text">
-    <div class="panel-heading">
-      <h3 class="panel-title">
-        List of Wads
-        <% if logged_in? %>
-          <%= link_to "Create New Wad", new_wad_path(:iwad => @iwad.username), :class => "label label-info pull-right" %>
-        <% end %>
-      </h3>
-    </div>
-    
-    <table class="table">
+    <table class="table table-striped table-modest">
       <thead>
         <tr>
           <th>File</th>
           <th>Name</th>
           <th>Author</th>
-          <th>Iwad</th>
           <th>Demos</th>
-          <th>Length</th>
+          <th class="center-text">Time</th>
         </tr>
       </thead>
       <tbody>
-        <%= render @wads %>
+        <% @wads.each do |wad| %>
+          <% if show_iwad?(wad.iwad_id) %>
+            <tr>
+              <td class="wadfile"><%= link_to wad.username, wad %></td>
+              <td><%= wad.name %></td>
+              <td><%= wad.author %></td>
+              <td><%= wad.demos.count %></td>
+              <td class="right-text demo-time"><%= total_time(wad, false) %></td>
+            </tr>
+          <% end %>
+        <% end %>
       </tbody>
     </table>
   </div>

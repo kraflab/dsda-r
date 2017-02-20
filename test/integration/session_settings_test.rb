@@ -15,5 +15,6 @@ class SessionSettingsTest < ActionDispatch::IntegrationTest
     assert_equal cookies[iwad_key], "1"
     patch settings_path, params: { iwad_key => "0" }
     assert_equal cookies[iwad_key], "0"
+    assert_not flash.empty?
   end
 end

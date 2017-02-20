@@ -8,7 +8,7 @@ class PortsIndexTest < ActionDispatch::IntegrationTest
   
   test "index layout" do
     get ports_path
-    assert_select "div.panel-heading", "List of Ports"
+    assert_select "h1", "Port List"
     ports = Port.all
     ports.each do |port|
       assert_match port.family, response.body
@@ -19,8 +19,5 @@ class PortsIndexTest < ActionDispatch::IntegrationTest
     log_in_as(@admin)
     get ports_path
     assert_select 'a[href=?]', new_port_path
-    ports.each do |port|
-      assert_select 'a[href=?]', edit_port_path(port)
-    end
   end
 end

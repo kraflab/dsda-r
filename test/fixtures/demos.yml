@@ -1,9 +1,8 @@
 bt01speed:
   wad: btsx
   category: uvspeed
-  port: prboom
   tics: 999
-  complevel: 9
+  engine: PRBoom+ v2.5.1.4 cl9
   tas: 0
   guys: 2
   has_tics: true

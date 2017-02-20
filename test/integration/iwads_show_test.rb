@@ -4,7 +4,7 @@ class IwadsShowTest < ActionDispatch::IntegrationTest
   
   def setup
     @admin = admins(:elim)
-    @iwad  = iwads(:doom)
+    @iwad  = iwads(:doom2)
   end
   
   test "layout and buttons" do
@@ -14,6 +14,10 @@ class IwadsShowTest < ActionDispatch::IntegrationTest
     assert_match @iwad.name, response.body
     @iwad.wads.each do |wad|
       assert_select "a[href=?]", wad_path(wad)
+      assert_select "td", wad.name
+      assert_select "td", wad.author
+      assert_select "td", wad.demos.count.to_s
+      assert_select "td", total_demo_time(wad, false)
     end
     assert_select "a[href=?]", edit_iwad_path(@iwad), 0
     log_in_as(@admin)

@@ -23,7 +23,7 @@ class PlayersShowTest < ActionDispatch::IntegrationTest
     assert_select "td", demo.wad.username
     assert_select "td", demo.level
     assert_select "td", demo.category.name
-    assert_select "td", demo.port_text
+    assert_select "td", demo.engine
     assert_select "td", demo.time
     assert_select "td", demo.note
     demo.players.each do |pl|

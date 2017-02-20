@@ -29,21 +29,6 @@ class PortsController < ApplicationController
     redirect_to ports_url
   end
   
-  def edit
-    family, version = parse_id
-    @port = Port.find_by(family: family, version: version)
-  end
-  
-  def update
-    @port = Port.find(params[:port][:old_id])
-    if @port.update_attributes(port_params)
-      flash[:info] = "Port successfully updated"
-      redirect_to ports_url
-    else
-      render 'edit'
-    end
-  end
-  
   private
   
     def port_params
