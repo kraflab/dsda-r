@@ -10,12 +10,13 @@ class Demo < ApplicationRecord
   validates :category_id, presence: true
   validates :tics,        presence: true, numericality: { greater_than: 0 }
   validates :engine,      presence: true, length: { maximum: 50 }
-  validates :tas,         presence: true
+  validates :tas,         presence: true,
+                          numericality: { greater_than_or_equal_to: 0 }
   validates :guys,        presence: true, numericality: { greater_than: 0 }
-  validates :has_tics,    presence: true
+  #validates :has_tics,    presence: true
   validates :level,       presence: true, length: { maximum: 10 },
                           format: { with: VALID_PORT_REGEX }
-  validates :recorded_at, presence: true
+  #validates :recorded_at, presence: true
   validates :levelstat,   presence: true, length: { maximum: 500 }
   validates :file,    length: { maximum: 50 }, allow_blank: true,
                       format: { with: VALID_USERNAME_REGEX }
@@ -30,7 +31,7 @@ class Demo < ApplicationRecord
   end
   
   def note
-    "#{"C#{guys} " if guys > 1}#{"T#{tas}" if tas > 0}".strip
+    "#{"C#{guys}" if guys > 1} #{"T#{tas}" if tas > 0}".strip
   end
   
   def tags_text

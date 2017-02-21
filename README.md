@@ -8,11 +8,8 @@ Uses Ruby  2.4.0
 Uses Rails 5.0.1
 
 # To Do
-Test:  
-demo: feed  
-demo model, demo_player model  
-  
-demo new / edit / delete  
+Test demo feed  
+Add Demo new / edit / delete  
 
 # Author
 Ryan Krafnick aka Kraflab
