@@ -9,3 +9,15 @@ bt01speed:
   level: Map 01
   recorded_at: <%= 20.days.ago %>
   levelstat: 0:02.97
+
+bt02speed:
+  wad: btsx
+  category: uvspeed
+  tics: 999
+  engine: PRBoom+ v2.5.1.4 cl9
+  tas: 0
+  guys: 2
+  has_tics: true
+  level: Map 02
+  recorded_at: <%= 20.days.ago %>
+  levelstat: 0:02.97

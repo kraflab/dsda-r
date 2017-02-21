@@ -47,7 +47,7 @@ player = Player.first
   wad  = Wad.first #reorder("RANDOM()").first
   demo = Demo.create!(tics:        rand(100000) + 1,
                       has_tics:    true,
-                      level:       "Map #{rand(32) + 1}",
+                      level:       "Map #{(rand(32) + 1).to_s.rjust(2, '0')}",
                       levelstat:   "0:00.97, 0:12.09",
                       tas:         0,
                       guys:        1,
