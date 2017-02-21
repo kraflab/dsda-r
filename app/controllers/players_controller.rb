@@ -67,7 +67,7 @@ class PlayersController < ApplicationController
     def admin_session
       unless logged_in?
         flash[:warning] = "You must be logged in to perform this action"
-        redirect_to(root_url)
+        redirect_to root_url
       end
     end
 end

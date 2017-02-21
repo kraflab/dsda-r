@@ -1,0 +1,20 @@
+<% provide(:title, 'New Demo') %>
+
+<%= bootstrap_form_for(@demo, label_errors: true) do |f| %>
+  <%= f.number_field :guys, :label => "Player Count (in game)" %>
+  <%= f.number_field :tas, :label => "Tas Level",
+                     :help => "0 = non-tas, 1 = segmented, 2 = slowdown / etc, 3 = partial building, 4 = built" %>
+  <%= f.text_field :level, :placeholder => "Map 02, E1M4, E3, D2ALL, etc" %>
+  <%= f.text_field :player_1, :label => "Player" %>
+  <%= f.text_field :time, :placeholder => "hh:mm:ss[.tt]" %>
+  <%= f.text_area  :engine, :size => "1x2",
+                   :placeholder => "PRBoom+ v2.5.1.4 cl9\nXDRE 2.14" %>
+  <%= f.text_field :levelstat, :placeholder => "hh:mm:ss[.tt],hh:mm:ss[.tt]..." %>
+  <%= f.text_field :wad_username, :label => "Wad",
+                   :placeholder => "doom, btsx, etc" %>
+  <%= f.text_field :category_name, :label => "Category",
+                   :placeholder => "UV Speed, Other, etc" %>
+  <%= f.datetime_field :recorded_at, :label => "Record Date" %>
+  <%= f.text_field :file %>
+  <%= f.submit "Create Wad" %>
+<% end %>

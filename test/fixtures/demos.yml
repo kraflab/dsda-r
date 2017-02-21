@@ -21,3 +21,18 @@ bt02speed:
   level: Map 02
   recorded_at: <%= 20.days.ago %>
   levelstat: 0:02.97
+
+<% 40.times do |n| %>
+demo_<%= n %>:
+  wad: btsx
+  category: uvspeed
+  tics: <%= rand(100000) + 1 %>
+  has_tics: true
+  level: <%= "Map #{(rand(32) + 1).to_s.rjust(2, '0')}" %>
+  levelstat: "0:00.97"
+  tas: 0
+  guys: 1
+  recorded_at: <%= rand(100).days.ago %>
+  created_at: <%= rand(100).days.ago %>
+  engine: "PRBoom+ v2.5.1.4 cl9"
+<% end %>

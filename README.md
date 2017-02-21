@@ -8,8 +8,9 @@ Uses Ruby  2.4.0
 Uses Rails 5.0.1
 
 # To Do
-Test demo feed  
 Add Demo new / edit / delete  
+Style edit / new pages  
+Restrict edit params or compensate for link immortality  
 
 # Author
 Ryan Krafnick aka Kraflab

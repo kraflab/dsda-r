@@ -16,9 +16,10 @@ Rails.application.routes.draw do
   get    'feed' => 'demos#feed'
 
   resources :players
-  resources :iwads
+  resources :iwads, except: [:edit, :update]
   resources :wads
-  resources :ports, except: :show, :id => /([^\/])+/ do
+  resources :ports, except: [:show, :edit, :update], :id => /([^\/])+/ do
     get :autocomplete_port_family, :on => :collection
   end
+  resources :demos, except: [:index, :show]
 end

@@ -22,12 +22,32 @@ class Demo < ApplicationRecord
                       format: { with: VALID_USERNAME_REGEX }
   after_save :update_players
   
+  def player_1
+    players.first.username if players.count > 0
+  end
+  
+  def wad_username
+    wad.username if wad
+  end
+  
+  def wad_username=(name)
+    self.wad = Wad.find_by(username: name) unless name.blank?
+  end
+  
+  def category_name
+    category.name if category
+  end
+  
+  def category_name=(name)
+    self.category = Category.find_by(name: name) unless name.blank?
+  end
+  
   def file_path
     "#"
   end
   
   def time
-    Demo.tics_to_string(tics)
+    Demo.tics_to_string(tics) if tics
   end
   
   def note
