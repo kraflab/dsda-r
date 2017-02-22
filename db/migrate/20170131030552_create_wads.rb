@@ -5,6 +5,9 @@ class CreateWads < ActiveRecord::Migration[5.0]
       t.string :username
       t.string :author
       t.string :file
+      t.string :year
+      t.string :compatibility
+      t.boolean :is_commercial
       t.references :iwad, foreign_key: true, index: true
 
       t.timestamps

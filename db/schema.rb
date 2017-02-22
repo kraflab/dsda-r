@@ -106,9 +106,12 @@ ActiveRecord::Schema.define(version: 20170216025240) do
     t.string   "username"
     t.string   "author"
     t.string   "file"
+    t.string   "year"
+    t.string   "compatibility"
+    t.boolean  "is_commercial"
     t.integer  "iwad_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.index ["iwad_id", "username"], name: "index_wads_on_iwad_id_and_username"
     t.index ["iwad_id"], name: "index_wads_on_iwad_id"
     t.index ["username"], name: "index_wads_on_username", unique: true

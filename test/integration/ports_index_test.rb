@@ -13,7 +13,6 @@ class PortsIndexTest < ActionDispatch::IntegrationTest
     ports.each do |port|
       assert_match port.family, response.body
       assert_match port.version, response.body
-      assert_select 'a[href=?]', edit_port_path(port), 0
     end
     assert_select 'a[href=?]', new_port_path, 0
     log_in_as(@admin)

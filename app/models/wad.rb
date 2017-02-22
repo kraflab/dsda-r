@@ -2,7 +2,7 @@ class Wad < ApplicationRecord
   belongs_to :iwad, touch: true
   has_many :demos, dependent: :destroy
   default_scope -> { order(:username) }
-  validates :iwad_id, presence: true
+  validates :iwad_id,  presence: true
   validates :name,     presence: true, length: { maximum: 50 }
   validates :username, presence: true, length: { maximum: 50 },
                        uniqueness: true,
