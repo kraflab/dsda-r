@@ -14,6 +14,17 @@ class IwadsDeleteTest < ActionDispatch::IntegrationTest
     assert_not flash.empty?
     assert_redirected_to root_url
   end
+  
+  test "unsuccessful delete" do
+    log_in_as(@admin)
+    @iwad.created_at = 2.days.ago
+    @iwad.save
+    assert_no_difference "Iwad.count" do
+      delete iwad_path(@iwad)
+    end
+    assert_not flash.empty?
+    assert_redirected_to root_url
+  end
 
   test "successful delete" do
     log_in_as(@admin)

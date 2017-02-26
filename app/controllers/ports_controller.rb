@@ -3,6 +3,7 @@ class PortsController < ApplicationController
     ActiveSupport::JSON.encode(items.uniq{ |i| i["value"] })
   end
   before_action :admin_session, except: [:index]
+  before_action :age_limit, only: :destroy
   
   def index
     @ports = Port.all
@@ -23,8 +24,7 @@ class PortsController < ApplicationController
   end
   
   def destroy
-    family, version = parse_id
-    Port.find_by(family: family, version: version).destroy
+    @port.destroy
     flash[:info] = "Port successfully deleted"
     redirect_to ports_url
   end
@@ -37,6 +37,16 @@ class PortsController < ApplicationController
     
     def parse_id
       CGI::unescape(params[:id]).split(':')
+    end
+    
+    # Allows destroy only for new items
+    def age_limit
+      family, version = parse_id
+      @port = Port.find_by(family: family, version: version)
+      unless @port && age_in_minutes(@port) < 30
+        flash[:warning] = "That Port is too old to delete from here"
+        redirect_to root_url
+      end
     end
 
     # Confirms an admin session

@@ -1,5 +1,6 @@
 class IwadsController < ApplicationController
   before_action :admin_session, except: [:index, :show]
+  before_action :age_limit, only: :destroy
   
   def index
     @iwads = Iwad.all
@@ -25,7 +26,7 @@ class IwadsController < ApplicationController
   end
   
   def destroy
-    Iwad.find_by(username: params[:id]).destroy
+    @iwad.destroy
     flash[:info] = "Iwad successfully deleted"
     redirect_to iwads_url
   end
@@ -36,11 +37,20 @@ class IwadsController < ApplicationController
       params.require(:iwad).permit(:name, :username, :author)
     end
     
+    # Allows destroy only for new items
+    def age_limit
+      @iwad = Iwad.find_by(username: params[:id])
+      unless @iwad && age_in_minutes(@iwad) < 30
+        flash[:warning] = "That Iwad is too old to delete from here"
+        redirect_to root_url
+      end
+    end
+    
     # Confirms an admin session
     def admin_session
       unless logged_in?
         flash[:warning] = "You must be logged in to perform this action"
-        redirect_to(root_url)
+        redirect_to root_url
       end
     end
 end

@@ -42,6 +42,17 @@ class PlayersEditTest < ActionDispatch::IntegrationTest
     assert_not_equal @player.reload.name, new_name
   end
   
+  test "unsuccessful delete" do
+    log_in_as(@admin)
+    @player.created_at = 2.days.ago
+    @player.save
+    assert_no_difference "Player.count" do
+      delete player_path(@player)
+    end
+    assert_not flash.empty?
+    assert_redirected_to root_url
+  end
+  
   test "successful edit and delete" do
     log_in_as(@admin)
     new_name     = "Good Name"

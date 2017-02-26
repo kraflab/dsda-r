@@ -1,5 +1,6 @@
 class WadsController < ApplicationController
   before_action :admin_session, except: [:index, :show]
+  before_action :age_limit, only: :destroy
   
   def index
     letter = params[:letter]
@@ -36,7 +37,7 @@ class WadsController < ApplicationController
   end
   
   def destroy
-    Wad.find_by(username: params[:id]).destroy
+    @wad.destroy
     flash[:info] = "Wad successfully deleted"
     redirect_to wads_url
   end
@@ -64,6 +65,15 @@ class WadsController < ApplicationController
   
     def wad_params
       params.require(:wad).permit(:name, :username, :author, :file, :iwad_username)
+    end
+    
+    # Allows destroy only for new items
+    def age_limit
+      @wad = Wad.find_by(username: params[:id])
+      unless @wad && age_in_minutes(@wad) < 30
+        flash[:warning] = "That Wad is too old to delete from here"
+        redirect_to root_url
+      end
     end
     
     # Confirms an admin session

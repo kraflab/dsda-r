@@ -1,5 +1,6 @@
 class PlayersController < ApplicationController
   before_action :admin_session, except: [:index, :show]
+  before_action :age_limit, only: :destroy
   
   def index
     @players = Player.all
@@ -27,7 +28,7 @@ class PlayersController < ApplicationController
   end
   
   def destroy
-    Player.find_by(username: params[:id]).destroy
+    @player.destroy
     flash[:info] = "Player successfully deleted"
     redirect_to players_url
   end
@@ -61,6 +62,15 @@ class PlayersController < ApplicationController
         these_params[:username] = Player.default_username(these_params[:name])
       end
       these_params
+    end
+    
+    # Allows destroy only for new items
+    def age_limit
+      @player = Player.find_by(username: params[:id])
+      unless @player && age_in_minutes(@player) < 30
+        flash[:warning] = "That Player is too old to delete from here"
+        redirect_to root_url
+      end
     end
     
     # Confirms an admin session

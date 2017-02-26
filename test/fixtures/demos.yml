@@ -7,8 +7,7 @@ bt01speed:
   guys: 2
   has_tics: true
   level: Map 01
-  recorded_at: <%= 101.days.ago %>
-  created_at: <%= 101.days.ago %>
+  recorded_at: <%= 100.days.ago %>
   levelstat: 0:02.97
 
 bt02speed:
@@ -20,8 +19,7 @@ bt02speed:
   guys: 2
   has_tics: true
   level: Map 02
-  recorded_at: <%= 101.days.ago %>
-  created_at: <%= 101.days.ago %>
+  recorded_at: <%= 100.days.ago %>
   levelstat: 0:02.97
 
 <% 40.times do |n| %>
@@ -34,7 +32,7 @@ demo_<%= n %>:
   levelstat: "0:00.97"
   tas: 0
   guys: 1
-  recorded_at: <%= rand(100).days.ago %>
-  created_at: <%= rand(100).days.ago %>
+  recorded_at: <%= n.days.ago %>
+  created_at: <%= n.days.ago %>
   engine: "PRBoom+ v2.5.1.4 cl9"
 <% end %>

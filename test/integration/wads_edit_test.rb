@@ -42,6 +42,17 @@ class WadsEditTest < ActionDispatch::IntegrationTest
     assert_not_equal @wad.reload.name, new_name
   end
   
+  test "unsuccessful delete" do
+    log_in_as(@admin)
+    @wad.created_at = 2.days.ago
+    @wad.save
+    assert_no_difference "Wad.count" do
+      delete wad_path(@wad)
+    end
+    assert_not flash.empty?
+    assert_redirected_to root_url
+  end
+  
   test "successful edit and delete" do
     log_in_as(@admin)
     new_name     = "Good Name"

@@ -55,6 +55,17 @@ class DemosEditTest < ActionDispatch::IntegrationTest
     assert_not_equal @demo.reload.time, new_time
   end
   
+  test "unsuccessful delete" do
+    log_in_as(@admin)
+    @demo.created_at = 2.days.ago
+    @demo.save
+    assert_no_difference "Demo.count" do
+      delete demo_path(@demo)
+    end
+    assert_not flash.empty?
+    assert_redirected_to root_url
+  end
+  
   test "successful edit and delete" do
     log_in_as(@admin)
     new_time = "10:10.10"

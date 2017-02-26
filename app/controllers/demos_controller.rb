@@ -1,5 +1,6 @@
 class DemosController < ApplicationController
   before_action :admin_session, except: :feed
+  before_action :age_limit, only: :destroy
   
   def feed
     @demos = Demo.reorder(created_at: :desc).paginate(page: params[:page])
@@ -30,7 +31,7 @@ class DemosController < ApplicationController
   end
   
   def destroy
-    Demo.find(params[:id]).destroy
+    @demo.destroy
     flash[:info] = "Demo successfully deleted"
     redirect_to root_path
   end
@@ -66,6 +67,15 @@ class DemosController < ApplicationController
       params.require(:demo).permit(:guys, :tas, :level, :time, :engine,
                                    :levelstat, :wad_username, :category_name,
                                    :recorded_at, :file)
+    end
+    
+    # Allows destroy only for new items
+    def age_limit
+      @demo = Demo.find(params[:id])
+      unless @demo && age_in_minutes(@demo) < 30
+        flash[:warning] = "That Demo is too old to delete from here"
+        redirect_to root_url
+      end
     end
     
     # Confirms an admin session
