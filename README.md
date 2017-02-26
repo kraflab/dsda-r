@@ -11,7 +11,6 @@ Uses Ruby  2.4.0
 Uses Rails 5.0.1
 
 ## To Do
-Add Demo new / edit / delete actions  
 Rework the style for forms and admin controls  
 Restrict edit params or compensate for link immortality  
 Restrict delete actions for entities older than 30 minutes  
