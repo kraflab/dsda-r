@@ -50,6 +50,21 @@ class Demo < ApplicationRecord
     Demo.tics_to_string(tics) if tics
   end
   
+  # hh:mm:ss[.tt]
+  def time=(str)
+    spl = str.split(".")
+    fields = spl[0].split(":")
+    
+    # invalid format
+    if fields.count != 3
+      self.tics = nil
+      return
+    end
+    
+    self.tics = fields[0].to_i * 360000 + fields[1].to_i * 6000 +
+                fields[2].to_i * 100 + ( spl.count == 2 ? spl[1].to_i : 0 )
+  end
+  
   def note
     "#{"C#{guys}" if guys > 1} #{"T#{tas}" if tas > 0}".strip
   end

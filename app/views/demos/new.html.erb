@@ -2,8 +2,9 @@
 
 <%= bootstrap_form_for(@demo, label_errors: true) do |f| %>
   <%= f.number_field :guys, :label => "Player Count (in game)" %>
-  <%= f.number_field :tas, :label => "Tas Level",
-                     :help => "0 = non-tas, 1 = segmented, 2 = slowdown / etc, 3 = partial building, 4 = built" %>
+  <%= f.select :tas, [["Not Tas", 0], ["Segmented", 1], ["Slowdown", 2],
+                      ["Partial Building", 3], ["Built", 4]],
+                      :label => "Tas Level" %>
   <%= f.text_field :level, :placeholder => "Map 02, E1M4, E3, D2ALL, etc" %>
   <%= f.text_field :player_1, :label => "Player" %>
   <%= f.text_field :time, :placeholder => "hh:mm:ss[.tt]" %>

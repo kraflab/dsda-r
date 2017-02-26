@@ -11,11 +11,20 @@ class DemosController < ApplicationController
   end
   
   def create
-    @demo = Demo.create(demo_params)
-    if @demo.save
-      flash[:info] = "Demo successfully created"
-      redirect_to wad_path(@demo.wad)
+    player_name = params[:demo][:player_1]
+    player = Player.find_by(username: player_name)
+    if player
+      @demo = Demo.create(demo_params)
+      if @demo.save
+        DemoPlayer.create(demo: @demo, player: player).save
+        flash[:info] = "Demo successfully created"
+        redirect_to wad_path(@demo.wad)
+      else
+        render 'new'
+      end
     else
+      flash.now[:warning] = "Player not located"
+      @demo = Demo.new(demo_params)
       render 'new'
     end
   end
@@ -33,7 +42,9 @@ class DemosController < ApplicationController
   private
     
     def demo_params
-      params.require(:demo).permit(:name)
+      params.require(:demo).permit(:guys, :tas, :level, :time, :engine,
+                                   :levelstat, :wad_username, :category_name,
+                                   :recorded_at, :file)
     end
     
     # Confirms an admin session
