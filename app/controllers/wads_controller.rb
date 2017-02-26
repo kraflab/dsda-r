@@ -53,6 +53,9 @@ class WadsController < ApplicationController
       flash[:info] = "Wad successfully updated"
       redirect_to @wad
     else
+      if @wad.iwad.nil?
+        @wad.errors.add(:iwad_username, :not_found, message: "not found")
+      end
       render 'edit'
     end
   end

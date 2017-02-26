@@ -40,6 +40,26 @@ class DemosController < ApplicationController
   end
   
   def update
+    @demo = Demo.find(params[:id])
+    player_name = params[:demo][:player_1]
+    player = Player.find_by(username: player_name)
+    if player
+      puts "player found"
+      if @demo.update(demo_params)
+        puts "atts updated found"
+        demo_players = @demo.demo_players
+        demo_players.each { |dp| dp.destroy }
+        DemoPlayer.create(demo: @demo, player: player).save
+        flash[:info] = "Demo successfully updated"
+        redirect_to wad_path(@demo.wad)
+      else
+        render 'edit'
+      end
+    else
+      flash.now[:warning] = "Player not located"
+      @demo = Demo.new(demo_params)
+      render 'edit'
+    end
   end
   
   private

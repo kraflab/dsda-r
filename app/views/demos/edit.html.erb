@@ -1,4 +1,4 @@
-<% provide(:title, 'New Demo') %>
+<% provide(:title, 'Edit Demo') %>
 
 <%= bootstrap_form_for(@demo, label_errors: true) do |f| %>
   <%= f.number_field :guys, :label => "Player Count (in game)" %>
@@ -18,5 +18,5 @@
                    :placeholder => "UV Speed, Other, etc" %>
   <%= f.datetime_field :recorded_at, :label => "Record Date" %>
   <%= f.text_field :file %>
-  <%= f.submit "Create Demo" %>
+  <%= f.submit "Update Demo" %>
 <% end %>
