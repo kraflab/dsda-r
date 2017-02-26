@@ -14,6 +14,8 @@ Uses Rails 5.0.1
 Add Demo new / edit / delete actions  
 Rework the style for forms and admin controls  
 Restrict edit params or compensate for link immortality  
+Restrict delete actions for entities older than 30 minutes  
+Add account lock after number of failed login attempts  
 
 ## Contributors
 Full stack: Kraflab  
