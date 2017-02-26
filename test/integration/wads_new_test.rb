@@ -31,27 +31,6 @@ class WadsNewTest < ActionDispatch::IntegrationTest
                                   iwad_username: "" } }
     end
     assert_select "input.btn[value=?]", "Create Wad"
-    assert_no_difference "Wad.count" do
-      post wads_path, params: { wad:
-                                { name:   "Back to Saturn X 2",
-                                  username: "btsx 7", author: "Various",
-                                  iwad_username: "doom2" } }
-    end
-    assert_select "input.btn[value=?]", "Create Wad"
-    assert_no_difference "Wad.count" do
-      post wads_path, params: { wad:
-                                { name:   "Back to Saturn X 2",
-                                  username: "btsx2", author: "",
-                                  iwad_username: "doom2" } }
-    end
-    assert_select "input.btn[value=?]", "Create Wad"
-    assert_no_difference "Wad.count" do
-      post wads_path, params: { wad:
-                                { name:   "",
-                                  username: "btsx2", author: "Various",
-                                  iwad_username: "doom2" } }
-    end
-    assert_select "input.btn[value=?]", "Create Wad"
   end
   
   test "successful creation" do

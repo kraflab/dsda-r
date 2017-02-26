@@ -30,12 +30,6 @@ class PlayersNewTest < ActionDispatch::IntegrationTest
                                      twitch: "", youtube: "" } }
     end
     assert_select "input.btn[value=?]", "Create Player"
-    assert_no_difference "Player.count" do
-      post players_path, params: { player:
-                                   { name: "Good", username: "bad$",
-                                     twitch: "",   youtube: "" } }
-    end
-    assert_select "input.btn[value=?]", "Create Player"
   end
   
   test "successful creation" do
@@ -47,12 +41,5 @@ class PlayersNewTest < ActionDispatch::IntegrationTest
     end
     assert_not flash.empty?
     assert_redirected_to player_path("good")
-    assert_difference "Player.count" do
-      post players_path, params: { player:
-                                   { name: "$God-N4me", username: "good_",
-                                     twitch: "good123",   youtube: "good321" } }
-    end
-    assert_not flash.empty?
-    assert_redirected_to player_path("good_")
   end
 end

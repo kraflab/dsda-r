@@ -25,13 +25,7 @@ class PortsNewTest < ActionDispatch::IntegrationTest
     assert_select "input.btn[value=?]", "Create Port"
     assert_no_difference "Port.count" do
       post ports_path, params: { port:
-                                   { name: "",   username: "",
-                                     twitch: "", youtube: "" } }
-    end
-    assert_select "input.btn[value=?]", "Create Port"
-    assert_no_difference "Port.count" do
-      post ports_path, params: { port:
-                                   { family: "GZDoom", version: "v2. bad" } }
+                                   { family: "", version: "" } }
     end
     assert_select "input.btn[value=?]", "Create Port"
   end

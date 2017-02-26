@@ -30,24 +30,6 @@ class IwadsNewTest < ActionDispatch::IntegrationTest
                                      author: "" } }
     end
     assert_select "input.btn[value=?]", "Create Iwad"
-    assert_no_difference "Iwad.count" do
-      post iwads_path, params: { iwad:
-                                   { name:   "Chex Quest", username: " $$cq",
-                                     author: "Digital Café" } }
-    end
-    assert_select "input.btn[value=?]", "Create Iwad"
-    assert_no_difference "Iwad.count" do
-      post iwads_path, params: { iwad:
-                                   { name:   "Chex Quest", username: "chex",
-                                     author: "" } }
-    end
-    assert_select "input.btn[value=?]", "Create Iwad"
-    assert_no_difference "Iwad.count" do
-      post iwads_path, params: { iwad:
-                                   { name:   " ", username: "chex",
-                                     author: "Digital Café" } }
-    end
-    assert_select "input.btn[value=?]", "Create Iwad"
   end
   
   test "successful creation" do
