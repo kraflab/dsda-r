@@ -39,7 +39,7 @@ class DemosEditTest < ActionDispatch::IntegrationTest
     log_in_as(@admin)
     get edit_demo_path(@demo)
     assert_response :success
-    assert_select "input.btn[value=?]", "Edit Demo"
+    assert_select "input.btn[value=?]", "Update Demo"
     new_time = "10:10.10"
     patch demo_path(@demo), params: { demo:
                                       { guys: 1, tas: 1, level: "Map 01",
@@ -51,7 +51,7 @@ class DemosEditTest < ActionDispatch::IntegrationTest
                                         category_name: @category.name,
                                         recorded_at: Time.zone.now,
                                         file: "" } }
-    assert_select "input.btn[value=?]", "Edit Demo"
+    assert_select "input.btn[value=?]", "Update Demo"
     assert_not_equal @demo.reload.time, new_time
   end
   

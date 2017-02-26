@@ -31,14 +31,14 @@ class PlayersEditTest < ActionDispatch::IntegrationTest
     log_in_as(@admin)
     get edit_player_path(@player)
     assert_response :success
-    assert_select "input.btn[value=?]", "Edit Player"
+    assert_select "input.btn[value=?]", "Update Player"
     new_name = "Good"
     patch player_path(@player), params: { player:
                                           { name: new_name, 
                                             old_username: @player.username, 
                                             username: "",
                                             twitch: "bad link", youtube: "" } }
-    assert_select "input.btn[value=?]", "Edit Player"
+    assert_select "input.btn[value=?]", "Update Player"
     assert_not_equal @player.reload.name, new_name
   end
   
