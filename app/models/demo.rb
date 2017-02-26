@@ -20,7 +20,8 @@ class Demo < ApplicationRecord
   validates :levelstat,   presence: true, length: { maximum: 500 }
   validates :file,    length: { maximum: 50 }, allow_blank: true,
                       format: { with: VALID_USERNAME_REGEX }
-  after_save :update_players
+  after_save    :update_players
+  after_destroy :update_players
   
   def player_1
     players.first.username if players.count > 0

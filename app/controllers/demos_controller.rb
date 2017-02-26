@@ -30,6 +30,9 @@ class DemosController < ApplicationController
   end
   
   def destroy
+    Demo.find(params[:id]).destroy
+    flash[:info] = "Demo successfully deleted"
+    redirect_to root_path
   end
   
   def edit
