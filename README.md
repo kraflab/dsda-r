@@ -16,6 +16,7 @@ Rework the style for forms and admin controls
 Restrict edit params or compensate for link immortality  
 Restrict delete actions for entities older than 30 minutes  
 Add account lock after number of failed login attempts  
+Add edit / delete visibility toggles for admins  
 
 ## Contributors
 Full stack: Kraflab  
