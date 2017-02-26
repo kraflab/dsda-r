@@ -8,6 +8,7 @@ bt01speed:
   has_tics: true
   level: Map 01
   recorded_at: <%= 20.days.ago %>
+  created_at: <%= 20.days.ago %>
   levelstat: 0:02.97
 
 bt02speed:
@@ -20,6 +21,7 @@ bt02speed:
   has_tics: true
   level: Map 02
   recorded_at: <%= 20.days.ago %>
+  created_at: <%= 20.days.ago %>
   levelstat: 0:02.97
 
 <% 40.times do |n| %>

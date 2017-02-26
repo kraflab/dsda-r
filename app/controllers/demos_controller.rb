@@ -44,9 +44,7 @@ class DemosController < ApplicationController
     player_name = params[:demo][:player_1]
     player = Player.find_by(username: player_name)
     if player
-      puts "player found"
       if @demo.update(demo_params)
-        puts "atts updated found"
         demo_players = @demo.demo_players
         demo_players.each { |dp| dp.destroy }
         DemoPlayer.create(demo: @demo, player: player).save

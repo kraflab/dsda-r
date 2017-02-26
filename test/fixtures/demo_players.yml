@@ -2,9 +2,13 @@ btsx01:
   player: kingdime
   demo: bt01speed
 
-btsx02:
+btsx01b:
   player: kraflab
   demo: bt01speed
+
+btsx02:
+  player: kraflab
+  demo: bt02speed
 
 <% 40.times do |n| %>
 demo_player_<%= n %>:
