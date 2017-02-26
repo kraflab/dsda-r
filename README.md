@@ -10,7 +10,7 @@ Opulent, have served the doom demo community for well over a decade.
 Uses Ruby  2.4.0  
 Uses Rails 5.0.1
 
-# To Do
+## To Do
 Add Demo new / edit / delete actions  
 Rework the style for forms and admin controls  
 Restrict edit params or compensate for link immortality  
