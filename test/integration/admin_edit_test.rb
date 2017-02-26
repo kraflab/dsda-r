@@ -31,18 +31,6 @@ class AdminEditTest < ActionDispatch::IntegrationTest
                                  password_confirmation: "password1234" } }
     assert_select "input.btn[value=?]", "Change Password"
     assert_not flash.empty?
-    patch edit_path, params: { admin:
-                               { current_password:      "password1234",
-                                 password:              "wrong",
-                                 password_confirmation: "password1234" } }
-    assert_select "input.btn[value=?]", "Change Password"
-    assert flash.empty?
-    patch edit_path, params: { admin:
-                               { current_password:      "password1234",
-                                 password:              "password1234",
-                                 password_confirmation: "wrong" } }
-    assert_select "input.btn[value=?]", "Change Password"
-    assert flash.empty?
   end
   
   test "successful edit" do

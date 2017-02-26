@@ -40,20 +40,6 @@ class PlayersEditTest < ActionDispatch::IntegrationTest
                                             twitch: "bad link", youtube: "" } }
     assert_select "input.btn[value=?]", "Edit Player"
     assert_not_equal @player.reload.name, new_name
-    patch player_path(@player), params: { player:
-                                          { name: new_name, 
-                                            old_username: @player.username, 
-                                            username: "",
-                                            twitch: "", youtube: "bad link" } }
-    assert_select "input.btn[value=?]", "Edit Player"
-    assert_not_equal @player.reload.name, new_name
-    patch player_path(@player), params: { player:
-                                          { name: new_name, 
-                                            old_username: @player.username, 
-                                            username: "bad name",
-                                            twitch: "", youtube: "" } }
-    assert_select "input.btn[value=?]", "Edit Player"
-    assert_not_equal @player.reload.name, new_name
   end
   
   test "successful edit and delete" do

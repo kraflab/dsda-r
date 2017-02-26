@@ -40,20 +40,6 @@ class WadsEditTest < ActionDispatch::IntegrationTest
                                       iwad_username: "doom2" } }
     assert_select "input.btn[value=?]", "Edit Wad"
     assert_not_equal @wad.reload.name, new_name
-    patch wad_path(@wad), params: { wad:
-                                    { name: new_name, username: "btsx",
-                                      author: " ",
-                                      old_username: @wad.username,
-                                      iwad_username: "doom2" } }
-    assert_select "input.btn[value=?]", "Edit Wad"
-    assert_not_equal @wad.reload.name, new_name
-    patch wad_path(@wad), params: { wad:
-                                    { name: new_name, username: "btsx",
-                                      author: "Various",
-                                      old_username: @wad.username,
-                                      iwad_username: "unknown" } }
-    assert_select "input.btn[value=?]", "Edit Wad"
-    assert_not_equal @wad.reload.name, new_name
   end
   
   test "successful edit and delete" do
