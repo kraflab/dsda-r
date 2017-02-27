@@ -11,7 +11,6 @@ Uses Ruby  2.4.0
 Uses Rails 5.0.1
 
 ## To Do
-Rework the style for forms and admin controls  
 Restrict edit params or compensate for link immortality  
 Add account lock after number of failed login attempts  
 Add edit / delete visibility toggles for admins  

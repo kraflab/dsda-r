@@ -8,7 +8,7 @@ class DemosController < ApplicationController
   
   def new
     @demo = Demo.new
-    @demo.wad_username = params[:wad]
+    @demo.wad_username = params[:wad] if params[:wad]
   end
   
   def create
@@ -24,7 +24,7 @@ class DemosController < ApplicationController
         render 'new'
       end
     else
-      flash.now[:warning] = "Player not located"
+      flash.now[:warning] = "Player \"#{player_name}\" not found"
       @demo = Demo.new(demo_params)
       render 'new'
     end
@@ -55,7 +55,7 @@ class DemosController < ApplicationController
         render 'edit'
       end
     else
-      flash.now[:warning] = "Player not located"
+      flash.now[:warning] = "Player \"#{player_name}\" not found"
       @demo = Demo.new(demo_params)
       render 'edit'
     end

@@ -33,6 +33,9 @@ class Demo < ApplicationRecord
   
   def wad_username=(name)
     self.wad = Wad.find_by(username: name) unless name.blank?
+    if wad.nil?
+      errors.add(:wad_username, :not_found, message: "not found")
+    end
   end
   
   def category_name
@@ -51,7 +54,7 @@ class Demo < ApplicationRecord
     Demo.tics_to_string(tics) if tics
   end
   
-  # hh:mm:ss[.tt]
+  # [hh:]mm:ss[.tt]
   def time=(str)
     return if str.blank?
     spl = str.split(".")
