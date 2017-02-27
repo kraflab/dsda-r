@@ -9,7 +9,7 @@
   <p class="p-short">
     <%= pluralize(@iwad.wads.count, "wad") %>
     <% if logged_in? %>
-      <%= link_to "Create New Wad", new_wad_path(:iwad => @iwad.username), :class => "label label-info pull-right" %>
+      <%= link_to "Create New Wad", new_wad_path(:iwad => @iwad.username), :class => "label label-info" %>
     <% end %>
   </p>
   
