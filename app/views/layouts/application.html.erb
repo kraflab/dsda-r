@@ -11,18 +11,7 @@
     <%= render 'layouts/header' %>
     <div class="container">
       <%= render 'layouts/wad_list' %>
-      <div class="center-text">
-        <% flash.each do |message_type, message| %>
-          <% sub_message = message.split("%%") %>
-          <div class="alert alert-<%= message_type %> alert-modest left-text">
-            <% if sub_message.count == 1 %>
-              <%= message %>
-            <% else %>
-              <strong><%= sub_message[0] %></strong><%= sub_message[1] %>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
+      <%= render 'layouts/flash_messages' %>
       <%= yield %>
       <%= render 'layouts/footer' %>
       <%= debug(params) if Rails.env.development? %>
