@@ -6,6 +6,11 @@ class Category < ApplicationRecord
   before_save   :clean_strings
   before_update :clean_strings
   
+  # called rarely, and few categories
+  def self.select_list
+    Category.all.collect { |i| [i.name, i.name] }
+  end
+  
   private
   
     # Remove excess whitespace
