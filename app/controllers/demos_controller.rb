@@ -24,8 +24,8 @@ class DemosController < ApplicationController
         render 'new'
       end
     else
-      flash.now[:warning] = "Player \"#{player_name}\" not found"
       @demo = Demo.new(demo_params)
+      @demo.errors.add(:player_1, :not_found, message: "not found")
       render 'new'
     end
   end
@@ -55,8 +55,7 @@ class DemosController < ApplicationController
         render 'edit'
       end
     else
-      flash.now[:warning] = "Player \"#{player_name}\" not found"
-      @demo = Demo.new(demo_params)
+      @demo.errors.add(:player_1, :not_found, message: "not found")
       render 'edit'
     end
   end
