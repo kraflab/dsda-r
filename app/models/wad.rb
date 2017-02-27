@@ -25,7 +25,7 @@ class Wad < ApplicationRecord
   def iwad_username=(name)
     self.iwad = Iwad.find_by(username: name) unless name.blank?
     if iwad.nil?
-      errors.add(:iwad_username, :not_found, message: "iwad not found")
+      errors.add(:iwad_username, :not_found, message: "not found")
     end
   end
   

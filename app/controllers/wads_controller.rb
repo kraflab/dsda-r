@@ -23,7 +23,7 @@ class WadsController < ApplicationController
   
   def new
     @wad = Wad.new
-    @wad.iwad_username = params[:iwad]
+    @wad.iwad_username = params[:iwad] if params[:iwad]
   end
   
   def create

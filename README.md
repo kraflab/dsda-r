@@ -18,7 +18,6 @@ Add edit / delete visibility toggles for admins
 Add tag functionality to demo forms  
 Add dynamic player fields to demo forms  
 Category field in demo form should be a dropdown  
-Fix Iwad error in Wad new form
 
 ## Contributors
 Full stack: Kraflab  
