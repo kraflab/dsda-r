@@ -22,12 +22,12 @@ class PortsNewTest < ActionDispatch::IntegrationTest
     log_in_as(@admin)
     get new_port_path
     assert_response :success
-    assert_select "input.btn[value=?]", "Create Port"
+    assert_select "input.btn[value=?]", "Create"
     assert_no_difference "Port.count" do
       post ports_path, params: { port:
                                    { family: "", version: "" } }
     end
-    assert_select "input.btn[value=?]", "Create Port"
+    assert_select "input.btn[value=?]", "Create"
   end
   
   test "successful creation" do

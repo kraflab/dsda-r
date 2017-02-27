@@ -23,13 +23,13 @@ class IwadsNewTest < ActionDispatch::IntegrationTest
     log_in_as(@admin)
     get new_iwad_path
     assert_response :success
-    assert_select "input.btn[value=?]", "Create Iwad"
+    assert_select "input.btn[value=?]", "Create"
     assert_no_difference "Iwad.count" do
       post iwads_path, params: { iwad:
                                    { name:   "", username: "",
                                      author: "" } }
     end
-    assert_select "input.btn[value=?]", "Create Iwad"
+    assert_select "input.btn[value=?]", "Create"
   end
   
   test "successful creation" do

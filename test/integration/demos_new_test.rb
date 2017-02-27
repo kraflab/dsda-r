@@ -31,7 +31,7 @@ class DemosNewTest < ActionDispatch::IntegrationTest
     log_in_as(@admin)
     get new_demo_path
     assert_response :success
-    assert_select "input.btn[value=?]", "Create Demo"
+    assert_select "input.btn[value=?]", "Create"
     assert_no_difference "Demo.count" do
       post demos_path, params: { demo:
                                 { guys: 1, tas: 1, level: "",
@@ -42,7 +42,7 @@ class DemosNewTest < ActionDispatch::IntegrationTest
                                   category_name: "",
                                   recorded_at: Time.zone.now, file: "" } }
     end
-    assert_select "input.btn[value=?]", "Create Demo"
+    assert_select "input.btn[value=?]", "Create"
   end
   
   test "successful creation" do

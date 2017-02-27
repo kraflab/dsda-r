@@ -1,8 +1,13 @@
 <% provide(:title, 'New Iwad') %>
 
-<%= bootstrap_form_for(@iwad, label_errors: true) do |f| %>
-  <%= f.text_field :name %>
-  <%= f.text_field :username, :label => "/iwads/***", :placeholder => "doom, chex, etc" %>
-  <%= f.text_field :author %>
-  <%= f.submit "Create Iwad" %>
-<% end %>
+<div class="center-text">
+  <div class="well well-modest left-text">
+    <%= bootstrap_form_for(@iwad, label_errors: true) do |f| %>
+      <legend>Create New Iwad</legend>
+      <%= f.text_field :name %>
+      <%= f.text_field :username, :label => "/iwads/***", :placeholder => "doom, chex, etc" %>
+      <%= f.text_field :author %>
+      <%= f.submit "Create", class: "btn btn-primary pull-right" %>
+    <% end %>
+  </div>
+</div>

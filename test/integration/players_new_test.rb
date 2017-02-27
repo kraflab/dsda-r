@@ -23,13 +23,13 @@ class PlayersNewTest < ActionDispatch::IntegrationTest
     log_in_as(@admin)
     get new_player_path
     assert_response :success
-    assert_select "input.btn[value=?]", "Create Player"
+    assert_select "input.btn[value=?]", "Create"
     assert_no_difference "Player.count" do
       post players_path, params: { player:
                                    { name: "",   username: "",
                                      twitch: "", youtube: "" } }
     end
-    assert_select "input.btn[value=?]", "Create Player"
+    assert_select "input.btn[value=?]", "Create"
   end
   
   test "successful creation" do

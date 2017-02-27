@@ -31,14 +31,14 @@ class WadsEditTest < ActionDispatch::IntegrationTest
     log_in_as(@admin)
     get edit_wad_path(@wad)
     assert_response :success
-    assert_select "input.btn[value=?]", "Update Wad"
+    assert_select "input.btn[value=?]", "Update"
     new_name = "Good"
     patch wad_path(@wad), params: { wad:
                                     { name: new_name, username: "btsx$$",
                                       author: "Various",
                                       old_username: @wad.username,
                                       iwad_username: "doom2" } }
-    assert_select "input.btn[value=?]", "Update Wad"
+    assert_select "input.btn[value=?]", "Update"
     assert_not_equal @wad.reload.name, new_name
   end
   

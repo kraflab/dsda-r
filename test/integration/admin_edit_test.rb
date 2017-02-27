@@ -24,12 +24,12 @@ class AdminEditTest < ActionDispatch::IntegrationTest
     log_in_as(@admin)
     get edit_path
     assert_response :success
-    assert_select "input.btn[value=?]", "Change Password"
+    assert_select "input.btn[value=?]", "Submit"
     patch edit_path, params: { admin:
                                { current_password:      "wrong",
                                  password:              "password1234",
                                  password_confirmation: "password1234" } }
-    assert_select "input.btn[value=?]", "Change Password"
+    assert_select "input.btn[value=?]", "Submit"
     assert_not flash.empty?
   end
   

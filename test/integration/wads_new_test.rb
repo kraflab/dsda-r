@@ -24,13 +24,13 @@ class WadsNewTest < ActionDispatch::IntegrationTest
     log_in_as(@admin)
     get new_wad_path
     assert_response :success
-    assert_select "input.btn[value=?]", "Create Wad"
+    assert_select "input.btn[value=?]", "Create"
     assert_no_difference "Wad.count" do
       post wads_path, params: { wad:
                                 { name:   "", username: "", author: "",
                                   iwad_username: "" } }
     end
-    assert_select "input.btn[value=?]", "Create Wad"
+    assert_select "input.btn[value=?]", "Create"
   end
   
   test "successful creation" do

@@ -1,13 +1,18 @@
 <% provide(:title, 'Edit Wad') %>
 
-<%= bootstrap_form_for(@wad, label_errors: true) do |f| %>
-  <%= f.text_field   :name %>
-  <%= f.hidden_field :old_username, :value => @old_username %>
-  <%= f.text_field   :username, :label => "/wads/***",
-                     :placeholder => "doom, chex, etc" %>
-  <%= f.text_field   :author %>
-  <%= f.text_field   :file %>
-  <%= f.text_field   :iwad_username, :label => "Iwad",
-                     :placeholer => "doom, chex, etc" %>
-  <%= f.submit "Update Wad" %>
-<% end %>
+<div class="center-text">
+  <div class="well well-modest left-text">
+    <%= bootstrap_form_for(@wad, label_errors: true) do |f| %>
+      <legend>Edit Wad</legend>
+      <%= f.text_field   :name %>
+      <%= f.hidden_field :old_username, :value => @old_username %>
+      <%= f.text_field   :username, :label => "/wads/***",
+                         :placeholder => "doom, chex, etc" %>
+      <%= f.text_field   :author %>
+      <%= f.text_field   :file %>
+      <%= f.text_field   :iwad_username, :label => "Iwad",
+                         :placeholer => "doom, chex, etc" %>
+      <%= f.submit "Update", class: "btn btn-primary pull-right" %>
+    <% end %>
+  </div>
+</div>

@@ -1,7 +1,12 @@
 <% provide(:title, 'Admin Login') %>
 
-<%= bootstrap_form_for(:session, url: login_path) do |f| %>
-  <%= f.text_field     :username %>
-  <%= f.password_field :password %>
-  <%= f.submit "Login" %>
-<% end %>
+<div class="center-text">
+  <div class="well well-modest left-text">
+    <legend>Log In</legend>
+    <%= bootstrap_form_for(:session, url: login_path) do |f| %>
+      <%= f.text_field     :username %>
+      <%= f.password_field :password %>
+      <%= f.submit "Log In", class: "btn btn-primary pull-right" %>
+    <% end %>
+  </div>
+</div>

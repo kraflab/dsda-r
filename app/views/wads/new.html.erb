@@ -1,12 +1,17 @@
 <% provide(:title, 'New Wad') %>
 
-<%= bootstrap_form_for(@wad, label_errors: true) do |f| %>
-  <%= f.text_field :name %>
-  <%= f.text_field :username, :label => "/wads/***",
-                              :placeholder => "doom, chex, etc" %>
-  <%= f.text_field :author %>
-  <%= f.text_field :file %>
-  <%= f.text_field :iwad_username, :label => "Iwad",
-                                   :placeholer => "doom, chex, etc" %>
-  <%= f.submit "Create Wad" %>
-<% end %>
+<div class="center-text">
+  <div class="well well-modest left-text">
+    <%= bootstrap_form_for(@wad, label_errors: true) do |f| %>
+      <legend>Create New Wad</legend>
+      <%= f.text_field :name %>
+      <%= f.text_field :username, :label => "/wads/***",
+                                  :placeholder => "doom, chex, etc" %>
+      <%= f.text_field :author %>
+      <%= f.text_field :file %>
+      <%= f.text_field :iwad_username, :label => "Iwad",
+                                       :placeholer => "doom, chex, etc" %>
+      <%= f.submit "Create", class: "btn btn-primary pull-right" %>
+    <% end %>
+  </div>
+</div>

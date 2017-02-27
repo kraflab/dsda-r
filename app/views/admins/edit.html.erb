@@ -1,8 +1,13 @@
-<% provide(:title, 'Update Password') %>
+<% provide(:title, 'Change Password') %>
 
-<%= bootstrap_form_for(@admin, url: edit_path, method: :patch) do |f| %>
-  <%= f.password_field :current_password %>
-  <%= f.password_field :password, label: "New password" %>
-  <%= f.password_field :password_confirmation %>
-  <%= f.submit "Change Password" %>
-<% end %>
+<div class="center-text">
+  <div class="well well-modest left-text">
+    <%= bootstrap_form_for(@admin, url: edit_path, method: :patch) do |f| %>
+      <legend>Change Password</legend>
+      <%= f.password_field :current_password %>
+      <%= f.password_field :password, label: "New password" %>
+      <%= f.password_field :password_confirmation %>
+      <%= f.submit "Submit", class: "btn btn-primary pull-right" %>
+    <% end %>
+  </div>
+</div>
