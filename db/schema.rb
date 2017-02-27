@@ -109,6 +109,7 @@ ActiveRecord::Schema.define(version: 20170216025240) do
     t.string   "year"
     t.string   "compatibility"
     t.boolean  "is_commercial"
+    t.integer  "versions"
     t.integer  "iwad_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false

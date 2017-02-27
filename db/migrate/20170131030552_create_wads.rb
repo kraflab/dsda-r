@@ -8,6 +8,7 @@ class CreateWads < ActiveRecord::Migration[5.0]
       t.string :year
       t.string :compatibility
       t.boolean :is_commercial
+      t.integer :versions
       t.references :iwad, foreign_key: true, index: true
 
       t.timestamps
