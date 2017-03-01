@@ -9,7 +9,7 @@
                           ["Partial Building", 3], ["Built", 4]],
                           :label => "Tas Level" %>
       <%= f.text_field :level, :placeholder => "Map 02, E1M4, E3, D2ALL, etc" %>
-      <%= f.text_field :player_1, :label => "Player" %>
+      <%= f.text_area  :player_list, :size => "1x2", :label => "Players" %>
       <%= f.text_field :time, :placeholder => "hh:mm:ss[.tt]" %>
       <%= f.text_area  :engine, :size => "1x2",
                        :placeholder => "PRBoom+ v2.5.1.4 cl9\nXDRE 2.14" %>

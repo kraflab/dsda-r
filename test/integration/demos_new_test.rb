@@ -5,6 +5,7 @@ class DemosNewTest < ActionDispatch::IntegrationTest
   def setup
     @admin = admins(:elim)
     @player = players(:kraflab)
+    @player_2 = players(:kingdime)
     @wad = wads(:btsx)
     @category = categories(:uvspeed)
   end
@@ -16,7 +17,8 @@ class DemosNewTest < ActionDispatch::IntegrationTest
     assert_no_difference "Demo.count" do
       post demos_path, params: { demo:
                                 { guys: 1, tas: 1, level: "Map 01",
-                                  player_1: @player.username, time: "12:02.13",
+                                  player_list: @player.username,
+                                  time: "12:02.13",
                                   engine: "PRBoom+ v2.5.1.4",
                                   levelstat: "12:02.13",
                                   wad_username: @wad.username,
@@ -35,7 +37,7 @@ class DemosNewTest < ActionDispatch::IntegrationTest
     assert_no_difference "Demo.count" do
       post demos_path, params: { demo:
                                 { guys: 1, tas: 1, level: "",
-                                  player_1: @player.username, time: "",
+                                  player_list: @player.username, time: "",
                                   engine: "",
                                   levelstat: "",
                                   wad_username: "",
@@ -50,7 +52,8 @@ class DemosNewTest < ActionDispatch::IntegrationTest
     assert_difference "Demo.count" do
       post demos_path, params: { demo:
                                 { guys: 1, tas: 1, level: "Map 01",
-                                  player_1: @player.username, time: "12:02.13",
+                                  player_list: "#{@player.username}\n#{@player_2.username}",
+                                  time: "12:02.13",
                                   engine: "PRBoom+ v2.5.1.4",
                                   levelstat: "12:02.13",
                                   wad_username: @wad.username,

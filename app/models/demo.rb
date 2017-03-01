@@ -23,8 +23,8 @@ class Demo < ApplicationRecord
   after_save    :update_players
   after_destroy :update_players
   
-  def player_1
-    players.first.username if players.count > 0
+  def player_list
+    players.collect { |i| i.username }.join("\n")
   end
   
   def wad_username

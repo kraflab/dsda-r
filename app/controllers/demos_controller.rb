@@ -12,12 +12,13 @@ class DemosController < ApplicationController
   end
   
   def create
-    player_name = params[:demo][:player_1]
-    player = Player.find_by(username: player_name)
-    if player
+    players, errors = parse_players
+    if errors.empty?
       @demo = Demo.create(demo_params)
       if @demo.save
-        DemoPlayer.create(demo: @demo, player: player).save
+        players.each do |player|
+          DemoPlayer.create(demo: @demo, player: player).save
+        end
         flash[:info] = "Demo successfully created"
         redirect_to wad_path(@demo.wad)
       else
@@ -25,7 +26,8 @@ class DemosController < ApplicationController
       end
     else
       @demo = Demo.new(demo_params)
-      @demo.errors.add(:player_1, :not_found, message: "not found")
+      @demo.errors.add(:player_list, :not_found, message: 
+        "#{errors.join(", ")} not found")
       render 'new'
     end
   end
@@ -42,20 +44,22 @@ class DemosController < ApplicationController
   
   def update
     @demo = Demo.find(params[:id])
-    player_name = params[:demo][:player_1]
-    player = Player.find_by(username: player_name)
-    if player
+    players, errors = parse_players
+    if errors.empty?
       if @demo.update(demo_params)
         demo_players = @demo.demo_players
         demo_players.each { |dp| dp.destroy }
-        DemoPlayer.create(demo: @demo, player: player).save
+        players.each do |player|
+          DemoPlayer.create(demo: @demo, player: player).save
+        end
         flash[:info] = "Demo successfully updated"
         redirect_to wad_path(@demo.wad)
       else
         render 'edit'
       end
     else
-      @demo.errors.add(:player_1, :not_found, message: "not found")
+      @demo.errors.add(:player_list, :not_found, message: 
+        "#{errors.join(", ")} not found")
       render 'edit'
     end
   end
@@ -66,6 +70,17 @@ class DemosController < ApplicationController
       params.require(:demo).permit(:guys, :tas, :level, :time, :engine,
                                    :levelstat, :wad_username, :category_name,
                                    :recorded_at, :file)
+    end
+    
+    def parse_players
+      player_names = params[:demo][:player_list].split(/[\n\r]+/).collect { |i| i.strip }
+      players = []
+      errors  = []
+      player_names.each do |name|
+        player = Player.find_by(username: name) || Player.find_by(name: name)
+        player.nil? ? errors.push(name.to_s) : players.push(player)
+      end
+      [players, errors]
     end
     
     # Allows destroy only for new items
