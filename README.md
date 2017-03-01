@@ -15,7 +15,8 @@ Restrict edit params or compensate for link immortality
 Add account lock after number of failed login attempts  
 Add edit / delete visibility toggles for admins  
 Add tag functionality to demo forms  
-Update flash messages to be consistent
+Update flash messages to be consistent  
+Add edit buttons for demos
 
 ## Contributors
 Full stack: Kraflab  

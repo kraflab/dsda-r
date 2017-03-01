@@ -2,7 +2,7 @@
 
 <div class="center-text">
   <div class="well well-modest left-text">
-    <%= bootstrap_form_for(@demo, label_errors: true) do |f| %>
+    <%= bootstrap_form_for(@demo) do |f| %>
       <legend>Create New Demo</legend>
       <%= f.number_field :guys, :label => "Player Count (in game)" %>
       <%= f.select :tas, [["Not Tas", 0], ["Segmented", 1], ["Slowdown", 2],

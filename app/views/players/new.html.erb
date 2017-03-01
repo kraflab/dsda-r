@@ -2,7 +2,7 @@
 
 <div class="center-text">
   <div class="well well-modest left-text">
-    <%= bootstrap_form_for(@player, label_errors: true) do |f| %>
+    <%= bootstrap_form_for(@player) do |f| %>
       <legend>Create New Player</legend>
       <%= f.text_field :name %>
       <%= f.text_field :username, :label => "/players/***", :placeholder => "leave blank for automatic generation" %>

@@ -2,7 +2,7 @@
 
 <div class="center-text">
   <div class="well well-modest left-text">
-    <%= bootstrap_form_for(@iwad, label_errors: true) do |f| %>
+    <%= bootstrap_form_for(@iwad) do |f| %>
       <legend>Create New Iwad</legend>
       <%= f.text_field :name %>
       <%= f.text_field :username, :label => "/iwads/***", :placeholder => "doom, chex, etc" %>

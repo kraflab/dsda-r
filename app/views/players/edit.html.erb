@@ -2,7 +2,7 @@
 
 <div class="center-text">
   <div class="well well-modest left-text">
-    <%= bootstrap_form_for(@player, label_errors: true) do |f| %>
+    <%= bootstrap_form_for(@player) do |f| %>
       <legend>Edit Player</legend>
       <%= f.text_field   :name %>
       <%= f.hidden_field :old_username, :value => @old_username %>
