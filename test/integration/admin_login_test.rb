@@ -14,7 +14,11 @@ class AdminLoginTest < ActionDispatch::IntegrationTest
     assert_not is_logged_in?
     assert_not flash.empty?
     post login_path, params: { session: { username: @admin.username,
-                                          password: "other" } }
+                                          password: "otherpassword" } }
+    assert_not is_logged_in?
+    assert_not flash.empty?
+    post login_path, params: { session: { username: @admin.username,
+                                          password: "" } }
     assert_not is_logged_in?
     assert_not flash.empty?
     post login_path, params: { session: { username: "other",
