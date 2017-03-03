@@ -4,10 +4,20 @@ class SessionsController < ApplicationController
   
   def create
     admin = Admin.find_by(username: params[:session][:username])
-    if admin && admin.authenticate(params[:session][:password])
-      log_in admin
-      flash[:info] = 'You are now logged in'
-      redirect_to root_path
+    if admin
+      if admin.fail_count >= 5
+        flash[:danger] = "This account has been locked; contact kraflab"
+        redirect_to root_url
+      elsif admin.authenticate(params[:session][:password])
+        log_in admin
+        flash[:info] = 'You are now logged in'
+        redirect_to root_path
+      else
+        admin.reload.fail_count += 1
+        admin.save
+        flash.now[:danger] = 'Invalid username/password combination'
+        render 'new'
+      end
     else
       flash.now[:danger] = 'Invalid username/password combination'
       render 'new'

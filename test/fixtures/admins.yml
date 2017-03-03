@@ -1,3 +1,4 @@
 elim:
   username: elim
   password_digest: <%= Admin.digest('password1234') %>
+  fail_count: 0

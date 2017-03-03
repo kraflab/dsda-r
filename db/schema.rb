@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 20170216025240) do
   create_table "admins", force: :cascade do |t|
     t.string   "username"
     t.string   "password_digest"
+    t.integer  "fail_count"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.index ["username"], name: "index_admins_on_username", unique: true

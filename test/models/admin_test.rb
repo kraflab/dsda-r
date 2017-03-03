@@ -3,7 +3,8 @@ require 'test_helper'
 class AdminTest < ActiveSupport::TestCase
   
   def setup
-    @admin = Admin.new(username: "test", password: "password1234")
+    @admin = Admin.new(username: "test",
+                       password: "password1234", fail_count: 0)
   end
   
   test "should be valid" do

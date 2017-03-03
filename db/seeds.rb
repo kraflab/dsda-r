@@ -20,7 +20,7 @@ Iwad.create!(name: "Hexen", username: "hexen", author: "Raven Software")
   doom.wads.create!(name: name, username: username, author: author, file: "")
 end
 
-Admin.create!(username: "kraflab", password: "password1234")
+Admin.create!(username: "kraflab", password: "password1234", fail_count: 0)
 
 Port.create!(family: "PRBoom+", version: "v2.5.1.4")
 Port.create!(family: "GZDoom",  version: "v2.0.05")

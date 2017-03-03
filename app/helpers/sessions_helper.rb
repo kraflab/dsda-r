@@ -3,6 +3,8 @@ module SessionsHelper
   # Logs in the given admin
   def log_in(admin)
     session[:username] = admin.username
+    admin.fail_count = 0
+    admin.save
   end
   
   # Logs out the current admin
