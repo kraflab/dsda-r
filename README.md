@@ -12,9 +12,9 @@ Uses Rails 5.0.1
 
 ## To Do
 Restrict edit params or compensate for link immortality  
-Add account lock after number of failed login attempts  
 Add edit / delete visibility toggles for admins  
 Add tag functionality to demo forms  
+Split tag field into tag and description for demos  
 Update flash messages to be consistent  
 Add edit buttons for demos
 
