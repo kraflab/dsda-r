@@ -7,14 +7,13 @@ categories, heretic / hexen demos, zandronum demos, and extra stats / options.
 DSDA is currently hosted at doomedsda.us, by Andy Olivera, who, along with
 Opulent, have served the doom demo community for well over a decade.
 
-Uses Ruby  2.4.0  
-Uses Rails 5.0.1
+Uses `Ruby  2.4.0`  
+Uses `Rails 5.0.2`
 
 ## To Do
 Restrict edit params or compensate for link immortality  
 Add edit / delete visibility toggles for admins  
 Add tag functionality to demo forms  
-Split tag field into tag and description for demos  
 Update flash messages to be consistent  
 Add edit buttons for demos
 
