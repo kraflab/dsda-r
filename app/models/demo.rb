@@ -66,7 +66,15 @@ class Demo < ApplicationRecord
   end
   
   def note
-    "#{"C#{guys}" if guys > 1} #{"T#{tas}" if tas > 0}".strip
+    "#{coop_text} #{tas_text}".strip
+  end
+  
+  def coop_text
+    guys > 1 ? "#{guys}P" : ""
+  end
+  
+  def tas_text
+    tas != 0 ? (tas > 0 ? "T#{tas}" : "T") : ""
   end
   
   def tags_text

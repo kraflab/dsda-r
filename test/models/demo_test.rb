@@ -97,9 +97,9 @@ class DemoTest < ActiveSupport::TestCase
   test "should show notes properly" do
     assert_match @demo.note, ""
     @demo.guys = 2
-    assert_match @demo.note, "C2"
+    assert_match @demo.note, "2P"
     @demo.tas = 3
-    assert_match @demo.note, "C2 T3"
+    assert_match @demo.note, "2P T3"
     @demo.guys = 1
     assert_match @demo.note, "T3"
   end
