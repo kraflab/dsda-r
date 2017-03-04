@@ -7,6 +7,7 @@ bt01speed:
   guys: 2
   has_tics: true
   level: Map 01
+  levelstat: 0:00.97
   recorded_at: <%= 100.days.ago %>
   levelstat: 0:02.97
 
@@ -19,6 +20,7 @@ bt02speed:
   guys: 2
   has_tics: true
   level: Map 02
+  levelstat: 0:00.97
   recorded_at: <%= 100.days.ago %>
   levelstat: 0:02.97
 
@@ -26,13 +28,13 @@ bt02speed:
 demo_<%= n %>:
   wad: btsx
   category: uvspeed
-  tics: <%= rand(100000) + 1 %>
+  tics: <%= n * 1000 %>
   has_tics: true
-  level: <%= "Map #{(rand(32) + 1).to_s.rjust(2, '0')}" %>
-  levelstat: "0:00.97"
+  level: <%= "Map #{n.to_s.rjust(2, '0')}" %>
+  levelstat: 0:00.97
   tas: 0
   guys: 1
   recorded_at: <%= n.days.ago %>
   created_at: <%= n.days.ago %>
-  engine: "PRBoom+ v2.5.1.4 cl9"
+  engine: PRBoom+ v2.5.1.4 cl9
 <% end %>

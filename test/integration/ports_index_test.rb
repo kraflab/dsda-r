@@ -14,7 +14,7 @@ class PortsIndexTest < ActionDispatch::IntegrationTest
       assert_match port.family, response.body
       assert_match port.version, response.body
     end
-    assert_select 'a[href=?]', new_port_path, 0
+    assert_select 'a[href=?]', new_port_path, count: 0
     log_in_as(@admin)
     get ports_path
     assert_select 'a[href=?]', new_port_path

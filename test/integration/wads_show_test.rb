@@ -21,7 +21,7 @@ class WadsShowTest < ActionDispatch::IntegrationTest
     demo.players.each do |pl|
       assert_match pl.name, response.body
     end
-    assert_select "a[href=?]", edit_wad_path(@wad), 0
+    assert_select "a[href=?]", edit_wad_path(@wad), count: 0
     log_in_as(@admin)
     get wad_path(@wad)
     assert_select "a[href=?]", edit_wad_path(@wad)

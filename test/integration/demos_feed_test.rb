@@ -6,7 +6,7 @@ class DemosFeedTest < ActionDispatch::IntegrationTest
     get feed_path
     assert_response :success
     assert_select "h1", "Recent Demos"
-    demos = Demo.reorder(created_at: :desc).paginate(page: nil)
+    demos = Demo.reorder(created_at: :desc).paginate(page: "1")
     [demos.first, demos.last].each do |demo|
       assert_select "td", demo.created_at.to_date.to_s
       assert_select "a[href=?]", wad_path(demo.wad)
@@ -18,7 +18,7 @@ class DemosFeedTest < ActionDispatch::IntegrationTest
       assert_select "td", demo.note
       assert_select "td", demo.time
     end
-    assert_select "td", Demo.last.time, 0
+    assert_select "td", text: Demo.reorder(created_at: :desc).last.time, count: 0
     assert_select "div.pagination"
   end
 end

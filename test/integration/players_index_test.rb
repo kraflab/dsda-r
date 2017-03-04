@@ -15,7 +15,7 @@ class PlayersIndexTest < ActionDispatch::IntegrationTest
       assert_select 'td', player.demos.count.to_s
       assert_select 'td', total_demo_time(player)
     end
-    assert_select 'a[href=?]', new_player_path, 0
+    assert_select 'a[href=?]', new_player_path, count: 0
     log_in_as(@admin)
     get players_path
     assert_select 'a[href=?]', new_player_path

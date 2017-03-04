@@ -15,7 +15,7 @@ class WadsIndexTest < ActionDispatch::IntegrationTest
     wads.each do |wad|
       assert_select 'a[href=?]', wad_path(wad)
     end
-    assert_select 'a[href=?]', new_wad_path, 0
+    assert_select 'a[href=?]', new_wad_path, count: 0
     ('a'..'z').to_a.each do |letter|
       get wads_path, params: { letter: letter }
       wads = Wad.where("username LIKE ?", "#{letter}%")
@@ -24,7 +24,7 @@ class WadsIndexTest < ActionDispatch::IntegrationTest
         assert_select 'td', wad.demos.count.to_s
         assert_select 'td', total_demo_time(wad, false)
       end
-      assert_select "div.pagination", 0
+      assert_select "div.pagination", count: 0
     end
     log_in_as(@admin)
     get wads_path
