@@ -31,10 +31,10 @@
             <% chunk_c[1].each do |demo| %>
               <tr>
                 <% if demo == chunk_l[1].first %>
-                  <td class="no-stripe-panel" rowspan="<%= chunk_l[1].count + 2*Tag.where(demo: chunk_l[1]).distinct.count(:demo_id) %>"><%= demo.level %></td>
+                  <td class="no-stripe-panel" rowspan="<%= chunk_l[1].count + 2 * tagged_demos(chunk_l[1]) %>"><%= demo.level %></td>
                 <% end %>
                 <% if demo == chunk_c[1].first %>
-                  <td class="no-stripe-panel" rowspan="<%= chunk_c[1].count + 2*Tag.where(demo: chunk_c[1]).distinct.count(:demo_id) %>"><%= demo.category.name %></td>
+                  <td class="no-stripe-panel" rowspan="<%= chunk_c[1].count + 2 * tagged_demos(chunk_c[1]) %>"><%= demo.category.name %></td>
                 <% end %>
                 <td class="player-cell"><%= demo.players_text %></td>
                 <td class="engine-cell"><%= demo.engine %></td>
