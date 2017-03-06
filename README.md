@@ -25,7 +25,6 @@ Add autocompletion for demo new / edit forms
 Update flash messages to be consistent  
 Add version id to demos directly?  
 Add edit buttons for demos  
-Add new demo button
 
 ## Contributors
 Full stack: Kraflab  
