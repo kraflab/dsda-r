@@ -24,7 +24,6 @@ Add edit / delete visibility toggles for admins
 Add autocompletion for demo new / edit forms  
 Update flash messages to be consistent  
 Add version id to demos directly?  
-Add edit buttons for demos  
 
 ## Contributors
 Full stack: Kraflab  

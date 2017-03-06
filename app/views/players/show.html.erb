@@ -50,7 +50,14 @@
                   <td class="player-cell"><%= demo.players_text %></td>
                   <td class="engine-cell"><%= demo.engine %></td>
                   <td class="right-text"><%= demo.note %></td>
-                  <td class="right-text demo-time"><%= link_to demo.time, demo.file_path %></td>
+                  <td class="right-text demo-time">
+                    <%= link_to demo.time, demo.file_path %>
+                    <% if logged_in? %>
+                      <%= link_to edit_demo_path(demo), :class => 'label label-info label-xs' do %>
+                        <span class="glyphicon glyphicon-cog" aria-hidden="true" aria-label="Edit"></span>
+                      <% end %>
+                    <% end %>
+                  </td>
                 </tr>
                 <% if demo.sub_categories.count > 0 %>
                   <tr></tr>
