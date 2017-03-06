@@ -50,9 +50,12 @@ class DemosController < ApplicationController
       if @demo.update(demo_params)
         demo_players = @demo.demo_players
         demo_players.each { |dp| dp.destroy }
+        demo_tags = @demo.tags
+        demo_tags.each { |dt| dt.destroy }
         players.each do |player|
           DemoPlayer.create(demo: @demo, player: player).save
         end
+        parse_tags
         flash[:info] = "Demo successfully updated"
         redirect_to wad_path(@demo.wad)
       else
@@ -88,11 +91,9 @@ class DemosController < ApplicationController
           end
         end
       end
-      puts ">> start"
+      
       tags.each_with_index do |tag, i|
-        puts "> here"
         next if tag.blank?
-        puts "> making"
         sub_category = SubCategory.find_by(name: tag) ||
                        SubCategory.create(name: tag, show: true)
         puts sub_category.errors.messages
