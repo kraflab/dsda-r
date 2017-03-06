@@ -21,9 +21,11 @@ Uses `Rails 5.0.2`
 ## To Do
 Restrict edit params or compensate for link immortality  
 Add edit / delete visibility toggles for admins  
-Add tag functionality to demo forms  
+Add tag functionality to demo edit form  
+Add autocompletion for demo new / edit forms  
 Update flash messages to be consistent  
-Add edit buttons for demos
+Add edit buttons for demos  
+Add new demo button
 
 ## Contributors
 Full stack: Kraflab  
