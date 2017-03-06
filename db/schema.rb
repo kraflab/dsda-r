@@ -87,9 +87,9 @@ ActiveRecord::Schema.define(version: 20170216025240) do
 
   create_table "sub_categories", force: :cascade do |t|
     t.string   "name"
-    t.integer  "style"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "style",      default: 0
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "tags", force: :cascade do |t|

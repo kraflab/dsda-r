@@ -64,6 +64,6 @@ player = Player.first
   player.player_demos.create(demo: demo)
 end
 
-subcategory = SubCategory.create!(name: "-fast", show: true, mod: true)
+subcategory = SubCategory.create!(name: "-fast", show: true)
 
 Tag.create!(sub_category: subcategory, demo: Demo.first)
