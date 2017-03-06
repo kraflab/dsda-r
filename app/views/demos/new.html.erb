@@ -21,8 +21,19 @@
                        :label => "Category",
                        :placeholder => "UV Speed, Other, etc" %>
       <%= f.datetime_field :recorded_at, :label => "Record Date" %>
+      <hr>
+      <div id="tag_fields">
+        <%= label_tag "Tags", nil, class: "control-label" %>
+        <%= render partial: "tag_field" %>
+      </div>
+      <p class="btn btn-info btn-xs" id="addNewTag">Add New Tag</p>
+      <hr>
       <%= f.text_field :file %>
       <%= f.submit "Create", class: "btn btn-primary pull-right" %>
     <% end %>
   </div>
+</div>
+
+<div class="no-display" id="new_tag_form">
+  <%= render partial: "tag_field" %>
 </div>
