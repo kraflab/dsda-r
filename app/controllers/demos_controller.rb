@@ -13,13 +13,13 @@ class DemosController < ApplicationController
   
   def create
     players, player_errors = parse_players
-    parse_tags
     if player_errors.empty?
-      @demo = Demo.create(demo_params)
+      @demo = Demo.new(demo_params)
       if @demo.save
         players.each do |player|
-          DemoPlayer.create(demo: @demo, player: player).save
+          DemoPlayer.create(demo: @demo, player: player)
         end
+        parse_tags
         flash[:info] = "Demo successfully created"
         redirect_to wad_path(@demo.wad)
       else
@@ -77,22 +77,27 @@ class DemosController < ApplicationController
       tags   = params[:tags]
       checks = params[:shows]
       shows  = []
-      
+
       # hack to get around empty check boxes
       checks.each_with_index do |c, i|
         if c == 'No'
           if i < checks.size and checks[i + 1] == 'Yes'
-            shows.push(1)
+            shows.push(true)
           else
-            shows.push(0)
+            shows.push(false)
           end
         end
       end
-      
+      puts ">> start"
       tags.each_with_index do |tag, i|
-        puts "> Tag: #{tag}, Show: #{shows[i]}"
+        puts "> here"
+        next if tag.blank?
+        puts "> making"
+        sub_category = SubCategory.find_by(name: tag) ||
+                       SubCategory.create(name: tag, show: true)
+        puts sub_category.errors.messages
+        Tag.create(sub_category: sub_category, demo: @demo) if sub_category
       end
-      [tags, []]
     end
     
     def parse_players
