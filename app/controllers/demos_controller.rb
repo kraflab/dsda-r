@@ -12,8 +12,9 @@ class DemosController < ApplicationController
   end
   
   def create
-    players, errors = parse_players
-    if errors.empty?
+    players, player_errors = parse_players
+    parse_tags
+    if player_errors.empty?
       @demo = Demo.create(demo_params)
       if @demo.save
         players.each do |player|
@@ -70,6 +71,28 @@ class DemosController < ApplicationController
       params.require(:demo).permit(:guys, :tas, :level, :time, :engine,
                                    :levelstat, :wad_username, :category_name,
                                    :recorded_at, :file)
+    end
+    
+    def parse_tags
+      tags   = params[:tags]
+      checks = params[:shows]
+      shows  = []
+      
+      # hack to get around empty check boxes
+      checks.each_with_index do |c, i|
+        if c == 'No'
+          if i < checks.size and checks[i + 1] == 'Yes'
+            shows.push(1)
+          else
+            shows.push(0)
+          end
+        end
+      end
+      
+      tags.each_with_index do |tag, i|
+        puts "> Tag: #{tag}, Show: #{shows[i]}"
+      end
+      [tags, []]
     end
     
     def parse_players

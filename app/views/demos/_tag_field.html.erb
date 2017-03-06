@@ -1,5 +1,9 @@
 <div class="tagForm">
   <div class="form-group">
     <%= text_field_tag "tags[]", nil, class: "form-control" %>
+    <div class="pull-right">
+      <%= check_box_tag "shows[]", "No", true, class: "no-display" %>
+      <%= check_box_tag "shows[]", "Yes", false %> Show by default
+    </div>
   </div>
 </div>
