@@ -25,8 +25,8 @@ class SubCategoryTest < ActiveSupport::TestCase
     assert_not @sub.valid?
   end
   
-  test "style should be > 0" do
-    @sub.style = 0
+  test "style should be >= 0" do
+    @sub.style = -1
     assert_not @sub.valid?
   end
   

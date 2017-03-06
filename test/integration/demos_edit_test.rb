@@ -24,7 +24,8 @@ class DemosEditTest < ActionDispatch::IntegrationTest
                                         wad_username: @wad.username,
                                         category_name: @category.name,
                                         recorded_at: Time.zone.now,
-                                        file: "" } }
+                                        file: "" },
+                                      tags: ["blind"], shows: ["No", "Yes"] }
     assert_not_equal @demo.reload.time, new_time
     assert_not flash.empty?
     assert_redirected_to root_url
@@ -50,7 +51,8 @@ class DemosEditTest < ActionDispatch::IntegrationTest
                                         wad_username: @wad.username,
                                         category_name: @category.name,
                                         recorded_at: Time.zone.now,
-                                        file: "" } }
+                                        file: "" },
+                                      tags: ["blind"], shows: ["No", "Yes"] }
     assert_select "input.btn[value=?]", "Update"
     assert_not_equal @demo.reload.time, new_time
   end
@@ -78,7 +80,8 @@ class DemosEditTest < ActionDispatch::IntegrationTest
                                         wad_username: @wad.username,
                                         category_name: @category.name,
                                         recorded_at: Time.zone.now,
-                                        file: "" } }
+                                        file: "" },
+                                      tags: ["blind"], shows: ["No", "Yes"] }
     assert_not flash.empty?
     assert_redirected_to wad_path(@demo.wad)
     assert_equal @demo.reload.time, new_time

@@ -24,7 +24,7 @@
       <hr>
       <div id="tag_fields">
         <%= label_tag "Tags", nil, class: "control-label" %>
-        <%= render partial: "tag_field" %>
+        <%= render partial: "tag_field", locals: { tag: nil } %>
       </div>
       <p class="btn btn-info btn-xs" id="addNewTag">Add New Tag</p>
       <hr>
@@ -35,5 +35,5 @@
 </div>
 
 <div class="no-display" id="new_tag_form">
-  <%= render partial: "tag_field" %>
+  <%= render partial: "tag_field", locals: { tag: nil } %>
 </div>

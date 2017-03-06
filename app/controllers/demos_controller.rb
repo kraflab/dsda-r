@@ -96,7 +96,6 @@ class DemosController < ApplicationController
         next if tag.blank?
         sub_category = SubCategory.find_by(name: tag) ||
                        SubCategory.create(name: tag, show: true)
-        puts sub_category.errors.messages
         Tag.create(sub_category: sub_category, demo: @demo) if sub_category
       end
     end
