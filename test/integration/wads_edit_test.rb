@@ -40,6 +40,16 @@ class WadsEditTest < ActionDispatch::IntegrationTest
                                       iwad_username: "doom2" } }
     assert_select "input.btn[value=?]", "Update"
     assert_not_equal @wad.reload.name, new_name
+    
+    new_username = "test123"
+    @wad.created_at = 2.days.ago
+    @wad.save
+    patch wad_path(@wad), params: { wad:
+                                    { name: @wad.name, username: new_username,
+                                      author: @wad.author,
+                                      old_username: @wad.username,
+                                      iwad_username: @wad.iwad_username } }
+    assert_not_equal @wad.reload.username, new_username
   end
   
   test "unsuccessful delete" do

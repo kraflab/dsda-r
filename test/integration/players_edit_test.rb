@@ -40,6 +40,16 @@ class PlayersEditTest < ActionDispatch::IntegrationTest
                                             twitch: "bad link", youtube: "" } }
     assert_select "input.btn[value=?]", "Update"
     assert_not_equal @player.reload.name, new_name
+    
+    new_username = "test123"
+    @player.created_at = 2.days.ago
+    @player.save
+    patch player_path(@player), params: { player:
+                                          { name: @player.name, 
+                                            old_username: @player.username, 
+                                            username: new_username,
+                                            twitch: "", youtube: "" } }
+    assert_not_equal @player.reload.username, new_username
   end
   
   test "unsuccessful delete" do
