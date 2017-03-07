@@ -19,6 +19,20 @@ Uses `Ruby  2.4.0`
 Uses `Rails 5.0.2`
 
 ## To Do
+Category filter options  
+Hide tas / coop options  
+File handling system  
+Download counts  
+Production preparation  
+Hidden tag interface  
+Level time view for movies  
+Demo field: link to video  
+Player / wad search  
+Site-wide totals stats  
+Average demo time stat  
+Record timeline  
+FDA category  
+Pacifist in Speed list if record  
 
 ## Contributors
 Full stack: Kraflab  
