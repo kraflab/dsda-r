@@ -10,6 +10,7 @@ class CreateDemos < ActiveRecord::Migration[5.0]
       t.string :file
       t.boolean :has_tics
       t.string :engine
+      t.integer :version, default: 0
       t.references :wad, foreign_key: true, index: true
       t.references :category, foreign_key: true
 

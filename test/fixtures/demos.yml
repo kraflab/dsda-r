@@ -8,6 +8,7 @@ bt01speed:
   has_tics: true
   level: Map 01
   levelstat: 0:00.97
+  version: 0
   recorded_at: <%= 100.days.ago %>
   levelstat: 0:02.97
 
@@ -21,6 +22,7 @@ bt02speed:
   has_tics: true
   level: Map 02
   levelstat: 0:00.97
+  version: 0
   recorded_at: <%= 100.days.ago %>
   levelstat: 0:02.97
 
@@ -34,6 +36,7 @@ demo_<%= n %>:
   levelstat: 0:00.97
   tas: 0
   guys: 1
+  version: 0
   recorded_at: <%= n.days.ago %>
   created_at: <%= n.days.ago %>
   engine: PRBoom+ v2.5.1.4 cl9

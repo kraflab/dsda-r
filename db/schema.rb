@@ -48,10 +48,11 @@ ActiveRecord::Schema.define(version: 20170216025240) do
     t.string   "file"
     t.boolean  "has_tics"
     t.string   "engine"
+    t.integer  "version",     default: 0
     t.integer  "wad_id"
     t.integer  "category_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
     t.index ["category_id"], name: "index_demos_on_category_id"
     t.index ["wad_id", "level", "category_id", "tics"], name: "index_demos_on_wad_id_and_level_and_category_id_and_tics"
     t.index ["wad_id"], name: "index_demos_on_wad_id"

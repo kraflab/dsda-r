@@ -13,6 +13,8 @@ class Demo < ApplicationRecord
   validates :tas,         presence: true,
                           numericality: { greater_than_or_equal_to: 0 }
   validates :guys,        presence: true, numericality: { greater_than: 0 }
+  validates :version,     presence: true,
+                          numericality: { greater_than_or_equal_to: 0 }
   #validates :has_tics,    presence: true
   validates :level,       presence: true, length: { maximum: 10 },
                           format: { with: VALID_PORT_REGEX }
@@ -63,6 +65,7 @@ class Demo < ApplicationRecord
     self.tics = ( fields.count == 3 ? fields[2].to_i * 360000 : 0 ) +
                 fields[1].to_i * 6000 + fields[0].to_i * 100 +
                 ( spl.count == 2 ? spl[1].to_i : 0 )
+    self.has_tics = (spl.count == 2)
   end
   
   def note
