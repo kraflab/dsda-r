@@ -41,6 +41,7 @@ class PlayersController < ApplicationController
   def update
     @old_username = params[:player][:old_username]
     @player = Player.find_by(username: @old_username)
+    params[:player][:username] = @player.username if @player.is_frozen?
     these_params = check_username(player_params)
     if @player.update_attributes(these_params)
       flash[:info] = "Player successfully updated"

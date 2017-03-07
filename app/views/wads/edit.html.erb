@@ -6,8 +6,13 @@
       <legend>Edit Wad</legend>
       <%= f.text_field   :name %>
       <%= f.hidden_field :old_username, :value => @old_username %>
-      <%= f.text_field   :username, :label => "/wads/***",
-                         :placeholder => "doom, chex, etc" %>
+      <% if @wad.is_frozen? %>
+        <%= f.text_field   :username, label: "/wads/***", disabled: true,
+                           placeholder: "doom, chex, etc" %>
+      <% else %>
+        <%= f.text_field   :username, :label => "/wads/***",
+                           :placeholder => "doom, chex, etc" %>
+      <% end %>
       <%= f.text_field   :author %>
       <%= f.text_field   :file %>
       <%= f.text_field   :iwad_username, :label => "Iwad",

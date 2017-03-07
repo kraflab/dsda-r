@@ -50,6 +50,7 @@ class WadsController < ApplicationController
   def update
     @old_username  = params[:wad][:old_username]
     @wad = Wad.find_by(username: @old_username)
+    params[:wad][:username] = @wad.username if @wad.is_frozen?
     if @wad.update_attributes(wad_params)
       flash[:info] = "Wad successfully updated"
       redirect_to @wad

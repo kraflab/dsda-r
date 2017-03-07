@@ -19,8 +19,6 @@ Uses `Ruby  2.4.0`
 Uses `Rails 5.0.2`
 
 ## To Do
-Restrict edit params or compensate for link immortality  
-Add edit / delete visibility toggles for admins  
 Add autocompletion for demo new / edit forms  
 
 ## Contributors
