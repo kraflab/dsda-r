@@ -43,7 +43,7 @@ class PortsController < ApplicationController
     def age_limit
       family, version = parse_id
       @port = Port.find_by(family: family, version: version)
-      unless @port && age_in_minutes(@port) < 30
+      if @port.is_frozen?
         flash[:warning] = "That Port is too old to delete from here"
         redirect_to root_url
       end

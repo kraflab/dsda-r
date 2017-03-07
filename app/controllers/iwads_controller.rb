@@ -40,7 +40,7 @@ class IwadsController < ApplicationController
     # Allows destroy only for new items
     def age_limit
       @iwad = Iwad.find_by(username: params[:id])
-      unless @iwad && age_in_minutes(@iwad) < 30
+      if @iwad.is_frozen?
         flash[:warning] = "That Iwad is too old to delete from here"
         redirect_to root_url
       end

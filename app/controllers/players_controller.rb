@@ -68,7 +68,7 @@ class PlayersController < ApplicationController
     # Allows destroy only for new items
     def age_limit
       @player = Player.find_by(username: params[:id])
-      unless @player && age_in_minutes(@player) < 30
+      if @player.is_frozen?
         flash[:warning] = "That Player is too old to delete from here"
         redirect_to root_url
       end

@@ -9,8 +9,4 @@ module ApplicationHelper
       "#{page_title} | #{base_title}"
     end
   end
-  
-  def age_in_minutes(object)
-    return ((Time.zone.now - object.created_at) / 60).to_i 
-  end
 end

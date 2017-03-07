@@ -71,7 +71,7 @@ class WadsController < ApplicationController
     # Allows destroy only for new items
     def age_limit
       @wad = Wad.find_by(username: params[:id])
-      unless @wad && age_in_minutes(@wad) < 30
+      if @wad.is_frozen?
         flash[:warning] = "That Wad is too old to delete from here"
         redirect_to root_url
       end
