@@ -17,6 +17,7 @@
                        :placeholder => "[hh:]mm:ss[.tt],[hh:]mm:ss[.tt]..." %>
       <%= f.text_field :wad_username, :label => "Wad",
                        :placeholder => "doom, btsx, etc" %>
+      <%= f.number_field :version, :label => "Wad Version" %>
       <%= f.select     :category_name, Category.select_list,
                        :label => "Category",
                        :placeholder => "UV Speed, Other, etc" %>

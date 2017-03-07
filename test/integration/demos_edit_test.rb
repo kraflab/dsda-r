@@ -18,7 +18,7 @@ class DemosEditTest < ActionDispatch::IntegrationTest
     patch demo_path(@demo), params: { demo:
                                       { guys: 1, tas: 1, level: "Map 01",
                                         player_list: @player.username,
-                                        time: new_time,
+                                        time: new_time, version: 0,
                                         engine: "PRBoom+ v2.5.1.4",
                                         levelstat: "12:02.13",
                                         wad_username: @wad.username,
@@ -45,7 +45,7 @@ class DemosEditTest < ActionDispatch::IntegrationTest
     patch demo_path(@demo), params: { demo:
                                       { guys: 1, tas: 1, level: "Map 01",
                                         player_list: "unknown name",
-                                        time: new_time,
+                                        time: new_time, version: 0,
                                         engine: "PRBoom+ v2.5.1.4",
                                         levelstat: "12:02.13",
                                         wad_username: @wad.username,
@@ -74,7 +74,7 @@ class DemosEditTest < ActionDispatch::IntegrationTest
     patch demo_path(@demo), params: { demo:
                                       { guys: 1, tas: 1, level: "Map 01",
                                         player_list: @player.username,
-                                        time: new_time,
+                                        time: new_time, version: 0,
                                         engine: "PRBoom+ v2.5.1.4",
                                         levelstat: "12:02.13",
                                         wad_username: @wad.username,
