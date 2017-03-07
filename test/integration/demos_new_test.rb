@@ -17,14 +17,14 @@ class DemosNewTest < ActionDispatch::IntegrationTest
     assert_no_difference "Demo.count" do
       post demos_path, params: { demo:
                                  { guys: 1, tas: 1, level: "Map 01",
-                                   player_list: @player.username,
                                    time: "12:02.13", version: 0,
                                    engine: "PRBoom+ v2.5.1.4",
                                    levelstat: "12:02.13",
                                    wad_username: @wad.username,
                                    category_name: @category.name,
                                    recorded_at: Time.zone.now, file: "" },
-                                 tags: ["blind"], shows: ["No", "Yes"] }
+                                 tags: ["blind"], shows: ["No", "Yes"],
+                                 players: [@player.username] }
     end
     assert_not flash.empty?
     assert_redirected_to root_url
@@ -38,13 +38,14 @@ class DemosNewTest < ActionDispatch::IntegrationTest
     assert_no_difference "Demo.count" do
       post demos_path, params: { demo:
                                  { guys: 1, tas: 1, level: "",
-                                   player_list: @player.username, time: "",
+                                   time: "",
                                    engine: "", version: 0,
                                    levelstat: "",
                                    wad_username: "",
                                    category_name: "",
                                    recorded_at: Time.zone.now, file: "" },
-                                 tags: [""], shows: [""] }
+                                 tags: [""], shows: [""],
+                                 players: [@player.username] }
     end
     assert_select "input.btn[value=?]", "Create"
   end
@@ -54,14 +55,14 @@ class DemosNewTest < ActionDispatch::IntegrationTest
     assert_difference "Demo.count" do
       post demos_path, params: { demo:
                                  { guys: 1, tas: 1, level: "Map 01",
-                                   player_list: "#{@player.username}\n#{@player_2.username}",
                                    time: "12:02.13", version: 0,
                                    engine: "PRBoom+ v2.5.1.4",
                                    levelstat: "12:02.13",
                                    wad_username: @wad.username,
                                    category_name: @category.name,
                                    recorded_at: Time.zone.now, file: "" },
-                                 tags: ["blind"], shows: ["No", "Yes"] }
+                                 tags: ["blind"], shows: ["No", "Yes"],
+                                 players: [@player.username, @player_2.username] }
     end
     assert_not flash.empty?
     assert_redirected_to wad_path(@wad)

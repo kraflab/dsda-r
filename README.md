@@ -19,7 +19,6 @@ Uses `Ruby  2.4.0`
 Uses `Rails 5.0.2`
 
 ## To Do
-Add autocompletion for demo new / edit forms  
 
 ## Contributors
 Full stack: Kraflab  

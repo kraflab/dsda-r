@@ -1,4 +1,5 @@
 class PlayersController < ApplicationController
+  autocomplete :player, :username
   before_action :admin_session, except: [:index, :show]
   before_action :age_limit, only: :destroy
   

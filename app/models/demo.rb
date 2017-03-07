@@ -25,10 +25,6 @@ class Demo < ApplicationRecord
   after_save    :update_players
   after_destroy :update_players
   
-  def player_list
-    players.collect { |i| i.username }.join("\n")
-  end
-  
   def wad_username
     wad.username if wad
   end

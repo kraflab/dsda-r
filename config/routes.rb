@@ -15,7 +15,9 @@ Rails.application.routes.draw do
   
   get    'feed' => 'demos#feed'
 
-  resources :players
+  resources :players do
+    get :autocomplete_player_username, :on => :collection
+  end
   resources :iwads, except: [:edit, :update]
   resources :wads
   resources :ports, except: [:show, :edit, :update], :id => /([^\/])+/ do

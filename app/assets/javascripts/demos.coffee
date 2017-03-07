@@ -5,3 +5,6 @@
 $ ->
   $("#addNewTag").on "click", ->
     $("#tag_fields").append($("#new_tag_form").html())
+  
+  $("#addNewPlayer").on "click", ->
+    $("#player_fields").append($("#new_player_form").html())

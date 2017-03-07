@@ -27,8 +27,7 @@ class DemosController < ApplicationController
       end
     else
       @demo = Demo.new(demo_params)
-      @demo.errors.add(:player_list, :not_found, message: 
-        "#{errors.join(", ")} not found")
+      flash.now[:warning] = "Players: #{errors.join(", ")} not found"
       render 'new'
     end
   end
@@ -62,8 +61,7 @@ class DemosController < ApplicationController
         render 'edit'
       end
     else
-      @demo.errors.add(:player_list, :not_found, message: 
-        "#{errors.join(", ")} not found")
+      flash.now[:warning] = "Players: #{errors.join(", ")} not found"
       render 'edit'
     end
   end
@@ -101,10 +99,11 @@ class DemosController < ApplicationController
     end
     
     def parse_players
-      player_names = params[:demo][:player_list].split(/[\n\r]+/).collect { |i| i.strip }
+      player_names = params[:players]
       players = []
       errors  = []
       player_names.each do |name|
+        next if name.blank?
         player = Player.find_by(username: name) || Player.find_by(name: name)
         player.nil? ? errors.push(name.to_s) : players.push(player)
       end

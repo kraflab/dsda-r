@@ -1,0 +1,11 @@
+<div class="playerForm">
+  <div class="form-group">
+    <% if player.nil? %>
+      <%= text_field_tag "players[]", nil, class: "form-control",
+          "data-autocomplete" => autocomplete_player_username_players_path %>
+    <% else %>
+      <%= text_field_tag "players[]", player.username, class: "form-control",
+          "data-autocomplete" => autocomplete_player_username_players_path %>
+    <% end %>
+  </div>
+</div>

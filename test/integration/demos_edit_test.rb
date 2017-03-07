@@ -17,7 +17,6 @@ class DemosEditTest < ActionDispatch::IntegrationTest
     new_time = "10:10.10"
     patch demo_path(@demo), params: { demo:
                                       { guys: 1, tas: 1, level: "Map 01",
-                                        player_list: @player.username,
                                         time: new_time, version: 0,
                                         engine: "PRBoom+ v2.5.1.4",
                                         levelstat: "12:02.13",
@@ -25,7 +24,8 @@ class DemosEditTest < ActionDispatch::IntegrationTest
                                         category_name: @category.name,
                                         recorded_at: Time.zone.now,
                                         file: "" },
-                                      tags: ["blind"], shows: ["No", "Yes"] }
+                                      tags: ["blind"], shows: ["No", "Yes"],
+                                      players: [@player.username] }
     assert_not_equal @demo.reload.time, new_time
     assert_not flash.empty?
     assert_redirected_to root_url
@@ -44,7 +44,6 @@ class DemosEditTest < ActionDispatch::IntegrationTest
     new_time = "10:10.10"
     patch demo_path(@demo), params: { demo:
                                       { guys: 1, tas: 1, level: "Map 01",
-                                        player_list: "unknown name",
                                         time: new_time, version: 0,
                                         engine: "PRBoom+ v2.5.1.4",
                                         levelstat: "12:02.13",
@@ -52,7 +51,8 @@ class DemosEditTest < ActionDispatch::IntegrationTest
                                         category_name: @category.name,
                                         recorded_at: Time.zone.now,
                                         file: "" },
-                                      tags: ["blind"], shows: ["No", "Yes"] }
+                                      tags: ["blind"], shows: ["No", "Yes"],
+                                      players: ["unknown name"] }
     assert_select "input.btn[value=?]", "Update"
     assert_not_equal @demo.reload.time, new_time
   end
@@ -73,7 +73,6 @@ class DemosEditTest < ActionDispatch::IntegrationTest
     new_time = "10:10.10"
     patch demo_path(@demo), params: { demo:
                                       { guys: 1, tas: 1, level: "Map 01",
-                                        player_list: @player.username,
                                         time: new_time, version: 0,
                                         engine: "PRBoom+ v2.5.1.4",
                                         levelstat: "12:02.13",
@@ -81,7 +80,8 @@ class DemosEditTest < ActionDispatch::IntegrationTest
                                         category_name: @category.name,
                                         recorded_at: Time.zone.now,
                                         file: "" },
-                                      tags: ["blind"], shows: ["No", "Yes"] }
+                                      tags: ["blind"], shows: ["No", "Yes"],
+                                      players: [@player.username] }
     assert_not flash.empty?
     assert_redirected_to wad_path(@demo.wad)
     assert_equal @demo.reload.time, new_time
