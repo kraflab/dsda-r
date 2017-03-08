@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
 gem 'rails',        '~> 5.0.2'
-gem 'sqlite3'
 gem 'puma',         '~> 3.0'
 gem 'sass-rails',   '~> 5.0'
 gem 'uglifier',     '>= 1.3.0'
@@ -22,6 +21,7 @@ gem 'jquery-ui-rails'
 gem 'rails-jquery-autocomplete'
 
 group :development, :test do
+  gem 'sqlite3'
   gem 'byebug', platform: :mri
   gem 'sqlite3_ar_regexp', '~> 2.2'
 end
@@ -32,6 +32,11 @@ group :test do
 end
 
 group :development do
+  gem 'capistrano',         require: false
+  gem 'capistrano-rvm',     require: false
+  gem 'capistrano-rails',   require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano3-puma',   require: false
   gem 'web-console',           '>= 3.3.0'
   gem 'listen',                '~> 3.0.5'
   gem 'spring'
