@@ -13,7 +13,7 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  database: db/production.pg
+  database: db/production_database
   pool: 5
   host: localhost
   username: deploy
