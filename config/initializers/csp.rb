@@ -6,8 +6,6 @@ SecureHeaders::Configuration.default do |config|
     img_src: %w('self'),
     font_src: %w('self' https://fonts.gstatic.com/),
     style_src: %w('self' https://fonts.googleapis.com/),
+    frame_ancestors: %w('none'),
   }
-  
-  config.x_frame_options = "DENY"
-  config.x_content_type_options = "nosniff"
 end
