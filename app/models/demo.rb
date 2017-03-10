@@ -77,7 +77,7 @@ class Demo < ApplicationRecord
   end
   
   def hidden_tags
-    sub_categories.where("style & ? == 0", SubCategory.Show).count
+    sub_categories.where("style & ? = 0", SubCategory.Show).count
   end
   
   def shown_tags
@@ -85,7 +85,7 @@ class Demo < ApplicationRecord
   end
   
   def hidden_tags_text
-    cell_names(sub_categories.where("style & ? == 0", SubCategory.Show))
+    cell_names(sub_categories.where("style & ? = 0", SubCategory.Show))
   end
   
   def tags_text
