@@ -22,7 +22,7 @@
     <table class="table table-striped table-modest">
       <thead>
         <tr>
-          <th>Level</th>
+          <th title="this is a test">Level</th>
           <th>Category</th>
           <th>Player(s)</th>
           <th>Engine</th>
@@ -43,7 +43,12 @@
                 <% end %>
                 <td class="player-cell"><%= demo.players_text %></td>
                 <td class="engine-cell"><%= demo.engine %></td>
-                <td class="right-text"><%= demo.note %></td>
+                <td class="right-text">
+                  <% if demo.hidden_tags > 0 %>
+                    <a title="<%= demo.hidden_tags_text %>">*</div>
+                  <% end %>
+                  <%= demo.note %>
+                </td>
                 <td class="right-text demo-time">
                   <%= link_to demo.time, demo.file_path %>
                   <% if logged_in? %>
@@ -53,7 +58,7 @@
                   <% end %>
                 </td>
               </tr>
-              <% if demo.sub_categories.count > 0 %>
+              <% if demo.shown_tags > 0 %>
                 <tr></tr>
                 <tr>
                   <td class="tag-text" colspan="4"><%= demo.tags_text %></td>

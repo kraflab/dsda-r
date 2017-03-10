@@ -76,8 +76,20 @@ class Demo < ApplicationRecord
     tas != 0 ? (tas > 0 ? "T#{tas}" : "T") : ""
   end
   
+  def hidden_tags
+    sub_categories.where("style & ? == 0", SubCategory.Show).count
+  end
+  
+  def shown_tags
+    sub_categories.where("style & ? > 0", SubCategory.Show).count
+  end
+  
+  def hidden_tags_text
+    cell_names(sub_categories.where("style & ? == 0", SubCategory.Show))
+  end
+  
   def tags_text
-    cell_names(sub_categories)
+    cell_names(sub_categories.where("style & ? > 0", SubCategory.Show))
   end
   
   def players_text

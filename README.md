@@ -23,7 +23,6 @@ Category filter options
 Hide tas / coop options  
 File handling system  
 Download counts  
-Hidden tag interface  
 Level time view for movies  
 Demo field: link to video  
 Player / wad search  
@@ -32,6 +31,7 @@ Average demo time stat
 Record timeline  
 FDA category  
 Pacifist in Speed list if record  
+Page caching  
 
 ## Contributors
 Full stack: Kraflab  

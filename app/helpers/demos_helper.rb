@@ -9,6 +9,7 @@ module DemosHelper
   end
   
   def tagged_demos(demos)
-    Tag.where(demo: demos).distinct.count(:demo_id)
+    Tag.where(demo: demos).distinct.includes(:sub_category).where(
+      "sub_categories.style & ? > 0", SubCategory.Show).references(:sub_category).count(:demo_id)
   end
 end

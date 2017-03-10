@@ -15,5 +15,9 @@ class SubCategory < ApplicationRecord
     define_method("#{sty}=") do |on|
       on ? self.style |= mask : self.style &= ~mask
     end
+    
+    define_singleton_method("#{sty.capitalize}") do
+      mask
+    end
   end
 end
