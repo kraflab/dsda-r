@@ -29,7 +29,6 @@ Player / wad search
 Site-wide totals stats  
 Average demo time stat  
 Record timeline  
-FDA category  
 Pacifist in Speed list if record  
 Page caching  
 

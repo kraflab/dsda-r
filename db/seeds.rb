@@ -45,6 +45,7 @@ Category.create!(name: "NoMo",        description: "Exit as fast as possible, us
 Category.create!(name: "NoMo 100S",   description: "Exit with all secrets collected, using the -nomonsters parameter.")
 Category.create!(name: "Collector",   description: "Exit with all weapons picked up, using the -nomonsters parameter.")
 Category.create!(name: "Other",       description: "Nonstandard category or movie.")
+Category.create!(name: "FDA",         description: "First demo attempt: play a map until you exit.")
 
 player = Player.first
 100.times do
