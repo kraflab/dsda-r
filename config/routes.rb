@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   patch  'edit' => 'admins#update'
   
   get    'feed' => 'demos#feed'
+  
+  get    'category_filter' => 'sessions#category_filter'
 
   resources :players do
     get :autocomplete_player_username, :on => :collection

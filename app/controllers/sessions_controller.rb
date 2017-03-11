@@ -30,6 +30,11 @@ class SessionsController < ApplicationController
     redirect_to root_url
   end
   
+  def category_filter
+    #cookies.permanent["category_filter"] = '{"filter": ["NM Speed"]}'
+    render json: cookies["category_filter"]
+  end
+  
   def settings
   end
   
