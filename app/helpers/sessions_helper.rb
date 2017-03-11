@@ -23,9 +23,9 @@ module SessionsHelper
     !current_admin.nil?
   end
   
-  # Returns true if the iwad's wads should be displayed
-  def show_iwad?(iwad)
-    !(cookies["iwad:#{iwad}"] == "0")
+  # Returns array of category filters
+  def category_filter_array
+    JSON.parse(cookies["category_filter"])["filter"]
   end
   
   # DRY delete pattern

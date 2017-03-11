@@ -31,7 +31,6 @@ class SessionsController < ApplicationController
   end
   
   def category_filter
-    #cookies.permanent["category_filter"] = '{"filter": ["NM Speed"]}'
     render json: cookies["category_filter"]
   end
   
@@ -39,9 +38,11 @@ class SessionsController < ApplicationController
   end
   
   def set
-    Iwad.all.each do |iwad|
-      cookies.permanent["iwad:#{iwad.id}"] = params["iwad:#{iwad.id}"]
+    category_filter = {filter: []}
+    Category.all.each do |category|
+      category_filter[:filter].push(category.name) if params["cat:#{category.name}"] == "0"
     end
+    cookies.permanent["category_filter"] = category_filter.to_json
     flash.now[:info] = 'Your settings have been updated'
     render 'settings'
   end

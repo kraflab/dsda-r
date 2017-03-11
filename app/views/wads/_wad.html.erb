@@ -1,10 +1,8 @@
-<% if show_iwad?(wad.iwad_id) %>
-  <tr>
-    <td class="wadfile"><%= link_to wad.username, wad %></td>
-    <td><%= wad.name %></td>
-    <td><%= wad.author %></td>
-    <td class="wadfile"><%= link_to wad.iwad.username, wad.iwad %></td>
-    <td><%= wad.demos.count %></td>
-    <td class="right-text demo-time"><%= total_time(wad, false) %></td>
-  </tr>
-<% end %>
+<tr>
+  <td class="wadfile"><%= link_to wad.username, wad %></td>
+  <td><%= wad.name %></td>
+  <td><%= wad.author %></td>
+  <td class="wadfile"><%= link_to wad.iwad.username, wad.iwad %></td>
+  <td><%= wad.demos.count %></td>
+  <td class="right-text demo-time"><%= total_time(wad, false) %></td>
+</tr>

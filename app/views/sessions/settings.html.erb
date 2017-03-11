@@ -9,11 +9,12 @@
     </div>
     <div class="panel-body">
       <%= bootstrap_form_tag url: settings_path, method: "patch" do |f| %>
-        <%= f.form_group :iwads, label: { text: "Iwad Visibility" },
-                                 help: "Uncheck to hide related wads and demos" do %>
-          <% Iwad.all.each do |iwad| %>
-            <%= f.check_box "iwad:#{iwad.id}", label:   iwad.username,
-                                               checked: show_iwad?(iwad.id) %>
+        <%= f.form_group :category_filters, label: { text: "Category Filter" } do %>
+          <% category_filter = category_filter_array %>
+          <% Category.all.each do |category| %>
+            <% name = category.name %>
+            <%= f.check_box "cat:#{name}", label: name,
+                            checked: !category_filter.include?(name) %>
           <% end %>
         <% end %>
         

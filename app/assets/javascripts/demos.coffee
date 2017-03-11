@@ -7,11 +7,9 @@ $ ->
   
   filter_body = $(".category-filter")[0]
   if filter_body
-    console.log "Opening request..."
     xmlhttp = new XMLHttpRequest
     xmlhttp.open "GET", "/category_filter", true
     xmlhttp.onreadystatechange = ->
-      console.log "state changed..."
       if this.readyState is 4 and this.status is 200
         response = JSON.parse this.responseText
         levelSpan = 0

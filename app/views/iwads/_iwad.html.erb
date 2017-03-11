@@ -1,7 +1,5 @@
-<% if show_iwad?(iwad.id) %>
-  <tr>
-    <td><%= link_to iwad.name, iwad %></td>
-    <td><%= iwad.author %></td>
-    <td><%= iwad.wads.count %></td>
-  </tr>
-<% end %>
+<tr>
+  <td><%= link_to iwad.name, iwad %></td>
+  <td><%= iwad.author %></td>
+  <td><%= iwad.wads.count %></td>
+</tr>
