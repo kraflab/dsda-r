@@ -22,8 +22,8 @@ Uses `Rails 5.0.2`
 Hide tas / coop options  
 File handling system  
 Download counts  
-Level time view for movies  
 Demo field: link to video  
+Standardize levelstat with \n  
 Player / wad search  
 Site-wide totals stats  
 Average demo time stat  

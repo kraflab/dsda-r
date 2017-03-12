@@ -51,10 +51,11 @@ player = Player.first
 100.times do
   cat  = Category.order("RANDOM()").first
   wad  = Wad.first #reorder("RANDOM()").first
-  demo = Demo.create!(tics:        rand(100000) + 1,
+  tics = rand(100000) + 1
+  demo = Demo.create!(tics:        tics,
                       has_tics:    true,
                       level:       "Map #{(rand(32) + 1).to_s.rjust(2, '0')}",
-                      levelstat:   "0:00.97, 0:12.09",
+                      levelstat:   Demo.tics_to_string(tics),
                       tas:         0,
                       guys:        1,
                       recorded_at: rand(100).days.ago,
