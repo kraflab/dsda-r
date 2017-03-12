@@ -40,6 +40,7 @@ $ ->
                 x.innerHTML = levelText
                 x.rowSpan = newSpan
                 x.className = "no-stripe-panel"
+            levelSpan = newSpan
             filter_body.rows[index].remove() for [1..deleteCount]
           else
             index += 1
