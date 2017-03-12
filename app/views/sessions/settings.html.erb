@@ -1,25 +1,20 @@
 <% provide(:title, "Settings") %>
 
 <div class="center-text">
-  <div class="panel panel-default panel-modest left-text">
-    <div class="panel-heading">
-      <h3 class="panel-title">
-        Settings
-      </h3>
-    </div>
-    <div class="panel-body">
-      <%= bootstrap_form_tag url: settings_path, method: "patch" do |f| %>
-        <%= f.form_group :category_filters, label: { text: "Category Filter" } do %>
-          <% category_filter = category_filter_array %>
-          <% Category.all.each do |category| %>
-            <% name = category.name %>
-            <%= f.check_box "cat:#{name}", label: name,
-                            checked: !category_filter.include?(name) %>
-          <% end %>
+  <div class="well well-modest left-text">
+    <legend>Settings</legend>
+    <%= bootstrap_form_tag url: settings_path, method: "patch" do |f| %>
+      <h4>Category Filter</h4>
+      <%= f.form_group :category_filters do %>
+        <% category_filter = category_filter_array %>
+        <% Category.all.each do |category| %>
+          <% name = category.name %>
+          <%= f.check_box "cat:#{name}", label: name,
+                          checked: !category_filter.include?(name) %>
         <% end %>
-        
-        <%= f.submit "Save Settings" %>
       <% end %>
-    </div>
+      <hr>
+      <%= f.submit "Save Settings" %>
+    <% end %>
   </div>
 </div>
