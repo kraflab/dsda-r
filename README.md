@@ -29,7 +29,6 @@ Site-wide totals stats
 Average demo time stat  
 Record timeline  
 Pacifist in Speed list if record  
-Page caching  
 
 ## Contributors
 Full stack: Kraflab  
