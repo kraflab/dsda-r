@@ -29,7 +29,7 @@ bt02speed:
 <% 40.times do |n| %>
 demo_<%= n %>:
   wad: btsx
-  category: uvspeed
+  category: <%= n < 20 ? "uvspeed" : "nmspeed" %>
   tics: <%= n * 1000 %>
   has_tics: true
   level: <%= "Map #{n.to_s.rjust(2, '0')}" %>

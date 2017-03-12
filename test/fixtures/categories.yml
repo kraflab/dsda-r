@@ -1,3 +1,7 @@
 uvspeed:
   name: UV Speed
   description: Exit as fast as possible on skill 4.
+
+nmspeed:
+  name: NM Speed
+  description: Exit as fast as possible on skill 5.

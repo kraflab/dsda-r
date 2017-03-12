@@ -22,8 +22,6 @@ Uses `Rails 5.0.2`
 Hide tas / coop options  
 File handling system  
 Download counts  
-Category filter tests  
-Clean up js  
 Level time view for movies  
 Demo field: link to video  
 Player / wad search  

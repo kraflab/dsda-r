@@ -35,6 +35,7 @@ class SessionsController < ApplicationController
   end
   
   def settings
+    cookies.permanent["category_filter"] ||= '{"filter": []}'
   end
   
   def set
