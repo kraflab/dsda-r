@@ -10,4 +10,8 @@ class StaticPagesController < ApplicationController
   
   def about
   end
+  
+  def search
+    @search = params[:search]
+  end
 end

@@ -27,6 +27,11 @@
           <a href="<%= tools_url %>">Tools</a>
         </li>
       </ul>
+      <%= bootstrap_form_tag url: search_path, method: "get", layout: :inline,
+                            html: { class: "navbar-form navbar-left" } do |f| %>
+        <%= f.text_field :search, placeholder: "Search", hide_label: true, control_class: "form-control nav-search" %>
+        <%= f.submit "Search", class: "btn btn-default btn-xs" %>
+      <% end %>
       <ul class="nav navbar-nav navbar-right">
         <li>
           <a href="<%= feed_url %>">Feed</a>

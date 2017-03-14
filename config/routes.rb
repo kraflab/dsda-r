@@ -13,7 +13,8 @@ Rails.application.routes.draw do
   get    'edit' => 'admins#edit'
   patch  'edit' => 'admins#update'
   
-  get    'feed' => 'demos#feed'
+  get 'feed'   => 'demos#feed'
+  get 'search' => 'static_pages#search'
   
   get    'category_filter' => 'sessions#category_filter'
 
