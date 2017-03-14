@@ -6,7 +6,9 @@ class WadsController < ApplicationController
     letter = params[:letter]
     if (/\A[a-z9]\z/ =~ letter) == 0
       if letter == "9"
-        @wads = Wad.where("username REGEXP ?", "^[0-9]")
+        @wads = Rails.env.production? ?
+          Wad.where("username ~ ?", "^[0-9]") :
+          Wad.where("username REGEXP ?", "^[0-9]")
       else
         @wads = Wad.where("username LIKE ?", "#{letter}%")
       end
