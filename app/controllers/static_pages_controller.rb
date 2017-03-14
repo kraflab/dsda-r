@@ -13,5 +13,7 @@ class StaticPagesController < ApplicationController
   
   def search
     @search = params[:search]
+    @players = Player.where("username LIKE ?", "%#{@search}%")
+    @wads = Wad.where("username LIKE ?", "%#{@search}%")
   end
 end

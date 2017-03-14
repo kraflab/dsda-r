@@ -1,3 +1,17 @@
 <% provide(:title, "Search") %>
 
-<h4>"<%= @search %>" search results:</h4>
+<h3>"<%= @search %>" search results:</h3>
+
+<h4>Player results (<%= @players.count %>):</h4>
+<% @players.each do |player| %>
+  <li>
+    <%= link_to "#{player.name} (#{player.username})", player_path(player) %>
+  </li>
+<% end %>
+
+<h4>Wad results (<%= @wads.count %>):</h4>
+<% @wads.each do |wad| %>
+  <li>
+    <%= link_to "#{wad.name} (#{wad.username})", wad_path(wad) %>
+  </li>
+<% end %>
