@@ -19,8 +19,8 @@
       <%= f.text_field :time, :placeholder => "[hh:]mm:ss[.tt]" %>
       <%= f.text_area  :engine, :size => "1x2",
                        :placeholder => "PRBoom+ v2.5.1.4 cl9\nXDRE 2.14" %>
-      <%= f.text_field :levelstat,
-                       :placeholder => "[hh:]mm:ss[.tt],[hh:]mm:ss[.tt]..." %>
+      <%= f.text_area  :levelstat, :size => "1x2",
+                       :placeholder => "[hh:]mm:ss[.tt]\n[hh:]mm:ss[.tt]" %>
       <%= f.text_field :wad_username, :label => "Wad",
                        :placeholder => "doom, btsx, etc" %>
       <%= f.number_field :version, :label => "Wad Version" %>
