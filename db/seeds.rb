@@ -52,12 +52,14 @@ player = Player.first
   cat  = Category.order("RANDOM()").first
   wad  = Wad.first #reorder("RANDOM()").first
   tics = rand(100000) + 1
+  is_tas = rand(100) < 10
+  is_coop = rand(100) < 10
   demo = Demo.create!(tics:        tics,
                       has_tics:    true,
                       level:       "Map #{(rand(32) + 1).to_s.rjust(2, '0')}",
                       levelstat:   Demo.tics_to_string(tics),
-                      tas:         0,
-                      guys:        1,
+                      tas:         is_tas ? 1 : 0,
+                      guys:        is_coop ? 2 : 1,
                       recorded_at: rand(100).days.ago,
                       created_at:  rand(100).days.ago,
                       wad:         wad,

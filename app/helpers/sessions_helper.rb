@@ -25,7 +25,7 @@ module SessionsHelper
   
   # Returns array of category filters
   def category_filter_array
-    JSON.parse(cookies["category_filter"])["filter"]
+    JSON.parse(cookies["category_filter"])
   end
   
   # DRY delete pattern
