@@ -25,7 +25,8 @@ Demo field: link to video
 Site-wide totals stats  
 Average demo time stat  
 Record timeline  
-Test pacifist -> uv speed more thoroughly
+Test pacifist cross-listing more thoroughly  
+Refactor coffeescript  
 Clean up demo tables with partials  
 
 ## Contributors
