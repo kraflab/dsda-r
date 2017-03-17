@@ -5,6 +5,49 @@ $ ->
   $("#addNewPlayer").on "click", ->
     $("#player_fields").append($("#new_player_form").html())
   
+  getRunTime = (row) ->
+    [..., lastCell] = row.cells
+    hours = mins = secs = tics = 0
+    timeText = lastCell.childNodes[1].innerHTML
+    [timeText, tics] = timeText.split(".") if timeText.search(".") >= 0
+    timeText = timeText.split(":")
+    timeText.unshift("0") if timeText.length < 3
+    if timeText.length < 3
+      [mins, secs] = timeText
+    else
+      [hours, mins, secs] = timeText
+    ((hours * 60 + mins) * 60 + secs) * 100 + tics
+  
+  parseCategory = (body, category) ->
+    subIndex = category.index
+    subRow = category.row
+    while true
+      subRowLength = subRow.cells.length
+      runTime = getRunTime(subRow)
+      note = subRow.cells[subRowLength - 2].innerHTML
+      if note.search("T") >= 0
+        if note.search("P") >= 0
+          if category.coopTas is 0
+            category.coopTas = runTime
+            category.coopTasIndex = subIndex
+        else
+          if category.tas is 0
+            category.tas = runTime
+            category.tasIndex = subIndex
+      else if note.search("P") >= 0
+        if category.coop is 0
+          category.coop = runTime
+          category.coopIndex = subIndex
+      else
+        if category.rta is 0
+          category.rta = runTime
+          category.rtaIndex = subIndex
+      subIndex += 1
+      subRow = body.rows[subIndex]
+      if subRow.cells.length is 0 or subRow.cells.length > 4
+        break
+    console.log category
+  
   filter_body = $(".category-filter")[0]
   if filter_body
     xmlhttp = new XMLHttpRequest
@@ -18,6 +61,7 @@ $ ->
         categorySpan = 0
         categoryText = ""
         categoryIndex = 0
+        uvSpeed = {row: null, index: 0, span: 0, rta: 0, tas: 0, coop: 0, coopTas: 0, rtaIndex: 0, tasIndex: 0, coopIndex: 0, coopTasIndex: 0}
         index = 0
         while index < filter_body.rows.length
           deleteCount = 0
@@ -28,12 +72,19 @@ $ ->
             levelIndex = index
             levelSpan = row.cells[0].rowSpan
             levelText = row.cells[0].innerHTML
+            uvSpeed = {row: null, index: -1, span: 0, rta: 0, tas: 0, coop: 0, coopTas: 0, rtaIndex: 0, tasIndex: 0, coopIndex: 0, coopTasIndex: 0}
             if row.cells[1].innerHTML in response.filter
               deleteCount = row.cells[1].rowSpan
             else
               categorySpan = row.cells[1].rowSpan
               categoryText = row.cells[1].innerHTML
               categoryIndex = index
+              # store uv speed records
+              if categoryText is "UV Speed"
+                uvSpeed.index = categoryIndex
+                uvSpeed.span = categorySpan
+                uvSpeed.row = filter_body.rows[index]
+                parseCategory(filter_body, uvSpeed)
           else if rowLength is 5 and row.cells[0]
             if row.cells[0].innerHTML in response.filter
               deleteCount = row.cells[0].rowSpan
@@ -41,6 +92,60 @@ $ ->
               categorySpan = row.cells[0].rowSpan
               categoryText = row.cells[0].innerHTML
               categoryIndex = index
+              if categoryText is "UV Speed"
+                uvSpeed.index = categoryIndex
+                uvSpeed.span = categorySpan
+                uvSpeed.row = filter_body.rows[index]
+                parseCategory(filter_body, uvSpeed)
+              # check for pacifist times to crosslist in uv speed
+              else if categoryText is "UV Pacifist" and uvSpeed.index >= 0
+                console.log "entering pacifist ->"
+                subIndex = index
+                subRow = filter_body.rows[subIndex]
+                while true
+                  subRowLength = subRow.cells.length
+                  runTime = getRunTime(subRow)
+                  note = subRow.cells[subRowLength - 2].innerHTML
+                  insertIndex = -1
+                  if note.search("T") >= 0
+                    if note.search("P") >= 0
+                      if (runTime < uvSpeed.coopTas or uvSpeed.coopTas is 0) and !response.hideTas and !response.hideCoop
+                        uvSpeed.coopTas = -1
+                        insertIndex = uvSpeed.coopTasIndex
+                    else
+                      if (uvSpeed.tas is 0) and !response.hideTas
+                        uvSpeed.coopTas = -1
+                        insertIndex = uvSpeed.coopTasIndex
+                  else if note.search("P") >= 0
+                    if (runTime < uvSpeed.coop or uvSpeed.coop is 0) and !response.hideCoop
+                      uvSpeed.coop = -1
+                      insertIndex = uvSpeed.coopIndex
+                  else
+                    if runTime < uvSpeed.rta or uvSpeed.rta is 0
+                      uvSpeed.rta = -1
+                      insertIndex = uvSpeed.rtaIndex
+                  if insertIndex >= 0
+                    cloneRow = filter_body.rows[subIndex].cloneNode(true)
+                    cloneRow.cells[0].remove() while cloneRow.cells.length > 4
+                    for cell in cloneRow.cells
+                      cell.style = "font-style: italic;"
+                    firstChild = cloneRow.firstChild
+                    if insertIndex is uvSpeed.index
+                      while uvSpeed.row.cells.length > 4
+                        shiftCell = uvSpeed.row.cells[0].cloneNode(true)
+                        shiftCell.rowSpan += 1
+                        uvSpeed.row.cells[0].remove()
+                        cloneRow.insertBefore(shiftCell, firstChild)
+                    filter_body.insertBefore(cloneRow, filter_body.rows[insertIndex])
+                    uvSpeed.row = filter_body.rows[uvSpeed.index]
+                    uvSpeed.span += 1
+                    console.log "nothing"
+                    index += 1
+                    subIndex += 1
+                  subIndex += 1
+                  subRow = filter_body.rows[subIndex]
+                  if subRow.cells.length is 0 or subRow.cells.length > 4
+                    break
           # wipe out category
           if deleteCount > 0
             newSpan = levelSpan - deleteCount

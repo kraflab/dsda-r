@@ -19,14 +19,14 @@ Uses `Ruby  2.4.0`
 Uses `Rails 5.0.2`
 
 ## To Do
-Hide tas / coop options  
 File handling system  
 Download counts  
 Demo field: link to video  
 Site-wide totals stats  
 Average demo time stat  
 Record timeline  
-Pacifist in Speed list if record  
+Test pacifist -> uv speed more thoroughly
+Clean up demo tables with partials  
 
 ## Contributors
 Full stack: Kraflab  
