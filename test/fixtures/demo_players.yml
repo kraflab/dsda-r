@@ -6,6 +6,10 @@ btsx01b:
   player: kraflab
   demo: bt01speed
 
+btsx01p:
+  player: kraflab
+  demo: bt01pacifist
+
 btsx02:
   player: kraflab
   demo: bt02speed

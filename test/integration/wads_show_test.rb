@@ -5,6 +5,7 @@ class WadsShowTest < ActionDispatch::IntegrationTest
   def setup
     @admin = admins(:elim)
     @wad   = wads(:btsx)
+    @pacifist = demos(:bt01pacifist)
   end
   
   test "layout and buttons" do
@@ -21,6 +22,7 @@ class WadsShowTest < ActionDispatch::IntegrationTest
     demo.players.each do |pl|
       assert_match pl.name, response.body
     end
+    assert_select "td", @pacifist.time, count: 2
     assert_select "a[href=?]", edit_wad_path(@wad), count: 0
     cookies["category_filter"] = '{"filter": ["UV Speed"]}'
     log_in_as(@admin)

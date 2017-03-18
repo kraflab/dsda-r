@@ -10,7 +10,6 @@ bt01speed:
   levelstat: 0:00.97
   version: 0
   recorded_at: <%= 100.days.ago %>
-  levelstat: 0:02.97
 
 bt02speed:
   wad: btsx
@@ -24,7 +23,19 @@ bt02speed:
   levelstat: 0:00.97
   version: 0
   recorded_at: <%= 100.days.ago %>
-  levelstat: 0:02.97
+
+bt01pacifist:
+  wad: btsx
+  category: pacifist
+  tics: 9
+  engine: PRBoom+ v2.5.1.4 cl9
+  tas: 0
+  guys: 2
+  has_tics: true
+  level: Map 01
+  levelstat: 0:00.97
+  version: 0
+  recorded_at: <%= 100.days.ago %>
 
 <% 40.times do |n| %>
 demo_<%= n %>:
