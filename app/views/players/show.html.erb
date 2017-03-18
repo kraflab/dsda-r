@@ -1,152 +1,68 @@
 <% provide(:title, @player.name) %>
-<% if logged_in? %>
-  <% cache ["admin", @player] do %>
-    <div class="center-text">
-      <h1>
-        <%= @player.name %>
-        <small>
-          <% if !@player.twitch.empty? %>
-            <a href="<%= @player.twitch_url %>">Twitch</a>
-          <% end %>
-          <% if !@player.youtube.empty? %>
-            <%= " | " if !@player.twitch.empty? %>
-            <a href="<%= @player.youtube_url %>">YouTube</a>
-          <% end %>
+
+<% cache ["admin:#{logged_in?}", @player] do %>
+  <div class="center-text">
+    <h1>
+      <%= @player.name %>
+      <small>
+        <% if !@player.twitch.empty? %>
+          <a href="<%= @player.twitch_url %>">Twitch</a>
+        <% end %>
+        <% if !@player.youtube.empty? %>
+          <%= " | " if !@player.twitch.empty? %>
+          <a href="<%= @player.youtube_url %>">YouTube</a>
+        <% end %>
+        <% if logged_in? %>
           <%= link_to edit_player_path(@player), :class => 'btn btn-info btn-xs' do %>
             <span class="glyphicon glyphicon-cog" aria-hidden="true" aria-label="Edit"></span>
           <% end %>
-        </small>
-      </h1>
-      <p class="p-short"><%= demo_details(@player) %></p>
-      
-      <div class="panel panel-default panel-modest left-text">
-        <table class="table table-striped table-modest">
-          <thead>
-            <tr>
-              <th>Wad</th>
-              <th>Level</th>
-              <th>Category</th>
-              <th>Player(s)</th>
-              <th>Engine</th>
-              <th class="center-text">Notes</th>
-              <th class="center-text">Time</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @demos.chunk { |i| i.wad.username }.each do |chunk_w| %>
-              <% chunk_w[1].chunk { |i| i.level }.each do |chunk_l| %>
-                <% chunk_l[1].chunk { |i| i.category }.each do |chunk_c| %>
-                  <% chunk_c[1].each do |demo| %>
-                    <tr>
-                      <% if demo == chunk_w[1].first %>
-                        <td class="wadfile no-stripe-panel" rowspan="<%= chunk_w[1].count + 2 * tagged_demos(chunk_w[1]) %>"><%= link_to chunk_w[0], demo.wad %></td>
-                      <% end %>
-                      <% if demo == chunk_l[1].first %>
-                        <td class="no-stripe-panel" rowspan="<%= chunk_l[1].count + 2 * tagged_demos(chunk_l[1]) %>"><%= demo.level %></td>
-                      <% end %>
-                      <% if demo == chunk_c[1].first %>
-                        <td class="no-stripe-panel" rowspan="<%= chunk_c[1].count + 2 * tagged_demos(chunk_c[1]) %>"><%= demo.category.name %></td>
-                      <% end %>
-                      <td class="player-cell"><%= demo.players_text %></td>
-                      <td class="engine-cell"><%= demo.engine %></td>
-                      <td class="right-text">
-                        <% if demo.hidden_tags > 0 %>
-                          <a title="<%= demo.hidden_tags_text %>">*</div>
-                        <% end %>
-                        <%= demo.note %>
-                      </td>
-                      <td class="right-text demo-time">
-                        <%= link_to demo.time, demo.file_path, title: demo.levelstat %>
-                        <%= link_to edit_demo_path(demo), :class => 'label label-info label-xs' do %>
-                          <span class="glyphicon glyphicon-cog" aria-hidden="true" aria-label="Edit"></span>
-                        <% end %>
-                      </td>
-                    </tr>
-                    <% if demo.shown_tags > 0 %>
-                      <tr></tr>
-                      <tr>
-                        <td class="tag-text" colspan="4"><%= demo.tags_text %></td>
-                      </tr>
+        <% end %>
+      </small>
+    </h1>
+    <p class="p-short"><%= demo_details(@player) %></p>
+    
+    <div class="panel panel-default panel-modest left-text">
+      <table class="table table-striped table-modest">
+        <thead>
+          <tr>
+            <th>Wad</th>
+            <th>Level</th>
+            <th>Category</th>
+            <th>Player(s)</th>
+            <th>Engine</th>
+            <th class="center-text">Notes</th>
+            <th class="center-text">Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @demos.chunk { |i| i.wad.username }.each do |chunk_w| %>
+            <% chunk_w[1].chunk { |i| i.level }.each do |chunk_l| %>
+              <% chunk_l[1].chunk { |i| i.category }.each do |chunk_c| %>
+                <% chunk_c[1].each do |demo| %>
+                  <tr>
+                    <% if demo == chunk_w[1].first %>
+                      <td class="wadfile no-stripe-panel" rowspan="<%= chunk_w[1].count + 2 * tagged_demos(chunk_w[1]) %>"><%= link_to chunk_w[0], demo.wad %></td>
                     <% end %>
+                    <% if demo == chunk_l[1].first %>
+                      <td class="no-stripe-panel" rowspan="<%= chunk_l[1].count + 2 * tagged_demos(chunk_l[1]) %>"><%= demo.level %></td>
+                    <% end %>
+                    <% if demo == chunk_c[1].first %>
+                      <td class="no-stripe-panel" rowspan="<%= chunk_c[1].count + 2 * tagged_demos(chunk_c[1]) %>"><%= demo.category.name %></td>
+                    <% end %>
+                    <%= render demo %>
+                  </tr>
+                  <% if demo.shown_tags > 0 %>
+                    <tr></tr>
+                    <tr>
+                      <td class="tag-text" colspan="4"><%= demo.tags_text %></td>
+                    </tr>
                   <% end %>
                 <% end %>
               <% end %>
             <% end %>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  <% end %>
-<% else %>
-  <% cache ["default", @player] do %>
-    <div class="center-text">
-      <h1>
-        <%= @player.name %>
-        <small>
-          <% if !@player.twitch.empty? %>
-            <a href="<%= @player.twitch_url %>">Twitch</a>
           <% end %>
-          <% if !@player.youtube.empty? %>
-            <%= " | " if !@player.twitch.empty? %>
-            <a href="<%= @player.youtube_url %>">YouTube</a>
-          <% end %>
-        </small>
-      </h1>
-      <p class="p-short"><%= demo_details(@player) %></p>
-      
-      <div class="panel panel-default panel-modest left-text">
-        <table class="table table-striped table-modest">
-          <thead>
-            <tr>
-              <th>Wad</th>
-              <th>Level</th>
-              <th>Category</th>
-              <th>Player(s)</th>
-              <th>Engine</th>
-              <th class="center-text">Notes</th>
-              <th class="center-text">Time</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @demos.chunk { |i| i.wad.username }.each do |chunk_w| %>
-              <% chunk_w[1].chunk { |i| i.level }.each do |chunk_l| %>
-                <% chunk_l[1].chunk { |i| i.category }.each do |chunk_c| %>
-                  <% chunk_c[1].each do |demo| %>
-                    <tr>
-                      <% if demo == chunk_w[1].first %>
-                        <td class="wadfile no-stripe-panel" rowspan="<%= chunk_w[1].count + 2 * tagged_demos(chunk_w[1]) %>"><%= link_to chunk_w[0], demo.wad %></td>
-                      <% end %>
-                      <% if demo == chunk_l[1].first %>
-                        <td class="no-stripe-panel" rowspan="<%= chunk_l[1].count + 2 * tagged_demos(chunk_l[1]) %>"><%= demo.level %></td>
-                      <% end %>
-                      <% if demo == chunk_c[1].first %>
-                        <td class="no-stripe-panel" rowspan="<%= chunk_c[1].count + 2 * tagged_demos(chunk_c[1]) %>"><%= demo.category.name %></td>
-                      <% end %>
-                      <td class="player-cell"><%= demo.players_text %></td>
-                      <td class="engine-cell"><%= demo.engine %></td>
-                      <td class="right-text">
-                        <% if demo.hidden_tags > 0 %>
-                          <a title="<%= demo.hidden_tags_text %>">*</div>
-                        <% end %>
-                        <%= demo.note %>
-                      </td>
-                      <td class="right-text demo-time">
-                        <%= link_to demo.time, demo.file_path, title: demo.levelstat %>
-                      </td>
-                    </tr>
-                    <% if demo.shown_tags > 0 %>
-                      <tr></tr>
-                      <tr>
-                        <td class="tag-text" colspan="4"><%= demo.tags_text %></td>
-                      </tr>
-                    <% end %>
-                  <% end %>
-                <% end %>
-              <% end %>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
+        </tbody>
+      </table>
     </div>
-  <% end %>
+  </div>
 <% end %>
