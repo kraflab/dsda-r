@@ -26,7 +26,6 @@ Site-wide totals stats
 Average demo time stat  
 Record timeline  
 Test pacifist cross-listing more thoroughly  
-Clean up demo tables with partials  
 
 ## Contributors
 Full stack: Kraflab  
