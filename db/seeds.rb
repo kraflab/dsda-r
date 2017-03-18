@@ -68,6 +68,6 @@ player = Player.first
   player.player_demos.create(demo: demo)
 end
 
-subcategory = SubCategory.create!(name: "-fast", show: true)
+subcategory = SubCategory.create!(name: "Also reality", show: true)
 
 Tag.create!(sub_category: subcategory, demo: Demo.first)

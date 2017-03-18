@@ -25,7 +25,6 @@ Demo field: link to video
 Site-wide totals stats  
 Average demo time stat  
 Record timeline  
-Test pacifist cross-listing more thoroughly  
 
 ## Contributors
 Full stack: Kraflab  

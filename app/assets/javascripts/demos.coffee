@@ -33,9 +33,9 @@ $ ->
             destination.coopTas = -1
             insertIndex = destination.coopTasIndex
         else
-          if (destination.tas is 0) and !flags.hideTas
+          if (runTime < destination.tas or destination.tas is 0) and !flags.hideTas
             destination.coopTas = -1
-            insertIndex = destination.coopTasIndex
+            insertIndex = destination.tasIndex
       else if note.search("P") >= 0
         if (runTime < destination.coop or destination.coop is 0) and !flags.hideCoop
           destination.coop = -1
@@ -56,8 +56,17 @@ $ ->
             shiftCell.rowSpan += 1
             destination.row.cells[0].remove()
             cloneRow.insertBefore(shiftCell, firstChild)
+        else
+          if destination.row.cells.length is 6
+            destination.row.cells[1].rowSpan += 1
+          if destination.row.cells.length > 4
+            destination.row.cells[0].rowSpan += 1
         body.insertBefore(cloneRow, body.rows[insertIndex])
         destination.row = body.rows[destination.index]
+        destination.rtaIndex += 1
+        destination.tasIndex += 1
+        destination.coopTasIndex += 1
+        destination.coopIndex += 1
         destination.span += 1
         shiftCount += 1
         subIndex += 1
@@ -98,6 +107,10 @@ $ ->
       subRow = body.rows[subIndex]
       if subRow.cells.length is 0 or subRow.cells.length > 4
         break
+    category.rtaIndex = category.index if category.rtaIndex is 0
+    category.tasIndex = category.index if category.tasIndex is 0
+    category.coopIndex = category.index if category.coopIndex is 0
+    category.coopTasIndex = category.index if category.coopTasIndex is 0
 
   filter_body = $(".category-filter")[0]
   if filter_body
