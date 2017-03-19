@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170319194340) do
+ActiveRecord::Schema.define(version: 20170319195545) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "username"
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 20170319194340) do
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
     t.integer  "download_count", default: 0
+    t.string   "video_link"
     t.index ["category_id"], name: "index_demos_on_category_id"
     t.index ["wad_id", "level", "category_id", "tics"], name: "index_demos_on_wad_id_and_level_and_category_id_and_tics"
     t.index ["wad_id"], name: "index_demos_on_wad_id"
