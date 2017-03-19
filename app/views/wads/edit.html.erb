@@ -17,6 +17,9 @@
       <%= f.text_field   :file %>
       <%= f.text_field   :iwad_username, :label => "Iwad",
                          :placeholer => "doom, chex, etc" %>
+      <%= f.form_group :flags do %>
+        <%= f.check_box :single_map, label: "Single Map?", checked: @wad.single_map %>
+      <% end %>
       <%= f.submit "Update", class: "btn btn-primary pull-right" %>
     <% end %>
   </div>

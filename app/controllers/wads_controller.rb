@@ -67,7 +67,8 @@ class WadsController < ApplicationController
   private
   
     def wad_params
-      params.require(:wad).permit(:name, :username, :author, :file, :iwad_username)
+      params[:wad][:single_map] = (params[:wad][:single_map] == '1')
+      params.require(:wad).permit(:name, :username, :author, :file, :iwad_username, :single_map)
     end
     
     # Allows destroy only for new items
