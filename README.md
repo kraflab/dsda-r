@@ -20,7 +20,6 @@ Uses `Rails 5.0.2`
 
 ## To Do
 File handling system  
-Download counts  
 Demo field: link to video  
 Site-wide totals stats  
 Average demo time stat  
