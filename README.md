@@ -18,6 +18,23 @@ work in parsing the old archive and extracting new data, see the work
 Uses `Ruby  2.4.0`  
 Uses `Rails 5.0.2`
 
+## New Features
+Heretic and Hexen support  
+Zandronum demo support  
+Extra site-wide stats (e.g., average demo time)  
+Ranking / sorting by tics  
+Category cross-listing (pacifist -> uv speed)  
+Additional categories (e.g., stroller)  
+Restful API  
+Admin interface for submission / updates  
+Live feed of recent demos  
+List of level times for movies  
+Date of recording  
+Twitch / YouTube links for players  
+Demo video links  
+Record timelines:  
+![timeline](http://i.imgur.com/0l1dKNy.png)
+
 ## To Do
 File handling system  
 Site-wide totals stats  
