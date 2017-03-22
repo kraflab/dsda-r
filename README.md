@@ -22,7 +22,7 @@ Uses `Rails 5.0.2`
 File handling system  
 Site-wide totals stats  
 Average demo time stat  
-Record timeline  
+Record timeline links  
 
 ## Contributors
 Full stack: Kraflab  
