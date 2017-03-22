@@ -5,7 +5,7 @@ class Demo < ApplicationRecord
   has_many :sub_categories, through: :tags
   has_many :demo_players, dependent: :destroy
   has_many :players, through: :demo_players
-  default_scope -> { order(:level, :category_id) }
+  default_scope -> { order(:level, :category_id, :tics) }
   validates :wad_id,      presence: true
   validates :category_id, presence: true
   validates :tics,        presence: true, numericality: { greater_than: 0 }
