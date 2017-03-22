@@ -68,6 +68,23 @@ player = Player.first
   player.player_demos.create(demo: demo)
 end
 
+tics = [12340, 8440, 7420, 6032, 5987, 4609, 3295, 3000, 2950, 1546]
+tics.each_with_index do |tic, n|
+  @recorded_at ||= 30.days.ago
+  @recorded_at += (1 + rand()).days
+  demo = Demo.create!(tics: tic,
+                      has_tics: true,
+                      level: "Map 01",
+                      levelstat: Demo.tics_to_string(tic),
+                      tas: 0,
+                      guys: 1,
+                      recorded_at: @recorded_at,
+                      wad: Wad.first,
+                      category: Category.first,
+                      engine: "PRBoom+ v2.5.1.4 cl9")
+  player.player_demos.create(demo: demo)
+end
+
 subcategory = SubCategory.create!(name: "Also reality", show: true)
 
 Tag.create!(sub_category: subcategory, demo: Demo.first)

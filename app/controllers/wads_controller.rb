@@ -1,5 +1,6 @@
 class WadsController < ApplicationController
-  before_action :admin_session, except: [:index, :show]
+  before_action :admin_session, except: [:index, :show, :record_timeline,
+                                                        :record_timeline_json]
   before_action :age_limit, only: :destroy
   
   def index
@@ -62,6 +63,35 @@ class WadsController < ApplicationController
       end
       render 'edit'
     end
+  end
+  
+  def record_timeline_json
+    @wad = Wad.find_by(username: params[:id])
+    level = params[:level]
+    category = Category.find_by(name: params[:category])
+    demos = Demo.where(level: level, category: category, wad: @wad, guys: 1, tas: 0).reorder(:recorded_at)
+    data_full = demos.all.map { |i| [i.players.first.username, i.tics, i.time, i.recorded_at] }
+    if data_full.empty?
+      render json: {data: [], players: [], error: true}
+    end
+    data_final = [data_full[0]]
+    data_full.each do |datum|
+      if datum[1] < data_final[-1][1]
+        data_final.push(datum)
+      end
+    end
+    plot = {data: [], players: {}, error: false}
+    data_final.each do |datum|
+      plot[:data].push({x: datum[3].to_s, y: datum[1]})
+      plot[:players]["#{datum[1]}"] = datum[0]
+    end
+    render json: plot
+  end
+  
+  def record_timeline
+    @wad = Wad.find_by(username: params[:id])
+    @level = params[:level]
+    @category = params[:category]
   end
   
   private

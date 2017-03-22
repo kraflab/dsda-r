@@ -13,10 +13,13 @@ Rails.application.routes.draw do
   get    'edit' => 'admins#edit'
   patch  'edit' => 'admins#update'
   
+  get 'record_timeline' => 'wads#record_timeline'
+  get 'record_timeline_json' => 'wads#record_timeline_json'
+  
   get 'feed'   => 'demos#feed'
   get 'search' => 'static_pages#search'
   
-  get    'category_filter' => 'sessions#category_filter'
+  get 'category_filter' => 'sessions#category_filter'
 
   resources :players do
     get :autocomplete_player_username, :on => :collection
