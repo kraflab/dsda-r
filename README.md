@@ -37,7 +37,6 @@ Record timelines:
 
 ## To Do
 File handling system  
-Record timeline links  
 
 ## Contributors
 Full stack: Kraflab  

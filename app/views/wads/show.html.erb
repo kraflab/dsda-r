@@ -41,7 +41,14 @@
                     <td class="no-stripe-panel" rowspan="<%= chunk_l[1].count + 2 * tagged_demos(chunk_l[1]) %>"><%= demo.level %></td>
                   <% end %>
                   <% if demo == chunk_c[1].first %>
-                    <td class="no-stripe-panel" rowspan="<%= chunk_c[1].count + 2 * tagged_demos(chunk_c[1]) %>"><%= demo.category.name %></td>
+                    <td class="no-stripe-panel" rowspan="<%= chunk_c[1].count + 2 * tagged_demos(chunk_c[1]) %>">
+                      <%= demo.category.name %>
+                      <% if chunk_c[1].count > 5 %>
+                        <%= link_to record_timeline_path(id: @wad.username, level: demo.level, category: demo.category.name) do %>
+                          <span class="glyphicon glyphicon-stats" aria-hidden="true" aria-label="Timeline"></span>
+                        <% end %>
+                      <% end %>
+                    </td>
                   <% end %>
                   <%= render demo %>
                 </tr>
