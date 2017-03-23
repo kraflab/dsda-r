@@ -73,19 +73,20 @@ class WadsController < ApplicationController
     data_full = demos.all.map { |i| [i.players.first.username, i.tics, i.time, i.recorded_at] }
     if data_full.empty?
       render json: {data: [], players: [], error: true}
-    end
-    data_final = [data_full[0]]
-    data_full.each do |datum|
-      if datum[1] < data_final[-1][1]
-        data_final.push(datum)
+    else
+      data_final = [data_full[0]]
+      data_full.each do |datum|
+        if datum[1] < data_final[-1][1]
+          data_final.push(datum)
+        end
       end
+      plot = {data: [], players: {}, error: false}
+      data_final.each do |datum|
+        plot[:data].push({x: datum[3].to_s, y: datum[1]})
+        plot[:players]["#{datum[1]}"] = datum[0]
+      end
+      render json: plot
     end
-    plot = {data: [], players: {}, error: false}
-    data_final.each do |datum|
-      plot[:data].push({x: datum[3].to_s, y: datum[1]})
-      plot[:players]["#{datum[1]}"] = datum[0]
-    end
-    render json: plot
   end
   
   def record_timeline

@@ -3,7 +3,8 @@ $ ->
     ("0" + number.toString()).slice(-2)
   
   chart = $("#myChart")
-  if chart
+  if chart.length > 0
+    console.log chart
     xmlhttp = new XMLHttpRequest
     xmlhttp.open "GET", "/record_timeline_json\?#{window.location.search.substring(1)}", true
     xmlhttp.onreadystatechange = ->
