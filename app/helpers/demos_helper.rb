@@ -12,4 +12,8 @@ module DemosHelper
     Tag.where(demo: demos).distinct.includes(:sub_category).where(
       "sub_categories.style & ? > 0", SubCategory.Show).references(:sub_category).count(:demo_id)
   end
+  
+  def last_update
+    Demo.reorder(:updated_at).last.updated_at
+  end
 end
