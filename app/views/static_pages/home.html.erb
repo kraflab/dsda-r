@@ -15,6 +15,9 @@
       <strong>The site is currently in the prototype stage:
       the backend and frontend are real, but the data is seeded.</strong>
     </p>
+    <h4>
+      Hosting <%= Demo.count %> demos, by <%= Player.count %> players, for <%= Wad.count %> wads, with a total time of <%= Demo.tics_to_string(Demo.all.sum(:tics), false) %>
+    </h4>
   </div>
 </div>
 

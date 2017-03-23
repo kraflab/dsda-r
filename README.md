@@ -37,7 +37,6 @@ Record timelines:
 
 ## To Do
 File handling system  
-Site-wide totals stats  
 Average demo time stat  
 Record timeline links  
 
