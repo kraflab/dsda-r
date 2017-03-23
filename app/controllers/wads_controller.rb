@@ -1,7 +1,30 @@
 class WadsController < ApplicationController
-  before_action :admin_session, except: [:index, :show, :record_timeline,
-                                                        :record_timeline_json]
+  before_action :admin_session, only: [:new, :create, :destroy, :edit, :update]
   before_action :age_limit, only: :destroy
+  
+  def api_show
+    wad = Wad.find_by(username: params[:id]) || Wad.find_by(name: params[:id])
+    error = wad.nil?
+    error_message = error ? "Wad not found" : nil
+    query = params[:query].nil? ? nil : JSON.parse(params[:query])
+    if wad and query
+      if query['level'] and query['category']
+        demo = wad.demos.where(tas: 0, guys: 1, level: query['level'], category: Category.find_by(name: query['category'])).first
+        demo_hash =
+          if demo.nil?
+            error = true
+            error_message = "No record exists"
+            nil
+          else
+            {time: demo.time, player: demo.players.first.username}
+          end
+        render json: {demo: demo_hash, error: error, error_message: error_message}
+      end
+    else
+      wad_hash = wad.nil? ? nil : wad.serializable_hash(only: [:name, :username, :author, :year, :compatibility, :is_commercial, :versions, :single_map], methods: :iwad_username)
+      render json: {wad: wad_hash, error: error, error_message: error_message}
+    end
+  end
   
   def index
     letter = params[:letter]

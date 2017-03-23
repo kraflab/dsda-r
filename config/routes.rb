@@ -20,6 +20,8 @@ Rails.application.routes.draw do
   get 'search' => 'static_pages#search'
   
   get 'category_filter' => 'sessions#category_filter'
+  
+  get 'api/wads/:id' => "wads#api_show"
 
   resources :players do
     get :autocomplete_player_username, :on => :collection
