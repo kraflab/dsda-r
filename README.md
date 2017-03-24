@@ -25,7 +25,6 @@ Extra site-wide stats (e.g., average demo time)
 Ranking / sorting by tics  
 Category cross-listing (pacifist -> uv speed)  
 Additional categories (e.g., stroller)  
-Restful API  
 Admin interface for submission / updates  
 Live feed of recent demos  
 List of level times for movies  
@@ -33,7 +32,22 @@ Date of recording
 Twitch / YouTube links for players  
 Demo video links  
 Record timelines:  
-![timeline](http://i.imgur.com/0l1dKNy.png)
+![timeline](http://i.imgur.com/0l1dKNy.png)  
+Restful API:  
+
+    kraflab:~/dsda-r-api-client $ ./dsda-client.rb
+    => Starting DSDA API Client
+    => Using ruby 2.4.0
+    => Type 'exit' or 'quit' to close the client
+    dsda-r: get wad aerified record "Map 01" "UV Speed"
+    Issuing GET request... [ SUCCESS ]
+    {
+      demo: {
+        time: 0:15.46,
+        player: adrien
+      }
+    }
+    No errors!
 
 ## To Do
 File handling system  
