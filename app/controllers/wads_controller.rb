@@ -4,26 +4,44 @@ class WadsController < ApplicationController
   
   def api_show
     wad = Wad.find_by(username: params[:id]) || Wad.find_by(name: params[:id])
-    error = wad.nil?
-    error_message = error ? "Wad not found" : nil
+    response_hash = {}
+    response_hash[:error_message] = []
+    response_hash[:error_message].push "Wad not found" if wad.nil?
     query = params[:query].nil? ? nil : JSON.parse(params[:query])
     if wad and query
-      if query['level'] and query['category']
-        demo = wad.demos.where(tas: 0, guys: 1, level: query['level'], category: Category.find_by(name: query['category'])).first
-        demo_hash =
-          if demo.nil?
-            error = true
-            error_message = "No record exists"
-            nil
+      query.each do |command, detail|
+        case command
+        when 'record'
+          level = detail['level']
+          category = detail['category']
+          if level and category
+            demo = wad.demos.where(tas: 0, guys: 1, level: level, category: Category.find_by(name: category)).first
+            if demo.nil?
+              response_hash[:error_message].push "No record exists"
+            else
+              response_hash[:demo] = {time: demo.time, player: demo.players.first.username}
+            end
           else
-            {time: demo.time, player: demo.players.first.username}
+            response_hash[:error_message].push "Wad Record requires level and category"
           end
-        render json: {demo: demo_hash, error: error, error_message: error_message}
+        when 'count'
+          detail.each do |d|
+            case d
+            when 'demos'
+              response_hash[:demo_count] = wad.demos.count
+            when 'players'
+              response_hash[:player_count] = DemoPlayer.includes(:demo).where("demos.wad_id = ?", wad.id).references(:demo).select(:player_id).distinct.count
+            else
+              response_hash[:error_messages].push "Unknown Wad Count '#{d}'"
+            end
+          end
+        when 'properties'
+          response_hash[:wad] = wad.serializable_hash(only: [:name, :username, :author, :year, :compatibility, :is_commercial, :versions, :single_map], methods: :iwad_username)
+        end
       end
-    else
-      wad_hash = wad.nil? ? nil : wad.serializable_hash(only: [:name, :username, :author, :year, :compatibility, :is_commercial, :versions, :single_map], methods: :iwad_username)
-      render json: {wad: wad_hash, error: error, error_message: error_message}
     end
+    response_hash[:error] = (response_hash[:error_message].count > 0)
+    render json: response_hash
   end
   
   def index
