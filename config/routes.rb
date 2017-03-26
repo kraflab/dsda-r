@@ -21,7 +21,8 @@ Rails.application.routes.draw do
   
   get 'category_filter' => 'sessions#category_filter'
   
-  get 'api/wads/:id' => "wads#api_show"
+  get 'api/wads/:id' => "wads#api_show", id: /[^\/]+/
+  get 'api/players/:id' => "players#api_show", id: /[^\/]+/
 
   resources :players do
     get :autocomplete_player_username, :on => :collection
