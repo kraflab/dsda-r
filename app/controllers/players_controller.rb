@@ -4,29 +4,38 @@ class PlayersController < ApplicationController
   before_action :age_limit, only: :destroy
   
   def api_show
-    player = Player.find_by(username: params[:id]) || Player.find_by(name: params[:id])
-    response_hash = {}
-    response_hash[:error_message] = []
-    response_hash[:error_message].push "Player not found" if player.nil?
     query = params[:query].nil? ? nil : JSON.parse(params[:query])
-    if player and query
-      query.each do |command, detail|
-        case command
-        when 'count'
-          detail.each do |d|
-            case d
-            when 'demos'
-              response_hash[:demo_count] = player.demos.count
-            when 'wads'
-              response_hash[:wad_count] = DemoPlayer.where(player: player).includes(:demo).select("demos.wad_id").references(:demo).distinct.count
-            else
-              response_hash[:error_messages].push "Unknown Player Count '#{d}'"
+    if query
+      if query['mode'] == 'fixed'
+        player = Player.find_by(username: query['id']) || Player.find_by(name: query['id'])
+      else
+        player = Player.reorder('RANDOM()').first
+      end
+      response_hash = {}
+      response_hash[:error_message] = []
+      response_hash[:error_message].push "Player not found" if player.nil?
+      commands = query['commands']
+      if player
+        commands.each do |command, detail|
+          case command
+          when 'count'
+            detail.each do |d|
+              case d
+              when 'demos'
+                response_hash[:demo_count] = player.demos.count
+              when 'wads'
+                response_hash[:wad_count] = DemoPlayer.where(player: player).includes(:demo).select("demos.wad_id").references(:demo).distinct.count
+              else
+                response_hash[:error_messages].push "Unknown Player Count '#{d}'"
+              end
             end
+          when 'properties'
+            response_hash[:player] = player.serializable_hash(only: [:name, :username, :twitch, :youtube])
           end
-        when 'properties'
-          response_hash[:player] = player.serializable_hash(only: [:name, :username, :twitch, :youtube])
         end
       end
+    else
+      response_hash[:error_message].push 'No command given'
     end
     response_hash[:error] = (response_hash[:error_message].count > 0)
     render json: response_hash
