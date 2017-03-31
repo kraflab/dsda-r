@@ -34,13 +34,23 @@ class WadsController < ApplicationController
             detail.each do |d|
               case d
               when 'demos'
-                response_hash[:demo_count] = wad.demos.count
+                response_hash[:demo_count] ||= wad.demos.count
               when 'players'
-                response_hash[:player_count] = DemoPlayer.includes(:demo).where("demos.wad_id = ?", wad.id).references(:demo).select(:player_id).distinct.count
+                response_hash[:player_count] ||= DemoPlayer.includes(:demo).where("demos.wad_id = ?", wad.id).references(:demo).select(:player_id).distinct.count
               else
                 response_hash[:error_messages].push "Unknown Wad Count '#{d}'"
               end
             end
+          when 'stats'
+            response_hash[:longest_demo] = Demo.tics_to_string(wad.demos.maximum(:tics))
+            response_hash[:total_time], response_hash[:average_time] = time_stats(wad, false)
+            response_hash[:demo_count] ||= wad.demos.count
+            response_hash[:player_count] ||= DemoPlayer.includes(:demo).where("demos.wad_id = ?", wad.id).references(:demo).select(:player_id).distinct.count
+            
+            # group players by number of demos for this wad, get max
+            player_counts = DemoPlayer.includes(:demo).where("demos.wad_id = ?", wad.id).references(:demo).group(:player_id).count
+            top_player = Player.find(player_counts.max_by { |k, v| v }[0])
+            response_hash[:top_player] = top_player.name
           when 'properties'
             response_hash[:wad] = wad.serializable_hash(only: [:name, :username, :author, :year, :compatibility, :is_commercial, :versions, :single_map], methods: :iwad_username)
           end

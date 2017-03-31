@@ -4,6 +4,13 @@ module DemosHelper
     Demo.tics_to_string(thing.demos.sum(:tics), with_tics)
   end
   
+  def time_stats(thing, with_tics = true)
+    tics = thing.demos.sum(:tics)
+    count = thing.demos.count
+    [Demo.tics_to_string(tics, with_tics),
+     Demo.tics_to_string(tics / count, with_tics)]
+  end
+  
   def demo_details(thing)
     "#{pluralize(thing.demos.count, "demo")}, #{total_time(thing)}"
   end
