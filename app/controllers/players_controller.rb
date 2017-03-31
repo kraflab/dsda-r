@@ -4,7 +4,7 @@ class PlayersController < ApplicationController
   before_action :age_limit, only: :destroy
   
   def api_show
-    query = params[:query].nil? ? nil : JSON.parse(CGI::unescape(params[:query]))
+    query = JSON.parse(request.headers["HTTP_API"])
     if query
       if query['mode'] == 'fixed'
         player = Player.find_by(username: query['id']) || Player.find_by(name: query['id'])
