@@ -4,7 +4,7 @@ class PlayersController < ApplicationController
   before_action :age_limit, only: :destroy
   
   def api_show
-    query = params[:query].nil? ? nil : JSON.parse(params[:query])
+    query = params[:query].nil? ? nil : JSON.parse(CGI::unescape(params[:query]))
     if query
       if query['mode'] == 'fixed'
         player = Player.find_by(username: query['id']) || Player.find_by(name: query['id'])
@@ -22,13 +22,33 @@ class PlayersController < ApplicationController
             detail.each do |d|
               case d
               when 'demos'
-                response_hash[:demo_count] = player.demos.count
+                response_hash[:demo_count] ||= player.demos.count
               when 'wads'
-                response_hash[:wad_count] = DemoPlayer.where(player: player).includes(:demo).select("demos.wad_id").references(:demo).distinct.count
+                response_hash[:wad_count] ||= DemoPlayer.where(player: player).includes(:demo).select("demos.wad_id").references(:demo).distinct.count
+              when 'tas'
+                response_hash[:tas_count] ||= DemoPlayer.where(player: player).includes(:demo).where("demos.tas > 0").references(:demo).count
               else
                 response_hash[:error_messages].push "Unknown Player Count '#{d}'"
               end
             end
+          when 'stats'
+            response_hash[:longest_demo] = Demo.tics_to_string(player.demos.maximum(:tics))
+            response_hash[:total_time], response_hash[:average_time] = time_stats(player, false)
+            response_hash[:demo_count] ||= player.demos.count
+            response_hash[:wad_count] ||= DemoPlayer.where(player: player).includes(:demo).select("demos.wad_id").references(:demo).distinct.count
+
+            # group wads by number of demos by this player, get average / max
+            wad_counts = DemoPlayer.where(player: player).includes(:demo).group("demos.wad_id").references(:demo).count
+            top_wad = Wad.find(wad_counts.max_by { |k, v| v }[0])
+            response_hash[:average_demo_count] = wad_counts.keys.inject { |sum, k| sum + k } / wad_counts.size
+            response_hash[:top_wad] = top_wad.name
+            
+            # group demos by category
+            category_counts = DemoPlayer.where(player: player).includes(:demo).group("demos.category_id").references(:demo).count
+            top_category = Category.find(category_counts.max_by { |k, v| v }[0])
+            response_hash[:top_category] = top_category.name
+            
+            response_hash[:tas_count] ||= DemoPlayer.where(player: player).includes(:demo).where("demos.tas > 0").references(:demo).count
           when 'properties'
             response_hash[:player] = player.serializable_hash(only: [:name, :username, :twitch, :youtube])
           end

@@ -33,7 +33,7 @@ Twitch / YouTube links for players
 Demo video links  
 Record timelines:  
 ![timeline](http://i.imgur.com/0l1dKNy.png)  
-Restful API:  
+Restful API ([repo](https://github.com/kraflab/dsda-r-api-client)):  
 
     kraflab:~/dsda-r-api-client $ ./dsda-client.rb
     => Starting DSDA API Client
@@ -51,7 +51,7 @@ Restful API:
 
 ## To Do
 File handling system  
-Expand API  
+Add API documentation  
 
 ## Contributors
 Full stack: Kraflab  

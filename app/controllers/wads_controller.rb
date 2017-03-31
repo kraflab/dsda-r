@@ -3,7 +3,7 @@ class WadsController < ApplicationController
   before_action :age_limit, only: :destroy
   
   def api_show
-    query = params[:query].nil? ? nil : JSON.parse(params[:query])
+    query = params[:query].nil? ? nil : JSON.parse(CGI::unescape(params[:query]))
     if query
       if query['mode'] == 'fixed'
         wad = Wad.find_by(username: query['id']) || Wad.find_by(name: query['id'])
