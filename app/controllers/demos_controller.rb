@@ -11,6 +11,30 @@ class DemosController < ApplicationController
     @demo.wad_username = params[:wad] if params[:wad]
   end
   
+  def api_create
+    response_hash = {}
+    response_hash[:error_message] = []
+    query = JSON.parse(request.headers["HTTP_API"])
+    if query
+      admin, code = authenticate_admin(query['username'], query['password'])
+      if admin
+        case code
+        when ADMIN_ERR_LOCK
+          response_hash[:error_message].push 'This account has been locked; contact kraflab'
+        when ADMIN_SUCCESS
+        when ADMIN_ERR_FAIL
+          response_hash[:error_message].push 'Invalid username/password combination'
+        end
+      else
+        response_hash[:error_message].push 'Invalid username/password combination'
+      end
+    else
+      response_hash[:error_message].push 'No command given'
+    end
+    response_hash[:error] = (response_hash[:error_message].count > 0)
+    render json: response_hash
+  end
+  
   def create
     players, player_errors = parse_players
     if player_errors.empty?
