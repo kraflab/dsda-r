@@ -4,6 +4,8 @@ class PlayersController < ApplicationController
   before_action :age_limit, only: :destroy
   
   def api_show
+    response_hash = {}
+    response_hash[:error_message] = []
     query = JSON.parse(request.headers["HTTP_API"])
     if query
       if query['mode'] == 'fixed'
@@ -11,8 +13,6 @@ class PlayersController < ApplicationController
       else
         player = Player.reorder('RANDOM()').first
       end
-      response_hash = {}
-      response_hash[:error_message] = []
       response_hash[:error_message].push "Player not found" if player.nil?
       commands = query['commands']
       if player
