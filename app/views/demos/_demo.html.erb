@@ -1,16 +1,18 @@
-<td class="player-cell"><%= demo.players_text %></td>
-<td class="engine-cell"><%= demo.engine %></td>
-<td class="right-text">
-  <% if demo.hidden_tags > 0 %>
-    <a title="<%= demo.hidden_tags_text %>">*</div>
-  <% end %>
-  <%= demo.note %>
-</td>
-<td class="right-text demo-time">
-  <%= link_to demo.time, demo.file_path, title: demo.levelstat %>
-  <% if logged_in? %>
-    <%= link_to edit_demo_path(demo), :class => 'label label-info label-xs' do %>
-      <span class="glyphicon glyphicon-cog" aria-hidden="true" aria-label="Edit"></span>
+<% cache demo do %>
+  <td class="player-cell"><%= demo.players_text %></td>
+  <td class="engine-cell"><%= demo.engine %></td>
+  <td class="right-text">
+    <% if demo.hidden_tags > 0 %>
+      <a title="<%= demo.hidden_tags_text %>">*</div>
     <% end %>
-  <% end %>
-</td>
+    <%= demo.note %>
+  </td>
+  <td class="right-text demo-time">
+    <%= link_to demo.time, demo.file_path, title: demo.levelstat %>
+    <% if logged_in? %>
+      <%= link_to edit_demo_path(demo), :class => 'label label-info label-xs' do %>
+        <span class="glyphicon glyphicon-cog" aria-hidden="true" aria-label="Edit"></span>
+      <% end %>
+    <% end %>
+  </td>
+<% end %>

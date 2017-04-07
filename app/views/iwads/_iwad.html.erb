@@ -1,5 +1,7 @@
-<tr>
-  <td><%= link_to iwad.name, iwad %></td>
-  <td><%= iwad.author %></td>
-  <td><%= iwad.wads.count %></td>
-</tr>
+<% cache iwad do %>
+  <tr>
+    <td><%= link_to iwad.name, iwad %></td>
+    <td><%= iwad.author %></td>
+    <td><%= iwad.wads.count %></td>
+  </tr>
+<% end %>
