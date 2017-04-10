@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
     if admin
       case code
       when ADMIN_ERR_LOCK
-        flash[:danger] = "This account has been locked; contact kraflab"
+        flash[:danger] = 'This account has been locked; contact kraflab'
         redirect_to root_url
       when ADMIN_SUCCESS
         log_in admin
@@ -31,21 +31,21 @@ class SessionsController < ApplicationController
   end
   
   def category_filter
-    render json: cookies["category_filter"]
+    render json: cookies['category_filter']
   end
   
   def settings
-    cookies.permanent["category_filter"] ||= '{"filter": [], "hideTas": false, "hideCoop": false}'
+    cookies.permanent['category_filter'] ||= '{"filter": [], "hideTas": false, "hideCoop": false}'
   end
   
   def set
     category_filter = {filter: [], hideTas: false, hideCoop: false}
     Category.all.each do |category|
-      category_filter[:filter].push(category.name) if params["cat:#{category.name}"] == "0"
+      category_filter[:filter].push(category.name) if params["cat:#{category.name}"] == '0'
     end
-    category_filter[:hideTas] = params["hideTas"] == "0"
-    category_filter[:hideCoop] = params["hideCoop"] == "0"
-    cookies.permanent["category_filter"] = category_filter.to_json
+    category_filter[:hideTas] = params['hideTas'] == '0'
+    category_filter[:hideCoop] = params['hideCoop'] == '0'
+    cookies.permanent['category_filter'] = category_filter.to_json
     flash.now[:info] = 'Your settings have been updated'
     render 'settings'
   end

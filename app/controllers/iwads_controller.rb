@@ -18,7 +18,7 @@ class IwadsController < ApplicationController
   def create
     @iwad = Iwad.new(iwad_params)
     if @iwad.save
-      flash[:info] = "Iwad successfully created"
+      flash[:info] = 'Iwad successfully created'
       redirect_to iwad_path(@iwad)
     else
       render 'new'
@@ -27,7 +27,7 @@ class IwadsController < ApplicationController
   
   def destroy
     @iwad.destroy
-    flash[:info] = "Iwad successfully deleted"
+    flash[:info] = 'Iwad successfully deleted'
     redirect_to iwads_url
   end
   
@@ -41,7 +41,7 @@ class IwadsController < ApplicationController
     def age_limit
       @iwad = Iwad.find_by(username: params[:id])
       if @iwad.is_frozen?
-        flash[:warning] = "That Iwad is too old to delete from here"
+        flash[:warning] = 'That Iwad is too old to delete from here'
         redirect_to root_url
       end
     end
@@ -49,7 +49,7 @@ class IwadsController < ApplicationController
     # Confirms an admin session
     def admin_session
       unless logged_in?
-        flash[:warning] = "You must be logged in to perform this action"
+        flash[:warning] = 'You must be logged in to perform this action'
         redirect_to root_url
       end
     end

@@ -5,14 +5,14 @@ class WadsController < ApplicationController
   def api_show
     response_hash = {}
     response_hash[:error_message] = []
-    query = JSON.parse(request.headers["HTTP_API"])
+    query = JSON.parse(request.headers['HTTP_API'])
     if query
       if query['mode'] == 'fixed'
         wad = Wad.find_by(username: query['id']) || Wad.find_by(name: query['id'])
       else
         wad = Wad.reorder('RANDOM()').first
       end
-      response_hash[:error_message].push "Wad not found" if wad.nil?
+      response_hash[:error_message].push 'Wad not found' if wad.nil?
       commands = query['commands']
       if wad
         commands.each do |command, detail|
@@ -23,12 +23,12 @@ class WadsController < ApplicationController
             if level and category
               demo = wad.demos.where(tas: 0, guys: 1, level: level, category: Category.find_by(name: category)).first
               if demo.nil?
-                response_hash[:error_message].push "No record exists"
+                response_hash[:error_message].push 'No record exists'
               else
                 response_hash[:demo] = {time: demo.time, player: demo.players.first.username}
               end
             else
-              response_hash[:error_message].push "Wad Record requires level and category"
+              response_hash[:error_message].push 'Wad Record requires level and category'
             end
           when 'count'
             detail.each do |d|
@@ -36,7 +36,7 @@ class WadsController < ApplicationController
               when 'demos'
                 response_hash[:demo_count] ||= wad.demos.count
               when 'players'
-                response_hash[:player_count] ||= DemoPlayer.includes(:demo).where("demos.wad_id = ?", wad.id).references(:demo).select(:player_id).distinct.count
+                response_hash[:player_count] ||= DemoPlayer.includes(:demo).where('demos.wad_id = ?', wad.id).references(:demo).select(:player_id).distinct.count
               else
                 response_hash[:error_messages].push "Unknown Wad Count '#{d}'"
               end
@@ -45,10 +45,10 @@ class WadsController < ApplicationController
             response_hash[:longest_demo] = Demo.tics_to_string(wad.demos.maximum(:tics))
             response_hash[:total_time], response_hash[:average_time] = time_stats(wad, false)
             response_hash[:demo_count] ||= wad.demos.count
-            response_hash[:player_count] ||= DemoPlayer.includes(:demo).where("demos.wad_id = ?", wad.id).references(:demo).select(:player_id).distinct.count
+            response_hash[:player_count] ||= DemoPlayer.includes(:demo).where('demos.wad_id = ?', wad.id).references(:demo).select(:player_id).distinct.count
             
             # group players by number of demos for this wad, get max
-            player_counts = DemoPlayer.includes(:demo).where("demos.wad_id = ?", wad.id).references(:demo).group(:player_id).count
+            player_counts = DemoPlayer.includes(:demo).where('demos.wad_id = ?', wad.id).references(:demo).group(:player_id).count
             top_player = Player.find(player_counts.max_by { |k, v| v }[0])
             response_hash[:top_player] = top_player.name
           when 'properties'
@@ -66,12 +66,12 @@ class WadsController < ApplicationController
   def index
     letter = params[:letter]
     if (/\A[a-z9]\z/ =~ letter) == 0
-      if letter == "9"
+      if letter == '9'
         @wads = Rails.env.production? ?
-          Wad.where("username ~ ?", "^[0-9]") :
-          Wad.where("username REGEXP ?", "^[0-9]")
+          Wad.where('username ~ ?', '^[0-9]') :
+          Wad.where('username REGEXP ?', '^[0-9]')
       else
-        @wads = Wad.where("username LIKE ?", "#{letter}%")
+        @wads = Wad.where('username LIKE ?', "#{letter}%")
       end
     else
       @wads = Wad.paginate(page: params[:page])
@@ -92,7 +92,7 @@ class WadsController < ApplicationController
   def create
     @wad = Wad.new(wad_params)
     if @wad.save
-      flash[:info] = "Wad successfully created"
+      flash[:info] = 'Wad successfully created'
       redirect_to wad_path(@wad)
     else
       render 'new'
@@ -101,7 +101,7 @@ class WadsController < ApplicationController
   
   def destroy
     @wad.destroy
-    flash[:info] = "Wad successfully deleted"
+    flash[:info] = 'Wad successfully deleted'
     redirect_to wads_url
   end
   
@@ -115,11 +115,11 @@ class WadsController < ApplicationController
     @wad = Wad.find_by(username: @old_username)
     params[:wad][:username] = @wad.username if @wad.is_frozen?
     if @wad.update_attributes(wad_params)
-      flash[:info] = "Wad successfully updated"
+      flash[:info] = 'Wad successfully updated'
       redirect_to @wad
     else
       if @wad.iwad.nil?
-        @wad.errors.add(:iwad_username, :not_found, message: "not found")
+        @wad.errors.add(:iwad_username, :not_found, message: 'not found')
       end
       render 'edit'
     end
@@ -166,7 +166,7 @@ class WadsController < ApplicationController
     def age_limit
       @wad = Wad.find_by(username: params[:id])
       if @wad.is_frozen?
-        flash[:warning] = "That Wad is too old to delete from here"
+        flash[:warning] = 'That Wad is too old to delete from here'
         redirect_to root_url
       end
     end
@@ -174,7 +174,7 @@ class WadsController < ApplicationController
     # Confirms an admin session
     def admin_session
       unless logged_in?
-        flash[:warning] = "You must be logged in to perform this action"
+        flash[:warning] = 'You must be logged in to perform this action'
         redirect_to(root_url)
       end
     end

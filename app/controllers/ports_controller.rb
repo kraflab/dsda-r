@@ -1,6 +1,6 @@
 class PortsController < ApplicationController
   autocomplete :port, :family do |items|
-    ActiveSupport::JSON.encode(items.uniq{ |i| i["value"] })
+    ActiveSupport::JSON.encode(items.uniq{ |i| i['value'] })
   end
   before_action :admin_session, except: [:index]
   before_action :age_limit, only: :destroy
@@ -16,7 +16,7 @@ class PortsController < ApplicationController
   def create
     @port = Port.new(port_params)
     if @port.save
-      flash[:info] = "Port successfully created"
+      flash[:info] = 'Port successfully created'
       redirect_to ports_url
     else
       render 'new'
@@ -25,7 +25,7 @@ class PortsController < ApplicationController
   
   def destroy
     @port.destroy
-    flash[:info] = "Port successfully deleted"
+    flash[:info] = 'Port successfully deleted'
     redirect_to ports_url
   end
   
@@ -44,7 +44,7 @@ class PortsController < ApplicationController
       family, version = parse_id
       @port = Port.find_by(family: family, version: version)
       if @port.is_frozen?
-        flash[:warning] = "That Port is too old to delete from here"
+        flash[:warning] = 'That Port is too old to delete from here'
         redirect_to root_url
       end
     end
@@ -52,7 +52,7 @@ class PortsController < ApplicationController
     # Confirms an admin session
     def admin_session
       unless logged_in?
-        flash[:warning] = "You must be logged in to perform this action"
+        flash[:warning] = 'You must be logged in to perform this action'
         redirect_to(root_url)
       end
     end

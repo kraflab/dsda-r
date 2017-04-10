@@ -44,7 +44,7 @@ class DemosController < ApplicationController
           DemoPlayer.create(demo: @demo, player: player)
         end
         parse_tags
-        flash[:info] = "Demo successfully created"
+        flash[:info] = 'Demo successfully created'
         redirect_to wad_path(@demo.wad)
       else
         render 'new'
@@ -58,7 +58,7 @@ class DemosController < ApplicationController
   
   def destroy
     @demo.destroy
-    flash[:info] = "Demo successfully deleted"
+    flash[:info] = 'Demo successfully deleted'
     redirect_to root_path
   end
   
@@ -79,7 +79,7 @@ class DemosController < ApplicationController
           DemoPlayer.create(demo: @demo, player: player).save
         end
         parse_tags
-        flash[:info] = "Demo successfully updated"
+        flash[:info] = 'Demo successfully updated'
         redirect_to wad_path(@demo.wad)
       else
         render 'edit'
@@ -138,7 +138,7 @@ class DemosController < ApplicationController
     def age_limit
       @demo = Demo.find(params[:id])
       if @demo.is_frozen?
-        flash[:warning] = "That Demo is too old to delete from here"
+        flash[:warning] = 'That Demo is too old to delete from here'
         redirect_to root_url
       end
     end
@@ -146,7 +146,7 @@ class DemosController < ApplicationController
     # Confirms an admin session
     def admin_session
       unless logged_in?
-        flash[:warning] = "You must be logged in to perform this action"
+        flash[:warning] = 'You must be logged in to perform this action'
         redirect_to root_url
       end
     end

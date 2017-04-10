@@ -10,13 +10,13 @@ class AdminsController < ApplicationController
     if @admin && @admin.authenticate(admin_params[:current_password])
       if @admin.update_attributes(admin_params.permit(:password,
                                                       :password_confirmation))
-        flash[:info] = "Password successfully updated"
+        flash[:info] = 'Password successfully updated'
         redirect_to root_path
       else
         render 'edit'
       end
     else
-      flash.now[:warning] = "Incorrect password"
+      flash.now[:warning] = 'Incorrect password'
       render 'edit'
     end
   end
@@ -31,7 +31,7 @@ class AdminsController < ApplicationController
     # Confirms an admin session
     def admin_session
       unless logged_in?
-        flash[:warning] = "You must be logged in to perform this action"
+        flash[:warning] = 'You must be logged in to perform this action'
         redirect_to(root_url)
       end
     end
