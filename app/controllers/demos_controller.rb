@@ -3,7 +3,7 @@ class DemosController < ApplicationController
   before_action :age_limit, only: :destroy
   
   def feed
-    @demos = Demo.reorder(created_at: :desc).paginate(page: params[:page])
+    @demos = Demo.reorder(created_at: :desc).page params[:page]
   end
   
   def new

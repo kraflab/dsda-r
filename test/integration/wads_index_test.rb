@@ -10,8 +10,8 @@ class WadsIndexTest < ActionDispatch::IntegrationTest
   test "index layout" do
     get wads_path
     assert_select "h1", "Wad List"
-    assert_select "div.pagination"
-    wads = Wad.paginate(page: nil)
+    assert_select "nav.pagination"
+    wads = Wad.page '0'
     wads.each do |wad|
       assert_select 'a[href=?]', wad_path(wad)
     end
@@ -24,7 +24,7 @@ class WadsIndexTest < ActionDispatch::IntegrationTest
         assert_select 'td', wad.demos.count.to_s
         assert_select 'td', total_demo_time(wad, false)
       end
-      assert_select "div.pagination", count: 0
+      assert_select "nav.pagination", count: 0
     end
     log_in_as(@admin)
     get wads_path
