@@ -49,4 +49,19 @@ class SessionsController < ApplicationController
     flash.now[:info] = 'Your settings have been updated'
     render 'settings'
   end
+  
+  private
+  
+    # Logs in the given admin
+    def log_in(admin)
+      session[:username] = admin.username
+      admin.fail_count = 0
+      admin.save
+    end
+    
+    # Logs out the current admin
+    def log_out
+      session.delete(:username)
+      @current_admin = nil
+    end
 end
