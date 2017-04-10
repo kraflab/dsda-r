@@ -5,7 +5,7 @@ class SubCategory < ApplicationRecord
   validates :style, presence: true,
                     numericality: { greater_than_or_equal_to: 0 }
 
-  STYLE_SET = ["show"]
+  STYLE_SET = ['show']
   STYLE_SET.each_with_index do |sty, i|
     mask = 1 << i
     define_method("#{sty}?") do

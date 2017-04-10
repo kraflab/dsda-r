@@ -45,7 +45,7 @@ class Demo < ApplicationRecord
   end
   
   def file_path
-    "#"
+    '#'
   end
   
   def time
@@ -55,8 +55,8 @@ class Demo < ApplicationRecord
   # [hh:]mm:ss[.tt]
   def time=(str)
     return if str.blank?
-    spl = str.split(".")
-    fields = spl[0].split(":").reverse
+    spl = str.split('.')
+    fields = spl[0].split(':').reverse
     return if fields.count < 2
     self.tics = ( fields.count == 3 ? fields[2].to_i * 360000 : 0 ) +
                 fields[1].to_i * 6000 + fields[0].to_i * 100 +
@@ -69,27 +69,27 @@ class Demo < ApplicationRecord
   end
   
   def coop_text
-    guys > 1 ? "#{guys}P" : ""
+    guys > 1 ? "#{guys}P" : ''
   end
   
   def tas_text
-    tas != 0 ? (tas > 0 ? "T#{tas}" : "T") : ""
+    tas != 0 ? (tas > 0 ? "T#{tas}" : 'T') : ''
   end
   
   def hidden_tags
-    sub_categories.where("style & ? = 0", SubCategory.Show).count
+    sub_categories.where('style & ? = 0', SubCategory.Show).count
   end
   
   def shown_tags
-    sub_categories.where("style & ? > 0", SubCategory.Show).count
+    sub_categories.where('style & ? > 0', SubCategory.Show).count
   end
   
   def hidden_tags_text
-    cell_names(sub_categories.where("style & ? = 0", SubCategory.Show))
+    cell_names(sub_categories.where('style & ? = 0', SubCategory.Show))
   end
   
   def tags_text
-    cell_names(sub_categories.where("style & ? > 0", SubCategory.Show))
+    cell_names(sub_categories.where('style & ? > 0', SubCategory.Show))
   end
   
   def players_text
@@ -103,9 +103,9 @@ class Demo < ApplicationRecord
     s %= 60
     h = m / 60
     m %= 60
-    (h > 0 ? h.to_s + ":" + m.to_s.rjust(2, '0') : m.to_s) +
+    (h > 0 ? h.to_s + ':' + m.to_s.rjust(2, '0') : m.to_s) +
       ":#{s.to_s.rjust(2, '0')}" +
-      (with_tics ? "." + t.to_s.rjust(2, '0') : "")
+      (with_tics ? '.' + t.to_s.rjust(2, '0') : '')
   end
   
   private

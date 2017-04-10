@@ -20,7 +20,7 @@ class Port < ApplicationRecord
   end
   
   def file_path
-    return "#"
+    return '#'
   end
   
   private

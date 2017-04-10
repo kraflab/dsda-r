@@ -21,12 +21,12 @@ class Player < ApplicationRecord
   
   # Return the player's twitch url
   def twitch_url
-    "https://www.twitch.tv/" + twitch
+    'https://www.twitch.tv/' + twitch
   end
   
   # Return the player's youtube url
   def youtube_url
-    "https://www.youtube.com/" + youtube
+    'https://www.youtube.com/' + youtube
   end
   
   # Override path
@@ -42,8 +42,8 @@ class Player < ApplicationRecord
   
     # Remove excess whitespace
     def clean_strings
-      self.twitch   ||= ""
-      self.youtube  ||= ""
+      self.twitch   ||= ''
+      self.youtube  ||= ''
       self.name     = name.strip.gsub(/\s+/, ' ')
     end
 end
