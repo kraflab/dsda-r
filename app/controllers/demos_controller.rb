@@ -1,10 +1,20 @@
 class DemosController < ApplicationController
-  before_action :admin_session, except: [:feed, :api_create]
+  before_action :admin_session, except: [:feed, :api_create, :latest]
   before_action :age_limit, only: :destroy
   skip_before_action :verify_authenticity_token, only: [:api_create]
   
   def feed
     @demos = Demo.reorder(created_at: :desc).page params[:page]
+  end
+  
+  def latest
+    @demos = Demo.reorder(created_at: :desc).page
+    @latest = @demos.first
+    if stale? @latest
+      respond_to do |format|
+        format.atom
+      end
+    end
   end
   
   def new

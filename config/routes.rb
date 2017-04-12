@@ -24,6 +24,8 @@ Rails.application.routes.draw do
   get 'api/wads/'    => "wads#api_show"
   get 'api/players/' => "players#api_show"
   post 'api/demos/'  => "demos#api_create"
+  
+  get 'demos/latest' => "demos#latest"
 
   resources :players do
     get :autocomplete_player_username, :on => :collection
