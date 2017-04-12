@@ -1,6 +1,7 @@
 class DemosController < ApplicationController
-  before_action :admin_session, except: :feed
+  before_action :admin_session, except: [:feed, :api_create]
   before_action :age_limit, only: :destroy
+  skip_before_action :verify_authenticity_token, only: [:api_create]
   
   def feed
     @demos = Demo.reorder(created_at: :desc).page params[:page]
@@ -11,6 +12,7 @@ class DemosController < ApplicationController
     @demo.wad_username = params[:wad] if params[:wad]
   end
   
+  # TODO - refactor the creation code with the create action!
   def api_create
     response_hash = {}
     response_hash[:error_message] = []
@@ -22,6 +24,22 @@ class DemosController < ApplicationController
         when ADMIN_ERR_LOCK
           response_hash[:error_message].push 'This account has been locked; contact kraflab'
         when ADMIN_SUCCESS
+          demo_query = query['demo']
+          players, player_errors = parse_players(demo_query['players'], true)
+          if player_errors.empty?
+            @demo= Demo.new(demo_query.slice(:time, :tas, :guys, :level, :recorded_at, :levelstat, :file, :engine, :version, :wad_username, :category_name, :video_link))
+            if @demo.save
+              players.each do |player|
+                DemoPlayer.create(demo: @demo, player: player)
+              end
+              parse_tags(demo_query[:tags], demo_query[:shows])
+              response_hash[:save] = 'Success'
+            else
+              response_hash[:error_message].push 'Demo creation failed', *@demo.errors
+            end
+          else
+            response_hash[:error_message].push 'Demo creation failed', *player_errors
+          end
         when ADMIN_ERR_FAIL
           response_hash[:error_message].push 'Invalid username/password combination'
         end
@@ -36,14 +54,14 @@ class DemosController < ApplicationController
   end
   
   def create
-    players, player_errors = parse_players
+    players, player_errors = parse_players(params[:players])
     if player_errors.empty?
       @demo = Demo.new(demo_params)
       if @demo.save
         players.each do |player|
           DemoPlayer.create(demo: @demo, player: player)
         end
-        parse_tags
+        parse_tags(params[:tags], params[:saves])
         flash[:info] = 'Demo successfully created'
         redirect_to wad_path(@demo.wad)
       else
@@ -68,7 +86,7 @@ class DemosController < ApplicationController
   
   def update
     @demo = Demo.find(params[:id])
-    players, errors = parse_players
+    players, errors = parse_players(params[:players])
     if errors.empty?
       if @demo.update(demo_params)
         demo_players = @demo.demo_players
@@ -78,7 +96,7 @@ class DemosController < ApplicationController
         players.each do |player|
           DemoPlayer.create(demo: @demo, player: player).save
         end
-        parse_tags
+        parse_tags(params[:tags], params[:saves])
         flash[:info] = 'Demo successfully updated'
         redirect_to wad_path(@demo.wad)
       else
@@ -98,9 +116,7 @@ class DemosController < ApplicationController
                                    :recorded_at, :file)
     end
     
-    def parse_tags
-      tags   = params[:tags]
-      checks = params[:shows]
+    def parse_tags(tags, checks)
       shows  = []
 
       # hack to get around empty check boxes
@@ -122,14 +138,17 @@ class DemosController < ApplicationController
       end
     end
     
-    def parse_players
-      player_names = params[:players]
+    def parse_players(player_names, from_api = false)
       players = []
       errors  = []
-      player_names.each do |name|
-        next if name.blank?
-        player = Player.find_by(username: name) || Player.find_by(name: name)
-        player.nil? ? errors.push(name.to_s) : players.push(player)
+      if from_api and player_names.nil?
+        errors.push('No player list')
+      else
+        player_names.each do |name|
+          next if name.blank?
+          player = Player.find_by(username: name) || Player.find_by(name: name)
+          player.nil? ? errors.push((from_api ? 'Missing player: ' : '') + name.to_s) : players.push(player)
+        end
       end
       [players, errors]
     end
