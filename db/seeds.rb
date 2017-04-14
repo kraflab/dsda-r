@@ -10,10 +10,19 @@ end
 
 doom = Iwad.create!(name: "Doom", username: "doom", author: "id Software")
 Iwad.create!(name: "Doom II", username: "doom2", author: "id Software")
-heretic = Iwad.create!(name: "Heretic", username: "heretic", author: "Raven Software")
 Iwad.create!(name: "Hexen", username: "hexen", author: "Raven Software")
 
+# Heretic-N
+heretic = Iwad.create!(name: "Heretic", username: "heretic", author: "Raven Software")
 heretic.wads.create!(name: "Heretic", username: "heretic", author: "Raven Software", file: "")
+[
+  'Andrey Boldt', 'Laurent Sebellin', 'JC', 'William Huber', 'Vincent Catalaa',
+  'Hitherto', 'QWERTY', 'Radek Pecka', 'Xit Vono', 'Drew DeVore', 'Kimo Xvirus',
+  'Bruno Vergílio', 'Arno Slagboom', 'Branimir H. Beric', 'Jeff Easthope',
+  'Lucas Marincak', 'Doug Merrill', 'Jeff N. Easthope', 'PVS', 'Mikhail Volkov'
+].each do |name|
+  Player.create!(name: name, username: Player.default_username(name))
+end
 
 50.times do
   name     = Faker::App.unique.name
@@ -54,7 +63,7 @@ Category.create!(name: "Other",       description: "Nonstandard category or movi
 Category.create!(name: "FDA",         description: "First demo attempt: play a map until you exit.")
 
 player = Player.first
-100.times do
+90.times do
   cat  = Category.order("RANDOM()").first
   wad  = Wad.first #reorder("RANDOM()").first
   tics = rand(100000) + 1
