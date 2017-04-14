@@ -34,25 +34,27 @@
         </thead>
         <tbody class="category-filter">
           <% @demos.chunk { |i| i.level }.each do |chunk_l| %>
-            <% chunk_l[1].chunk { |i| i.category }.each do |chunk_c| %>
-              <% chunk_c[1].each do |demo| %>
-                <tr>
-                  <% if demo == chunk_l[1].first %>
-                    <td class="no-stripe-panel" rowspan="<%= chunk_l[1].count + 2 * tagged_demos(chunk_l[1]) %>"><%= demo.level %></td>
-                  <% end %>
-                  <% if demo == chunk_c[1].first %>
-                    <td class="no-stripe-panel" rowspan="<%= chunk_c[1].count + 2 * tagged_demos(chunk_c[1]) %>">
-                      <%= demo.category.name %>
-                      <% if chunk_c[1].count > 5 %>
-                        <%= link_to record_timeline_path(id: @wad.username, level: demo.level, category: demo.category.name) do %>
-                          <span class="glyphicon glyphicon-stats" aria-hidden="true" aria-label="Timeline"></span>
+            <% cache chunk_l do %>
+              <% chunk_l[1].chunk { |i| i.category }.each do |chunk_c| %>
+                <% chunk_c[1].each do |demo| %>
+                  <tr>
+                    <% if demo == chunk_l[1].first %>
+                      <td class="no-stripe-panel" rowspan="<%= chunk_l[1].count + 2 * tagged_demos(chunk_l[1]) %>"><%= demo.level %></td>
+                    <% end %>
+                    <% if demo == chunk_c[1].first %>
+                      <td class="no-stripe-panel" rowspan="<%= chunk_c[1].count + 2 * tagged_demos(chunk_c[1]) %>">
+                        <%= demo.category.name %>
+                        <% if chunk_c[1].count > 5 and !chunk_c[1].any? { |i| i.recorded_at.nil? } %>
+                          <%= link_to record_timeline_path(id: @wad.username, level: demo.level, category: demo.category.name) do %>
+                            <span class="glyphicon glyphicon-stats" aria-hidden="true" aria-label="Timeline"></span>
+                          <% end %>
                         <% end %>
-                      <% end %>
-                    </td>
-                  <% end %>
-                  <%= render demo %>
-                </tr>
-                <%= render partial: "demos/demo_tag", locals: {demo: demo} %>
+                      </td>
+                    <% end %>
+                    <%= render demo %>
+                  </tr>
+                  <%= render partial: "demos/demo_tag", locals: {demo: demo} %>
+                <% end %>
               <% end %>
             <% end %>
           <% end %>
