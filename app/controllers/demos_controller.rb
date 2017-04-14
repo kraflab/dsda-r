@@ -37,12 +37,12 @@ class DemosController < ApplicationController
           demo_query = query['demo']
           players, player_errors = parse_players(demo_query['players'], true)
           if player_errors.empty?
-            @demo= Demo.new(demo_query.slice(:time, :tas, :guys, :level, :recorded_at, :levelstat, :file, :engine, :version, :wad_username, :category_name, :video_link))
+            @demo= Demo.new(demo_query.slice('time', 'tas', 'guys', 'level', 'recorded_at', 'levelstat', 'file', 'engine', 'version', 'wad_username', 'category_name', 'video_link'))
             if @demo.save
               players.each do |player|
                 DemoPlayer.create(demo: @demo, player: player)
               end
-              parse_tags(demo_query[:tags], demo_query[:shows])
+              parse_tags(demo_query['tags'], demo_query['shows'])
               response_hash[:save] = 'Success'
             else
               response_hash[:error_message].push 'Demo creation failed', *@demo.errors
@@ -128,7 +128,8 @@ class DemosController < ApplicationController
     
     def parse_tags(tags, checks)
       shows  = []
-
+      return if tags.empty? or checks.empty?
+      
       # hack to get around empty check boxes
       checks.each_with_index do |c, i|
         if c == 'No'
@@ -143,7 +144,7 @@ class DemosController < ApplicationController
       tags.each_with_index do |tag, i|
         next if tag.blank?
         sub_category = SubCategory.find_by(name: tag) ||
-                       SubCategory.create(name: tag, show: true)
+                       SubCategory.create(name: tag, show: shows[i])
         Tag.create(sub_category: sub_category, demo: @demo) if sub_category
       end
     end
