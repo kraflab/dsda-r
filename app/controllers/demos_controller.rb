@@ -128,7 +128,7 @@ class DemosController < ApplicationController
     
     def parse_tags(tags, checks)
       shows  = []
-      return if tags.empty? or checks.empty?
+      return if tags.nil? or checks.nil?
       
       # hack to get around empty check boxes
       checks.each_with_index do |c, i|
