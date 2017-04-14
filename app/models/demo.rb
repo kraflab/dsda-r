@@ -49,7 +49,7 @@ class Demo < ApplicationRecord
   end
   
   def time
-    Demo.tics_to_string(tics) if tics
+    Demo.tics_to_string(tics, has_tics) if tics
   end
   
   # [hh:]mm:ss[.tt]
