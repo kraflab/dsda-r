@@ -20,8 +20,8 @@ class Demo < ApplicationRecord
                           format: { with: VALID_PORT_REGEX }
   #validates :recorded_at, presence: true
   validates :levelstat,   presence: true, length: { maximum: 500 }
-  validates :file,    length: { maximum: 50 }, allow_blank: true,
-                      format: { with: VALID_USERNAME_REGEX }
+  mount_uploader :file, ZipFileUploader
+  validates_size_of :file, maximum: 100.megabytes, message: 'File exceeds 100 MB size limit'
   after_save    :update_players
   after_destroy :update_players
   

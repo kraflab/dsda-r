@@ -7,9 +7,9 @@ class Wad < ApplicationRecord
   validates :username, presence: true, length: { maximum: 50 },
                        uniqueness: true,
                        format: { with: VALID_USERNAME_REGEX }
-  validates :file,     length: { maximum: 50 }, allow_blank: true,
-                       format: { with: VALID_USERNAME_REGEX }
   validates :author,   presence: true, length: { maximum: 50 }
+  mount_uploader :file, ZipFileUploader
+  validates_size_of :file, maximum: 100.megabytes, message: 'File exceeds 100 MB size limit'
   before_save   :clean_strings
   before_update :clean_strings
   

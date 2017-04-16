@@ -18,6 +18,7 @@ gem 'secure_headers'
 gem 'chartkick'
 gem 'jquery-ui-rails'
 gem 'rails-jquery-autocomplete'
+gem 'carrierwave', '~> 1.0'
 
 group :development, :test do
   gem 'sqlite3'
