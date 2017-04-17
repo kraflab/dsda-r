@@ -49,6 +49,7 @@ class DemosController < ApplicationController
               end
               parse_tags(demo_query['tags'], demo_query['shows'])
               response_hash[:save] = 'Success'
+              response_hash[:demo] = {id: @demo.id}
             else
               response_hash[:error_message].push 'Demo creation failed', *@demo.errors
             end
