@@ -37,7 +37,12 @@ class DemosController < ApplicationController
           demo_query = query['demo']
           players, player_errors = parse_players(demo_query['players'], true)
           if player_errors.empty?
-            @demo= Demo.new(demo_query.slice('time', 'tas', 'guys', 'level', 'recorded_at', 'levelstat', 'file', 'engine', 'version', 'wad_username', 'category_name', 'video_link'))
+            @demo= Demo.new(demo_query.slice('time', 'tas', 'guys', 'level', 'recorded_at', 'levelstat', 'engine', 'version', 'wad_username', 'category_name', 'video_link'))
+            if demo_query['file'] and demo_query['file']['data'] and demo_query['file']['name']
+              io = Base64StringIO.new(Base64.decode64(demo_query['file']['data']))
+              io.original_filename = demo_query['file']['name'][0..15]
+              @demo.file = io
+            end
             if @demo.save
               players.each do |player|
                 DemoPlayer.create(demo: @demo, player: player)

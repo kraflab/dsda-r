@@ -45,7 +45,7 @@ class Demo < ApplicationRecord
   end
   
   def file_path
-    '#'
+    file.url
   end
   
   def time

@@ -26,6 +26,8 @@ Rails.application.routes.draw do
   post 'api/demos/'  => "demos#api_create"
   
   get 'demos/latest' => "demos#latest"
+  
+  get 'no_file' => "static_pages#no_file"
 
   resources :players do
     get :autocomplete_player_username, :on => :collection

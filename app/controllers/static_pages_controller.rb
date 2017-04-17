@@ -16,4 +16,7 @@ class StaticPagesController < ApplicationController
     @players = Player.where('username LIKE ?', "%#{@search}%")
     @wads = Wad.where('username LIKE ?', "%#{@search}%")
   end
+  
+  def no_file
+  end
 end
