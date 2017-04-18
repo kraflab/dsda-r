@@ -20,6 +20,7 @@ class Demo < ApplicationRecord
                           format: { with: VALID_PORT_REGEX }
   #validates :recorded_at, presence: true
   validates :levelstat,   presence: true, length: { maximum: 500 }
+  validate :unique_demo_file
   mount_uploader :file, ZipFileUploader
   validates_size_of :file, maximum: 100.megabytes, message: 'File exceeds 100 MB size limit'
   after_save    :update_players
@@ -109,6 +110,17 @@ class Demo < ApplicationRecord
   end
   
   private
+  
+    # determine if this file has been uploaded (rarely actually performs digest)
+    def unique_demo_file
+      conflicts = Demo.where(wad: wad, level: level, category: category, tics: tics)
+      conflicts.each do |conflict|
+        if Digest::MD5.hexdigest(self.file.read) == Digest::MD5.hexdigest(conflict.file.read)
+          errors.add(:file, 'already exists in the archive')
+          break
+        end
+      end
+    end
   
     # touch players when attributes change
     def update_players
