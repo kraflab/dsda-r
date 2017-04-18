@@ -5,6 +5,9 @@ $ ->
   $("#addNewPlayer").on "click", ->
     $("#player_fields").append($("#new_player_form").html())
   
+  getText = (cell) ->
+    $.trim cell.innerText
+  
   getRunTime = (row) ->
     [..., lastCell] = row.cells
     hours = mins = secs = tics = 0
@@ -129,19 +132,19 @@ $ ->
           rowLength = row.cells.length
           # full row with level
           if rowLength is 6
-            level = {span: row.cells[0].rowSpan, text: row.cells[0].innerHTML, index: index}
+            level = {span: row.cells[0].rowSpan, text: row.cells[0].innerText, index: index}
             uvSpeed = {row: null, index: -1, span: 0, rta: 0, tas: 0, coop: 0, coopTas: 0, rtaIndex: 0, tasIndex: 0, coopIndex: 0, coopTasIndex: 0}
-            category = {span: row.cells[1].rowSpan, text: row.cells[1].innerHTML, index: index}
-            if row.cells[1].innerHTML in response.filter
+            category = {span: row.cells[1].rowSpan, text: getText(row.cells[1]), index: index}
+            if category.text in response.filter
               deleteCount = row.cells[1].rowSpan
             else
               # store uv speed records
               if category.text is "UV Speed"
                 parseCategory(filter_body, uvSpeed, category)
           else if rowLength is 5 and row.cells[0]
-            category = {span: row.cells[0].rowSpan, text: row.cells[0].innerHTML, index: index}
-            if row.cells[0].innerHTML in response.filter
-              if category.text is "UV Pacifist" and uvSpeed.index >= 0
+            category = {span: row.cells[0].rowSpan, text: getText(row.cells[0]), index: index}
+            if category.text in response.filter
+              if category.text is "Pacifist" and uvSpeed.index >= 0
                 shiftCount = crossListPacifist(filter_body, uvSpeed, index, response)
                 index += shiftCount
                 level.span += shiftCount
@@ -150,20 +153,21 @@ $ ->
               if category.text is "UV Speed"
                 parseCategory(filter_body, uvSpeed, category)
               # check for pacifist times to crosslist in uv speed
-              else if category.text is "UV Pacifist" and uvSpeed.index >= 0
+              else if category.text is "Pacifist" and uvSpeed.index >= 0
                 shiftCount = crossListPacifist(filter_body, uvSpeed, index, response)
                 index += shiftCount
                 level.span += shiftCount
           # wipe out category
           if deleteCount > 0
+            console.log "deleting"
             newSpan = level.span - deleteCount
             if newSpan > 0
               if index != level.index
-                filter_body.rows[level.index].cells[0].innerHTML = level.text
+                filter_body.rows[level.index].cells[0].innerText = level.text
                 filter_body.rows[level.index].cells[0].rowSpan = newSpan
               else
                 x = filter_body.rows[index + deleteCount].insertCell(0)
-                x.innerHTML = level.text
+                x.innerText = level.text
                 x.rowSpan = newSpan
                 x.className = "no-stripe-panel"
             level.span = newSpan
@@ -185,20 +189,20 @@ $ ->
                   if index != category.index
                     cellID = 0
                     cellID = 1 if category.index is level.index
-                    filter_body.rows[category.index].cells[cellID].innerHTML = category.text
+                    filter_body.rows[category.index].cells[cellID].innerText = category.text
                     filter_body.rows[category.index].cells[cellID].rowSpan = newCategorySpan
                   else
                     x = filter_body.rows[index + deleteCount].insertCell(0)
-                    x.innerHTML = category.text
+                    x.innerText = category.text
                     x.rowSpan = newCategorySpan
                     x.className = "no-stripe-panel"
                 if newLevelSpan > 0
                   if index != level.index
-                    filter_body.rows[level.index].cells[0].innerHTML = level.text
+                    filter_body.rows[level.index].cells[0].innerText = level.text
                     filter_body.rows[level.index].cells[0].rowSpan = newLevelSpan
                   else
                     x = filter_body.rows[index + deleteCount].insertCell(0)
-                    x.innerHTML = level.text
+                    x.innerText = level.text
                     x.rowSpan = newLevelSpan
                     x.className = "no-stripe-panel"
                 filter_body.rows[index].remove() for [1..deleteCount]
