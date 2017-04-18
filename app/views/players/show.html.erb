@@ -41,13 +41,13 @@
                 <% chunk_c[1].each do |demo| %>
                   <tr>
                     <% if demo == chunk_w[1].first %>
-                      <td class="wadfile no-stripe-panel" rowspan="<%= chunk_w[1].count + 2 * tagged_demos(chunk_w[1]) %>"><%= link_to chunk_w[0], demo.wad %></td>
+                      <td class="wadfile no-stripe-panel" rowspan="<%= 3 * chunk_w[1].count %>"><%= link_to chunk_w[0], demo.wad %></td>
                     <% end %>
                     <% if demo == chunk_l[1].first %>
-                      <td class="no-stripe-panel" rowspan="<%= chunk_l[1].count + 2 * tagged_demos(chunk_l[1]) %>"><%= demo.level %></td>
+                      <td class="no-stripe-panel" rowspan="<%= 3 * chunk_l[1].count %>"><%= demo.level %></td>
                     <% end %>
                     <% if demo == chunk_c[1].first %>
-                      <td class="no-stripe-panel" rowspan="<%= chunk_c[1].count + 2 * tagged_demos(chunk_c[1]) %>"><%= demo.category.name %></td>
+                      <td class="no-stripe-panel" rowspan="<%= 3 * chunk_c[1].count %>"><%= demo.category.name %></td>
                     <% end %>
                     <%= render demo %>
                   </tr>
