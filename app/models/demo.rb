@@ -88,7 +88,7 @@ class Demo < ApplicationRecord
   def hidden_tags_text
     cell_names(sub_categories.where('style & ? = 0', SubCategory.Show))
   end
-  q
+  
   def tags_text
     cell_names(sub_categories.where('style & ? > 0', SubCategory.Show))
   end
