@@ -47,7 +47,7 @@ class DemosController < ApplicationController
               players.each do |player|
                 DemoPlayer.create(demo: @demo, player: player)
               end
-              parse_tags(demo_query['tags'], demo_query['shows'])
+              parse_tags(demo_query['tags'])
               response_hash[:save] = 'Success'
               response_hash[:demo] = {id: @demo.id}
             else
@@ -77,7 +77,7 @@ class DemosController < ApplicationController
         players.each do |player|
           DemoPlayer.create(demo: @demo, player: player)
         end
-        parse_tags(params[:tags], params[:saves])
+        parse_tags_form(params[:tags], params[:shows])
         flash[:info] = 'Demo successfully created'
         redirect_to wad_path(@demo.wad)
       else
@@ -112,7 +112,7 @@ class DemosController < ApplicationController
         players.each do |player|
           DemoPlayer.create(demo: @demo, player: player).save
         end
-        parse_tags(params[:tags], params[:saves])
+        parse_tags_form(params[:tags], params[:shows])
         flash[:info] = 'Demo successfully updated'
         redirect_to wad_path(@demo.wad)
       else
@@ -132,25 +132,30 @@ class DemosController < ApplicationController
                                    :recorded_at, :file)
     end
     
-    def parse_tags(tags, checks)
-      shows  = []
-      return if tags.nil? or checks.nil?
-      
+    def parse_tags_form(tags, checks)
+      tag_list = []
+
       # hack to get around empty check boxes
       checks.each_with_index do |c, i|
         if c == 'No'
           if i < checks.size and checks[i + 1] == 'Yes'
-            shows.push(true)
+            tag_list.push({'text' => tags.shift, 'style' => '1'})
           else
-            shows.push(false)
+            tag_list.push({'text' => tags.shift, 'style' => '0'})
           end
         end
       end
       
-      tags.each_with_index do |tag, i|
-        next if tag.blank?
-        sub_category = SubCategory.find_by(name: tag) ||
-                       SubCategory.create(name: tag, show: shows[i])
+      parse_tags(tag_list)
+    end
+    
+    def parse_tags(tags)
+      return if tags.nil?
+      
+      tags.each do |tag|
+        next if tag['text'].blank?
+        sub_category = SubCategory.find_by(name: tag['text']) ||
+                       SubCategory.create(name: tag['text'], show: tag['style'])
         Tag.create(sub_category: sub_category, demo: @demo) if sub_category
       end
     end
