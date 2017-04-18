@@ -25,7 +25,7 @@ class Demo < ApplicationRecord
   validates_size_of :file, maximum: 100.megabytes, message: 'File exceeds 100 MB size limit'
   after_save    :update_players
   after_destroy :update_players
-  
+
   def wad_username
     wad.username if wad
   end
@@ -77,18 +77,18 @@ class Demo < ApplicationRecord
     tas != 0 ? (tas > 0 ? "T#{tas}" : 'T') : ''
   end
   
-  def hidden_tags
-    sub_categories.where('style & ? = 0', SubCategory.Show).count
+  def hidden_tags?
+    sub_categories.where('style & ? = 0', SubCategory.Show).exists?
   end
   
-  def shown_tags
-    sub_categories.where('style & ? > 0', SubCategory.Show).count
+  def shown_tags?
+    sub_categories.where('style & ? > 0', SubCategory.Show).exists?
   end
   
   def hidden_tags_text
     cell_names(sub_categories.where('style & ? = 0', SubCategory.Show))
   end
-  
+  q
   def tags_text
     cell_names(sub_categories.where('style & ? > 0', SubCategory.Show))
   end
@@ -113,11 +113,14 @@ class Demo < ApplicationRecord
   
     # determine if this file has been uploaded (rarely actually performs digest)
     def unique_demo_file
-      conflicts = Demo.where(wad: wad, level: level, category: category, tics: tics)
-      conflicts.each do |conflict|
-        if Digest::MD5.hexdigest(self.file.read) == Digest::MD5.hexdigest(conflict.file.read)
-          errors.add(:file, 'already exists in the archive')
-          break
+      if self.file.file
+        conflicts = Demo.where(wad: wad, level: level, category: category, tics: tics).where.not(id: self.id)
+        conflicts.each do |conflict|
+          if conflict.file.file and
+             Digest::MD5.hexdigest(self.file.read) == Digest::MD5.hexdigest(conflict.file.read)
+            errors.add(:file, 'already exists in the archive')
+            break
+          end
         end
       end
     end

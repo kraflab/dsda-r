@@ -2,7 +2,7 @@
   <td class="player-cell"><%= demo.players_text %></td>
   <td class="engine-cell"><%= demo.engine %></td>
   <td class="right-text">
-    <% if demo.hidden_tags > 0 %>
+    <% if demo.hidden_tags? %>
       <a title="<%= demo.hidden_tags_text %>">*</div>
     <% end %>
     <%= demo.note %>
