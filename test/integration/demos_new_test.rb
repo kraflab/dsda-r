@@ -22,7 +22,7 @@ class DemosNewTest < ActionDispatch::IntegrationTest
                                    levelstat: "12:02.13",
                                    wad_username: @wad.username,
                                    category_name: @category.name,
-                                   recorded_at: Time.zone.now, file: "" },
+                                   recorded_at: Time.zone.now },
                                  tags: ["blind"], shows: ["No", "Yes"],
                                  players: [@player.username] }
     end
@@ -43,7 +43,7 @@ class DemosNewTest < ActionDispatch::IntegrationTest
                                    levelstat: "",
                                    wad_username: "",
                                    category_name: "",
-                                   recorded_at: Time.zone.now, file: "" },
+                                   recorded_at: Time.zone.now },
                                  tags: [""], shows: [""],
                                  players: [@player.username] }
     end
@@ -60,7 +60,7 @@ class DemosNewTest < ActionDispatch::IntegrationTest
                                    levelstat: "12:02.13",
                                    wad_username: @wad.username,
                                    category_name: @category.name,
-                                   recorded_at: Time.zone.now, file: "" },
+                                   recorded_at: Time.zone.now },
                                  tags: ["blind"], shows: ["No", "Yes"],
                                  players: [@player.username, @player_2.username] }
     end

@@ -1,6 +1,7 @@
 class Demo < ApplicationRecord
   belongs_to :wad, touch: true
   belongs_to :category
+  belongs_to :demo_file
   has_many :tags, dependent: :destroy
   has_many :sub_categories, through: :tags
   has_many :demo_players, dependent: :destroy
@@ -20,10 +21,8 @@ class Demo < ApplicationRecord
                           format: { with: VALID_PORT_REGEX }
   #validates :recorded_at, presence: true
   validates :levelstat,   presence: true, length: { maximum: 500 }
-  validate :unique_demo_file
-  mount_uploader :file, ZipFileUploader
-  validates_size_of :file, maximum: 100.megabytes, message: 'File exceeds 100 MB size limit'
   after_save    :update_players
+  before_destroy :check_file
   after_destroy :update_players
 
   def wad_username
@@ -46,7 +45,7 @@ class Demo < ApplicationRecord
   end
   
   def file_path
-    file.url
+    demo_file.data.url if demo_file
   end
   
   def time
@@ -111,20 +110,13 @@ class Demo < ApplicationRecord
   
   private
   
-    # determine if this file has been uploaded (rarely actually performs digest)
-    def unique_demo_file
-      if self.file.file
-        conflicts = Demo.where(wad: wad, level: level, category: category, tics: tics).where.not(id: self.id)
-        conflicts.each do |conflict|
-          if conflict.file.file and
-             Digest::MD5.hexdigest(self.file.read) == Digest::MD5.hexdigest(conflict.file.read)
-            errors.add(:file, 'already exists in the archive')
-            break
-          end
-        end
+    # delete related file if this is the only associated demo
+    def check_file
+      if demo_file and demo_file.demos.count == 1
+        demo_file.destroy
       end
     end
-  
+
     # touch players when attributes change
     def update_players
       players.each { |i| i.touch }

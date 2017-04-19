@@ -1,6 +1,7 @@
 class Wad < ApplicationRecord
   belongs_to :iwad, touch: true
   has_many :demos, dependent: :destroy
+  has_many :demo_files
   default_scope -> { order(:username) }
   validates :iwad_id,  presence: true
   validates :name,     presence: true, length: { maximum: 50 }

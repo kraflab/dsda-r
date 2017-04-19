@@ -38,18 +38,36 @@ class DemosController < ApplicationController
           players, player_errors = parse_players(demo_query['players'], true)
           if player_errors.empty?
             @demo= Demo.new(demo_query.slice('time', 'tas', 'guys', 'level', 'recorded_at', 'levelstat', 'engine', 'version', 'wad_username', 'category_name', 'video_link'))
-            if demo_query['file'] and demo_query['file']['data'] and demo_query['file']['name']
-              io = Base64StringIO.new(Base64.decode64(demo_query['file']['data']))
-              io.original_filename = demo_query['file']['name'][0..15]
-              @demo.file = io
-            end
-            if @demo.save
-              players.each do |player|
-                DemoPlayer.create(demo: @demo, player: player)
+            if @demo.valid?
+              success = true
+              if demo_query['file'] and demo_query['file']['data'] and demo_query['file']['name']
+                io = Base64StringIO.new(Base64.decode64(demo_query['file']['data']))
+                io.original_filename = demo_query['file']['name'][0..15]
+                new_file = DemoFile.new(wad: @demo.wad)
+                new_file.data = io
+                if new_file.save
+                  @demo.demo_file = new_file
+                else
+                  success = false
+                  response_hash[:error_message].push 'Demo creation failed', *new_file.errors
+                end
+              elsif demo_query['file_id']
+                if demo_file = DemoFile.find_by(id: demo_query['file_id'])
+                  @demo.demo_file = demo_file
+                else
+                  success = false
+                  response_hash[:error_message].push 'Demo creation failed', 'file not found'
+                end
               end
-              parse_tags(demo_query['tags'])
-              response_hash[:save] = 'Success'
-              response_hash[:demo] = {id: @demo.id}
+              if success
+                @demo.save
+                players.each do |player|
+                  DemoPlayer.create(demo: @demo, player: player)
+                end
+                parse_tags(demo_query['tags'])
+                response_hash[:save] = 'Success'
+                response_hash[:demo] = {id: @demo.id, file_id: @demo.demo_file_id}
+              end
             else
               response_hash[:error_message].push 'Demo creation failed', *@demo.errors
             end
@@ -129,7 +147,7 @@ class DemosController < ApplicationController
     def demo_params
       params.require(:demo).permit(:guys, :tas, :level, :time, :engine,
                                    :levelstat, :wad_username, :category_name,
-                                   :recorded_at, :file)
+                                   :recorded_at)
     end
     
     def parse_tags_form(tags, checks)

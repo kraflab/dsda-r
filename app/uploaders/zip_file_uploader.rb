@@ -2,11 +2,10 @@ class ZipFileUploader < CarrierWave::Uploader::Base
   storage :file
 
   # Override the directory where uploaded files will be stored.
-  # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
     case model.class.to_s.underscore
-    when 'demo'
-      "files/demos/#{model.wad_username}/#{model.id}/"
+    when 'demo_file'
+      "files/demos/#{model.wad.username}/#{model.id}/"
     when 'wad'
       "files/wads/#{model.iwad_username}/#{model.id}/"
     when 'port'

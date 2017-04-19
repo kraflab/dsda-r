@@ -7,7 +7,6 @@ class CreateDemos < ActiveRecord::Migration[5.0]
       t.string :level
       t.datetime :recorded_at
       t.text :levelstat
-      t.string :file
       t.boolean :has_tics
       t.string :engine
       t.integer :version, default: 0

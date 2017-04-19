@@ -22,8 +22,7 @@ class DemosEditTest < ActionDispatch::IntegrationTest
                                         levelstat: "12:02.13",
                                         wad_username: @wad.username,
                                         category_name: @category.name,
-                                        recorded_at: Time.zone.now,
-                                        file: "" },
+                                        recorded_at: Time.zone.now },
                                       tags: ["blind"], shows: ["No", "Yes"],
                                       players: [@player.username] }
     assert_not_equal @demo.reload.time, new_time
@@ -49,8 +48,7 @@ class DemosEditTest < ActionDispatch::IntegrationTest
                                         levelstat: "12:02.13",
                                         wad_username: @wad.username,
                                         category_name: @category.name,
-                                        recorded_at: Time.zone.now,
-                                        file: "" },
+                                        recorded_at: Time.zone.now },
                                       tags: ["blind"], shows: ["No", "Yes"],
                                       players: ["unknown name"] }
     assert_select "input.btn[value=?]", "Update"
@@ -78,8 +76,7 @@ class DemosEditTest < ActionDispatch::IntegrationTest
                                         levelstat: "12:02.13",
                                         wad_username: @wad.username,
                                         category_name: @category.name,
-                                        recorded_at: Time.zone.now,
-                                        file: "" },
+                                        recorded_at: Time.zone.now },
                                       tags: ["blind"], shows: ["No", "Yes"],
                                       players: [@player.username] }
     assert_not flash.empty?
