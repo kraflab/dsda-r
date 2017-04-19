@@ -25,6 +25,11 @@ $ ->
               }]
             },
             options: {
+              elements: {
+                line: {
+                  tension: 0.1
+                }
+              },
               legend: {display: false},
               scales: {
                 xAxes: [{
