@@ -40,9 +40,11 @@ class DemosController < ApplicationController
             @demo= Demo.new(demo_query.slice('time', 'tas', 'guys', 'level', 'recorded_at', 'levelstat', 'engine', 'version', 'wad_username', 'category_name', 'video_link'))
             if @demo.valid?
               success = true
-              if demo_query['file'] and demo_query['file']['data'] and demo_query['file']['name']
-                io = Base64StringIO.new(Base64.decode64(demo_query['file']['data']))
-                io.original_filename = demo_query['file']['name'][0..15]
+              body = JSON.parse(request.body.read)
+              puts body
+              if body['file'] and body['file']['data'] and body['file']['name']
+                io = Base64StringIO.new(Base64.decode64(body['file']['data']))
+                io.original_filename = body['file']['name'][0..15]
                 new_file = DemoFile.new(wad: @demo.wad)
                 new_file.data = io
                 if new_file.save
