@@ -65,7 +65,7 @@ class DemosController < ApplicationController
                   DemoPlayer.create(demo: @demo, player: player)
                 end
                 parse_tags(demo_query['tags'])
-                response_hash[:save] = 'Success'
+                response_hash[:save] = true
                 response_hash[:demo] = {id: @demo.id, file_id: @demo.demo_file_id}
               end
             else
