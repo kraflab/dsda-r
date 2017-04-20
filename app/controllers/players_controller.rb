@@ -6,7 +6,7 @@ class PlayersController < ApplicationController
   def api_show
     response_hash = {}
     response_hash[:error_message] = []
-    query = JSON.parse(request.headers['HTTP_API'])
+    query = JSON.parse(request.body.read)
     if query
       if query['mode'] == 'fixed'
         player = Player.find_by(username: query['id']) || Player.find_by(name: query['id'])

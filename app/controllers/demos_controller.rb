@@ -26,9 +26,9 @@ class DemosController < ApplicationController
   def api_create
     response_hash = {}
     response_hash[:error_message] = []
-    query = JSON.parse(request.headers["HTTP_API"])
+    query = JSON.parse(request.body.read)
     if query
-      admin, code = authenticate_admin(query['username'], query['password'])
+      admin, code = authenticate_admin(request.headers["HTTP_API_USERNAME"], request.headers["HTTP_API_PASSWORD"])
       if admin
         case code
         when ADMIN_ERR_LOCK
@@ -40,11 +40,9 @@ class DemosController < ApplicationController
             @demo= Demo.new(demo_query.slice('time', 'tas', 'guys', 'level', 'recorded_at', 'levelstat', 'engine', 'version', 'wad_username', 'category_name', 'video_link'))
             if @demo.valid?
               success = true
-              body = JSON.parse(request.body.read)
-              puts body
-              if body['file'] and body['file']['data'] and body['file']['name']
-                io = Base64StringIO.new(Base64.decode64(body['file']['data']))
-                io.original_filename = body['file']['name'][0..15]
+              if demo_query['file'] and demo_query['file']['data'] and demo_query['file']['name']
+                io = Base64StringIO.new(Base64.decode64(demo_query['file']['data']))
+                io.original_filename = demo_query['file']['name'][0..15]
                 new_file = DemoFile.new(wad: @demo.wad)
                 new_file.data = io
                 if new_file.save
