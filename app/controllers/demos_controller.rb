@@ -1,5 +1,5 @@
 class DemosController < ApplicationController
-  before_action :admin_session, except: [:feed, :api_create, :latest]
+  before_action :admin_session, except: [:feed, :api_create, :latest, :hidden_tag]
   before_action :age_limit, only: :destroy
   skip_before_action :verify_authenticity_token, only: [:api_create]
   
@@ -112,6 +112,11 @@ class DemosController < ApplicationController
     @demo.destroy
     flash[:info] = 'Demo successfully deleted'
     redirect_to root_path
+  end
+  
+  def hidden_tag
+    demo = Demo.find(params[:id])
+    render plain: demo.hidden_tags_text
   end
   
   def edit

@@ -3,7 +3,7 @@
   <td class="engine-cell"><%= demo.engine %></td>
   <td class="right-text">
     <% if demo.hidden_tags? %>
-      <a title="<%= demo.hidden_tags_text %>">*</div>
+      <a class="hidden-tag" id="<%= demo.id %>">*</a>
     <% end %>
     <%= demo.note %>
   </td>

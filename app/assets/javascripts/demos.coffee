@@ -5,6 +5,16 @@ $ ->
   $("#addNewPlayer").on "click", ->
     $("#player_fields").append($("#new_player_form").html())
   
+  $("a.hidden-tag").mouseover ->
+    $(this).removeClass "hidden-tag"
+    cell = this
+    xmlhttp = new XMLHttpRequest
+    xmlhttp.open "GET", "/demos/#{this.id}/hidden_tag", true
+    xmlhttp.onreadystatechange = ->
+      if this.readyState is 4 and this.status is 200
+        cell.title = this.responseText
+    xmlhttp.send null
+  
   getText = (cell) ->
     $.trim cell.innerText
   
