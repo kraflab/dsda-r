@@ -25,7 +25,7 @@ class PlayersShowTest < ActionDispatch::IntegrationTest
     assert_select "td", demo.category.name
     assert_select "td", demo.engine
     assert_select "td", demo.time
-    assert_select "td", demo.note
+    assert_select "td", demo.note.strip
     demo.players.each do |pl|
       assert_match pl.name, response.body
     end

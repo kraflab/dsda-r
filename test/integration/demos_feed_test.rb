@@ -15,7 +15,7 @@ class DemosFeedTest < ActionDispatch::IntegrationTest
       assert_select "td", demo.category.name
       assert_select "td", demo.players_text
       assert_select "td", demo.engine
-      assert_select "td", demo.note
+      assert_select "td", demo.note.strip
       assert_select "td", demo.time
     end
     assert_select "td", text: Demo.reorder(created_at: :desc).last.time, count: 0

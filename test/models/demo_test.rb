@@ -95,13 +95,13 @@ class DemoTest < ActiveSupport::TestCase
   end
   
   test "should show notes properly" do
-    assert_match @demo.note, ""
+    assert_match @demo.note.strip, ""
     @demo.guys = 2
-    assert_match @demo.note, "2P"
+    assert_match @demo.note.strip, "2P"
     @demo.tas = 3
-    assert_match @demo.note, "2P T3"
+    assert_match @demo.note.strip, "2P T3"
     @demo.guys = 1
-    assert_match @demo.note, "T3"
+    assert_match @demo.note.strip, "T3"
   end
   
   test "time text should be right" do
