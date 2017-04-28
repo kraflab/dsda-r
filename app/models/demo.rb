@@ -76,19 +76,17 @@ class Demo < ApplicationRecord
     tas != 0 ? (tas > 0 ? "T#{tas}" : 'T') : ''
   end
   
-  def hidden_tags?
-    sub_categories.where('style & ? = 0', SubCategory.Show).exists?
-  end
-  
-  def shown_tags?
-    sub_categories.where('style & ? > 0', SubCategory.Show).exists?
+  def update_tags
+    self.has_hidden_tag = sub_categories.where('style & ? = 0', SubCategory.Show).exists?
+    self.has_shown_tag = sub_categories.where('style & ? > 0', SubCategory.Show).exists?
+    self.save
   end
   
   def hidden_tags_text
     cell_names(sub_categories.where('style & ? = 0', SubCategory.Show))
   end
   
-  def tags_text
+  def shown_tags_text
     cell_names(sub_categories.where('style & ? > 0', SubCategory.Show))
   end
   

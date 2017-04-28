@@ -1,8 +1,8 @@
 <% cache demo do %>
     <tr></tr>
     <tr>
-      <% if demo.shown_tags? %>
-        <td class="tag-text" colspan="4"><%= demo.tags_text %></td>
+      <% if demo.has_shown_tag %>
+        <td class="tag-text" colspan="4"><%= demo.shown_tags_text %></td>
       <% else %>
         <td class="no-display" colspan="4"></td>
       <% end %>
