@@ -1,5 +1,5 @@
 class DemosController < ApplicationController
-  before_action :admin_session, except: [:feed, :api_create, :latest, :hidden_tag]
+  before_action :admin_session, only: [:new, :create, :update, :edit, :destroy]
   before_action :age_limit, only: :destroy
   skip_before_action :verify_authenticity_token, only: [:api_create]
   
