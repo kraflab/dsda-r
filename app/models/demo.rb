@@ -65,7 +65,7 @@ class Demo < ApplicationRecord
   end
   
   def note
-    "#{coop_text} #{tas_text}".strip
+    "#{coop_text} #{tas_text}"
   end
   
   def coop_text
