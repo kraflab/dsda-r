@@ -2,24 +2,8 @@
 
 <% cache ["admin:#{logged_in?}", @player] do %>
   <div class="center-text">
-    <h1>
-      <%= @player.name %>
-      <small>
-        <% if !@player.twitch.empty? %>
-          <a href="<%= @player.twitch_url %>">Twitch</a>
-        <% end %>
-        <% if !@player.youtube.empty? %>
-          <%= " | " if !@player.twitch.empty? %>
-          <a href="<%= @player.youtube_url %>">YouTube</a>
-        <% end %>
-        <% if logged_in? %>
-          <%= link_to edit_player_path(@player), :class => 'btn btn-info btn-xs' do %>
-            <span class="glyphicon glyphicon-cog" aria-hidden="true" aria-label="Edit"></span>
-          <% end %>
-        <% end %>
-      </small>
-    </h1>
-    <p class="p-short"><%= demo_details(@player) %></p>
+    <%= player_header(@player) %>
+    <%= player_sub_header(@player) %>
     
     <div class="panel panel-default panel-modest left-text">
       <table class="table table-striped table-modest">
@@ -40,18 +24,15 @@
               <% chunk_l[1].chunk { |i| i.category }.each do |chunk_c| %>
                 <% chunk_c[1].each do |demo| %>
                   <tr>
-                    <% if demo == chunk_w[1].first %>
-                      <td class="wadfile no-stripe-panel" rowspan="<%= 3 * chunk_w[1].count %>"><%= link_to chunk_w[0], demo.wad %></td>
-                    <% end %>
-                    <% if demo == chunk_l[1].first %>
-                      <td class="no-stripe-panel" rowspan="<%= 3 * chunk_l[1].count %>"><%= demo.level %></td>
-                    <% end %>
-                    <% if demo == chunk_c[1].first %>
-                      <td class="no-stripe-panel" rowspan="<%= 3 * chunk_c[1].count %>"><%= demo.category.name %></td>
-                    <% end %>
+                    <%= demo_wad_cell(demo, chunk_w[1], chunk_w[0]) %>
+                    <%= demo_level_cell(demo, chunk_l[1]) %>
+                    <%= demo_category_cell_lite(demo, chunk_c[1]) %>
                     <%= render demo %>
                   </tr>
-                  <%= render partial: "demos/demo_tag", locals: {demo: demo} %>
+                  <% cache demo do %>
+                    <tr></tr>
+                    <%= demo_tags(demo) %>
+                  <% end %>
                 <% end %>
               <% end %>
             <% end %>

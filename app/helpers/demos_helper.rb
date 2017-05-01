@@ -26,7 +26,7 @@ module DemosHelper
   
   def demo_category_cell(demo, chunk, wad)
     if demo == chunk.first
-      content_tag :td, class: 'no-stripe-panel', rowspan: "#{3 * chunk.count}" do
+      content_tag :td, class: 'no-stripe-panel', rowspan: 3 * chunk.count do
         [
           demo.category.name,
           if (chunk.count > 5 and !chunk.any? { |i| i.recorded_at.nil? })
@@ -38,6 +38,21 @@ module DemosHelper
             nil
           end
         ].join(' ').html_safe
+      end
+    end
+  end
+  
+  def demo_category_cell_lite(demo, chunk)
+    if demo == chunk.first
+      content_tag :td, demo.category.name, class: 'no-stripe-panel',
+        rowspan: 3 * chunk.count
+    end
+  end
+  
+  def demo_wad_cell(demo, chunk, name)
+    if demo == chunk.first
+      content_tag :td, class: 'wadfile no-stripe-panel', rowspan: 3 * chunk.count do
+        link_to name, demo.wad
       end
     end
   end
