@@ -17,6 +17,35 @@ module DemosHelper
     Demo.reorder(:updated_at).last.updated_at
   end
   
+  def demo_hidden_tag(demo)
+    content_tag :td, class: 'right-text' do
+      [
+        if demo.has_hidden_tag
+          content_tag :a, '*', id: demo.id, class: 'hidden-tag'
+        else
+          nil
+        end,
+        demo.note
+      ].join(' ').html_safe
+    end
+  end
+  
+  def demo_time_cell(demo)
+    content_tag :td, class: 'right-text demo-time' do
+      [
+        link_to(demo.time, demo.file_path, title: demo.levelstat),
+        if logged_in?
+          link_to edit_demo_path(demo), class: 'label label-info label-xs' do
+            content_tag :span, '', class: 'glyphicon glyphicon-cog',
+              'aria-hidden': 'true', 'aria-label': 'Edit'
+          end
+        else
+          nil
+        end
+      ].join(' ').html_safe
+    end
+  end
+  
   def demo_level_cell(demo, chunk)
     if demo == chunk.first
       content_tag :td, demo.level, class: 'no-stripe-panel',
