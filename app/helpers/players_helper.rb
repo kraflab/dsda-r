@@ -1,5 +1,22 @@
 module PlayersHelper
   
+  def players_header(players)
+    [
+      content_tag(:h1, 'Player List'),
+      (content_tag :p, class: 'p-short' do
+        [
+          pluralize(players.count, 'player'),
+          if logged_in?
+            link_to 'Create New Player', new_player_path,
+              class: 'label label-info'
+          else
+            nil
+          end
+        ].join(' ').html_safe
+      end)
+    ].join(' ').html_safe
+  end
+  
   def player_header(player)
     content_tag :h1 do
       [
