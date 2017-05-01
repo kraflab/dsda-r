@@ -1,5 +1,21 @@
 module WadsHelper
   
+  def wads_header(wads)
+    [
+      content_tag(:h1, 'Wad List'),
+      (content_tag :p, class: 'p-short' do
+        [
+          pluralize(wads.count, 'wad'),
+          if logged_in?
+            link_to 'Create New Wad', new_wad_path, class: 'label label-info'
+          else
+            nil
+          end
+        ].join(' ').html_safe
+      end)
+    ].join(' ').html_safe
+  end
+  
   def wad_header(wad)
     content_tag :h1 do
       [
