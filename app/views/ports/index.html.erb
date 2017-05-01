@@ -1,12 +1,7 @@
 <% provide(:title, 'Ports') %>
 
 <div class="center-text">
-  <h1>Port List</h1>
-  <% if logged_in? %>
-    <p class="p-short">
-      <%= link_to "Create New Port", new_port_path, :class => "label label-info" %>
-    </p>
-  <% end %>
+  <%= ports_header(@ports) %>
 
   <div class="panel panel-default panel-modest left-text">
     <table class="table table-striped">
