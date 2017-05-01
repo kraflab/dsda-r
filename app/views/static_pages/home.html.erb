@@ -1,4 +1,4 @@
-<% provide(:title, "Home") %>
+<% provide(:title, 'Home') %>
 
 <div class="jumbotron">
   <div class="container">
@@ -18,11 +18,13 @@
     </p>
     <% cache "home:#{last_update}" do %>
       <h4>
-        Hosting <%= Demo.count %> demos, by <%= Player.count %> players, for <%= Wad.count %> wads, with a total time of <%= Demo.tics_to_string(Demo.all.sum(:tics), false) %>
+        Hosting <%= Demo.count %> demos, by <%= Player.count %> players, for
+        <%= Wad.count %> wads, with a total time of
+        <%= Demo.tics_to_string(Demo.all.sum(:tics), false) %>
       </h4>
     <% end %>
   </div>
 </div>
 
-<%= render "layouts/categories" %>
-<%= render "layouts/info" %>
+<%= render 'layouts/categories' %>
+<%= render 'layouts/info' %>
