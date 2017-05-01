@@ -104,6 +104,8 @@ if Rails.env.development?
   end
   
   subcategory = SubCategory.create!(name: "Also reality", show: true)
+  hidden_subcategory = SubCategory.create!(name: "Keyboard only", show: false)
   
   Tag.create!(sub_category: subcategory, demo: Demo.second)
+  Tag.create!(sub_category: hidden_subcategory, demo: Demo.third)
 end
