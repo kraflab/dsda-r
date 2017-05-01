@@ -1,5 +1,9 @@
 module WadsHelper
   
+  def record_timeline_header(wad, level, category)
+    content_tag :h1, "Record Timeline | #{wad.name} #{level} #{category}"
+  end
+  
   def wads_header(wads)
     [
       content_tag(:h1, 'Wad List'),

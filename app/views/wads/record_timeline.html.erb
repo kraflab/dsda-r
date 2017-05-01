@@ -1,9 +1,7 @@
 <% provide(:title, "Record Timeline") %>
 
 <div class="page-header">
-  <h1>
-    Record Timeline | <%= "#{@wad.name} #{@level} #{@category}" %>
-  </h1>
+  <%= record_timeline_header(@wad, @level, @category) %>
 </div>
 
 <canvas id="myChart" class="chart-style"></canvas>
