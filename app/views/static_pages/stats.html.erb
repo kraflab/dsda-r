@@ -11,7 +11,7 @@
   <% demo_count = Demo.count %>
   <% player_count = Player.count %>
   <% wad_count = Wad.count %>
-  
+
   <h4>Number of demos = <%= demo_count %></h4>
   <h4>Number of players = <%= player_count %></h4>
   <h4>Number of wads = <%= wad_count %></h4>
@@ -19,11 +19,18 @@
   <h4>Average demos per player = <%= demo_count / player_count %></h4>
   <h4>Average demos per wad = <%= demo_count/ wad_count %></h4>
   <h4>Average demo time = <%= Demo.tics_to_string(time_sum / demo_count, false) %></h4>
-<% end %>
 
-<div id="wad_count_by_iwad" class="chart-style">
-  <%= column_chart iwad_by_wad_count,
-  title: 'Wad Count by Iwad',
-  nonce: content_security_policy_script_nonce,
-  id: 'wad_count_by_iwad', html: '' %>
-</div>
+  <div id="wad_count_by_iwad" class="chart-style">
+    <%= column_chart iwad_by_wad_count,
+    title: 'Wad Count by Iwad',
+    nonce: content_security_policy_script_nonce,
+    id: 'wad_count_by_iwad', html: '' %>
+  </div>
+
+  <div id="demo_count_by_month" class="chart-style">
+    <%= column_chart demos_by_month(Demo),
+    title: 'Demo Count by Month',
+    nonce: content_security_policy_script_nonce,
+    id: 'demo_count_by_month', html: '' %>
+  </div>
+<% end %>

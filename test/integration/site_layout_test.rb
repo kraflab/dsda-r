@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class SiteLayoutTest < ActionDispatch::IntegrationTest
-  
+
   test "home page content and links" do
     get root_path
     assert_select "title", "Home | DSDA"
@@ -19,19 +19,21 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", about_url
     assert_select "a[href=?]", "https://www.doomworld.com/vb/doom-speed-demos/"
   end
-  
+
   test "tools page" do
     get tools_path
     assert_select "title", "Tools | DSDA"
     assert_select "div.panel-heading", "List of Tools"
   end
-  
+
   test "stats page" do
     get stats_path
     assert_select "title", "Stats | DSDA"
     assert_select "div.page-header", "Stats & Charts"
+    assert_select "div.chart-style[id=?]", "wad_count_by_iwad"
+    assert_select "div.chart-style[id=?]", "demo_count_by_month"
   end
-  
+
   test "about page" do
     get about_path
     assert_match "Andy Olivera", response.body

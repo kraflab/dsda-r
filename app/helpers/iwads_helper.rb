@@ -1,5 +1,5 @@
 module IwadsHelper
-  
+
   def iwads_header(iwads)
     [
       content_tag(:h1, 'Iwad List'),
@@ -16,7 +16,7 @@ module IwadsHelper
       end)
     ].join(' ').html_safe
   end
-  
+
   def iwad_by_wad_count
     Hash[Iwad.all.map {|i| [i.name, i.wads.count]}]
   end
