@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170428033526) do
+ActiveRecord::Schema.define(version: 20170513191523) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "username"
@@ -69,8 +69,8 @@ ActiveRecord::Schema.define(version: 20170428033526) do
     t.boolean  "has_shown_tag",  default: false
     t.index ["category_id"], name: "index_demos_on_category_id"
     t.index ["demo_file_id"], name: "index_demos_on_demo_file_id"
+    t.index ["recorded_at"], name: "index_demos_on_recorded_at"
     t.index ["wad_id", "level", "category_id", "tics"], name: "index_demos_on_wad_id_and_level_and_category_id_and_tics"
-    t.index ["wad_id"], name: "index_demos_on_wad_id"
   end
 
   create_table "iwads", force: :cascade do |t|
