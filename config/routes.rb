@@ -10,29 +10,30 @@ Rails.application.routes.draw do
   delete 'logout'   => 'sessions#destroy'
   get    'settings' => 'sessions#settings'
   patch  'settings' => 'sessions#set'
-  
+
   get    'edit' => 'admins#edit'
   patch  'edit' => 'admins#update'
-  
+
   get 'record_timeline'      => 'wads#record_timeline'
   get 'record_timeline_json' => 'wads#record_timeline_json'
-  
+
   get 'demos/latest' => "demos#latest"
   get 'feed'         => 'demos#feed'
   get 'demos/:id/hidden_tag' => 'demos#hidden_tag'
-  
+
   get 'category_filter' => 'sessions#category_filter'
-  
+
   get  'api/wads/'    => "wads#api_show"
   get  'api/players/' => "players#api_show"
   post 'api/demos/'   => "demos#api_create"
-  
+
   get 'no_file' => "static_pages#no_file"
 
   resources :players do
     get :autocomplete_player_username, :on => :collection
   end
   resources :iwads, except: [:edit, :update]
+  get 'iwads/:id/stats' => 'iwads#stats', as: 'iwad_stats'
   resources :wads
   resources :ports, except: [:show, :edit, :update], :id => /([^\/])+/ do
     get :autocomplete_port_family, :on => :collection
