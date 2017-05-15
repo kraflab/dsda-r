@@ -1,9 +1,9 @@
 module WadsHelper
-  
+
   def record_timeline_header(wad, level, category)
     content_tag :h1, "Record Timeline | #{wad.name} #{level} #{category}"
   end
-  
+
   def wads_header(wads)
     [
       content_tag(:h1, 'Wad List'),
@@ -19,7 +19,7 @@ module WadsHelper
       end)
     ].join(' ').html_safe
   end
-  
+
   def wad_header(wad)
     content_tag :h1 do
       [
@@ -29,7 +29,7 @@ module WadsHelper
       ].join(' ').html_safe
     end
   end
-  
+
   def wad_sub_header(wad)
     content_tag :p, class: 'p-short' do
       [
@@ -38,16 +38,16 @@ module WadsHelper
       ].join(' ').html_safe
     end
   end
-  
+
   def edit_wad_link(wad)
     if logged_in?
       link_to edit_wad_path(wad), :class => 'btn btn-info btn-xs' do
-        content_tag :span, '', class: 'glyphicon glyphicon-cog', 
+        content_tag :span, '', class: 'glyphicon glyphicon-cog',
           'aria-hidden': 'true', 'aria-label': 'Edit'
       end
     end
   end
-  
+
   def new_demo_link(wad)
     if logged_in?
       link_to 'Create New Demo', new_demo_path(wad: wad.username),
