@@ -1,5 +1,5 @@
 module PlayersHelper
-  
+
   def players_header(players)
     [
       content_tag(:h1, 'Player List'),
@@ -16,7 +16,7 @@ module PlayersHelper
       end)
     ].join(' ').html_safe
   end
-  
+
   def player_header(player)
     content_tag :h1 do
       [
@@ -39,17 +39,22 @@ module PlayersHelper
       ].join(' ').html_safe
     end
   end
-  
+
   def player_sub_header(player)
     content_tag :p, demo_details(player)
   end
-  
+
   def edit_player_link(player)
     if logged_in?
       link_to edit_player_path(player), :class => 'btn btn-info btn-xs' do
-        content_tag :span, '', class: 'glyphicon glyphicon-cog', 
+        content_tag :span, '', class: 'glyphicon glyphicon-cog',
           'aria-hidden': 'true', 'aria-label': 'Edit'
       end
     end
+  end
+
+  def player_wad_count(player)
+    DemoPlayer.where(player: player).includes(:demo).select('demos.wad_id').
+      references(:demo).distinct.count
   end
 end
