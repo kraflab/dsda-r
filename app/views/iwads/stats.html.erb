@@ -9,7 +9,7 @@
 <% cache @iwad do %>
   <% demos = Demo.where(wad: @iwad.wads) %>
   <% time_sum = demos.sum(:tics) %>
-  <% demo_count = Demo.where(wad: @iwad.wads).count %>
+  <% demo_count = demos.count %>
   <% player_count = DemoPlayer.where(demo: demos).select(:player_id).distinct.count %>
   <% wad_count = @iwad.wads.count %>
 
