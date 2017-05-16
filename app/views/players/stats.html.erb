@@ -6,8 +6,9 @@
   </h1>
 </div>
 
+<% demos = @player.demos %>
+
 <% cache @player do %>
-  <% demos = @player.demos %>
   <% time_sum = demos.sum(:tics) %>
   <% demo_count = demos.count %>
   <% wad_count = player_wad_count(@player) %>
@@ -17,11 +18,11 @@
   <h4>Total demo time = <%= Demo.tics_to_string(time_sum, false) %> </h4>
   <h4>Average demos per wad = <%= demo_count/ wad_count %></h4>
   <h4>Average demo time = <%= Demo.tics_to_string(time_sum / demo_count, false) %></h4>
-
-  <div id="demo_count_by_month" class="chart-style">
-    <%= column_chart demos_by_month(demos),
-    title: 'Demo Count by Month',
-    nonce: content_security_policy_script_nonce,
-    id: 'demo_count_by_month', html: '' %>
-  </div>
 <% end %>
+
+<div id="demo_count_by_month" class="chart-style">
+  <%= column_chart demos_by_month(demos),
+  title: 'Demo Count by Month',
+  nonce: content_security_policy_script_nonce,
+  id: 'demo_count_by_month', html: '' %>
+</div>
