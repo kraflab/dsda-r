@@ -32,23 +32,8 @@ class PlayersController < ApplicationController
               end
             end
           when 'stats'
-            response_hash[:longest_demo] = Demo.tics_to_string(player.demos.maximum(:tics))
-            response_hash[:total_time], response_hash[:average_time] = time_stats(player, false)
-            response_hash[:demo_count] ||= player.demos.count
-            response_hash[:wad_count] ||= player_wad_count(player)
-
-            # group wads by number of demos by this player, get average / max
-            wad_counts = DemoPlayer.where(player: player).includes(:demo).group('demos.wad_id').references(:demo).count
-            top_wad = Wad.find(wad_counts.max_by { |k, v| v }[0])
-            response_hash[:average_demo_count] = wad_counts.keys.inject { |sum, k| sum + k } / wad_counts.size
-            response_hash[:top_wad] = top_wad.name
-
-            # group demos by category
-            category_counts = DemoPlayer.where(player: player).includes(:demo).group('demos.category_id').references(:demo).count
-            top_category = Category.find(category_counts.max_by { |k, v| v }[0])
-            response_hash[:top_category] = top_category.name
-
-            response_hash[:tas_count] ||= DemoPlayer.where(player: player).includes(:demo).where('demos.tas > 0').references(:demo).count
+            # This function puts the results directly into the hash
+            player_stats(player, response_hash)
           when 'properties'
             response_hash[:player] = player.serializable_hash(only: [:name, :username, :twitch, :youtube])
           end
