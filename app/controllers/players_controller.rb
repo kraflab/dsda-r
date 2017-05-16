@@ -1,6 +1,6 @@
 class PlayersController < ApplicationController
   autocomplete :player, :username
-  before_action :admin_session, except: [:index, :show, :api_show]
+  before_action :admin_session, only: [:new, :create, :edit, :update, :destroy]
   before_action :age_limit, only: :destroy
 
   def api_show
@@ -69,6 +69,10 @@ class PlayersController < ApplicationController
     @player = Player.find_by(username: params[:id])
     @demos  = @player.demos.includes(:wad).reorder('wads.username',
                                                    :level, :category_id, :tics)
+  end
+
+  def stats
+    @player = Player.find_by(username: params[:id])
   end
 
   def new

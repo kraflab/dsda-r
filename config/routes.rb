@@ -32,11 +32,16 @@ Rails.application.routes.draw do
   resources :players do
     get :autocomplete_player_username, :on => :collection
   end
+  get 'players/:id/stats' => 'players#stats', as: 'player_stats'
+
   resources :iwads, except: [:edit, :update]
   get 'iwads/:id/stats' => 'iwads#stats', as: 'iwad_stats'
+
   resources :wads
+
   resources :ports, except: [:show, :edit, :update], :id => /([^\/])+/ do
     get :autocomplete_port_family, :on => :collection
   end
+
   resources :demos, except: [:index, :show]
 end
