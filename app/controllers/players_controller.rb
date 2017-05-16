@@ -35,7 +35,7 @@ class PlayersController < ApplicationController
             response_hash[:longest_demo] = Demo.tics_to_string(player.demos.maximum(:tics))
             response_hash[:total_time], response_hash[:average_time] = time_stats(player, false)
             response_hash[:demo_count] ||= player.demos.count
-            response_hash[:wad_count] ||= player_wads_count(player)
+            response_hash[:wad_count] ||= player_wad_count(player)
 
             # group wads by number of demos by this player, get average / max
             wad_counts = DemoPlayer.where(player: player).includes(:demo).group('demos.wad_id').references(:demo).count
