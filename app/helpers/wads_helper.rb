@@ -39,6 +39,19 @@ module WadsHelper
     end
   end
 
+  def wad_stats(wad, hash = {})
+    hash[:longest_demo] = Demo.tics_to_string(wad.demos.maximum(:tics))
+    hash[:total_time], hash[:average_time] = time_stats(wad, false)
+    hash[:demo_count] ||= wad.demos.count
+    hash[:player_count] ||= DemoPlayer.includes(:demo).where('demos.wad_id = ?', wad.id).references(:demo).select(:player_id).distinct.count
+
+    # group players by number of demos for this wad, get max
+    player_counts = DemoPlayer.includes(:demo).where('demos.wad_id = ?', wad.id).references(:demo).group(:player_id).count
+    top_player = Player.find(player_counts.max_by { |k, v| v }[0])
+    hash[:top_player] = top_player.name
+    hash
+  end
+
   def edit_wad_link(wad)
     if logged_in?
       link_to edit_wad_path(wad), :class => 'btn btn-info btn-xs' do

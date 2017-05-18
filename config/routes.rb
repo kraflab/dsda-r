@@ -38,6 +38,7 @@ Rails.application.routes.draw do
   get 'iwads/:id/stats' => 'iwads#stats', as: 'iwad_stats'
 
   resources :wads
+  get 'wads/:id/stats' => 'wads#stats', as: 'wad_stats'
 
   resources :ports, except: [:show, :edit, :update], :id => /([^\/])+/ do
     get :autocomplete_port_family, :on => :collection

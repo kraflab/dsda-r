@@ -1,0 +1,27 @@
+<% provide(:title, "#{@wad.name} | Stats") %>
+
+<div class="page-header">
+  <h1>
+    <%= @wad.name %> Stats & Charts
+  </h1>
+</div>
+
+<% demos = Demo.where(wad: @wad) %>
+
+<% cache @wad do %>
+  <% stats = wad_stats(@wad) %>
+
+  <h4>Number of demos = <%= stats[:demo_count] %></h4>
+  <h4>Number of players = <%= stats[:player_count] %></h4>
+  <h4>Total demo time = <%= stats[:total_time] %> </h4>
+  <h4>Average demos per player = <%= stats[:demo_count] / stats[:player_count] %></h4>
+  <h4>Average demo time = <%= stats[:average_time] %></h4>
+  <h4>Longest demo time = <%= stats[:longest_demo] %></h4>
+<% end %>
+
+<div id="demo_count_by_month" class="chart-style">
+  <%= column_chart demos_by_month(demos),
+  title: 'Demo Count by Month',
+  nonce: content_security_policy_script_nonce,
+  id: 'demo_count_by_month', html: '' %>
+</div>
