@@ -1,0 +1,5 @@
+# Various notes and to-dos
+- Highlight first demo to reach the record in seconds
+- Add file uploading to forms
+- Add create API for wads, ports, players
+- Add API documentation

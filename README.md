@@ -49,10 +49,10 @@ Restful API ([repo](https://github.com/kraflab/dsda-r-api-client)):
     }
     No errors!
 
-## To Do
-Add file uploading to forms  
-Add create API for wads, ports, players  
-Add API documentation  
+## Current Focus
+Expand API capabilities
+Expand and clean up settings page
+Improve caching and database queries
 
 ## Contributors
 Full stack: Kraflab  
