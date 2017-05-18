@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170513191523) do
+ActiveRecord::Schema.define(version: 20170518181412) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "username"
@@ -132,7 +132,6 @@ ActiveRecord::Schema.define(version: 20170513191523) do
     t.datetime "updated_at",                    null: false
     t.boolean  "single_map",    default: false
     t.index ["iwad_id", "username"], name: "index_wads_on_iwad_id_and_username"
-    t.index ["iwad_id"], name: "index_wads_on_iwad_id"
     t.index ["username"], name: "index_wads_on_username", unique: true
   end
 
