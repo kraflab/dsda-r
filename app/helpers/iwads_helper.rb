@@ -42,6 +42,17 @@ module IwadsHelper
     end
   end
 
+  def iwad_stats(iwad, hash = {})
+    demos = Demo.where(wad: @iwad.wads)
+    total_time = demos.sum(:tics)
+    hash[:total_time] = Demo.tics_to_string(total_time, false)
+    hash[:demo_count] = demos.count
+    hash[:player_count] = DemoPlayer.where(demo: demos).select(:player_id).distinct.count
+    hash[:wad_count] = iwad.wads.count
+    hash[:average_time] = Demo.tics_to_string(total_time / hash[:demo_count], false)
+    hash
+  end
+
   def iwad_by_wad_count
     Hash[Iwad.all.map {|i| [i.name, i.wads.count]}]
   end

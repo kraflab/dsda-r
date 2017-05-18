@@ -9,18 +9,15 @@
 <% demos = Demo.where(wad: @iwad.wads) %>
 
 <% cache @iwad do %>
-  <% time_sum = demos.sum(:tics) %>
-  <% demo_count = demos.count %>
-  <% player_count = DemoPlayer.where(demo: demos).select(:player_id).distinct.count %>
-  <% wad_count = @iwad.wads.count %>
+  <% stats = iwad_stats(@iwad) %>
 
-  <h4>Number of demos = <%= demo_count %></h4>
-  <h4>Number of players = <%= player_count %></h4>
-  <h4>Number of wads = <%= wad_count %></h4>
-  <h4>Total demo time = <%= Demo.tics_to_string(time_sum, false) %> </h4>
-  <h4>Average demos per player = <%= demo_count / player_count %></h4>
-  <h4>Average demos per wad = <%= demo_count/ wad_count %></h4>
-  <h4>Average demo time = <%= Demo.tics_to_string(time_sum / demo_count, false) %></h4>
+  <h4>Number of demos = <%= stats[:demo_count] %></h4>
+  <h4>Number of players = <%= stats[:player_count] %></h4>
+  <h4>Number of wads = <%= stats[:wad_count] %></h4>
+  <h4>Total demo time = <%= stats[:total_time] %> </h4>
+  <h4>Average demos per player = <%= stats[:demo_count] / stats[:player_count] %></h4>
+  <h4>Average demos per wad = <%= stats[:demo_count] / stats[:wad_count] %></h4>
+  <h4>Average demo time = <%= stats[:average_time] %></h4>
 <% end %>
 
 <div id="demo_count_by_month" class="chart-style">
