@@ -50,9 +50,10 @@ Restful API ([repo](https://github.com/kraflab/dsda-r-api-client)):
     No errors!
 
 ## Current Focus
-Expand API capabilities
-Expand and clean up settings page
-Improve caching and database queries
+Expand API capabilities  
+Expand and clean up settings page  
+Improve caching and database queries  
+Adjust database indexing
 
 ## Contributors
 Full stack: Kraflab  
