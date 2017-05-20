@@ -7,5 +7,5 @@ nmspeed:
   description: Exit as fast as possible on skill 5.
 
 pacifist:
-  name: UV Pacifist
+  name: Pacifist
   description: Exit as fast as possible on skill 4, without injuring enemies.

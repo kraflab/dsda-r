@@ -11,6 +11,19 @@ bt01speed:
   version: 0
   recorded_at: <%= 100.days.ago %>
 
+bt01pacifist:
+  wad: btsx
+  category: pacifist
+  tics: 9
+  engine: PRBoom+ v2.5.1.4 cl9
+  tas: 0
+  guys: 2
+  has_tics: true
+  level: Map 01
+  levelstat: 0:00.97
+  version: 0
+  recorded_at: <%= 100.days.ago %>
+
 bt02speed:
   wad: btsx
   category: uvspeed
@@ -24,15 +37,15 @@ bt02speed:
   version: 0
   recorded_at: <%= 100.days.ago %>
 
-bt01pacifist:
+bt02speed_slow:
   wad: btsx
-  category: pacifist
-  tics: 9
+  category: uvspeed
+  tics: 9999
   engine: PRBoom+ v2.5.1.4 cl9
   tas: 0
   guys: 2
   has_tics: true
-  level: Map 01
+  level: Map 02
   levelstat: 0:00.97
   version: 0
   recorded_at: <%= 100.days.ago %>
