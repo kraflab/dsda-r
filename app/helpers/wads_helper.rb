@@ -34,6 +34,7 @@ module WadsHelper
     content_tag :p, class: 'p-short' do
       [
         demo_details(wad),
+        link_to('Stats', wad_stats_path(wad)),
         new_demo_link(wad)
       ].join(' ').html_safe
     end

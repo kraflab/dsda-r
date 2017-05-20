@@ -32,6 +32,7 @@ module IwadsHelper
     content_tag :p, class: 'p-short' do
       [
         pluralize(iwad.wads.count, 'wad'),
+        link_to('Stats', iwad_stats_path(iwad)),
         if logged_in?
           link_to 'Create New Player', new_wad_path(iwad: iwad.username),
             class: 'label label-info'

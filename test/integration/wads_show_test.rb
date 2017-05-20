@@ -1,18 +1,19 @@
 require 'test_helper'
 
 class WadsShowTest < ActionDispatch::IntegrationTest
-  
+
   def setup
     @admin = admins(:elim)
     @wad   = wads(:btsx)
     @pacifist = demos(:bt01pacifist)
   end
-  
+
   test "layout and buttons" do
     get wad_path(@wad)
     assert_response :success
     assert_select "h1 > small"
     assert_match @wad.name, response.body
+    assert_select "a[href=?]", wad_stats_path(wad)
     demo = @wad.demos.first
     assert_select "td", demo.level
     assert_select "td", demo.category.name

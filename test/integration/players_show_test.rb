@@ -1,18 +1,19 @@
 require 'test_helper'
 
 class PlayersShowTest < ActionDispatch::IntegrationTest
-  
+
   def setup
     @admin = admins(:elim)
     @player = players(:kingdime)
     @player_links = players(:kraflab)
   end
-  
+
   test "layout and buttons" do
     get player_path(@player_links)
     assert_response :success
     assert_select "a[href=?]", @player_links.twitch_url
     assert_select "a[href=?]", @player_links.youtube_url
+    assert_select "a[href=?]", player_stats_path(player)
     get player_path(@player)
     assert_response :success
     assert_select "div > a", count: 0, text: "Twitch"

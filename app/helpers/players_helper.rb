@@ -41,7 +41,12 @@ module PlayersHelper
   end
 
   def player_sub_header(player)
-    content_tag :p, demo_details(player)
+    content_tag :p do
+      [
+        demo_details(player),
+        link_to('Stats', player_stats_path(player))
+      ].join(' ').html_safe
+    end
   end
 
   def player_stats(player, hash = {})
