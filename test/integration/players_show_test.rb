@@ -13,7 +13,7 @@ class PlayersShowTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "a[href=?]", @player_links.twitch_url
     assert_select "a[href=?]", @player_links.youtube_url
-    assert_select "a[href=?]", player_stats_path(player)
+    assert_select "a[href=?]", player_stats_path(@player_links)
     get player_path(@player)
     assert_response :success
     assert_select "div > a", count: 0, text: "Twitch"

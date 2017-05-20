@@ -13,7 +13,7 @@ class WadsShowTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "h1 > small"
     assert_match @wad.name, response.body
-    assert_select "a[href=?]", wad_stats_path(wad)
+    assert_select "a[href=?]", wad_stats_path(@wad)
     demo = @wad.demos.first
     assert_select "td", demo.level
     assert_select "td", demo.category.name
