@@ -23,14 +23,14 @@ heretic.wads.create!(name: "Heretic", username: "heretic", author: "Raven Softwa
 end
 
 Category.create!(name: "UV Speed",    description: "Exit as fast as possible on skill 4.")
-Category.create!(name: "SM Speed",    description: "Exit as fast as possible on skill 4 (heretic).")
+Category.create!(name: "SM Speed",    description: "Exit as fast as possible on skill 4 (heretic).", game: 'Heretic')
 Category.create!(name: "UV Max",      description: "Exit with all monsters dead (except lost souls) and all secrets collected on skill 4.")
-Category.create!(name: "SM Max",      description: "Exit with all monsters dead (except lost souls) and all secrets collected on skill 4 (heretic).")
+Category.create!(name: "SM Max",      description: "Exit with all monsters dead (except lost souls) and all secrets collected on skill 4 (heretic).", game: 'Heretic')
 Category.create!(name: "Tyson",       description: "Exit with all monsters dead (except lost souls) on skill 4, using only weapons 1 and 2 (fist, chainsaw, pistol).")
 Category.create!(name: "UV Fast",     description: "Exit with all monsters dead (except lost souls) and all secrets collected on skill 4, using the -fast parameter.")
-Category.create!(name: "BP Max",      description: "Exit with all monsters dead (except lost souls) and all secrets collected on skill 5 (heretic).")
+Category.create!(name: "BP Max",      description: "Exit with all monsters dead (except lost souls) and all secrets collected on skill 5 (heretic).", game: 'Heretic')
 Category.create!(name: "UV Respawn",  description: "Exit with 100% Kills and all secrets collected on skill 4, using the -respawn parameter.")
-Category.create!(name: "BP Speed",    description: "Exit as fast as possible on skill 5 (heretic).")
+Category.create!(name: "BP Speed",    description: "Exit as fast as possible on skill 5 (heretic).", game: 'Heretic')
 Category.create!(name: "NM Speed",    description: "Exit as fast as possible on skill 5.")
 Category.create!(name: "NM 100S",     description: "Exit with all secrets collected on skill 5.")
 Category.create!(name: "Pacifist",    description: "Exit as fast as possible on skill 4, without hurting monsters either directly or indirectly (no barrels, crushers, telefrags).")
@@ -47,11 +47,11 @@ if Rails.env.development?
     username = Faker::Internet.unique.user_name(nil, %w(_))
     twitch   = Faker::Boolean.boolean ? Faker::Internet.user_name(nil, %w(_)) : ""
     youtube  = Faker::Boolean.boolean ? Faker::Internet.user_name(nil, %w(_)) : ""
-    
+
     Player.create!(name: name, username: username, twitch: twitch,
                                                    youtube: youtube)
   end
-  
+
   doom = Iwad.first
   50.times do
     name     = Faker::App.unique.name
@@ -59,12 +59,12 @@ if Rails.env.development?
     author   = Faker::Name.name
     doom.wads.create!(name: name, username: username, author: author, file: "")
   end
-  
+
   Port.create!(family: "PRBoom+", version: "v2.5.1.4")
   Port.create!(family: "GZDoom",  version: "v2.0.05")
   Port.create!(family: "CNDoom",  version: "v2.0.3.2")
   Port.create!(family: "PRBoom+", version: "v2.5.1.5")
-  
+
   player = Player.first
   90.times do
     cat  = Category.order("RANDOM()").first
@@ -85,7 +85,7 @@ if Rails.env.development?
                         engine:      "PRBoom+ v2.5.1.4 cl9")
     player.player_demos.create(demo: demo)
   end
-  
+
   tics = [12340, 8440, 7420, 6032, 5987, 4609, 3295, 3000, 2950, 1546]
   tics.each_with_index do |tic, n|
     @recorded_at ||= 30.days.ago
@@ -102,10 +102,10 @@ if Rails.env.development?
                         engine: "PRBoom+ v2.5.1.4 cl9")
     player.player_demos.create(demo: demo)
   end
-  
+
   subcategory = SubCategory.create!(name: "Also reality", show: true)
   hidden_subcategory = SubCategory.create!(name: "Keyboard only", show: false)
-  
+
   Tag.create!(sub_category: subcategory, demo: Demo.second)
   Tag.create!(sub_category: hidden_subcategory, demo: Demo.third)
 end

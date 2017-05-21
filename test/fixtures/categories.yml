@@ -1,11 +1,14 @@
 uvspeed:
   name: UV Speed
   description: Exit as fast as possible on skill 4.
+  game: Doom
 
 nmspeed:
   name: NM Speed
   description: Exit as fast as possible on skill 5.
+  game: Doom
 
 pacifist:
   name: Pacifist
   description: Exit as fast as possible on skill 4, without injuring enemies.
+  game: Doom

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170518181412) do
+ActiveRecord::Schema.define(version: 20170521210504) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "username"
@@ -24,8 +24,10 @@ ActiveRecord::Schema.define(version: 20170518181412) do
   create_table "categories", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.string   "game",        default: "Doom"
+    t.index ["game"], name: "index_categories_on_game"
   end
 
   create_table "demo_files", force: :cascade do |t|

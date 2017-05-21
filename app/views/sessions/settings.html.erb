@@ -1,18 +1,25 @@
 <% provide(:title, "Settings") %>
 
 <div class="center-text">
+  <h1>Settings</h1>
+
   <div class="well well-modest left-text">
-    <legend>Settings</legend>
     <%= bootstrap_form_tag url: settings_path, method: "patch" do |f| %>
-      <h4>Category Filter</h4>
+      <h4>Category Filters</h4>
       <%= f.form_group :category_filters do %>
         <% category_filter_json = category_filter_array %>
         <% category_filter = category_filter_json["filter"] %>
-        <% Category.all.each do |category| %>
-          <% name = category.name %>
-          <%= f.check_box "cat:#{name}", label: name,
-                          checked: !category_filter.include?(name) %>
+        <% Category.reorder(:game).chunk { |i| i.game }.each do |chunk| %>
+          <hr>
+          <p><%= chunk[0] %></p>
+          <% chunk[1].each do |category| %>
+            <% name = category.name %>
+            <%= f.check_box "cat:#{name}", label: name,
+                            checked: !category_filter.include?(name) %>
+          <% end %>
         <% end %>
+        <hr>
+        <p>Additional Filters</p>
         <%= f.check_box "hideTas", label: "TAS", checked: !category_filter_json["hideTas"] %>
         <%= f.check_box "hideCoop", label: "Coop", checked: !category_filter_json["hideCoop"] %>
       <% end %>
