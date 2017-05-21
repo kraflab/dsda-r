@@ -24,4 +24,37 @@ class ApplicationController < ActionController::Base
       [nil, nil]
     end
   end
+
+  # Basic pass for api
+  def preprocess_api(request, require_query = true)
+    response_hash = {}
+    response_hash[:error_message] = []
+    query = JSON.parse(request.body.read)
+    if require_query and query.nil?
+      response_hash[:error_message].push 'No command given'
+    end
+
+    [query, response_hash]
+  end
+
+  # Preprocess api with authentication
+  def preprocess_api_authenticate(request, require_query = true)
+    query, response_hash = preprocess_api(request, require_query)
+    admin, code = authenticate_admin(request.headers["HTTP_API_USERNAME"],
+                                     request.headers["HTTP_API_PASSWORD"])
+    if admin
+      case code
+      when ADMIN_SUCCESS
+        authenticated_admin = admin
+      when ADMIN_ERR_LOCK
+        response_hash[:error_message].push 'This account has been locked; contact kraflab'
+      else
+        response_hash[:error_message].push 'Invalid username/password combination'
+      end
+    else
+      response_hash[:error_message].push 'Invalid username/password combination'
+    end
+
+    [query, response_hash, authenticated_admin]
+  end
 end

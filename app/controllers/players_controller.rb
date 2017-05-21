@@ -4,9 +4,7 @@ class PlayersController < ApplicationController
   before_action :age_limit, only: :destroy
 
   def api_show
-    response_hash = {}
-    response_hash[:error_message] = []
-    query = JSON.parse(request.body.read)
+    query, response_hash = preprocess_api(request)
     if query
       if query['mode'] == 'fixed'
         player = Player.find_by(username: query['id']) || Player.find_by(name: query['id'])
@@ -39,8 +37,6 @@ class PlayersController < ApplicationController
           end
         end
       end
-    else
-      response_hash[:error_message].push 'No command given'
     end
     response_hash[:error] = (response_hash[:error_message].count > 0)
     render json: response_hash

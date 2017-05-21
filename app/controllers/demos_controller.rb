@@ -2,11 +2,11 @@ class DemosController < ApplicationController
   before_action :admin_session, only: [:new, :create, :update, :edit, :destroy]
   before_action :age_limit, only: :destroy
   skip_before_action :verify_authenticity_token, only: [:api_create]
-  
+
   def feed
     @demos = Demo.reorder(created_at: :desc).page params[:page]
   end
-  
+
   def latest
     @demos = Demo.reorder(created_at: :desc).page
     @latest = @demos.first
@@ -16,77 +16,62 @@ class DemosController < ApplicationController
       end
     end
   end
-  
+
   def new
     @demo = Demo.new
     @demo.wad_username = params[:wad] if params[:wad]
   end
-  
+
   # TODO - refactor the creation code with the create action!
   def api_create
-    response_hash = {}
-    response_hash[:error_message] = []
-    query = JSON.parse(request.body.read)
-    if query
-      admin, code = authenticate_admin(request.headers["HTTP_API_USERNAME"], request.headers["HTTP_API_PASSWORD"])
-      if admin
-        case code
-        when ADMIN_ERR_LOCK
-          response_hash[:error_message].push 'This account has been locked; contact kraflab'
-        when ADMIN_SUCCESS
-          demo_query = query['demo']
-          players, player_errors = parse_players(demo_query['players'], true)
-          if player_errors.empty?
-            @demo= Demo.new(demo_query.slice('time', 'tas', 'guys', 'level', 'recorded_at', 'levelstat', 'engine', 'version', 'wad_username', 'category_name', 'video_link'))
-            if @demo.valid?
-              success = true
-              if demo_query['file'] and demo_query['file']['data'] and demo_query['file']['name']
-                io = Base64StringIO.new(Base64.decode64(demo_query['file']['data']))
-                io.original_filename = demo_query['file']['name'][0..15]
-                new_file = DemoFile.new(wad: @demo.wad)
-                new_file.data = io
-                if new_file.save
-                  @demo.demo_file = new_file
-                else
-                  success = false
-                  response_hash[:error_message].push 'Demo creation failed', *new_file.errors
-                end
-              elsif demo_query['file_id']
-                if demo_file = DemoFile.find_by(id: demo_query['file_id'])
-                  @demo.demo_file = demo_file
-                else
-                  success = false
-                  response_hash[:error_message].push 'Demo creation failed', 'file not found'
-                end
-              end
-              if success
-                @demo.save
-                players.each do |player|
-                  DemoPlayer.create(demo: @demo, player: player)
-                end
-                parse_tags(demo_query['tags'])
-                response_hash[:save] = true
-                response_hash[:demo] = {id: @demo.id, file_id: @demo.demo_file_id}
-              end
+    query, response_hash, admin = preprocess_api_authenticate(request)
+    # admin is nil unless authentication was successful
+    if query and admin
+      demo_query = query['demo']
+      players, player_errors = parse_players(demo_query['players'], true)
+      if player_errors.empty?
+        @demo= Demo.new(demo_query.slice('time', 'tas', 'guys', 'level', 'recorded_at', 'levelstat', 'engine', 'version', 'wad_username', 'category_name', 'video_link'))
+        if @demo.valid?
+          success = true
+          if demo_query['file'] and demo_query['file']['data'] and demo_query['file']['name']
+            io = Base64StringIO.new(Base64.decode64(demo_query['file']['data']))
+            io.original_filename = demo_query['file']['name'][0..15]
+            new_file = DemoFile.new(wad: @demo.wad)
+            new_file.data = io
+            if new_file.save
+              @demo.demo_file = new_file
             else
-              response_hash[:error_message].push 'Demo creation failed', *@demo.errors
+              success = false
+              response_hash[:error_message].push 'Demo creation failed', *new_file.errors
             end
-          else
-            response_hash[:error_message].push 'Demo creation failed', *player_errors
+          elsif demo_query['file_id']
+            if demo_file = DemoFile.find_by(id: demo_query['file_id'])
+              @demo.demo_file = demo_file
+            else
+              success = false
+              response_hash[:error_message].push 'Demo creation failed', 'file not found'
+            end
           end
-        when ADMIN_ERR_FAIL
-          response_hash[:error_message].push 'Invalid username/password combination'
+          if success
+            @demo.save
+            players.each do |player|
+              DemoPlayer.create(demo: @demo, player: player)
+            end
+            parse_tags(demo_query['tags'])
+            response_hash[:save] = true
+            response_hash[:demo] = {id: @demo.id, file_id: @demo.demo_file_id}
+          end
+        else
+          response_hash[:error_message].push 'Demo creation failed', *@demo.errors
         end
       else
-        response_hash[:error_message].push 'Invalid username/password combination'
+        response_hash[:error_message].push 'Demo creation failed', *player_errors
       end
-    else
-      response_hash[:error_message].push 'No command given'
     end
     response_hash[:error] = (response_hash[:error_message].count > 0)
     render json: response_hash
   end
-  
+
   def create
     players, player_errors = parse_players(params[:players])
     if player_errors.empty?
@@ -107,22 +92,22 @@ class DemosController < ApplicationController
       render 'new'
     end
   end
-  
+
   def destroy
     @demo.destroy
     flash[:info] = 'Demo successfully deleted'
     redirect_to root_path
   end
-  
+
   def hidden_tag
     demo = Demo.find(params[:id])
     render plain: demo.hidden_tags_text
   end
-  
+
   def edit
     @demo = Demo.find(params[:id])
   end
-  
+
   def update
     @demo = Demo.find(params[:id])
     players, errors = parse_players(params[:players])
@@ -146,15 +131,15 @@ class DemosController < ApplicationController
       render 'edit'
     end
   end
-  
+
   private
-    
+
     def demo_params
       params.require(:demo).permit(:guys, :tas, :level, :time, :engine,
                                    :levelstat, :wad_username, :category_name,
                                    :recorded_at)
     end
-    
+
     def parse_tags_form(tags, checks)
       tag_list = []
 
@@ -168,13 +153,13 @@ class DemosController < ApplicationController
           end
         end
       end
-      
+
       parse_tags(tag_list)
     end
-    
+
     def parse_tags(tags)
       return if tags.nil?
-      
+
       tags.each do |tag|
         next if tag['text'].blank?
         sub_category = SubCategory.find_by(name: tag['text']) ||
@@ -182,7 +167,7 @@ class DemosController < ApplicationController
         Tag.create(sub_category: sub_category, demo: @demo) if sub_category
       end
     end
-    
+
     def parse_players(player_names, from_api = false)
       players = []
       errors  = []
@@ -197,7 +182,7 @@ class DemosController < ApplicationController
       end
       [players, errors]
     end
-    
+
     # Allows destroy only for new items
     def age_limit
       @demo = Demo.find(params[:id])
@@ -206,7 +191,7 @@ class DemosController < ApplicationController
         redirect_to root_url
       end
     end
-    
+
     # Confirms an admin session
     def admin_session
       unless logged_in?
