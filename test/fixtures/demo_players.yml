@@ -14,6 +14,10 @@ btsx02:
   player: kraflab
   demo: bt02speed
 
+btsx02b:
+  player: elim
+  demo: bt02speed_slow
+
 <% 40.times do |n| %>
 demo_player_<%= n %>:
   player: kraflab

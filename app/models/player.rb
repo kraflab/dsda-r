@@ -13,33 +13,41 @@ class Player < ApplicationRecord
   before_save   :clean_strings
   before_update :clean_strings
   after_save :update_demos
-  
+
   # Convert name to valid username
   def Player.default_username(name)
     I18n.transliterate(name).downcase.strip.gsub(/\s+/, '_').gsub(/[^a-z\d_-]+/, '')
   end
-  
+
   # Return the player's twitch url
   def twitch_url
     'https://www.twitch.tv/' + twitch
   end
-  
+
   # Return the player's youtube url
   def youtube_url
     'https://www.youtube.com/' + youtube
   end
-  
+
+  def absorb!(other)
+    other_demos = DemoPlayer.where(player: other)
+    other_demos.each do |demo|
+      demo.player = self
+      demo.save
+    end
+  end
+
   # Override path
   def to_param
     username
   end
-  
+
   private
-  
+
     def update_demos
       demos.each { |i| i.touch }
     end
-  
+
     # Remove excess whitespace
     def clean_strings
       self.twitch   ||= ''
