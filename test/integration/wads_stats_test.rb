@@ -10,6 +10,6 @@ class WadsStatsTest < ActionDispatch::IntegrationTest
     get wad_stats_path(@wad)
     assert_select "title", "#{@wad.name} | Stats | DSDA"
     assert_select "div.page-header", "#{@wad.name} Stats & Charts"
-    assert_select "div.chart-style[id=?]", "demo_count_by_month"
+    assert_select "div.chart-style[id=?]", "demo_count_by_year"
   end
 end

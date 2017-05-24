@@ -35,6 +35,36 @@ module ApplicationHelper
       end
   end
 
+  # Returns the number of demos by yyyy
+  def demos_by_year(subset)
+    data = {}
+    start_year = end_year = nil
+    subset.reorder(:recorded_at).each do |demo|
+      if demo.recorded_at
+        start_year = demo.recorded_at.year
+        break
+      end
+    end
+    if start_year
+      subset.reorder(recorded_at: :desc).each do |demo|
+        if demo.recorded_at
+          end_year = demo.recorded_at.year
+          break
+        end
+      end
+    end
+    if start_year and end_year
+      (start_year..end_year).each do |i|
+        data[i] = 0
+      end
+    end
+    subset.reorder(:recorded_at).group_by { |i| i.recorded_at.nil? ? nil :
+      i.recorded_at.strftime('%Y') }.inject(data) do |hash, (k, v)|
+        hash[k] = v.size if k
+        hash
+      end
+  end
+
   # Calculate total time and average time for thing
   def time_stats(thing, with_tics = true)
     tics = thing.demos.sum(:tics)

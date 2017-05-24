@@ -19,9 +19,9 @@
   <h4>Longest demo time = <%= stats[:longest_demo] %></h4>
 <% end %>
 
-<div id="demo_count_by_month" class="chart-style">
-  <%= column_chart demos_by_month(demos),
-  title: 'Demo Count by Month',
+<div id="demo_count_by_year" class="chart-style">
+  <%= column_chart demos_by_year(demos),
+  title: 'Demo Count by Year',
   nonce: content_security_policy_script_nonce,
-  id: 'demo_count_by_month', html: '' %>
+  id: 'demo_count_by_year', html: '' %>
 </div>
