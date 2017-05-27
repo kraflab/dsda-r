@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170521210504) do
+ActiveRecord::Schema.define(version: 20170527220643) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "username"
@@ -120,11 +120,20 @@ ActiveRecord::Schema.define(version: 20170521210504) do
     t.index ["sub_category_id"], name: "index_tags_on_sub_category_id"
   end
 
+  create_table "wad_files", force: :cascade do |t|
+    t.integer  "iwad_id"
+    t.string   "data"
+    t.string   "md5"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["iwad_id"], name: "index_wad_files_on_iwad_id"
+    t.index ["md5"], name: "index_wad_files_on_md5"
+  end
+
   create_table "wads", force: :cascade do |t|
     t.string   "name"
     t.string   "username"
     t.string   "author"
-    t.string   "file"
     t.string   "year"
     t.string   "compatibility"
     t.boolean  "is_commercial"
@@ -133,8 +142,10 @@ ActiveRecord::Schema.define(version: 20170521210504) do
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
     t.boolean  "single_map",    default: false
+    t.integer  "wad_file_id"
     t.index ["iwad_id", "username"], name: "index_wads_on_iwad_id_and_username"
     t.index ["username"], name: "index_wads_on_username", unique: true
+    t.index ["wad_file_id"], name: "index_wads_on_wad_file_id"
   end
 
 end

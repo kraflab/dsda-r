@@ -1,6 +1,7 @@
 class WadsController < ApplicationController
   before_action :admin_session, only: [:new, :create, :destroy, :edit, :update]
   before_action :age_limit, only: :destroy
+  skip_before_action :verify_authenticity_token, only: [:api_create]
 
   def api_show
     query, response_hash = preprocess_api(request)
@@ -80,6 +81,54 @@ class WadsController < ApplicationController
   def new
     @wad = Wad.new
     @wad.iwad_username = params[:iwad] if params[:iwad]
+  end
+
+  # TODO - refactor with demo creation api
+  def api_create
+    query, response_hash, admin = preprocess_api_authenticate(request)
+    # admin is nil unless authentication was successful
+    if query and admin
+      wad_query = query['wad']
+      iwad = Iwad.find_by(name: wad_query['iwad']) || Iwad.find_by(username: wad_query['iwad'])
+      if iwad
+        @wad = Wad.new(wad_query.slice('name', 'username', 'author', 'year',
+                                       'compatibility', 'is_commercial', 'single_map'))
+        @wad.iwad = iwad
+        if @wad.valid?
+          success = true
+          if has_file_data?(wad_query)
+            io = Base64StringIO.new(Base64.decode64(wad_query['file']['data']))
+            io.original_filename = wad_query['file']['name'][0..15]
+            new_file = WadFile.new(iwad: @wad.iwad)
+            new_file.data = io
+            if new_file.save
+              @wad.wad_file = new_file
+            else
+              success = false
+              response_hash[:error_message].push 'Wad creation failed', *new_file.errors
+            end
+          elsif wad_query['file_id']
+            if wad_file = WadFile.find_by(id: wad_query['file_id'])
+              @wad.wad_file = wad_file
+            else
+              success = false
+              response_hash[:error_message].push 'Wad creation failed', 'file not found'
+            end
+          end
+          if success
+            @wad.save
+            response_hash[:save] = true
+            response_hash[:wad] = {id: @wad.id, file_id: @wad.wad_file_id}
+          end
+        else
+          response_hash[:error_message].push 'Wad creation failed', *@wad.errors
+        end
+      else
+        response_hash[:error_message].push 'Wad creation failed', 'Iwad not found'
+      end
+    end
+    response_hash[:error] = (response_hash[:error_message].count > 0)
+    render json: response_hash
   end
 
   def create

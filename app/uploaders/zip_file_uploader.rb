@@ -6,8 +6,8 @@ class ZipFileUploader < CarrierWave::Uploader::Base
     case model.class.to_s.underscore
     when 'demo_file'
       "files/demos/#{model.wad.username}/#{model.id}/"
-    when 'wad'
-      "files/wads/#{model.iwad_username}/#{model.id}/"
+    when 'wad_file'
+      "files/wads/#{model.iwad.username}/#{model.id}/"
     when 'port'
       "files/ports/#{model.id}/"
     else

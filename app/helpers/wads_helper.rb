@@ -23,7 +23,7 @@ module WadsHelper
   def wad_header(wad)
     content_tag :h1 do
       [
-        wad.name,
+        link_to(wad.name, wad.file_path),
         content_tag(:small, wad.author),
         edit_wad_link(wad)
       ].join(' ').html_safe
