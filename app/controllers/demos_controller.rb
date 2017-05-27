@@ -33,7 +33,7 @@ class DemosController < ApplicationController
         @demo= Demo.new(demo_query.slice('time', 'tas', 'guys', 'level', 'recorded_at', 'levelstat', 'engine', 'version', 'wad_username', 'category_name', 'video_link'))
         if @demo.valid?
           success = true
-          if demo_query['file'] and demo_query['file']['data'] and demo_query['file']['name']
+          if has_file_data?(demo_query)
             io = Base64StringIO.new(Base64.decode64(demo_query['file']['data']))
             io.original_filename = demo_query['file']['name'][0..15]
             new_file = DemoFile.new(wad: @demo.wad)

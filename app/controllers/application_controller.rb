@@ -57,4 +57,9 @@ class ApplicationController < ActionController::Base
 
     [query, response_hash, authenticated_admin]
   end
+
+  # Basic api check for file data
+  def has_file_data?(query)
+    query['file'] and query['file']['data'] and query['file']['name']
+  end
 end
