@@ -98,7 +98,7 @@ class WadsController < ApplicationController
           success = true
           if has_file_data?(wad_query)
             io = Base64StringIO.new(Base64.decode64(wad_query['file']['data']))
-            io.original_filename = wad_query['file']['name'][0..15]
+            io.original_filename = wad_query['file']['name'][0..23]
             new_file = WadFile.new(iwad: @wad.iwad)
             new_file.data = io
             if new_file.save

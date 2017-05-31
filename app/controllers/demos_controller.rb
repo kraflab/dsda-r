@@ -35,7 +35,7 @@ class DemosController < ApplicationController
           success = true
           if has_file_data?(demo_query)
             io = Base64StringIO.new(Base64.decode64(demo_query['file']['data']))
-            io.original_filename = demo_query['file']['name'][0..15]
+            io.original_filename = demo_query['file']['name'][0..23]
             new_file = DemoFile.new(wad: @demo.wad)
             new_file.data = io
             if new_file.save
