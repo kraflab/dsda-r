@@ -5,7 +5,7 @@ class DemoFile < ApplicationRecord
   validates :md5, presence: true, uniqueness: true
   mount_uploader :data, ZipFileUploader
   validates_presence_of :data
-  validates_size_of :data, maximum: 1.megabytes, message: 'File exceeds 100 MB size limit'
+  validates_size_of :data, maximum: 100.megabytes, message: 'File exceeds 100 MB size limit'
   before_validation :compute_md5_hash
 
   private
