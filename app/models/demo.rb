@@ -22,7 +22,7 @@ class Demo < ApplicationRecord
   #validates :recorded_at, presence: true
   validates :levelstat,   presence: true, length: { maximum: 500 }
   after_save    :update_players
-  before_destroy :check_file
+  after_destroy :check_file
   after_destroy :update_players
 
   def wad_username
