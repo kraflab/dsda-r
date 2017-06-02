@@ -22,7 +22,7 @@ class Demo < ApplicationRecord
   #validates :recorded_at, presence: true
   validates :levelstat,   presence: true, length: { maximum: 500 }
   after_save    :update_players
-  after_destroy :check_file
+  before_destroy :check_file
   after_destroy :update_players
 
   def wad_username
@@ -126,7 +126,10 @@ class Demo < ApplicationRecord
     # delete related file if this is the only associated demo
     def check_file
       if demo_file and demo_file.demos.count == 1
-        demo_file.destroy
+        temp = demo_file
+        self.demo_file = nil
+        self.save
+        temp.destroy
       end
     end
 
