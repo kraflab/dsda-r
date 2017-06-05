@@ -7,7 +7,7 @@ bt01speed:
   guys: 2
   has_tics: true
   level: Map 01
-  levelstat: 0:00.97
+  levelstat: "0:09.99"
   version: 0
   recorded_at: <%= 100.days.ago %>
 
@@ -20,7 +20,7 @@ bt01pacifist:
   guys: 2
   has_tics: true
   level: Map 01
-  levelstat: 0:00.97
+  levelstat: "0:00.97,1:12"
   version: 0
   recorded_at: <%= 100.days.ago %>
 
@@ -33,7 +33,7 @@ bt02speed:
   guys: 2
   has_tics: true
   level: Map 02
-  levelstat: 0:00.97
+  levelstat: "0:00.97"
   version: 0
   recorded_at: <%= 100.days.ago %>
 
@@ -46,7 +46,7 @@ bt02speed_slow:
   guys: 2
   has_tics: true
   level: Map 02
-  levelstat: 0:00.97
+  levelstat: "0:00.97"
   version: 0
   recorded_at: <%= 100.days.ago %>
 
@@ -57,7 +57,7 @@ demo_<%= n %>:
   tics: <%= n * 1000 %>
   has_tics: true
   level: <%= "Map #{n.to_s.rjust(2, '0')}" %>
-  levelstat: 0:00.97
+  levelstat: "0:00.97"
   tas: 0
   guys: 1
   version: 0

@@ -20,7 +20,7 @@ class Demo < ApplicationRecord
   validates :level,       presence: true, length: { maximum: 10 },
                           format: { with: VALID_PORT_REGEX }
   #validates :recorded_at, presence: true
-  validates :levelstat,   presence: true, length: { maximum: 500 }
+  validates :levelstat,   length: { maximum: 500 }
   after_save    :update_players
   before_destroy :check_file
   after_destroy :update_players
@@ -119,6 +119,20 @@ class Demo < ApplicationRecord
     (h > 0 ? h.to_s + ':' + m.to_s.rjust(2, '0') : m.to_s) +
       ":#{s.to_s.rjust(2, '0')}" +
       (with_tics ? '.' + t.to_s.rjust(2, '0') : '')
+  end
+
+  def self.prune_levelstats
+    Demo.all.each do |demo|
+      if demo.time == demo.levelstat
+        demo.levelstat = ''
+        demo.save
+      else
+        if demo.levelstat.include? ','
+          demo.levelstat = demo.levelstat.gsub(/,/, "\n")
+          demo.save
+        end
+      end
+    end
   end
 
   private

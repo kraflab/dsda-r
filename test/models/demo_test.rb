@@ -84,11 +84,6 @@ class DemoTest < ActiveSupport::TestCase
     assert @demo.valid?
   end
 
-  test "must have levelstat" do
-    @demo.levelstat = ""
-    assert_not @demo.valid?
-  end
-
   test "levelstat must not be too long" do
     @demo.levelstat = "a" * 501
     assert_not @demo.valid?
@@ -117,5 +112,18 @@ class DemoTest < ActiveSupport::TestCase
     assert_not demo01.is_record?
     assert demo02.is_record?
     assert_not demo02_slow.is_record?
+  end
+
+  test "should fix levelstats" do
+    demo = demos(:bt01speed)
+    demo2 = demos(:bt01pacifist)
+    assert_not demo.levelstat.blank?
+    assert demo2.levelstat.include? ','
+    Demo.prune_levelstats
+    demo.reload
+    demo2.reload
+    assert demo.levelstat.blank?
+    assert demo2.levelstat.include? "\n"
+    assert_not demo2.levelstat.include? ','
   end
 end

@@ -1,22 +1,22 @@
 module DemosHelper
-  
+
   def total_time(thing, with_tics = true)
     Demo.tics_to_string(thing.demos.sum(:tics), with_tics)
   end
-  
+
   def demo_details(thing)
     "#{pluralize(thing.demos.count, 'demo')}, #{total_time(thing)}"
   end
-  
+
   def tagged_demos(demos)
     Tag.where(demo: demos).distinct.includes(:sub_category).where(
       'sub_categories.style & ? > 0', SubCategory.Show).references(:sub_category).count(:demo_id)
   end
-  
+
   def last_update
     Demo.reorder(:updated_at).last.updated_at
   end
-  
+
   def demo_hidden_tag(demo)
     content_tag :td, class: 'right-text' do
       [
@@ -29,7 +29,7 @@ module DemosHelper
       ].join(' ').html_safe
     end
   end
-  
+
   def demo_time_cell(demo)
     content_tag :td, class: 'right-text demo-time' do
       [
@@ -45,14 +45,14 @@ module DemosHelper
       ].join(' ').html_safe
     end
   end
-  
+
   def demo_level_cell(demo, chunk)
     if demo == chunk.first
       content_tag :td, demo.level, class: 'no-stripe-panel',
         rowspan: 3 * chunk.count
     end
   end
-  
+
   def demo_category_cell(demo, chunk, wad)
     if demo == chunk.first
       content_tag :td, class: 'no-stripe-panel', rowspan: 3 * chunk.count do
@@ -70,14 +70,14 @@ module DemosHelper
       end
     end
   end
-  
+
   def demo_category_cell_lite(demo, chunk)
     if demo == chunk.first
       content_tag :td, demo.category.name, class: 'no-stripe-panel',
         rowspan: 3 * chunk.count
     end
   end
-  
+
   def demo_wad_cell(demo, chunk, name)
     if demo == chunk.first
       content_tag :td, class: 'wadfile no-stripe-panel', rowspan: 3 * chunk.count do
@@ -85,7 +85,7 @@ module DemosHelper
       end
     end
   end
-  
+
   def demo_tags(demo)
     content_tag :tr, '' do
       if demo.has_shown_tag
