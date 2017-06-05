@@ -197,6 +197,15 @@ class WadsController < ApplicationController
     @category = params[:category]
   end
 
+  def compare_movies
+    @wad = Wad.find_by(username: params[:id])
+    @level = params[:level]
+    @category = params[:category]
+    if @level.nil? or !@level.include?('Ep')
+      redirect_to wad_url(@wad)
+    end
+  end
+
   private
 
     def wad_params

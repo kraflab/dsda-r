@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 
   get 'record_timeline'      => 'wads#record_timeline'
   get 'record_timeline_json' => 'wads#record_timeline_json'
+  get 'compare_movies' => 'wads#compare_movies'
 
   get 'demos/latest' => "demos#latest"
   get 'feed'         => 'demos#feed'

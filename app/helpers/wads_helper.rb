@@ -4,6 +4,22 @@ module WadsHelper
     content_tag :h1, "Record Timeline | #{wad.name} #{level} #{category}"
   end
 
+  def compare_movies_header(wad, level, category)
+    content_tag :h1, "Compare Movies | #{wad.name} #{level} #{category}"
+  end
+
+  def compare_movies_pairs(first_demo, second_demo)
+    first_times = first_demo.levelstat.split("\n")
+    second_times = second_demo.levelstat.split("\n")
+    if first_times.size == second_times.size
+      first_times.zip(second_times).collect do |first, second|
+        [first, second, time_diff_secs(first, second)]
+      end
+    else
+      nil
+    end
+  end
+
   def wads_header(wads)
     [
       content_tag(:h1, 'Wad List'),

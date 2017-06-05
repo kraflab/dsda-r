@@ -65,3 +65,29 @@ demo_<%= n %>:
   created_at: <%= n.days.ago %>
   engine: PRBoom+ v2.5.1.4 cl9
 <% end %>
+
+btep1_a:
+  wad: btsx
+  category: uvspeed
+  tics: 999
+  engine: PRBoom+ v2.5.1.4 cl9
+  tas: 0
+  guys: 1
+  has_tics: false
+  level: Ep 1
+  levelstat: "0:59\n1:13"
+  version: 0
+  recorded_at: <%= 100.days.ago %>
+
+btep1_b:
+  wad: btsx
+  category: uvspeed
+  tics: 999
+  engine: PRBoom+ v2.5.1.4 cl9
+  tas: 0
+  guys: 1
+  has_tics: false
+  level: Ep 1
+  levelstat: "0:54\n1:18"
+  version: 0
+  recorded_at: <%= 100.days.ago %>

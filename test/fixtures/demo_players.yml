@@ -18,6 +18,14 @@ btsx02b:
   player: elim
   demo: bt02speed_slow
 
+btsxep1a:
+  player: kraflab
+  demo: btep1_a
+
+btsxep1b:
+  player: kingdime
+  demo: btep1_b
+
 <% 40.times do |n| %>
 demo_player_<%= n %>:
   player: kraflab

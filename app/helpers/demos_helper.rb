@@ -1,5 +1,20 @@
 module DemosHelper
 
+  def time_diff_secs(first, second)
+    spl1 = time_split(first)
+    spl2 = time_split(second)
+    spl1[1] - spl2[1] + (spl1[2] - spl2[2]) * 60 + (spl1[3] - spl2[3]) * 3600
+  end
+
+  def time_split(time)
+    return if time.blank?
+    spl = time.split('.')
+    spl.push 0 if spl.count != 2
+    fields = spl[0].split(':').reverse
+    fields.push 0 while fields.count < 3
+    ([spl.last] + fields).collect { |i| i.to_i }
+  end
+
   def total_time(thing, with_tics = true)
     Demo.tics_to_string(thing.demos.sum(:tics), with_tics)
   end
