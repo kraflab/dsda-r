@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
   include ApplicationHelper
   include DemosHelper
+  include WadsHelper
   ADMIN_ERR_LOCK = 3
   ADMIN_ERR_FAIL = 2
   ADMIN_SUCCESS  = 1

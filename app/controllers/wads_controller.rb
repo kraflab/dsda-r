@@ -197,6 +197,22 @@ class WadsController < ApplicationController
     @category = params[:category]
   end
 
+  def compare_movies_json
+    wad = Wad.find_by(username: params[:id])
+    level = params[:level]
+    category = params[:category]
+    index_0 = params[:index_0].to_i
+    index_1 = params[:index_1].to_i
+    demos = Demo.where(level: level, category: Category.find_by(name: category), wad: wad, guys: 1, tas: 0)
+    demo_0 = demos[index_0]
+    demo_1 = demos[index_1]
+    if level.nil? or !level.include?('Ep') or demo_0.nil? or demo_1.nil?
+      render json: {error: true}
+    end
+    render json: {error: false,
+                  times: compare_movies_pairs(demo_0, demo_1)}
+  end
+
   def compare_movies
     @wad = Wad.find_by(username: params[:id])
     @level = params[:level]
