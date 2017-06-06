@@ -201,8 +201,15 @@ class WadsController < ApplicationController
     @wad = Wad.find_by(username: params[:id])
     @level = params[:level]
     @category = params[:category]
-    if @level.nil? or !@level.include?('Ep')
-      redirect_to wad_url(@wad)
+    @demos = Demo.where(level: @level, category: Category.find_by(name: @category), wad: @wad, guys: 1, tas: 0)
+    if @level.nil? or !@level.include?('Ep') or @demos.count < 2
+      if @wad.nil?
+        flash[:info] = 'Wad not found'
+        redirect_to root_url
+      else
+        flash[:info] = 'A movie comparison is not possible for these parameters'
+        redirect_to wad_url(@wad)
+      end
     end
   end
 

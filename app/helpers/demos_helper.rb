@@ -1,5 +1,15 @@
 module DemosHelper
 
+  def compare_movies_list(demos)
+    content_tag :ul, class: 'dropdown-menu' do
+      demos.collect do |demo|
+        content_tag :li do
+          content_tag :a, demo.movie_text, href: '#'
+        end
+      end.join(' ').html_safe
+    end
+  end
+
   def time_diff_secs(first, second)
     spl1 = time_split(first)
     spl2 = time_split(second)

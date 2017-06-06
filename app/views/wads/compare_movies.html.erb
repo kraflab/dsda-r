@@ -1,33 +1,38 @@
 <% provide(:title, "Compare Movies") %>
 
-<div class="page-header">
-  <%= compare_movies_header(@wad, @level, @category) %>
-</div>
-
-<% demos = Demo.where(level: @level, category: Category.find_by(name: @category), wad: @wad, guys: 1, tas: 0) %>
-<% first_demo = demos.first %>
-<% second_demo = demos.second %>
-<% if first_demo and second_demo %>
-  <div class="center-text">
-    <div class="panel panel-default panel-modest left-text">
-      <table class="table table-striped table-modest">
-        <thead>
-          <tr>
-            <th><%= "#{first_demo.players.first.name} #{first_demo.time}" %></th>
-            <th><%= "#{second_demo.players.first.name} #{second_demo.time}" %></th>
-            <th>Difference</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% compare_movies_pairs(first_demo, second_demo).each do |fields| %>
-            <tr>
-              <td class="right-text demo-time <%= fields[2] < 0 ? "better-time" : "" %>"><%= fields[0] %></td>
-              <td class="right-text demo-time <%= fields[2] > 0 ? "better-time" : "" %>"><%= fields[1] %></td>
-              <td class="right-text demo-time"><%= fields[2] %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
+<div class="center-text">
+  <div class="page-header">
+    <%= compare_movies_header(@wad, @level, @category) %>
   </div>
-<% end %>
+  <div>
+    <% 2.times do |n| %>
+      <div class="btn-group">
+        <button type="button" class="btn btn-default btn-short dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <%= @demos[n].movie_text %> <span class="caret"></span>
+        </button>
+        <%= compare_movies_list(@demos) %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="panel panel-default panel-modest left-text">
+    <table class="table table-striped table-modest">
+      <thead>
+        <tr>
+          <th><%= @demos[0].movie_text %></th>
+          <th><%= @demos[1].movie_text %></th>
+          <th>Difference</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% compare_movies_pairs(@demos[0], @demos[1]).each do |fields| %>
+          <tr>
+            <td class="right-text demo-time <%= fields[2] < 0 ? "better-time" : "" %>"><%= fields[0] %></td>
+            <td class="right-text demo-time <%= fields[2] > 0 ? "better-time" : "" %>"><%= fields[1] %></td>
+            <td class="right-text demo-time"><%= fields[2] %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

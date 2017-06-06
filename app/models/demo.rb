@@ -68,6 +68,10 @@ class Demo < ApplicationRecord
     "#{coop_text} #{tas_text}"
   end
 
+  def movie_text
+    "#{players.first.name} #{time}"
+  end
+
   def coop_text
     guys > 1 ? "#{guys}P" : ''
   end
