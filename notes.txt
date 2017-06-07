@@ -3,4 +3,5 @@
 - Add file uploading to forms
 - Add create API for wads, ports, players
 - Add API documentation
-- Add javascript selector to compare_movies
+- Add episode selector to movie comparison page
+- Update movie comparison url for link sharing

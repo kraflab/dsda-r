@@ -1,6 +1,7 @@
 $ ->
   items = $("div#compareMoviesDropdowns div.btn-group ul li")
   dropdowns = $("div#compareMoviesDropdowns div.btn-group button")
+  heads = $("table thead tr th")
   itemCount = items.length / 2
   indices = [0, 1]
   items.on "click", ->
@@ -8,6 +9,7 @@ $ ->
     listNumber = if index < itemCount then 0 else 1
     indices[listNumber] = index - listNumber * itemCount
     dropdowns[listNumber].innerHTML = this.innerText + "<span class=\"caret\"></span>"
+    heads[listNumber].innerText = this.innerText
 
     xmlhttp = new XMLHttpRequest
     xmlhttp.open "GET", "/compare_movies_json\?#{window.location.search.substring(1)}&index_0=#{indices[0]}&index_1=#{indices[1]}", true
