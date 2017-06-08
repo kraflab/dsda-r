@@ -7,6 +7,8 @@ class Demo < ApplicationRecord
   has_many :demo_players, dependent: :destroy
   has_many :players, through: :demo_players
   default_scope -> { order(:level, :category_id, :tics) }
+  scope :movies, -> { where("level LIKE 'Ep%' OR level LIKE 'A%'") }
+  scope :ils, -> { where("level NOT LIKE 'Ep%' AND level NOT LIKE 'A%'") }
   validates :wad_id,      presence: true
   validates :category_id, presence: true
   validates :tics,        presence: true, numericality: { greater_than: 0 }
