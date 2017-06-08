@@ -1,10 +1,12 @@
 $ ->
+  crossListTargets = ["UV Speed", "SM Speed"]
+
   $("#addNewTag").on "click", ->
     $("#tag_fields").append($("#new_tag_form").html())
-  
+
   $("#addNewPlayer").on "click", ->
     $("#player_fields").append($("#new_player_form").html())
-  
+
   $("a.hidden-tag").mouseover ->
     $(this).removeClass "hidden-tag"
     cell = this
@@ -14,14 +16,14 @@ $ ->
       if this.readyState is 4 and this.status is 200
         cell.title = this.responseText
     xmlhttp.send null
-  
+
   getText = (cell) ->
     $.trim cell.innerText
-  
+
   getRunTime = (row) ->
     [..., lastCell] = row.cells
     hours = mins = secs = tics = 0
-    timeText = lastCell.childNodes[1].innerHTML
+    timeText = lastCell.innerText
     [timeText, tics] = timeText.split(".") if timeText.search(".") >= 0
     timeText = timeText.split(":")
     timeText.unshift("0") if timeText.length < 3
@@ -30,7 +32,7 @@ $ ->
     else
       [hours, mins, secs] = timeText
     ((hours * 60 + mins) * 60 + secs) * 100 + tics
-  
+
   crossListPacifist = (body, destination, index, flags) ->
     shiftCount = 0
     subIndex = index
@@ -88,7 +90,7 @@ $ ->
       if subRow.cells.length is 0 or subRow.cells.length > 4
         break
     shiftCount
-  
+
   parseCategory = (body, category, reference) ->
     category.index = reference.index
     category.span = reference.span
@@ -149,7 +151,7 @@ $ ->
               deleteCount = row.cells[1].rowSpan
             else
               # store uv speed records
-              if category.text is "UV Speed"
+              if crossListTargets.indexOf(category.text) isnt -1
                 parseCategory(filter_body, uvSpeed, category)
           else if rowLength is 5 and row.cells[0]
             category = {span: row.cells[0].rowSpan, text: getText(row.cells[0]), index: index}
@@ -160,7 +162,7 @@ $ ->
                 level.span += shiftCount
               deleteCount = row.cells[0].rowSpan
             else
-              if category.text is "UV Speed"
+              if crossListTargets.indexOf(category.text) isnt -1
                 parseCategory(filter_body, uvSpeed, category)
               # check for pacifist times to crosslist in uv speed
               else if category.text is "Pacifist" and uvSpeed.index >= 0
@@ -169,7 +171,6 @@ $ ->
                 level.span += shiftCount
           # wipe out category
           if deleteCount > 0
-            console.log "deleting"
             newSpan = level.span - deleteCount
             if newSpan > 0
               if index != level.index
@@ -215,6 +216,7 @@ $ ->
                     x.innerText = level.text
                     x.rowSpan = newLevelSpan
                     x.className = "no-stripe-panel"
+                level.span = newLevelSpan
                 filter_body.rows[index].remove() for [1..deleteCount]
             if deleteCount is 0
               index += 1
