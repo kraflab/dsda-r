@@ -5,4 +5,5 @@
 - Add API documentation
 - Add episode selector to movie comparison page
 - Update movie comparison url for link sharing
-- Work on pacifist crosslisting tests
+- Add option of sorting feed by record date instead of upload date
+- Add option of sorting feed by update date instead of upload date
