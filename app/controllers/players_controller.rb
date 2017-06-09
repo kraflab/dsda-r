@@ -2,6 +2,7 @@ class PlayersController < ApplicationController
   autocomplete :player, :username
   before_action :admin_session, only: [:new, :create, :edit, :update, :destroy]
   before_action :age_limit, only: :destroy
+  skip_before_action :verify_authenticity_token, only: [:api_create]
 
   def api_show
     query, response_hash = preprocess_api(request)
@@ -58,6 +59,24 @@ class PlayersController < ApplicationController
 
   def new
     @player = Player.new
+  end
+
+  def api_create
+    query, response_hash, admin = preprocess_api_authenticate(request)
+    # admin is nil unless authentication was successful
+    if query and admin
+      player_query = query['player']
+      @player = Player.new(player_query.slice('name', 'username', 'twitch',
+                                                                  'youtube'))
+      if @player.save
+        response_hash[:save] = true
+        response_hash[:player] = {id: @player.id, username: @player.username}
+      else
+        response_hash[:error_message].push 'Player creation failed', *@player.errors
+      end
+    end
+    response_hash[:error] = (response_hash[:error_message].count > 0)
+    render json: response_hash
   end
 
   def create
