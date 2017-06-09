@@ -85,9 +85,9 @@ $ ->
         destination.span += 1
         shiftCount += 1
         subIndex += 1
-      subIndex += 1
+      subIndex += 3
       subRow = body.rows[subIndex]
-      if subRow.cells.length is 0 or subRow.cells.length > 4
+      if subRow is undefined or subRow.cells.length > 4
         break
     shiftCount
 
@@ -118,9 +118,9 @@ $ ->
         if category.rta is 0
           category.rta = runTime
           category.rtaIndex = subIndex
-      subIndex += 1
+      subIndex += 3
       subRow = body.rows[subIndex]
-      if subRow.cells.length is 0 or subRow.cells.length > 4
+      if subRow is undefined or subRow.cells.length > 4
         break
     category.rtaIndex = category.index if category.rtaIndex is 0
     category.tasIndex = category.index if category.tasIndex is 0
@@ -189,11 +189,7 @@ $ ->
               note = row.cells[rowLength - 2].innerHTML
               # check for tas and coop filtering
               if (response.hideTas and note.search("T") >= 0) or (response.hideCoop and note.search("P") >= 0)
-                deleteCount = 1
-                if index < filter_body.rows.length
-                  # check for tag row
-                  if filter_body.rows[index + 1].cells.length is 0
-                    deleteCount += 2
+                deleteCount = 3
                 newLevelSpan = level.span - deleteCount
                 newCategorySpan = category.span - deleteCount
                 if newCategorySpan > 0
