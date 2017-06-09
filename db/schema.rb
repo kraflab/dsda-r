@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170527220643) do
+ActiveRecord::Schema.define(version: 20170609214707) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "username"
@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 20170527220643) do
     t.integer  "guys"
     t.string   "level"
     t.datetime "recorded_at"
-    t.text     "levelstat"
+    t.text     "levelstat",      default: ""
     t.boolean  "has_tics"
     t.string   "engine"
     t.integer  "version",        default: 0
