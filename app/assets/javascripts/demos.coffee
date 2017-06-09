@@ -20,18 +20,21 @@ $ ->
   getText = (cell) ->
     $.trim cell.innerText
 
+  toI = (str) ->
+    parseInt(str, 10)
+
   getRunTime = (row) ->
     [..., lastCell] = row.cells
     hours = mins = secs = tics = 0
     timeText = lastCell.innerText
-    [timeText, tics] = timeText.split(".") if timeText.search(".") >= 0
+    [timeText, tics] = timeText.split(".") if timeText.search("\\.") >= 0
     timeText = timeText.split(":")
     timeText.unshift("0") if timeText.length < 3
     if timeText.length < 3
       [mins, secs] = timeText
     else
       [hours, mins, secs] = timeText
-    ((hours * 60 + mins) * 60 + secs) * 100 + tics
+    ((toI(hours) * 60 + toI(mins)) * 60 + toI(secs)) * 100 + toI(tics)
 
   crossListPacifist = (body, destination, index, flags) ->
     shiftCount = 0
