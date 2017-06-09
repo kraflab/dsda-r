@@ -137,6 +137,8 @@ $ ->
     xmlhttp.onreadystatechange = ->
       if this.readyState is 4 and this.status is 200
         response = JSON.parse this.responseText
+        if response is null
+          response = {filter: [], hideTas: false, hideCoop: false}
         level = {span: 0, text: "", index: 0}
         category = {span: 0, text: "", index: 0}
         uvSpeed = {row: null, index: 0, span: 0, rta: 0, tas: 0, coop: 0, coopTas: 0, rtaIndex: 0, tasIndex: 0, coopIndex: 0, coopTasIndex: 0}
