@@ -24,6 +24,19 @@ bt01pacifist:
   version: 0
   recorded_at: <%= 100.days.ago %>
 
+bt01pacifist_solo:
+  wad: btsx
+  category: pacifist
+  tics: 9
+  engine: PRBoom+ v2.5.1.4 cl9
+  tas: 0
+  guys: 1
+  has_tics: true
+  level: Map 01
+  levelstat: "0:00.97,1:12"
+  version: 0
+  recorded_at: <%= 100.days.ago %>
+
 bt02speed:
   wad: btsx
   category: uvspeed
@@ -91,3 +104,23 @@ btep1_b:
   levelstat: "0:54\n1:18"
   version: 0
   recorded_at: <%= 100.days.ago %>
+
+xlist_speed:
+  wad: xlist_test
+  category: smspeed
+  tics: 2400
+  engine: Heretic v1.3
+  tas: 0
+  guys: 1
+  has_tics: false
+  level: E1M4
+
+xlist_pacifist:
+  wad: xlist_test
+  category: pacifist
+  tics: 2000
+  engine: Heretic v1.3
+  tas: 0
+  guys: 1
+  has_tics: false
+  level: E1M4

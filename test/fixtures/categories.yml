@@ -12,3 +12,8 @@ pacifist:
   name: Pacifist
   description: Exit as fast as possible on skill 4, without injuring enemies.
   game: Doom
+
+smspeed:
+  name: SM Speed
+  description: Exit as fast as possible on skill 4 (heretic).
+  game: Heretic

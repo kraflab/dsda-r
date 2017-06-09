@@ -24,6 +24,7 @@ class WadsShowTest < ActionDispatch::IntegrationTest
       assert_match pl.name, response.body
     end
     assert_select "td", @pacifist.time, count: 2
+    assert_select "td", demos(:bt01pacifist_solo).time, count: 2
     assert_select "a[href=?]", edit_wad_path(@wad), count: 0
     cookies["category_filter"] = '{"filter": ["UV Speed"]}'
     log_in_as(@admin)
@@ -31,5 +32,11 @@ class WadsShowTest < ActionDispatch::IntegrationTest
     assert_select "td", demo.category.name, count: 0
     assert_select "a[href=?]", edit_wad_path(@wad)
     assert_select "a[href=?]", new_demo_path + "?wad=" + @wad.username
+  end
+
+  test "heretic pacifist crosslist" do
+    get wad_path(wads(:xlist_test))
+    assert_response :success
+    assert_select "td", demos(:xlist_pacifist).time, count: 2
   end
 end

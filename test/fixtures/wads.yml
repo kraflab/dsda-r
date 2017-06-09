@@ -11,3 +11,9 @@ wad_<%= n %>:
   author: <%= Faker::Name.name %>
   iwad: doom2
 <% end %>
+
+xlist_test:
+  name: XList Test
+  username: xlist_test
+  author: XList Author
+  iwad: doom2
