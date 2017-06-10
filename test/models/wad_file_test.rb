@@ -4,7 +4,7 @@ class WadFileTest < ActiveSupport::TestCase
 
   def setup
     @iwad = iwads(:doom2)
-    @file = File.open(Rails.root.join("test/fixtures/files/test.zip"))
+    @file = dummy_zip
     @wad_file = WadFile.new(iwad: @iwad, data: @file)
   end
 

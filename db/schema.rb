@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170609214707) do
+ActiveRecord::Schema.define(version: 20170610033333) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "username"
@@ -95,12 +95,14 @@ ActiveRecord::Schema.define(version: 20170609214707) do
   end
 
   create_table "ports", force: :cascade do |t|
-    t.string   "file"
     t.string   "family"
     t.string   "version"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "data"
+    t.string   "md5"
     t.index ["family", "version"], name: "index_ports_on_family_and_version", unique: true
+    t.index ["md5"], name: "index_ports_on_md5", unique: true
   end
 
   create_table "sub_categories", force: :cascade do |t|

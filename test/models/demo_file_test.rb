@@ -4,7 +4,7 @@ class DemoFileTest < ActiveSupport::TestCase
 
   def setup
     @wad = wads(:btsx)
-    @file = File.open(Rails.root.join("test/fixtures/files/test.zip"))
+    @file = dummy_zip
     @demo_file = DemoFile.new(wad: @wad, data: @file)
   end
 
