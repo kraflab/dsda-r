@@ -7,3 +7,5 @@
 - Update movie comparison url for link sharing
 - Add option of sorting feed by record date instead of upload date
 - Add option of sorting feed by update date instead of upload date
+- Add demo file presence validation, update tests
+- Add wad file upload tests
