@@ -32,7 +32,7 @@ set :puma_init_active_record, true  # Change to false when not using ActiveRecor
 # set :keep_releases, 5
 
 ## Linked Files & Directories (Default None):
-set :linked_dirs, %w{public/files public/uploads}
+set :linked_dirs, %w{public/files tmp/cache tmp/uploads}
 
 namespace :puma do
   desc 'Create Directories for Puma Pids and Socket'
