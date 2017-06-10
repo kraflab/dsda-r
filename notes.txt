@@ -1,7 +1,6 @@
 # Various notes and to-dos
 - Highlight first demo to reach the record in seconds
 - Add file uploading to forms
-- Add create API for ports, players
 - Add API documentation
 - Add episode selector to movie comparison page
 - Update movie comparison url for link sharing
