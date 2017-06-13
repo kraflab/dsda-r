@@ -1,5 +1,14 @@
 module DemosHelper
 
+  def demo_feed_sub_header
+    content_tag :p do
+      [
+        link_to('Sort by Record Date', feed_path(sort_by: 'record_date')),
+        link_to('Sort by Update Date', feed_path(sort_by: 'update_date'))
+      ].join(' | ').html_safe
+    end
+  end
+
   def compare_movies_list(demos)
     content_tag :ul, class: 'dropdown-menu' do
       demos.collect do |demo|

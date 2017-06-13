@@ -4,7 +4,8 @@ class DemosController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:api_create]
 
   def feed
-    @demos = Demo.reorder(created_at: :desc).page params[:page]
+    @sort_sym = params[:sort_by] == 'record_date' ? :recorded_at : :updated_at
+    @demos = Demo.reorder(@sort_sym => :desc).page params[:page]
   end
 
   def latest

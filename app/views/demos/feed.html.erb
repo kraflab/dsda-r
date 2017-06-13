@@ -1,7 +1,8 @@
 <% provide(:title, "Feed") %>
 
 <div class="center-text">
-  <h1>Recent Demos</h1>
+  <h1>Recent Updates</h1>
+  <%= demo_feed_sub_header %>
   <table class="table table-striped table-modest">
     <thead>
       <tr>
@@ -19,7 +20,7 @@
     <tbody>
       <% @demos.each do |demo| %>
         <tr>
-          <td><%= demo.created_at.to_date.to_s %></td>
+          <td><%= demo.send(@sort_sym).to_date.to_s %></td>
           <td class="wadfile"><%= link_to demo.wad.username, demo.wad %></td>
           <td class="wadfile"><%= link_to demo.wad.iwad.username, demo.wad.iwad %></td>
           <td><%= demo.level %></td>
