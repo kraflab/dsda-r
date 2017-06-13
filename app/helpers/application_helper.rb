@@ -1,5 +1,10 @@
 module ApplicationHelper
 
+  # Returns a string from an active record date, which may be nil
+  def safe_date(date)
+    date.nil? ? 'Unknown' : date.to_date.to_s
+  end
+
   # Returns the full title on a per-page basis
   def full_title(page_title = '')
     base_title = 'DSDA'
