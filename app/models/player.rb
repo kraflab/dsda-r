@@ -12,7 +12,7 @@ class Player < ApplicationRecord
                        format: { with: VALID_USERNAME_REGEX }
   before_save   :clean_strings
   before_update :clean_strings
-  after_save :update_demos
+  after_save :update_demos, if: :name_changed?
 
   # Convert name to valid username
   def Player.default_username(name)
