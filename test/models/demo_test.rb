@@ -114,6 +114,13 @@ class DemoTest < ActiveSupport::TestCase
     assert_not demo02_slow.is_record?
   end
 
+  test "should determine record_index properly" do
+    assert_equal 0, demos(:bt01speed).record_index
+    assert_equal 0, demos(:table_fill).record_index
+    assert_equal 1, demos(:bt01pacifist).record_index
+    assert_equal 2, demos(:bt02speed).record_index
+  end
+
   test "should fix levelstats" do
     demo = demos(:bt01speed)
     demo2 = demos(:bt01pacifist)

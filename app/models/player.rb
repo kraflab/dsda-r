@@ -37,6 +37,10 @@ class Player < ApplicationRecord
     end
   end
 
+  def record_index
+    demos.reduce(0) { |sum, demo| sum + demo.record_index }
+  end
+
   # Override path
   def to_param
     username

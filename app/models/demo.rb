@@ -102,17 +102,35 @@ class Demo < ApplicationRecord
 
   # Return true if fastest demo (including ties) *to the second*
   def is_record?
-    record_tics = Demo.where(wad: wad, level: level, category: category,
-                             tas: tas, guys: guys).minimum(:tics)
-    # Pacifist runs are also UV Speed runs
-    if category.name == 'UV Speed'
-      alt_record_tics = Demo.where(wad: wad, level: level,
-                                   category: Category.find_by(name: 'Pacifist'),
-                                   tas: tas, guys: guys).minimum(:tics)
-      record_tics = [record_tics, alt_record_tics].min if alt_record_tics
-    end
+    !record_index!.nil?
+  end
 
-    tics / 100 <= record_tics / 100
+  # Number of slower demos for this run if it is a record (not record = 0)
+  def record_index
+    record_index!.to_i
+  end
+
+  # Number of slower demos for this run if it is a record (not record = nil)
+  def record_index!
+    filter_categories = [category]
+    if category.name == 'UV Speed' or category.name == 'SM Speed'
+      filter_categories.push(Category.find_by(name: 'Pacifist'))
+    end
+    record_demos = Demo.where(wad: wad, level: level, category: filter_categories,
+                              tas: tas, guys: guys)
+    record_tics = record_demos.minimum(:tics)
+
+    if tics / 100 <= record_tics / 100
+      filter_categories.pop if filter_categories.size > 1
+      if category.name == 'Pacifist'
+        filter_categories.push(Category.find_by(name: 'UV Speed'), Category.find_by(name: 'SM Speed'))
+      end
+      index_demos = Demo.where(wad: wad, level: level, category: filter_categories,
+                               tas: tas, guys: guys)
+      index_demos.count - 1
+    else
+      nil
+    end
   end
 
   def self.tics_to_string(t, with_tics = true)

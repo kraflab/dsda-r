@@ -63,6 +63,32 @@ bt02speed_slow:
   version: 0
   recorded_at: <%= 100.days.ago %>
 
+bt02speed_slower:
+  wad: btsx
+  category: uvspeed
+  tics: 99999
+  engine: PRBoom+ v2.5.1.4 cl9
+  tas: 0
+  guys: 2
+  has_tics: true
+  level: Map 02
+  levelstat: "0:00.97"
+  version: 0
+  recorded_at: <%= 100.days.ago %>
+
+table_fill:
+  wad: btsx
+  category: nmspeed
+  tics: 99999
+  engine: PRBoom+ v2.5.1.4 cl9
+  tas: 0
+  guys: 2
+  has_tics: true
+  level: Map 02
+  levelstat: "0:00.97"
+  version: 0
+  recorded_at: <%= 100.days.ago %>
+
 <% 40.times do |n| %>
 demo_<%= n %>:
   wad: btsx
