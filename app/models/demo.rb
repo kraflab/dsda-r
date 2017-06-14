@@ -116,14 +116,13 @@ class Demo < ApplicationRecord
     if category.name == 'UV Speed' or category.name == 'SM Speed'
       filter_categories.push(Category.find_by(name: 'Pacifist'))
     end
-    record_demos = Demo.where(wad: wad, level: level, category: filter_categories,
-                              tas: tas, guys: guys)
-    record_tics = record_demos.minimum(:tics)
 
-    if tics / 100 <= record_tics / 100
+    if best_of filter_categories
       filter_categories.pop if filter_categories.size > 1
       if category.name == 'Pacifist'
         filter_categories.push(Category.find_by(name: 'UV Speed'), Category.find_by(name: 'SM Speed'))
+        # Only add these if the demo is faster (i.e., it is also the speed record)
+        filter_categories.pop(2) if !best_of(filter_categories)
       end
       index_demos = Demo.where(wad: wad, level: level, category: filter_categories,
                                tas: tas, guys: guys)
@@ -131,6 +130,13 @@ class Demo < ApplicationRecord
     else
       nil
     end
+  end
+
+  # Return true if demo is the fastest of this set
+  def best_of(filter_categories)
+    least_tics = Demo.where(wad: wad, level: level, category: filter_categories,
+                             tas: tas, guys: guys).minimum(:tics)
+    tics / 100 <= least_tics / 100
   end
 
   def self.tics_to_string(t, with_tics = true)

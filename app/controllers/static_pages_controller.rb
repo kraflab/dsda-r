@@ -3,6 +3,7 @@ class StaticPagesController < ApplicationController
   end
 
   def stats
+    @record_index_players = Player.reorder(record_index: :desc).limit(20)
   end
 
   def about

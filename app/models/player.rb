@@ -10,13 +10,24 @@ class Player < ApplicationRecord
                        format: { with: VALID_USERNAME_REGEX }
   validates :youtube,  length: { maximum: 50 }, allow_blank: true,
                        format: { with: VALID_USERNAME_REGEX }
+  validates :record_index, presence: true,
+                           numericality: { greater_than_or_equal_to: 0 }
   before_save   :clean_strings
   before_update :clean_strings
   after_save :update_demos, if: :name_changed?
 
   # Convert name to valid username
-  def Player.default_username(name)
+  def self.default_username(name)
     I18n.transliterate(name).downcase.strip.gsub(/\s+/, '_').gsub(/[^a-z\d_-]+/, '')
+  end
+
+  # Calculate and save the record index for a set of players (all by default)
+  def self.calculate_record_index!(players = nil)
+    players ||= Player.all
+    players.each do |player|
+      # The bang calculates and saves before returning
+      player.record_index!
+    end
   end
 
   # Return the player's twitch url
@@ -37,8 +48,10 @@ class Player < ApplicationRecord
     end
   end
 
-  def record_index
-    demos.reduce(0) { |sum, demo| sum + demo.record_index }
+  def record_index!
+    self.record_index = demos.reduce(0) { |sum, demo| sum + demo.record_index }
+    self.save
+    self.reload.record_index
   end
 
   # Override path
