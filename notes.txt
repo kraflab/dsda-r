@@ -1,8 +1,0 @@
-# Various notes and to-dos
-- Highlight first demo to reach the record in seconds
-- Add file uploading to forms
-- Add API documentation
-- Add episode selector to movie comparison page
-- Update movie comparison url for link sharing
-- Add demo file presence validation, update tests
-- Add wad file upload tests
