@@ -6,6 +6,7 @@ gem 'sass-rails',   '~> 5.0'
 gem 'uglifier',     '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
+gem 'js_cookie_rails'
 gem 'jbuilder',     '~> 2.5'
 gem 'bcrypt',       '~> 3.1.7'
 
