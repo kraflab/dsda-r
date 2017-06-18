@@ -26,7 +26,7 @@ class WadsShowTest < ActionDispatch::IntegrationTest
     assert_select "td", @pacifist.time, count: 2
     assert_select "td", demos(:bt01pacifist_solo).time, count: 2
     assert_select "a[href=?]", edit_wad_path(@wad), count: 0
-    cookies["category_filter"] = '{"filter": ["UV Speed"]}'
+    cookies["demo_filter"] = '{"category": ["UV Speed"]}'
     log_in_as(@admin)
     get wad_path(@wad)
     assert_select "td", demo.category.name, count: 0

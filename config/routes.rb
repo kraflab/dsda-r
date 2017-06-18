@@ -22,8 +22,6 @@ Rails.application.routes.draw do
   get 'feed'         => 'demos#feed'
   get 'demos/:id/hidden_tag' => 'demos#hidden_tag'
 
-  get 'category_filter' => 'sessions#category_filter'
-
   get  'api/wads/'    => "wads#api_show"
   get  'api/players/' => "players#api_show"
   post 'api/demos/'   => "demos#api_create"

@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
   def new
   end
-  
+
   def create
     admin, code = authenticate_admin(params[:session][:username],
                                      params[:session][:password])
@@ -23,42 +23,38 @@ class SessionsController < ApplicationController
       render 'new'
     end
   end
-  
+
   def destroy
     log_out if logged_in?
     flash[:info] = 'You are now logged out'
     redirect_to root_url
   end
-  
-  def category_filter
-    render json: cookies['category_filter']
-  end
-  
+
   def settings
-    cookies.permanent['category_filter'] ||= '{"filter": [], "hideTas": false, "hideCoop": false}'
+    cookies.permanent['demo_filter'] ||= '{"category": [], "tas": false, "coop": false}'
   end
-  
+
   def set
-    category_filter = {filter: [], hideTas: false, hideCoop: false}
+    demo_filter = {category: [], tas: false, coop: false}
     Category.all.each do |category|
-      category_filter[:filter].push(category.name) if params["cat:#{category.name}"] == '0'
+      demo_filter[:category].push(category.name) if params["cat:#{category.name}"] == '0'
     end
-    category_filter[:hideTas] = params['hideTas'] == '0'
-    category_filter[:hideCoop] = params['hideCoop'] == '0'
-    cookies.permanent['category_filter'] = category_filter.to_json
+    demo_filter[:tas] = params['tas'] == '0'
+    demo_filter[:coop] = params['coop'] == '0'
+    cookies.permanent['demo_filter'] = demo_filter.to_json
     flash.now[:info] = 'Your settings have been updated'
     render 'settings'
   end
-  
+
   private
-  
+
     # Logs in the given admin
     def log_in(admin)
       session[:username] = admin.username
       admin.fail_count = 0
       admin.save
     end
-    
+
     # Logs out the current admin
     def log_out
       session.delete(:username)

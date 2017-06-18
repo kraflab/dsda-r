@@ -17,7 +17,7 @@
             <th class="center-text">Time</th>
           </tr>
         </thead>
-        <tbody class="category-filter">
+        <tbody class="demo-filter">
           <% [:ils, :movies].each do |subset| %>
             <% @demos.send(subset).chunk { |i| i.level }.each do |chunk_l| %>
               <% cache chunk_l do %>
