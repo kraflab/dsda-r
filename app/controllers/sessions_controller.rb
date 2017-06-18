@@ -31,16 +31,19 @@ class SessionsController < ApplicationController
   end
 
   def settings
-    cookies.permanent['demo_filter'] ||= '{"category": [], "tas": false, "coop": false}'
+    cookies.permanent['demo_filter'] ||= '{"category": [], "tas": false, "coop": false, "port": []}'
   end
 
   def set
-    demo_filter = {category: [], tas: false, coop: false}
+    demo_filter = {category: [], tas: false, coop: false, port: []}
     Category.all.each do |category|
       demo_filter[:category].push(category.name) if params["cat:#{category.name}"] == '0'
     end
     demo_filter[:tas] = params['tas'] == '0'
     demo_filter[:coop] = params['coop'] == '0'
+    demo_filter[:port].push('vanilla') if params['port:vanilla'] == '0'
+    demo_filter[:port].push('compatible') if params['port:compatible'] == '0'
+    demo_filter[:port].push('incompatible') if params['port:incompatible'] == '0'
     cookies.permanent['demo_filter'] = demo_filter.to_json
     flash.now[:info] = 'Your settings have been updated'
     render 'settings'

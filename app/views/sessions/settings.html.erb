@@ -4,11 +4,11 @@
   <h1>Settings</h1>
 
   <div class="well well-modest left-text">
-    <%= bootstrap_form_tag url: settings_path, method: "patch" do |f| %>
+    <%= bootstrap_form_tag url: settings_path, method: 'patch' do |f| %>
       <h4>Category Filters</h4>
       <%= f.form_group :demo_filters do %>
         <% demo_filter_json = demo_filter_array %>
-        <% category_filter = demo_filter_json["category"] %>
+        <% category_filter = demo_filter_json['category'] %>
         <% Category.reorder(:game).chunk { |i| i.game }.each do |chunk| %>
           <hr>
           <p><%= chunk[0] %></p>
@@ -20,11 +20,17 @@
         <% end %>
         <hr>
         <p>Additional Filters</p>
-        <%= f.check_box "tas", label: "TAS", checked: !demo_filter_json["tas"] %>
-        <%= f.check_box "coop", label: "Coop", checked: !demo_filter_json["coop"] %>
+        <%= f.check_box 'tas', label: 'TAS', checked: !demo_filter_json['tas'] %>
+        <%= f.check_box 'coop', label: 'Coop', checked: !demo_filter_json['coop'] %>
+        <hr>
+        <p>Source Ports</p>
+        <% port_filter = demo_filter_json['port'] %>
+        <%= f.check_box 'port:vanilla', label: 'Vanilla (Chocolate, CNDoom...)' %>
+        <%= f.check_box 'port:compatible', label: 'Compatible (PRBoom+, jHeretic...)' %>
+        <%= f.check_box 'port:incompatible', label: 'Incompatible (ZDoom, Doomsday...)' %>
       <% end %>
       <hr>
-      <%= f.submit "Save Settings" %>
+      <%= f.submit 'Save Settings' %>
     <% end %>
   </div>
 </div>
