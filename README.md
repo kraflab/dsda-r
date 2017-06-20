@@ -16,7 +16,7 @@ work in parsing the old archive and extracting new data, see the work
 [here](https://github.com/oleksiykamenyev/DSDA_data_extraction).
 
 Uses `Ruby  2.4.0`  
-Uses `Rails 5.0.2`
+Uses `Rails 5.0.4`
 
 ## New Features
 Heretic and Hexen support  
