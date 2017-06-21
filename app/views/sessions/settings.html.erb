@@ -23,11 +23,14 @@
         <%= f.check_box 'tas', label: 'TAS', checked: !demo_filter_json['tas'] %>
         <%= f.check_box 'coop', label: 'Coop', checked: !demo_filter_json['coop'] %>
         <hr>
-        <p>Source Ports</p>
-        <% port_filter = demo_filter_json['port'] %>
-        <%= f.check_box 'port:vanilla', label: 'Vanilla (Chocolate, CNDoom...)' %>
-        <%= f.check_box 'port:compatible', label: 'Compatible (PRBoom+, jHeretic...)' %>
-        <%= f.check_box 'port:incompatible', label: 'Incompatible (ZDoom, Doomsday...)' %>
+        <p>Compatibility Filter</p>
+        <% compatibility_filter = demo_filter_json['compatibility'] %>
+        <% compatibility_filter ||= 3 %>
+        <%= f.select :compatibility, [['Original Executable', 0],
+                                      ['Vanilla Environment', 1],
+                                      ['Compatible Demos (cl 2 for doom2, etc)', 2],
+                                      ['All Demos', 3]],
+                                      selected: compatibility_filter, hide_label: true %>
       <% end %>
       <hr>
       <%= f.submit 'Save Settings' %>
