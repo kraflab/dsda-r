@@ -23,6 +23,7 @@ class Demo < ApplicationRecord
                           format: { with: VALID_PORT_REGEX }
   #validates :recorded_at, presence: true
   validates :levelstat,   length: { maximum: 500 }
+  validates :compatibility, presence: true, numericality: { greater_than_or_equal_to: 0 }
   after_save    :update_players
   before_destroy :check_file
   after_destroy :update_players

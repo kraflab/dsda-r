@@ -47,6 +47,13 @@ class DemoTest < ActiveSupport::TestCase
     assert_not @demo.valid?
   end
 
+  test "must have compatibility" do
+    @demo.compatibility = nil
+    assert_not @demo.valid?
+    @demo.compatibility = -1
+    assert_not @demo.valid?
+  end
+
   test "must have tas" do
     @demo.tas = nil
     assert_not @demo.valid?
