@@ -6,8 +6,8 @@ btsx:
 
 <% 40.times do |n| %>
 wad_<%= n %>:
-  name: <%= Faker::App.unique.name %>
-  username: <%= Faker::App.unique.name.gsub(/\s+/, '').slice(0, 8).downcase %>
+  name: <%= Faker::App.name + "#{n}" %>
+  username: <%= "#{n}" + Faker::App.name.gsub(/\s+/, '').slice(0, 8).downcase %>
   author: <%= Faker::Name.name %>
   iwad: doom2
 <% end %>

@@ -28,6 +28,9 @@ group :development, :test do
 end
 
 group :test do
+  gem 'capybara'
+  gem 'capybara-webkit'
+  gem 'selenium-webdriver'
   gem 'minitest-reporters', '1.0.5'
   gem 'mini_backtrace',     '0.1.3'
 end

@@ -1,19 +1,24 @@
-uvspeed:
-  name: UV Speed
-  description: Exit as fast as possible on skill 4.
-  game: Doom
+--- !omap
+- uvspeed:
+    id: 1
+    name: UV Speed
+    description: Exit as fast as possible on skill 4.
+    game: Doom
 
-nmspeed:
-  name: NM Speed
-  description: Exit as fast as possible on skill 5.
-  game: Doom
+- smspeed:
+    id: 2
+    name: SM Speed
+    description: Exit as fast as possible on skill 4 (heretic).
+    game: Heretic
 
-pacifist:
-  name: Pacifist
-  description: Exit as fast as possible on skill 4, without injuring enemies.
-  game: Doom
+- pacifist:
+    id: 3
+    name: Pacifist
+    description: Exit as fast as possible on skill 4, without injuring enemies.
+    game: Doom
 
-smspeed:
-  name: SM Speed
-  description: Exit as fast as possible on skill 4 (heretic).
-  game: Heretic
+- nmspeed:
+    id: 4
+    name: NM Speed
+    description: Exit as fast as possible on skill 5.
+    game: Doom

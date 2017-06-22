@@ -1,6 +1,6 @@
 bt01speed:
   wad: btsx
-  category: uvspeed
+  category_id: 1
   tics: 999
   engine: PRBoom+ v2.5.1.4 cl9
   tas: 0
@@ -13,8 +13,8 @@ bt01speed:
 
 bt01pacifist:
   wad: btsx
-  category: pacifist
-  tics: 9
+  category_id: 3
+  tics: 99
   engine: PRBoom+ v2.5.1.4 cl9
   tas: 0
   guys: 2
@@ -26,11 +26,12 @@ bt01pacifist:
 
 bt01pacifist_solo:
   wad: btsx
-  category: pacifist
+  category_id: 3
   tics: 9
   engine: PRBoom+ v2.5.1.4 cl9
   tas: 0
   guys: 1
+  compatibility: 2
   has_tics: true
   level: Map 01
   levelstat: "0:00.97,1:12"
@@ -39,7 +40,7 @@ bt01pacifist_solo:
 
 bt02speed:
   wad: btsx
-  category: uvspeed
+  category_id: 1
   tics: 999
   engine: PRBoom+ v2.5.1.4 cl9
   tas: 0
@@ -52,7 +53,7 @@ bt02speed:
 
 bt02speed_slow:
   wad: btsx
-  category: uvspeed
+  category_id: 1
   tics: 9999
   engine: PRBoom+ v2.5.1.4 cl9
   tas: 0
@@ -65,7 +66,7 @@ bt02speed_slow:
 
 bt02speed_slower:
   wad: btsx
-  category: uvspeed
+  category_id: 1
   tics: 99999
   engine: PRBoom+ v2.5.1.4 cl9
   tas: 0
@@ -78,7 +79,7 @@ bt02speed_slower:
 
 table_fill:
   wad: btsx
-  category: nmspeed
+  category_id: 4
   tics: 99999
   engine: PRBoom+ v2.5.1.4 cl9
   tas: 0
@@ -92,7 +93,7 @@ table_fill:
 <% 40.times do |n| %>
 demo_<%= n %>:
   wad: btsx
-  category: <%= n < 20 ? "uvspeed" : "nmspeed" %>
+  category_id: <%= n < 20 ? 1 : 4 %>
   tics: <%= n * 1000 %>
   has_tics: true
   level: <%= "Map #{n.to_s.rjust(2, '0')}" %>
@@ -108,7 +109,7 @@ demo_<%= n %>:
 
 btep1_a:
   wad: btsx
-  category: uvspeed
+  category_id: 1
   tics: 999
   engine: PRBoom+ v2.5.1.4 cl9
   tas: 0
@@ -121,7 +122,7 @@ btep1_a:
 
 btep1_b:
   wad: btsx
-  category: uvspeed
+  category_id: 1
   tics: 999
   engine: PRBoom+ v2.5.1.4 cl9
   tas: 0
@@ -134,7 +135,7 @@ btep1_b:
 
 xlist_speed:
   wad: xlist_test
-  category: smspeed
+  category_id: 2
   tics: 2400
   engine: Heretic v1.3
   tas: 0
@@ -145,7 +146,7 @@ xlist_speed:
 
 xlist_pacifist:
   wad: xlist_test
-  category: pacifist
+  category_id: 3
   tics: 2000
   engine: Heretic v1.3
   tas: 0

@@ -134,7 +134,7 @@ $ ->
   if filter_body
     filter = Cookies.get("demo_filter")
     if filter is undefined
-      filter = {category: [], tas: false, coop: false}
+      filter = {category: [], tas: false, coop: false, compatibility: 3}
     else
       # cookie has converted space to +, so convert back
       filter = filter.replace "+", " "
