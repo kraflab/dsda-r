@@ -9,6 +9,10 @@ class Demo < ApplicationRecord
   default_scope -> { order(:level, :category_id, :tics) }
   scope :movies, -> { where("level LIKE 'Ep%' OR level LIKE 'A%'") }
   scope :ils, -> { where("level NOT LIKE 'Ep%' AND level NOT LIKE 'A%'") }
+  scope :episode, -> (ep) {
+    where("level IS NOT ? AND (level LIKE ? or level IS ? or LEVEL LIKE ? or LEVEL IS ?)",
+          "Map #{ep - 1}0", "Map #{ep - 1}_", "Map #{ep}0", "E#{ep}M%", "Ep #{ep}")
+  }
   validates :wad_id,      presence: true
   validates :category_id, presence: true
   validates :tics,        presence: true, numericality: { greater_than: 0 }

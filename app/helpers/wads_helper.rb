@@ -47,10 +47,11 @@ module WadsHelper
   end
 
   def wad_sub_header(wad)
-    content_tag :p, class: 'p-short' do
+    content_tag :p, class: 'p-short one-line' do
       [
         demo_details(wad),
         link_to('Stats', wad_stats_path(wad)),
+        level_selector(wad),
         new_demo_link(wad)
       ].join(' ').html_safe
     end
@@ -67,6 +68,36 @@ module WadsHelper
     top_player = Player.find(player_counts.max_by { |k, v| v }[0])
     hash[:top_player] = top_player.name
     hash
+  end
+
+  def level_selector(wad)
+    first = wad.demos.ils.select(:level).distinct.first
+    first ||= wad.demos.movies.select(:level).distinct.first
+    return '' if first.nil?
+    content_tag :div, id: 'levelSelectDropdown', class: 'one-line ' do
+      content_tag :div, class: 'btn-group shift-right' do
+        [
+          (content_tag :button, type: 'button', class: 'btn btn-default fix-dropdown dropdown-toggle', 'data-toggle': 'dropdown', 'aria-haspopup': 'true', 'aria-expanded': 'false' do
+            [
+              first.level,
+              (content_tag :span, '', class: 'caret')
+            ].join(' ').html_safe
+          end),
+          (content_tag :ul, class: 'dropdown-menu' do
+            (wad.demos.ils.select(:level).distinct.collect do |field|
+              content_tag :li do
+                content_tag :a, field.level, href: '#'
+              end
+            end +
+            wad.demos.movies.select(:level).distinct.collect do |field|
+              content_tag :li do
+                content_tag :a, field.level, href: '#'
+              end
+            end).join(' ').html_safe
+          end)
+        ].join(' ').html_safe
+      end
+    end
   end
 
   def edit_wad_link(wad)
