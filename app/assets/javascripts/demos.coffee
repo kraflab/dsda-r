@@ -23,6 +23,12 @@ $ ->
   toI = (str) ->
     parseInt(str, 10)
 
+  filtered = (row, filter) ->
+    rowLength = row.cells.length
+    note = row.cells[rowLength - 2].innerHTML
+    compatibility = toI($(row.cells[rowLength - 3]).data("cl"))
+    (filter.tas and note.search("T") >= 0) or (filter.coop and note.search("P") >= 0) or filter.compatibility < compatibility
+
   getRunTime = (row) ->
     [..., lastCell] = row.cells
     hours = mins = secs = tics = 0
@@ -45,23 +51,24 @@ $ ->
       runTime = getRunTime(subRow)
       note = subRow.cells[subRowLength - 2].innerHTML
       insertIndex = -1
-      if note.search("T") >= 0
-        if note.search("P") >= 0
-          if (runTime < destination.coopTas or destination.coopTas is 0) and !filter.tas and !filter.coop
-            destination.coopTas = -1
-            insertIndex = destination.coopTasIndex
+      if !filtered(subRow, filter)
+        if note.search("T") >= 0
+          if note.search("P") >= 0
+            if (runTime < destination.coopTas or destination.coopTas is 0) and !filter.tas and !filter.coop
+              destination.coopTas = -1
+              insertIndex = destination.coopTasIndex
+          else
+            if (runTime < destination.tas or destination.tas is 0) and !filter.tas
+              destination.coopTas = -1
+              insertIndex = destination.tasIndex
+        else if note.search("P") >= 0
+          if (runTime < destination.coop or destination.coop is 0) and !filter.coop
+            destination.coop = -1
+            insertIndex = destination.coopIndex
         else
-          if (runTime < destination.tas or destination.tas is 0) and !filter.tas
-            destination.coopTas = -1
-            insertIndex = destination.tasIndex
-      else if note.search("P") >= 0
-        if (runTime < destination.coop or destination.coop is 0) and !filter.coop
-          destination.coop = -1
-          insertIndex = destination.coopIndex
-      else
-        if runTime < destination.rta or destination.rta is 0
-          destination.rta = -1
-          insertIndex = destination.rtaIndex
+          if runTime < destination.rta or destination.rta is 0
+            destination.rta = -1
+            insertIndex = destination.rtaIndex
       if insertIndex >= 0
         cloneRow = body.rows[subIndex].cloneNode(true)
         cloneRow.cells[0].remove() while cloneRow.cells.length > 4
@@ -81,10 +88,10 @@ $ ->
             destination.row.cells[0].rowSpan += 1
         body.insertBefore(cloneRow, body.rows[insertIndex])
         destination.row = body.rows[destination.index]
-        destination.rtaIndex += 1
-        destination.tasIndex += 1
-        destination.coopTasIndex += 1
-        destination.coopIndex += 1
+        destination.rtaIndex += 1 if destination.rtaIndex >= insertIndex
+        destination.tasIndex += 1 if destination.tasIndex >= insertIndex
+        destination.coopTasIndex += 1 if destination.coopTasIndex >= insertIndex
+        destination.coopIndex += 1 if destination.coopIndex >= insertIndex
         destination.span += 1
         shiftCount += 1
         subIndex += 1
@@ -94,7 +101,7 @@ $ ->
         break
     shiftCount
 
-  parseCategory = (body, category, reference) ->
+  parseCategory = (body, category, reference, filter) ->
     category.index = reference.index
     category.span = reference.span
     category.row = body.rows[reference.index]
@@ -104,23 +111,24 @@ $ ->
       subRowLength = subRow.cells.length
       runTime = getRunTime(subRow)
       note = subRow.cells[subRowLength - 2].innerHTML
-      if note.search("T") >= 0
-        if note.search("P") >= 0
-          if category.coopTas is 0
-            category.coopTas = runTime
-            category.coopTasIndex = subIndex
+      if !filtered(subRow, filter)
+        if note.search("T") >= 0
+          if note.search("P") >= 0
+            if category.coopTas is 0
+              category.coopTas = runTime
+              category.coopTasIndex = subIndex
+          else
+            if category.tas is 0
+              category.tas = runTime
+              category.tasIndex = subIndex
+        else if note.search("P") >= 0
+          if category.coop is 0
+            category.coop = runTime
+            category.coopIndex = subIndex
         else
-          if category.tas is 0
-            category.tas = runTime
-            category.tasIndex = subIndex
-      else if note.search("P") >= 0
-        if category.coop is 0
-          category.coop = runTime
-          category.coopIndex = subIndex
-      else
-        if category.rta is 0
-          category.rta = runTime
-          category.rtaIndex = subIndex
+          if category.rta is 0
+            category.rta = runTime
+            category.rtaIndex = subIndex
       subIndex += 3
       subRow = body.rows[subIndex]
       if subRow is undefined or subRow.cells.length > 4
@@ -157,7 +165,7 @@ $ ->
         else
           # store uv speed records
           if crossListTargets.indexOf(category.text) isnt -1
-            parseCategory(filter_body, uvSpeed, category)
+            parseCategory(filter_body, uvSpeed, category, filter)
       else if rowLength is 5 and row.cells[0]
         category = {span: row.cells[0].rowSpan, text: getText(row.cells[0]), index: index}
         if category.text in filter.category
@@ -168,12 +176,13 @@ $ ->
           deleteCount = row.cells[0].rowSpan
         else
           if crossListTargets.indexOf(category.text) isnt -1
-            parseCategory(filter_body, uvSpeed, category)
+            parseCategory(filter_body, uvSpeed, category, filter)
           # check for pacifist times to crosslist in uv speed
           else if category.text is "Pacifist" and uvSpeed.index >= 0
             shiftCount = crossListPacifist(filter_body, uvSpeed, index, filter)
             index += shiftCount
             level.span += shiftCount
+            category.index += shiftCount
       # wipe out category
       if deleteCount > 0
         newSpan = level.span - deleteCount
@@ -191,9 +200,7 @@ $ ->
       else
         deleteCount = 0
         if rowLength > 3
-          note = row.cells[rowLength - 2].innerHTML
-          # check for tas and coop filtering
-          if (filter.tas and note.search("T") >= 0) or (filter.coop and note.search("P") >= 0)
+          if filtered(row, filter)
             deleteCount = 3
             newLevelSpan = level.span - deleteCount
             newCategorySpan = category.span - deleteCount

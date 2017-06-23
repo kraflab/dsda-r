@@ -20,10 +20,10 @@ class WadsShowJSTest < CapybaraIntegrationTest
     compat_demo = demos(:bt01pacifist_solo)
     page.assert_selector "td", text: @pacifist.time, count: 2
     page.assert_selector "td", text: compat_demo.time
-    add_cookie page, "demo_filter", '{"category": ["UV Speed"]}'
+    add_cookie page, "demo_filter", '{"category": ["UV Speed"], "tas": false, "coop": false, "compatibility": 3}'
     visit wad_path(@wad)
     page.assert_no_selector "td", text: demo.category.name
-    add_cookie page, "demo_filter", '{compatibility: 1}'
+    add_cookie page, "demo_filter", '{"category": [], "tas": false, "coop": false, "compatibility": 1}'
     visit wad_path(@wad)
     page.assert_no_selector "td", text: compat_demo.time
   end
