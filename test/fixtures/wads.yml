@@ -17,3 +17,9 @@ xlist_test:
   username: xlist_test
   author: XList Author
   iwad: doom2
+
+recent_wad:
+  name: Recent Wad
+  username: recent_wad
+  author: Recent Author
+  iwad: doom

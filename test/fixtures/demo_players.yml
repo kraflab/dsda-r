@@ -30,6 +30,18 @@ compat_dp:
   player: cyber
   demo: bt01pacifist_solo
 
+recent_dp:
+  player: kraflab
+  demo: recent_demo
+
+next_dp:
+  player: kingdime
+  demo: next_demo
+
+nexter_dp:
+  player: kingdime
+  demo: nexter_demo
+
 <% 40.times do |n| %>
 demo_player_<%= n %>:
   player: kraflab

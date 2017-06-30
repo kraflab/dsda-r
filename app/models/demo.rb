@@ -13,6 +13,7 @@ class Demo < ApplicationRecord
     where("level IS NOT ? AND (level LIKE ? or level IS ? or LEVEL LIKE ? or LEVEL IS ?)",
           "Map #{ep - 1}0", "Map #{ep - 1}_", "Map #{ep}0", "E#{ep}M%", "Ep #{ep}")
   }
+  scope :recent, -> (n) { reorder(recorded_at: :desc).limit(n) }
   validates :wad_id,      presence: true
   validates :category_id, presence: true
   validates :tics,        presence: true, numericality: { greater_than: 0 }

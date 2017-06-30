@@ -101,9 +101,9 @@ demo_<%= n %>:
   tas: 0
   guys: 1
   version: 0
-  recorded_at: <%= n.days.ago %>
-  created_at: <%= n.days.ago %>
-  updated_at: <%= n.days.ago %>
+  recorded_at: <%= (n + 1).days.ago %>
+  created_at: <%= (n + 1).days.ago %>
+  updated_at: <%= (n + 1).days.ago %>
   engine: PRBoom+ v2.5.1.4 cl9
 <% end %>
 
@@ -154,3 +154,36 @@ xlist_pacifist:
   has_tics: false
   level: E1M4
   recorded_at: <%= 100.days.ago %>
+
+recent_demo:
+  wad: recent_wad
+  category_id: 3
+  tics: 2000
+  engine: Heretic v1.3
+  tas: 0
+  guys: 1
+  has_tics: false
+  level: E1M4
+  recorded_at: <%= Time.zone.now %>
+
+next_demo:
+  wad: recent_wad
+  category_id: 3
+  tics: 2000
+  engine: Heretic v1.3
+  tas: 0
+  guys: 1
+  has_tics: false
+  level: E1M4
+  recorded_at: <%= 5.minutes.ago %>
+
+nexter_demo:
+  wad: recent_wad
+  category_id: 3
+  tics: 2001
+  engine: Heretic v1.3
+  tas: 0
+  guys: 1
+  has_tics: true
+  level: E1M4
+  recorded_at: <%= 10.minutes.ago %>
