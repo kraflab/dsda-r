@@ -49,6 +49,22 @@ module PlayersHelper
     end
   end
 
+  def active_player_entry(player, demo_count)
+    content_tag :tr do
+      [
+        (content_tag :td, class: 'no-wrap' do
+          link_to(player.name, player_path(player), class: 'one-line')
+        end),
+        (content_tag :td, class: 'no-wrap' do
+          "#{demo_count}"
+        end),
+        (content_tag :td, class: 'no-wrap' do
+          "#{demo_details(player)}"
+        end)
+      ].join(' ').html_safe
+    end
+  end
+
   def player_stats(player, hash = {})
     hash[:longest_demo] = Demo.tics_to_string(player.demos.maximum(:tics))
     hash[:total_time], hash[:average_time] = time_stats(player, false)

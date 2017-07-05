@@ -57,6 +57,25 @@ module WadsHelper
     end
   end
 
+  def active_wad_entry(wad, demo_count)
+    content_tag :tr, class: 'row-no-top' do
+      [
+        (content_tag :td, class: 'no-wrap' do
+          link_to(wad.name, wad_path(wad), class: 'one-line')
+        end),
+        (content_tag :td, class: 'no-wrap' do
+          "#{demo_count}"
+        end),
+        (content_tag :td, class: 'no-wrap' do
+          "#{wad.author}"
+        end),
+        (content_tag :td, class: 'no-wrap' do
+          "#{demo_details(wad)}"
+        end)
+      ].join(' ').html_safe
+    end
+  end
+
   def wad_stats(wad, hash = {})
     hash[:longest_demo] = Demo.tics_to_string(wad.demos.maximum(:tics))
     hash[:total_time], hash[:average_time] = time_stats(wad, false)

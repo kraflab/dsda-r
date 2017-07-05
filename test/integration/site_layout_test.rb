@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class SiteLayoutTest < ActionDispatch::IntegrationTest
+  include ApplicationHelper
 
   test "home page content and links" do
     get root_path
@@ -17,6 +18,8 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", settings_url
     assert_select "a[href=?]", about_url
     assert_select "a[href=?]", "https://www.doomworld.com/forum/37-doom-speed-demos/"
+    assert_match Wad.find(active_wads(100).first[0]).name, response.body
+    assert_match Player.find(active_players(100).first[0]).name, response.body
   end
 
   test "stats page" do

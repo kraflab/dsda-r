@@ -63,17 +63,4 @@ class ApplicationController < ActionController::Base
   def has_file_data?(query)
     query['file'] and query['file']['data'] and query['file']['name']
   end
-
-  # return the 3 most active wads of the past n demos
-  def active_wads(n)
-    Hash[Demo.where(id: Demo.recent(n)).group(:wad_id).count.
-      sort_by { |k, v| -v }[0..2]]
-  end
-
-  # return the 3 most active players of the past n demos
-  def active_players(n)
-    Hash[DemoPlayer.includes(:demo).
-      where('demos.id IN (?)', Demo.recent(n).select(:id)).
-      references(:demo).group(:player_id).count.sort_by { |k, v| -v }[0..2]]
-  end
 end
