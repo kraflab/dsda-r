@@ -80,14 +80,21 @@ module ApplicationHelper
 
   # return the 3 most active wads of the past n demos
   def active_wads(n)
-    Hash[Demo.where(id: Demo.recent(n)).group(:wad_id).count.
-      sort_by { |k, v| -v }[0..2]]
+    hash = Hash.new(0)
+    Demo.recent(n).select(:id, :wad_id).each do |demo|
+      hash[demo.wad_id] += 1
+    end
+    hash.sort_by { |k, v| -v }[0..2]
   end
 
   # return the 3 most active players of the past n demos
   def active_players(n)
-    Hash[DemoPlayer.includes(:demo).
+    hash = Hash.new(0)
+    DemoPlayer.includes(:demo).
       where('demos.id IN (?)', Demo.recent(n).select(:id)).
-      references(:demo).group(:player_id).count.sort_by { |k, v| -v }[0..2]]
+      references(:demo).each do |dp|
+      hash[dp.player_id] += 1
+    end
+    hash.sort_by { |k, v| -v }[0..2]
   end
 end
