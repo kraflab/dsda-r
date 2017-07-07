@@ -7,10 +7,10 @@ class Demo < ApplicationRecord
   has_many :demo_players, dependent: :destroy
   has_many :players, through: :demo_players
   default_scope -> { order(:level, :category_id, :tics) }
-  scope :movies, -> { where("level LIKE 'Ep%' OR level LIKE 'A%'") }
-  scope :ils, -> { where("level NOT LIKE 'Ep%' AND level NOT LIKE 'A%'") }
+  scope :movies, -> { reorder(:level).where("level LIKE 'Ep%' OR level LIKE 'A%'") }
+  scope :ils, -> { reorder(:level).where("level NOT LIKE 'Ep%' AND level NOT LIKE 'A%'") }
   scope :episode, -> (ep) {
-    where("level IS NOT ? AND (level LIKE ? or level IS ? or LEVEL LIKE ? or LEVEL IS ?)",
+    reorder(:level).where("level IS NOT ? AND (level LIKE ? or level IS ? or LEVEL LIKE ? or LEVEL IS ?)",
           "Map #{ep - 1}0", "Map #{ep - 1}_", "Map #{ep}0", "E#{ep}M%", "Ep #{ep}")
   }
   scope :recent, -> (n) { reorder(recorded_at: :desc).limit(n) }
