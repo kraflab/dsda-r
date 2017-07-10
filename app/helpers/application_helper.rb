@@ -78,20 +78,20 @@ module ApplicationHelper
      Demo.tics_to_string(tics / count, with_tics)]
   end
 
-  # return the 3 most active wads of the past n demos
+  # return the 5 most active wads of the past n days
   def active_wads(n)
     hash = Hash.new(0)
-    Demo.recent(n).select(:id, :wad_id).each do |demo|
+    Demo.within(n).select(:id, :wad_id).each do |demo|
       hash[demo.wad_id] += 1
     end
     hash.sort_by { |k, v| -v }[0..2]
   end
 
-  # return the 3 most active players of the past n demos
+  # return the 5 most active players of the past n days
   def active_players(n)
     hash = Hash.new(0)
     DemoPlayer.includes(:demo).
-      where('demos.id IN (?)', Demo.recent(n).select(:id)).
+      where('demos.id IN (?)', Demo.within(n).select(:id)).
       references(:demo).each do |dp|
       hash[dp.player_id] += 1
     end

@@ -14,6 +14,7 @@ class Demo < ApplicationRecord
           "Map #{ep - 1}0", "Map #{ep - 1}_", "Map #{ep}0", "E#{ep}M%", "Ep #{ep}")
   }
   scope :recent, -> (n) { reorder(recorded_at: :desc).limit(n) }
+  scope :within, -> (n) { reorder(recorded_at: :desc).where('recorded_at >= ?', n.days.ago)}
   validates :wad_id,      presence: true
   validates :category_id, presence: true
   validates :tics,        presence: true, numericality: { greater_than: 0 }
