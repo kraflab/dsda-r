@@ -96,7 +96,7 @@ module WadsHelper
     content_tag :div, id: 'levelSelectDropdown', class: 'one-line ' do
       content_tag :div, class: 'btn-group shift-right' do
         [
-          (content_tag :button, type: 'button', class: 'btn btn-default fix-dropdown dropdown-toggle', 'data-toggle': 'dropdown', 'aria-haspopup': 'true', 'aria-expanded': 'false' do
+          (content_tag :button, type: 'button', class: 'btn btn-primary fix-dropdown dropdown-toggle', 'data-toggle': 'dropdown', 'aria-haspopup': 'true', 'aria-expanded': 'false' do
             [
               first.level,
               (content_tag :span, '', class: 'caret')
