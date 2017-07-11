@@ -105,12 +105,12 @@ module WadsHelper
           (content_tag :ul, class: 'dropdown-menu' do
             (wad.demos.ils.select(:level).distinct.collect do |field|
               content_tag :li do
-                content_tag :a, field.level, href: '#'
+                content_tag :a, field.level, href: wad_path(level: field.level)
               end
             end +
             wad.demos.movies.select(:level).distinct.collect do |field|
               content_tag :li do
-                content_tag :a, field.level, href: '#'
+                content_tag :a, field.level, href: wad_path(level: field.level)
               end
             end).join(' ').html_safe
           end)

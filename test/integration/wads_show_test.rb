@@ -29,4 +29,9 @@ class WadsShowTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", edit_wad_path(@wad)
     assert_select "a[href=?]", new_demo_path + "?wad=" + @wad.username
   end
+
+  test "level selection" do
+    get wad_path(@wad, level: "Map 01")
+    assert_select 'td', { count: 0, text: 'Map 02' }, 'maps not filtered by params'
+  end
 end

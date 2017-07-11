@@ -71,7 +71,8 @@ class WadsController < ApplicationController
 
   def show
     @wad = Wad.find_by(username: params[:id])
-    @demos = @wad.demos
+    subset = params[:level]
+    @demos = subset.nil? ? @wad.demos : @wad.demos.where(level: subset)
   end
 
   def stats
