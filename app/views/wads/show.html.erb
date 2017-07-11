@@ -20,7 +20,7 @@
           </tr>
         </thead>
         <tbody class="demo-filter">
-          <% [:ils, :movies].each do |subset| %>
+          <% [:show_ils, :show_movies].each do |subset| %>
             <% @demos.send(subset).chunk { |i| i.level }.each do |chunk_l| %>
               <% cache chunk_l do %>
                 <% chunk_l[1].chunk { |i| i.category }.each do |chunk_c| %>

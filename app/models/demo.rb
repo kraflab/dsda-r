@@ -9,6 +9,8 @@ class Demo < ApplicationRecord
   default_scope -> { order(:level, :category_id, :tics) }
   scope :movies, -> { reorder(:level).where("level LIKE 'Ep%' OR level LIKE 'A%'") }
   scope :ils, -> { reorder(:level).where("level NOT LIKE 'Ep%' AND level NOT LIKE 'A%'") }
+  scope :show_movies, -> { where("level LIKE 'Ep%' OR level LIKE 'A%'") }
+  scope :show_ils, -> { where("level NOT LIKE 'Ep%' AND level NOT LIKE 'A%'") }
   scope :episode, -> (ep) {
     reorder(:level).where("level IS NOT ? AND (level LIKE ? or level IS ? or LEVEL LIKE ? or LEVEL IS ?)",
           "Map #{ep - 1}0", "Map #{ep - 1}_", "Map #{ep}0", "E#{ep}M%", "Ep #{ep}")
