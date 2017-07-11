@@ -4,15 +4,7 @@ module IwadsHelper
     [
       content_tag(:h1, 'Iwad List'),
       (content_tag :p, class: 'p-short' do
-        [
-          pluralize(iwads.count, 'iwad'),
-          if logged_in?
-            link_to 'Create New Iwad', new_iwad_path,
-              class: 'label label-info'
-          else
-            nil
-          end
-        ].join(' ').html_safe
+        pluralize(iwads.count, 'iwad')
       end)
     ].join(' ').html_safe
   end
@@ -32,13 +24,7 @@ module IwadsHelper
     content_tag :p, class: 'p-short' do
       [
         pluralize(iwad.wads.count, 'wad'),
-        link_to('Stats', iwad_stats_path(iwad)),
-        if logged_in?
-          link_to 'Create New Player', new_wad_path(iwad: iwad.username),
-            class: 'label label-info'
-        else
-          nil
-        end
+        link_to('Stats', iwad_stats_path(iwad))
       ].join(' ').html_safe
     end
   end

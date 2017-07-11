@@ -4,15 +4,7 @@ module PlayersHelper
     [
       content_tag(:h1, 'Player List'),
       (content_tag :p, class: 'p-short' do
-        [
-          pluralize(players.count, 'player'),
-          if logged_in?
-            link_to 'Create New Player', new_player_path,
-              class: 'label label-info'
-          else
-            nil
-          end
-        ].join(' ').html_safe
+        pluralize(players.count, 'player')
       end)
     ].join(' ').html_safe
   end
@@ -87,12 +79,6 @@ module PlayersHelper
   end
 
   def edit_player_link(player)
-    if logged_in?
-      link_to edit_player_path(player), :class => 'btn btn-info btn-xs' do
-        content_tag :span, '', class: 'glyphicon glyphicon-cog',
-          'aria-hidden': 'true', 'aria-label': 'Edit'
-      end
-    end
   end
 
   def player_wad_count(player)

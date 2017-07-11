@@ -1,10 +1,10 @@
 class AdminsController < ApplicationController
   before_action :admin_session
-  
+
   def edit
     @admin = current_admin
   end
-  
+
   def update
     @admin = current_admin
     if @admin && @admin.authenticate(admin_params[:current_password])
@@ -20,17 +20,17 @@ class AdminsController < ApplicationController
       render 'edit'
     end
   end
-  
+
   private
-  
+
     def admin_params
       params.require(:admin).permit(:current_password, :password,
                                     :password_confirmation)
     end
-    
+
     # Confirms an admin session
     def admin_session
-      unless logged_in?
+      unless logged_in?(true)
         flash[:warning] = 'You must be logged in to perform this action'
         redirect_to(root_url)
       end

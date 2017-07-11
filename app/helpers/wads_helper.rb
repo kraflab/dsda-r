@@ -24,14 +24,7 @@ module WadsHelper
     [
       content_tag(:h1, 'Wad List'),
       (content_tag :p, class: 'p-short' do
-        [
-          pluralize(wads.count, 'wad'),
-          if logged_in?
-            link_to 'Create New Wad', new_wad_path, class: 'label label-info'
-          else
-            nil
-          end
-        ].join(' ').html_safe
+        pluralize(wads.count, 'wad')
       end)
     ].join(' ').html_safe
   end
@@ -120,18 +113,8 @@ module WadsHelper
   end
 
   def edit_wad_link(wad)
-    if logged_in?
-      link_to edit_wad_path(wad), :class => 'btn btn-info btn-xs' do
-        content_tag :span, '', class: 'glyphicon glyphicon-cog',
-          'aria-hidden': 'true', 'aria-label': 'Edit'
-      end
-    end
   end
 
   def new_demo_link(wad)
-    if logged_in?
-      link_to 'Create New Demo', new_demo_path(wad: wad.username),
-        :class => 'label label-info'
-    end
   end
 end

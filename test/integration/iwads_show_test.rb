@@ -20,8 +20,5 @@ class IwadsShowTest < ActionDispatch::IntegrationTest
       assert_select "td", wad.demos.count.to_s
       assert_select "td", total_demo_time(wad, false)
     end
-    log_in_as(@admin)
-    get iwad_path(@iwad)
-    assert_select "a[href=?]", new_wad_path + "?iwad=" + @iwad.username
   end
 end

@@ -31,8 +31,5 @@ class PlayersShowTest < ActionDispatch::IntegrationTest
       assert_match pl.name, response.body
     end
     assert_select "a[href=?]", edit_player_path(@player), count: 0
-    log_in_as(@admin)
-    get player_path(@player)
-    assert_select "a[href=?]", edit_player_path(@player)
   end
 end

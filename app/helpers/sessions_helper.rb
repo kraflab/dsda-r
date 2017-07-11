@@ -6,8 +6,9 @@ module SessionsHelper
   end
 
   # Returns true if this is an admin session
-  def logged_in?
-    !current_admin.nil?
+  # Admin functionality is currently suppressed, except where explicitly forced
+  def logged_in?(force_answer = false)
+    force_answer ? !current_admin.nil? : false
   end
 
   # Returns array of demo filters

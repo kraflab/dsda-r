@@ -66,17 +66,7 @@ module DemosHelper
 
   def demo_time_cell(demo)
     content_tag :td, class: 'right-text demo-time' do
-      [
-        link_to(demo.time, demo.file_path, title: demo.levelstat),
-        if logged_in?
-          link_to edit_demo_path(demo), class: 'label label-info label-xs' do
-            content_tag :span, '', class: 'glyphicon glyphicon-cog',
-              'aria-hidden': 'true', 'aria-label': 'Edit'
-          end
-        else
-          nil
-        end
-      ].join(' ').html_safe
+      link_to(demo.time, demo.file_path, title: demo.levelstat)
     end
   end
 

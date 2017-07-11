@@ -1,6 +1,6 @@
 <% provide(:title, @iwad.name) %>
 
-<% cache ["admin:#{logged_in?}", @iwad] do %>
+<% cache @iwad do %>
   <div class="center-text">
     <%= iwad_header(@iwad) %>
     <%= iwad_sub_header(@iwad) %>

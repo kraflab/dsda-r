@@ -1,8 +1,8 @@
 <% provide(:title, @wad.name) %>
 
-<% cache ["admin_v001:#{logged_in?}", @wad] do %>
+<% cache ['wad_show_v001', @wad] do %>
   <div class="center-text">
-    <% cache ["wad_header_v001", @wad] do %>
+    <% cache ['wad_header_v001', @wad] do %>
       <%= wad_header(@wad) %>
       <%= wad_sub_header(@wad) %>
     <% end %>

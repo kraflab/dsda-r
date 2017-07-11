@@ -1,12 +1,12 @@
 require 'test_helper'
 
 class WadsIndexTest < ActionDispatch::IntegrationTest
-  
+
   def setup
     @admin = admins(:elim)
     @iwad  = iwads(:doom)
   end
-  
+
   test "index layout" do
     get wads_path
     assert_select "h1", "Wad List"
@@ -26,8 +26,5 @@ class WadsIndexTest < ActionDispatch::IntegrationTest
       end
       assert_select "nav.pagination", count: 0
     end
-    log_in_as(@admin)
-    get wads_path
-    assert_select 'a[href=?]', new_wad_path
   end
 end
