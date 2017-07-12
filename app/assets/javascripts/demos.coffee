@@ -3,6 +3,7 @@ $ ->
   categoryRowLength = 6
   demoRowLength = 5
   noteDelta = 3
+  timeDelta = 2
   engineDelta = 4
   crossListTargets = ["UV Speed", "SM Speed"]
 
@@ -35,7 +36,7 @@ $ ->
     (filter.tas and note.search("T") >= 0) or (filter.coop and note.search("P") >= 0) or filter.compatibility < compatibility
 
   getRunTime = (row) ->
-    [..., lastCell] = row.cells
+    lastCell = row.cells[row.cells.length - timeDelta]
     hours = mins = secs = tics = 0
     timeText = lastCell.innerText
     [timeText, tics] = timeText.split(".") if timeText.search("\\.") >= 0

@@ -13,8 +13,9 @@
         <th>Category</th>
         <th>Player(s)</th>
         <th>Engine</th>
-        <th class="center-text">Notes</th>
+        <th class="center-text">Note</th>
         <th class="center-text">Time</th>
+        <th><span class="glyphicon glyphicon-play" aria-hidden="true" aria-label="video"></span></th>
       </tr>
     </thead>
     <tbody>
@@ -27,8 +28,9 @@
           <td><%= demo.category.name %></td>
           <td class="player-cell"><%= demo.players_text %></td>
           <td class="engine-cell"><%= demo.engine %></td>
-          <td class="right-text"><%= demo.note %></td>
-          <td class="right-text demo-time"><%= link_to demo.time, demo.file_path %></td>
+          <%= demo_hidden_tag(demo) %>
+          <%= demo_time_cell(demo) %>
+          <%= demo_video_link(demo) %>
         </tr>
       <% end %>
     </tbody>
