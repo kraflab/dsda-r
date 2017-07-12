@@ -1,4 +1,9 @@
 $ ->
+  levelRowLength = 7
+  categoryRowLength = 6
+  demoRowLength = 5
+  noteDelta = 3
+  engineDelta = 4
   crossListTargets = ["UV Speed", "SM Speed"]
 
   $("#addNewTag").on "click", ->
@@ -25,8 +30,8 @@ $ ->
 
   filtered = (row, filter) ->
     rowLength = row.cells.length
-    note = row.cells[rowLength - 2].innerHTML
-    compatibility = toI($(row.cells[rowLength - 3]).data("cl"))
+    note = row.cells[rowLength - noteDelta].innerHTML
+    compatibility = toI($(row.cells[rowLength - engineDelta]).data("cl"))
     (filter.tas and note.search("T") >= 0) or (filter.coop and note.search("P") >= 0) or filter.compatibility < compatibility
 
   getRunTime = (row) ->
@@ -49,7 +54,7 @@ $ ->
     while true
       subRowLength = subRow.cells.length
       runTime = getRunTime(subRow)
-      note = subRow.cells[subRowLength - 2].innerHTML
+      note = subRow.cells[subRowLength - noteDelta].innerHTML
       insertIndex = -1
       if !filtered(subRow, filter)
         if note.search("T") >= 0
@@ -71,20 +76,20 @@ $ ->
             insertIndex = destination.rtaIndex
       if insertIndex >= 0
         cloneRow = body.rows[subIndex].cloneNode(true)
-        cloneRow.cells[0].remove() while cloneRow.cells.length > 4
+        cloneRow.cells[0].remove() while cloneRow.cells.length > demoRowLength
         for cell in cloneRow.cells
           cell.style = "font-style: italic;"
         firstChild = cloneRow.firstChild
         if insertIndex is destination.index
-          while destination.row.cells.length > 4
+          while destination.row.cells.length > demoRowLength
             shiftCell = destination.row.cells[0].cloneNode(true)
             shiftCell.rowSpan += 1
             destination.row.cells[0].remove()
             cloneRow.insertBefore(shiftCell, firstChild)
         else
-          if destination.row.cells.length is 6
+          if destination.row.cells.length is levelRowLength
             destination.row.cells[1].rowSpan += 1
-          if destination.row.cells.length > 4
+          if destination.row.cells.length > demoRowLength
             destination.row.cells[0].rowSpan += 1
         body.insertBefore(cloneRow, body.rows[insertIndex])
         destination.row = body.rows[destination.index]
@@ -97,7 +102,7 @@ $ ->
         subIndex += 1
       subIndex += 3
       subRow = body.rows[subIndex]
-      if subRow is undefined or subRow.cells.length > 4
+      if subRow is undefined or subRow.cells.length > demoRowLength
         break
     shiftCount
 
@@ -110,7 +115,7 @@ $ ->
     while true
       subRowLength = subRow.cells.length
       runTime = getRunTime(subRow)
-      note = subRow.cells[subRowLength - 2].innerHTML
+      note = subRow.cells[subRowLength - noteDelta].innerHTML
       if !filtered(subRow, filter)
         if note.search("T") >= 0
           if note.search("P") >= 0
@@ -131,7 +136,7 @@ $ ->
             category.rtaIndex = subIndex
       subIndex += 3
       subRow = body.rows[subIndex]
-      if subRow is undefined or subRow.cells.length > 4
+      if subRow is undefined or subRow.cells.length > demoRowLength
         break
     category.rtaIndex = category.index if category.rtaIndex is 0
     category.tasIndex = category.index if category.tasIndex is 0
@@ -156,7 +161,7 @@ $ ->
       row = filter_body.rows[index]
       rowLength = row.cells.length
       # full row with level
-      if rowLength is 6
+      if rowLength is levelRowLength
         level = {span: row.cells[0].rowSpan, text: row.cells[0].innerText, index: index}
         uvSpeed = {row: null, index: -1, span: 0, rta: 0, tas: 0, coop: 0, coopTas: 0, rtaIndex: 0, tasIndex: 0, coopIndex: 0, coopTasIndex: 0}
         category = {span: row.cells[1].rowSpan, text: getText(row.cells[1]), index: index}
@@ -166,7 +171,7 @@ $ ->
           # store uv speed records
           if crossListTargets.indexOf(category.text) isnt -1
             parseCategory(filter_body, uvSpeed, category, filter)
-      else if rowLength is 5 and row.cells[0]
+      else if rowLength is categoryRowLength and row.cells[0]
         category = {span: row.cells[0].rowSpan, text: getText(row.cells[0]), index: index}
         if category.text in filter.category
           if category.text is "Pacifist" and uvSpeed.index >= 0
@@ -199,7 +204,7 @@ $ ->
         filter_body.rows[index].remove() for [1..deleteCount]
       else
         deleteCount = 0
-        if rowLength > 3
+        if rowLength >= demoRowLength
           if filtered(row, filter)
             deleteCount = 3
             newLevelSpan = level.span - deleteCount

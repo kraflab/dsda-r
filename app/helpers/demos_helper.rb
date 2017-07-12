@@ -59,16 +59,21 @@ module DemosHelper
         else
           nil
         end,
-        if !demo.video_link.blank?
-          content_tag :a, href: "https://www.youtube.com/watch?v=#{demo.video_link}", target: :_blank do
-            content_tag :span, '', class: 'glyphicon glyphicon-play',
-              'aria-hidden': 'true', 'aria-label': 'Video'
-          end
-        else
-          nil
-        end,
         demo.note
       ].join(' ').html_safe
+    end
+  end
+
+  def demo_video_link(demo)
+    content_tag :td do
+      if !demo.video_link.blank?
+        content_tag :a, href: "https://www.youtube.com/watch?v=#{demo.video_link}", target: :_blank do
+          content_tag :span, '', class: 'glyphicon glyphicon-play',
+            'aria-hidden': 'true', 'aria-label': 'Video'
+        end
+      else
+        nil
+      end
     end
   end
 
@@ -121,9 +126,9 @@ module DemosHelper
   def demo_tags(demo)
     content_tag :tr, '' do
       if demo.has_shown_tag
-        content_tag :td, demo.shown_tags_text, class: 'tag-text', colspan: '4'
+        content_tag :td, demo.shown_tags_text, class: 'tag-text', colspan: '5'
       else
-        content_tag :td, '', class: 'no-display', colspan: '4'
+        content_tag :td, '', class: 'no-display', colspan: '5'
       end
     end
   end

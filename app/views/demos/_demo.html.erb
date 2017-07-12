@@ -2,5 +2,6 @@
   <td class="player-cell"><%= demo.players_text %></td>
   <td class="engine-cell" data-cl="<%= demo.compatibility %>"><%= demo.engine %></td>
   <%= demo_hidden_tag(demo) %>
+  <%= demo_video_link(demo) %>
   <%= demo_time_cell(demo) %>
 <% end %>
