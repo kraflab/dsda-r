@@ -59,6 +59,14 @@ module DemosHelper
         else
           nil
         end,
+        if demo.video_link
+          content_tag :a, href: "https://www.youtube.com/watch?v=#{demo.video_link}", target: :_blank do
+            content_tag :span, '', class: 'glyphicon glyphicon-play',
+              'aria-hidden': 'true', 'aria-label': 'Video'
+          end
+        else
+          nil
+        end,
         demo.note
       ].join(' ').html_safe
     end

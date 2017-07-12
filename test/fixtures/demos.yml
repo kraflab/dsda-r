@@ -23,6 +23,7 @@ bt01pacifist:
   levelstat: "0:00.97,1:12"
   version: 0
   recorded_at: <%= 100.days.ago %>
+  video_link: "1op_0sdg923g"
 
 bt01pacifist_solo:
   wad: btsx
