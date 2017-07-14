@@ -32,13 +32,9 @@ class PortTest < ActiveSupport::TestCase
   end
 
   test "version should match regex" do
-    @port.version = " v1 "
-    assert_not @port.valid?
     @port.version = "v\t1"
     assert_not @port.valid?
     @port.version = "v$%1"
-    assert_not @port.valid?
-    @port.version = "v 1"
     assert_not @port.valid?
     @port.version = "v-1+"
     assert @port.valid?
