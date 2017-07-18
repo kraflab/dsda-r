@@ -91,12 +91,17 @@ module WadsHelper
         [
           (content_tag :button, type: 'button', class: 'btn btn-primary fix-dropdown dropdown-toggle', 'data-toggle': 'dropdown', 'aria-haspopup': 'true', 'aria-expanded': 'false' do
             [
-              params[:level] || first.level,
+              'Map Select',
               (content_tag :span, '', class: 'caret')
             ].join(' ').html_safe
           end),
           (content_tag :ul, class: 'dropdown-menu' do
-            (wad.demos.ils.select(:level).distinct.collect do |field|
+            ([
+              (content_tag :li do
+                content_tag :a, 'Everything', href: wad_path
+              end)
+            ] +
+            wad.demos.ils.select(:level).distinct.collect do |field|
               content_tag :li do
                 content_tag :a, field.level, href: wad_path(level: field.level)
               end
