@@ -91,7 +91,7 @@ module WadsHelper
         [
           (content_tag :button, type: 'button', class: 'btn btn-primary fix-dropdown dropdown-toggle', 'data-toggle': 'dropdown', 'aria-haspopup': 'true', 'aria-expanded': 'false' do
             [
-              first.level,
+              params[:level] || first.level,
               (content_tag :span, '', class: 'caret')
             ].join(' ').html_safe
           end),
