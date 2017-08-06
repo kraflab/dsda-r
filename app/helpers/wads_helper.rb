@@ -82,6 +82,16 @@ module WadsHelper
     hash
   end
 
+  def wad_episodes(wad)
+    episodes = []
+    wad.demos.select(:level).distinct.each do |demo|
+      episodes = episodes + demo_episode(demo.level)
+    end
+    episodes.uniq{ |x| x.to_i }.collect do |ep|
+      "Episode #{ep}"
+    end
+  end
+
   def level_selector(wad)
     first = wad.demos.ils.select(:level).distinct.first
     first ||= wad.demos.movies.select(:level).distinct.first
@@ -101,6 +111,11 @@ module WadsHelper
                 content_tag :a, 'Everything', href: wad_path
               end)
             ] +
+            wad_episodes(wad).collect do |ep|
+              (content_tag :li do
+                content_tag :a, ep, href: wad_path(level: ep)
+              end)
+            end +
             wad.demos.ils.select(:level).distinct.collect do |field|
               content_tag :li do
                 content_tag :a, field.level, href: wad_path(level: field.level)

@@ -51,6 +51,26 @@ module DemosHelper
     Demo.reorder(:updated_at).last.updated_at
   end
 
+  def map_number_to_episode(n)
+    n == 31 || n == 32 ? 2 : ((n - 1) / 10 + 1)
+  end
+
+  def demo_episode(level)
+    /E(?<ep>\d*)M/.match(level) do |m|
+      return [m[:ep]] if m[:ep].present?
+    end
+
+    /Map (?<ep>\d*)/.match(level) do |m|
+      return [map_number_to_episode(m[:ep].to_i)] if m[:ep]
+    end
+
+    /Ep (?<ep>\d*)/.match(level) do |m|
+      return [m[:ep]] if m[:ep]
+    end
+
+    []
+  end
+
   def demo_hidden_tag(demo)
     content_tag :td, class: 'right-text' do
       [

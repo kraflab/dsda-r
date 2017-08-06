@@ -72,7 +72,12 @@ class WadsController < ApplicationController
   def show
     @wad = Wad.find_by(username: params[:id])
     subset = params[:level]
-    @demos = subset.nil? ? @wad.demos : @wad.demos.where(level: subset)
+    if subset.is_a?(String) && subset.include?('Episode')
+      episode = subset.split(' ').last.to_i
+      @demos = @wad.demos.episode(episode)
+    else
+      @demos = subset.nil? ? @wad.demos : @wad.demos.where(level: subset)
+    end
   end
 
   def stats
