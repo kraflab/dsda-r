@@ -84,7 +84,7 @@ module WadsHelper
 
   def wad_episodes(wad)
     episodes = []
-    wad.demos.select(:level).distinct.each do |demo|
+    wad.demos.reorder(:level).select(:level).distinct.each do |demo|
       episodes = episodes + demo_episode(demo.level)
     end
     episodes.uniq{ |x| x.to_i }.collect do |ep|
