@@ -11,6 +11,12 @@ row-no-top {
   border-top: 0;
 }
 
+.scrollable-menu {
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+}
+
 .one-line {
   display: inline-block;
 }
