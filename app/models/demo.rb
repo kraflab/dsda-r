@@ -35,6 +35,7 @@ class Demo < ApplicationRecord
   after_save    :update_players
   before_destroy :check_file
   after_destroy :update_players
+  before_create :prune_levelstat
 
   def wad_username
     wad.username if wad
@@ -194,5 +195,9 @@ class Demo < ApplicationRecord
     # collect names for table cell
     def cell_names(thing)
       thing.collect { |i| i.name }.join("\n")
+    end
+
+    def prune_levelstat
+      self.levelstat = levelstat.gsub(/,/, "\n")
     end
 end

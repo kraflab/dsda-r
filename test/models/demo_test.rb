@@ -128,6 +128,14 @@ class DemoTest < ActiveSupport::TestCase
     assert_equal 2, demos(:bt02speed).record_index
   end
 
+  test "fix levelstats before creation" do
+    demo = Demo.create(wad: @wad, category: @category, tics: 99,
+                       engine: "PRBoom+ v2.5.1.4", tas: 0, guys: 1,
+                       has_tics: true, level: "Map 02",
+                       recorded_at: 20.minutes.ago, levelstat: "0:00.99,1:11:00")
+    assert_equal "0:00.99\n1:11:00", demo.levelstat
+  end
+
   test "should fix levelstats" do
     demo = demos(:bt01speed)
     demo2 = demos(:bt01pacifist)
