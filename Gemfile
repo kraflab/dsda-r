@@ -25,6 +25,7 @@ group :development, :test do
   gem 'sqlite3'
   gem 'byebug', platform: :mri
   gem 'sqlite3_ar_regexp', '~> 2.2'
+  gem 'pry'
 end
 
 group :test do
@@ -45,7 +46,6 @@ group :development do
   gem 'listen',                '~> 3.0.5'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'pry'
 end
 
 group :production do
