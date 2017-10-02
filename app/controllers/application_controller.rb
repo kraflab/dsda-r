@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   include ApplicationHelper
   include DemosHelper
   include WadsHelper
+  include PlayersHelper
   ADMIN_ERR_LOCK = 3
   ADMIN_ERR_FAIL = 2
   ADMIN_SUCCESS  = 1
