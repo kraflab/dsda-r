@@ -21,11 +21,6 @@ class PlayerTest < ActiveSupport::TestCase
     assert_not @player.valid?
   end
 
-  test "username must be present" do
-    @player.username = " "
-    assert_not @player.valid?
-  end
-
   test "name should not be too long" do
     @player.name = "a" * 51
     assert_not @player.valid?
@@ -52,9 +47,15 @@ class PlayerTest < ActiveSupport::TestCase
     assert @player.valid?
   end
 
-  test "username should be fixed" do
-    @player.name = "  7x7 #Should be fixed\t\n"
-    assert_equal "7x7_should_be_fixed", Player.default_username(@player.name)
+  test "default username should be fixed" do
+    player = Player.new(name: "  7x7 #Should be fixed\t\n")
+    assert_equal "7x7_should_be_fixed", Player.default_username(player.name)
+  end
+
+  test "default username should be assigned" do
+    player = Player.new(name: "  7x7 #Should be fixed\t\n")
+    player.valid?
+    assert_equal player.username, Player.default_username(player.name)
   end
 
   test "username should match regex" do

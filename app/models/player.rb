@@ -12,8 +12,8 @@ class Player < ApplicationRecord
                        format: { with: VALID_USERNAME_REGEX }
   validates :record_index, presence: true,
                            numericality: { greater_than_or_equal_to: 0 }
-  before_save   :clean_strings
-  before_update :clean_strings
+  before_validation   :clean_strings
+  before_validation   :check_username
   after_save :update_demos, if: :name_changed?
 
   # Convert name to valid username
@@ -65,10 +65,13 @@ class Player < ApplicationRecord
       demos.each { |i| i.touch }
     end
 
-    # Remove excess whitespace
     def clean_strings
       self.twitch   ||= ''
       self.youtube  ||= ''
       self.name     = name.strip.gsub(/\s+/, ' ')
+    end
+
+    def check_username
+      self.username = Player.default_username(name) if username.blank?
     end
 end
