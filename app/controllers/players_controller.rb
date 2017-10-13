@@ -4,45 +4,6 @@ class PlayersController < ApplicationController
   before_action :age_limit, only: :destroy
   skip_before_action :verify_authenticity_token, only: [:api_create]
 
-  def api_show
-    query, response_hash = preprocess_api(request)
-    if query
-      if query['mode'] == 'fixed'
-        player = Player.find_by(username: query['id']) || Player.find_by(name: query['id'])
-      else
-        player = Player.reorder('RANDOM()').first
-      end
-      response_hash[:error_message].push 'Player not found' if player.nil?
-      commands = query['commands']
-      if player
-        commands.each do |command, detail|
-          case command
-          when 'count'
-            detail.each do |d|
-              case d
-              when 'demos'
-                response_hash[:demo_count] ||= player.demos.count
-              when 'wads'
-                response_hash[:wad_count] ||= player_wad_count(player)
-              when 'tas'
-                response_hash[:tas_count] ||= DemoPlayer.where(player: player).includes(:demo).where('demos.tas > 0').references(:demo).count
-              else
-                response_hash[:error_messages].push "Unknown Player Count '#{d}'"
-              end
-            end
-          when 'stats'
-            # This function puts the results directly into the hash
-            player_stats(player, response_hash)
-          when 'properties'
-            response_hash[:player] = player.serializable_hash(only: [:name, :username, :twitch, :youtube])
-          end
-        end
-      end
-    end
-    response_hash[:error] = (response_hash[:error_message].count > 0)
-    render json: response_hash
-  end
-
   def index
     @players = Player.all
   end

@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  if Rails.env.development?
+    mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql"
+  end
+
+  post "/graphql", to: "graphql#execute"
+
   root 'static_pages#home'
   get 'search' => 'static_pages#search'
   get 'stats'  => 'static_pages#stats'
@@ -23,7 +29,6 @@ Rails.application.routes.draw do
   get 'demos/:id/hidden_tag' => 'demos#hidden_tag'
 
   get  'api/wads/'    => "wads#api_show"
-  get  'api/players/' => "players#api_show"
   post 'api/demos/'   => "demos#api_create"
   post 'api/wads'     => "wads#api_create"
   post 'api/players/' => "players#api_create"

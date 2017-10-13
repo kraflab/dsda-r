@@ -8,4 +8,5 @@ SecureHeaders::Configuration.default do |config|
     style_src: %w('self' https://fonts.googleapis.com/),
     frame_ancestors: %w('none'),
   }
+  config.csp[:script_src] << "'unsafe-inline'" if Rails.env.development?
 end
