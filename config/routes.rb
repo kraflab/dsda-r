@@ -28,7 +28,6 @@ Rails.application.routes.draw do
   get 'feed'         => 'demos#feed'
   get 'demos/:id/hidden_tag' => 'demos#hidden_tag'
 
-  get  'api/wads/'    => "wads#api_show"
   post 'api/demos/'   => "demos#api_create"
   post 'api/wads'     => "wads#api_create"
   post 'api/players/' => "players#api_create"

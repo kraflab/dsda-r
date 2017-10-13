@@ -3,56 +3,6 @@ class WadsController < ApplicationController
   before_action :age_limit, only: :destroy
   skip_before_action :verify_authenticity_token, only: [:api_create]
 
-  def api_show
-    query, response_hash = preprocess_api(request)
-    if query
-      if query['mode'] == 'fixed'
-        wad = Wad.find_by(username: query['id']) || Wad.find_by(name: query['id'])
-      else
-        wad = Wad.reorder('RANDOM()').first
-      end
-      response_hash[:error_message].push 'Wad not found' if wad.nil?
-      commands = query['commands']
-      if wad
-        commands.each do |command, detail|
-          case command
-          when 'record'
-            level = detail['level']
-            category = detail['category']
-            if level and category
-              demo = wad.demos.where(tas: 0, guys: 1, level: level, category: Category.find_by(name: category)).first
-              if demo.nil?
-                response_hash[:error_message].push 'No record exists'
-              else
-                response_hash[:demo] = {time: demo.time, player: demo.players.first.username}
-              end
-            else
-              response_hash[:error_message].push 'Wad Record requires level and category'
-            end
-          when 'count'
-            detail.each do |d|
-              case d
-              when 'demos'
-                response_hash[:demo_count] ||= wad.demos.count
-              when 'players'
-                response_hash[:player_count] ||= DemoPlayer.includes(:demo).where('demos.wad_id = ?', wad.id).references(:demo).select(:player_id).distinct.count
-              else
-                response_hash[:error_messages].push "Unknown Wad Count '#{d}'"
-              end
-            end
-          when 'stats'
-            # This function puts the results directly into the hash
-            wad_stats(wad, response_hash)
-          when 'properties'
-            response_hash[:wad] = wad.serializable_hash(only: [:name, :username, :author, :year, :compatibility, :is_commercial, :versions, :single_map], methods: :iwad_username)
-          end
-        end
-      end
-    end
-    response_hash[:error] = (response_hash[:error_message].count > 0)
-    render json: response_hash
-  end
-
   def index
     letter = params[:letter]
     if (/\A[a-z9]\z/ =~ letter) == 0

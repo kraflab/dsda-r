@@ -4,7 +4,7 @@ Types::QueryType = GraphQL::ObjectType.define do
   name 'Query'
 
   field :player, Types::PlayerType do
-    description 'Retrieves player with a given ID or username.'
+    description 'Retrieves player with a given ID, username, or name.'
 
     argument :id, types.ID
     argument :username, types.String
@@ -24,6 +24,18 @@ Types::QueryType = GraphQL::ObjectType.define do
   field :iwads, !types[Types::IwadType] do
     resolve -> (obj, args, ctx) {
       Iwad.all
+    }
+  end
+
+  field :wad, Types::WadType do
+    description 'Retrieves wad with a given ID, username, or name.'
+
+    argument :id, types.ID
+    argument :username, types.String
+    argument :name, types.String
+
+    resolve -> (_obj, args, _ctx) {
+      find_by_one_of! :id, :username, :name, args, Wad
     }
   end
 
