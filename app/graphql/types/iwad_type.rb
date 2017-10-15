@@ -4,6 +4,7 @@ Types::IwadType = GraphQL::ObjectType.define do
   field :id,       !types.Int
   field :username, !types.String
   field :name,     !types.String
+  field :author,   !types.String
 
-  field :wads, !types[Types::WadType]
+  field :wads_count, !types.Int
 end

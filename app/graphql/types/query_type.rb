@@ -21,6 +21,18 @@ Types::QueryType = GraphQL::ObjectType.define do
     }
   end
 
+  field :iwad, Types::IwadType do
+    description 'Retrieves iwad with a given ID, username, or name.'
+
+    argument :id, types.ID
+    argument :username, types.String
+    argument :name, types.String
+
+    resolve -> (_obj, args, _ctx) {
+      find_by_one_of! :id, :username, :name, args, Iwad
+    }
+  end
+
   field :iwads, !types[Types::IwadType] do
     resolve -> (obj, args, ctx) {
       Iwad.all

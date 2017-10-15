@@ -8,14 +8,18 @@ class Iwad < ApplicationRecord
   validates :author,   presence: true, length: { maximum: 50 }
   before_save   :clean_strings
   before_update :clean_strings
-  
+
   # Override path
   def to_param
     username
   end
-  
+
+  def wads_count
+    wads.count
+  end
+
   private
-  
+
     # Remove excess whitespace
     def clean_strings
       self.name     = name.strip.gsub(/\s+/, ' ')
