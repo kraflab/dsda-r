@@ -271,7 +271,7 @@ DEPENDENCIES
   capistrano-rvm
   capistrano3-puma
   capybara
-  capybara-webkit
+  capybara-webkit (~> 1.14.0)
   carrierwave (~> 1.0)
   chartkick
   coffee-rails (~> 4.2)
