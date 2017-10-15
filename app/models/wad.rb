@@ -34,7 +34,7 @@ class Wad < ApplicationRecord
   end
 
   def record(level, category, guys, tas)
-    run_demos.first
+    run_demos(level, category, guys, tas).first
   end
 
   def run_demos(level, category, guys, tas)
