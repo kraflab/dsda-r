@@ -60,6 +60,10 @@ class Demo < ApplicationRecord
     demo_file.data.url if demo_file
   end
 
+  def video_url
+    "https://www.youtube.com/watch?v=#{video_link}" unless video_link.blank?
+  end
+
   def time
     Demo.tics_to_string(tics, has_tics) if tics
   end
