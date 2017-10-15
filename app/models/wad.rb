@@ -38,7 +38,12 @@ class Wad < ApplicationRecord
   end
 
   def run_demos(level, category, guys, tas)
-    demos.where(tas: tas, guys: guys, level: level, category: Category.find_by(name: category))
+    run_categories = [Category.find_by(name: category)]
+    if ['UV Speed', 'SM Speed'].include?(category)
+      run_categories << Category.find_by(name: 'Pacifist')
+    end
+
+    demos.where(tas: tas, guys: guys, level: level, category: run_categories).reorder(:tics)
   end
 
   def demos_count
