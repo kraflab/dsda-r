@@ -110,13 +110,4 @@ class DemosController < ApplicationController
     end
     [players, errors]
   end
-
-  # Allows destroy only for new items
-  def age_limit
-    @demo = Demo.find(params[:id])
-    if @demo.is_frozen?
-      flash[:warning] = 'That Demo is too old to delete from here'
-      redirect_to root_url
-    end
-  end
 end
