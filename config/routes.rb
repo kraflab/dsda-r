@@ -39,7 +39,7 @@ Rails.application.routes.draw do
   end
   get 'players/:id/stats' => 'players#stats', as: 'player_stats'
 
-  resources :iwads, except: [:edit, :update]
+  resources :iwads, only: [:show, :index]
   get 'iwads/:id/stats' => 'iwads#stats', as: 'iwad_stats'
 
   resources :wads
