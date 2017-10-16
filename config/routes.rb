@@ -16,9 +16,6 @@ Rails.application.routes.draw do
   get    'settings' => 'sessions#settings'
   patch  'settings' => 'sessions#set'
 
-  get    'edit' => 'admins#edit'
-  patch  'edit' => 'admins#update'
-
   get 'record_timeline'      => 'wads#record_timeline'
   get 'record_timeline_json' => 'wads#record_timeline_json'
   get 'compare_movies'      => 'wads#compare_movies'
