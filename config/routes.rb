@@ -34,7 +34,7 @@ Rails.application.routes.draw do
 
   get 'no_file' => "static_pages#no_file"
 
-  resources :players do
+  resources :players, only: [:show, :index] do
     get :autocomplete_player_username, :on => :collection
   end
   get 'players/:id/stats' => 'players#stats', as: 'player_stats'
