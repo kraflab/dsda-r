@@ -62,69 +62,61 @@ class DemosController < ApplicationController
 
   private
 
-    def demo_params
-      params.require(:demo).permit(:guys, :tas, :level, :time, :engine,
-                                   :levelstat, :wad_username, :category_name,
-                                   :recorded_at)
-    end
+  def demo_params
+    params.require(:demo).permit(:guys, :tas, :level, :time, :engine,
+                                 :levelstat, :wad_username, :category_name,
+                                 :recorded_at)
+  end
 
-    def parse_tags_form(tags, checks)
-      tag_list = []
+  def parse_tags_form(tags, checks)
+    tag_list = []
 
-      # hack to get around empty check boxes
-      checks.each_with_index do |c, i|
-        if c == 'No'
-          if i < checks.size and checks[i + 1] == 'Yes'
-            tag_list.push({'text' => tags.shift, 'style' => '1'})
-          else
-            tag_list.push({'text' => tags.shift, 'style' => '0'})
-          end
+    # hack to get around empty check boxes
+    checks.each_with_index do |c, i|
+      if c == 'No'
+        if i < checks.size and checks[i + 1] == 'Yes'
+          tag_list.push({'text' => tags.shift, 'style' => '1'})
+        else
+          tag_list.push({'text' => tags.shift, 'style' => '0'})
         end
       end
-
-      parse_tags(tag_list)
     end
 
-    def parse_tags(tags)
-      return if tags.nil?
+    parse_tags(tag_list)
+  end
 
-      tags.each do |tag|
-        next if tag['text'].blank?
-        sub_category = SubCategory.find_by(name: tag['text']) ||
-                       SubCategory.create(name: tag['text'], show: tag['style'])
-        Tag.create(sub_category: sub_category, demo: @demo) if sub_category
+  def parse_tags(tags)
+    return if tags.nil?
+
+    tags.each do |tag|
+      next if tag['text'].blank?
+      sub_category = SubCategory.find_by(name: tag['text']) ||
+                     SubCategory.create(name: tag['text'], show: tag['style'])
+      Tag.create(sub_category: sub_category, demo: @demo) if sub_category
+    end
+  end
+
+  def parse_players(player_names, from_api = false)
+    players = []
+    errors  = []
+    if from_api and player_names.nil?
+      errors.push('No player list')
+    else
+      player_names.each do |name|
+        next if name.blank?
+        player = Player.find_by(username: name) || Player.find_by(name: name)
+        player.nil? ? errors.push((from_api ? 'Missing player: ' : '') + name.to_s) : players.push(player)
       end
     end
+    [players, errors]
+  end
 
-    def parse_players(player_names, from_api = false)
-      players = []
-      errors  = []
-      if from_api and player_names.nil?
-        errors.push('No player list')
-      else
-        player_names.each do |name|
-          next if name.blank?
-          player = Player.find_by(username: name) || Player.find_by(name: name)
-          player.nil? ? errors.push((from_api ? 'Missing player: ' : '') + name.to_s) : players.push(player)
-        end
-      end
-      [players, errors]
+  # Allows destroy only for new items
+  def age_limit
+    @demo = Demo.find(params[:id])
+    if @demo.is_frozen?
+      flash[:warning] = 'That Demo is too old to delete from here'
+      redirect_to root_url
     end
-
-    # Allows destroy only for new items
-    def age_limit
-      @demo = Demo.find(params[:id])
-      if @demo.is_frozen?
-        flash[:warning] = 'That Demo is too old to delete from here'
-        redirect_to root_url
-      end
-    end
-
-    # Confirms an admin session
-    def admin_session
-      unless logged_in?
-        flash[:warning] = 'You must be logged in to perform this action'
-        redirect_to root_url
-      end
-    end
+  end
 end
