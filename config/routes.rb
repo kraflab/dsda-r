@@ -24,7 +24,6 @@ Rails.application.routes.draw do
   get 'compare_movies'      => 'wads#compare_movies'
   get 'compare_movies_json' => 'wads#compare_movies_json'
 
-  get 'demos/latest' => "demos#latest"
   get 'feed'         => 'demos#feed'
   get 'demos/:id/hidden_tag' => 'demos#hidden_tag'
 
@@ -49,6 +48,4 @@ Rails.application.routes.draw do
   resources :ports, except: [:show, :edit, :update], :id => /([^\/])+/ do
     get :autocomplete_port_family, :on => :collection
   end
-
-  resources :demos, except: [:index, :show]
 end

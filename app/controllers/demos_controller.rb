@@ -1,6 +1,4 @@
 class DemosController < ApplicationController
-  before_action :admin_session, only: [:new, :create, :update, :edit, :destroy]
-  before_action :age_limit, only: :destroy
   skip_before_action :verify_authenticity_token, only: [:api_create]
 
   def feed
@@ -8,22 +6,6 @@ class DemosController < ApplicationController
     @demos = Demo.reorder(@sort_sym => :desc).page params[:page]
   end
 
-  def latest
-    @demos = Demo.reorder(created_at: :desc).page
-    @latest = @demos.first
-    if stale? @latest
-      respond_to do |format|
-        format.atom
-      end
-    end
-  end
-
-  def new
-    @demo = Demo.new
-    @demo.wad_username = params[:wad] if params[:wad]
-  end
-
-  # TODO - refactor the creation code with the create action!
   def api_create
     query, response_hash, admin = preprocess_api_authenticate(request)
     # admin is nil unless authentication was successful
@@ -73,64 +55,9 @@ class DemosController < ApplicationController
     render json: response_hash
   end
 
-  def create
-    players, player_errors = parse_players(params[:players])
-    if player_errors.empty?
-      @demo = Demo.new(demo_params)
-      if @demo.save
-        players.each do |player|
-          DemoPlayer.create(demo: @demo, player: player)
-        end
-        parse_tags_form(params[:tags], params[:shows])
-        flash[:info] = 'Demo successfully created'
-        redirect_to wad_path(@demo.wad)
-      else
-        render 'new'
-      end
-    else
-      @demo = Demo.new(demo_params)
-      flash.now[:warning] = "Players: #{errors.join(", ")} not found"
-      render 'new'
-    end
-  end
-
-  def destroy
-    @demo.destroy
-    flash[:info] = 'Demo successfully deleted'
-    redirect_to root_path
-  end
-
   def hidden_tag
     demo = Demo.find(params[:id])
     render plain: demo.hidden_tags_text
-  end
-
-  def edit
-    @demo = Demo.find(params[:id])
-  end
-
-  def update
-    @demo = Demo.find(params[:id])
-    players, errors = parse_players(params[:players])
-    if errors.empty?
-      if @demo.update(demo_params)
-        demo_players = @demo.demo_players
-        demo_players.each { |dp| dp.destroy }
-        demo_tags = @demo.tags
-        demo_tags.each { |dt| dt.destroy }
-        players.each do |player|
-          DemoPlayer.create(demo: @demo, player: player).save
-        end
-        parse_tags_form(params[:tags], params[:shows])
-        flash[:info] = 'Demo successfully updated'
-        redirect_to wad_path(@demo.wad)
-      else
-        render 'edit'
-      end
-    else
-      flash.now[:warning] = "Players: #{errors.join(", ")} not found"
-      render 'edit'
-    end
   end
 
   private
