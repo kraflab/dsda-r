@@ -14,6 +14,5 @@ class IwadsIndexTest < ActionDispatch::IntegrationTest
       assert_select 'a[href=?]', iwad_path(iwad)
       assert_select 'td', iwad.wads.count.to_s
     end
-    assert_select 'a[href=?]', new_iwad_path, count: 0
   end
 end

@@ -23,7 +23,6 @@ class WadsShowTest < ActionDispatch::IntegrationTest
     demo.players.each do |pl|
       assert_match pl.name, response.body
     end
-    assert_select "a[href=?]", edit_wad_path(@wad), count: 0
     assert_match demos(:bt01pacifist).video_link, response.body
   end
 

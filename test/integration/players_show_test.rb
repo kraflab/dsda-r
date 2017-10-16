@@ -30,6 +30,5 @@ class PlayersShowTest < ActionDispatch::IntegrationTest
     demo.players.each do |pl|
       assert_match pl.name, response.body
     end
-    assert_select "a[href=?]", edit_player_path(@player), count: 0
   end
 end
