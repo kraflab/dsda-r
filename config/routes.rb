@@ -10,9 +10,6 @@ Rails.application.routes.draw do
   get 'stats'  => 'static_pages#stats'
   get 'about'  => 'static_pages#about'
 
-  get    'login'    => 'sessions#new'
-  post   'login'    => 'sessions#create'
-  delete 'logout'   => 'sessions#destroy'
   get    'settings' => 'sessions#settings'
   patch  'settings' => 'sessions#set'
 
