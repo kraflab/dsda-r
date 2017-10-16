@@ -16,7 +16,7 @@ work in parsing the old archive and extracting new data, see the work
 [here](https://github.com/oleksiykamenyev/DSDA_data_extraction).
 
 Uses `Ruby  2.4.0`  
-Uses `Rails 5.0.4`
+Uses `Rails 5.0.x`
 
 ## New Features
 Heretic and Hexen support  
@@ -33,27 +33,7 @@ Twitch / YouTube links for players
 Demo video links  
 Record timelines:  
 ![timeline](http://i.imgur.com/0l1dKNy.png)  
-Restful API ([repo](https://github.com/kraflab/dsda-r-api-client)):  
-
-    kraflab:~/dsda-r-api-client $ ./dsda-client.rb
-    => Starting DSDA API Client
-    => Using ruby 2.4.0
-    => Type 'exit' or 'quit' to close the client
-    dsda-r: get wad aerified record "Map 01" "UV Speed"
-    Issuing GET request... [ SUCCESS ]
-    {
-      demo: {
-        time: 0:15.46,
-        player: adrien
-      }
-    }
-    No errors!
+GraphQL API
 
 ## Current Focus
-Expand API capabilities  
-Expand and clean up settings page  
-Add and clean up features
-
-## Contributors
-Full stack: Kraflab  
-Design: Kraflab, 4shockblast, elimzke
+Implement and expand GraphQL API
