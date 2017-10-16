@@ -42,7 +42,7 @@ Rails.application.routes.draw do
   resources :iwads, only: [:show, :index]
   get 'iwads/:id/stats' => 'iwads#stats', as: 'iwad_stats'
 
-  resources :wads
+  resources :wads, only: [:show, :index]
   get 'wads/:id/stats' => 'wads#stats', as: 'wad_stats'
 
   resources :ports, only: [:index], :id => /([^\/])+/ do

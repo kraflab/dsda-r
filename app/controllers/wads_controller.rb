@@ -1,6 +1,4 @@
 class WadsController < ApplicationController
-  before_action :admin_session, only: [:new, :create, :destroy, :edit, :update]
-  before_action :age_limit, only: :destroy
   skip_before_action :verify_authenticity_token, only: [:api_create]
 
   def index
@@ -34,12 +32,6 @@ class WadsController < ApplicationController
     @wad = Wad.find_by(username: params[:id])
   end
 
-  def new
-    @wad = Wad.new
-    @wad.iwad_username = params[:iwad] if params[:iwad]
-  end
-
-  # TODO - refactor with demo creation api
   def api_create
     query, response_hash, admin = preprocess_api_authenticate(request)
     # admin is nil unless authentication was successful
@@ -85,42 +77,6 @@ class WadsController < ApplicationController
     end
     response_hash[:error] = (response_hash[:error_message].count > 0)
     render json: response_hash
-  end
-
-  def create
-    @wad = Wad.new(wad_params)
-    if @wad.save
-      flash[:info] = 'Wad successfully created'
-      redirect_to wad_path(@wad)
-    else
-      render 'new'
-    end
-  end
-
-  def destroy
-    @wad.destroy
-    flash[:info] = 'Wad successfully deleted'
-    redirect_to wads_url
-  end
-
-  def edit
-    @wad = Wad.find_by(username: params[:id])
-    @old_username = @wad.username
-  end
-
-  def update
-    @old_username  = params[:wad][:old_username]
-    @wad = Wad.find_by(username: @old_username)
-    params[:wad][:username] = @wad.username if @wad.is_frozen?
-    if @wad.update_attributes(wad_params)
-      flash[:info] = 'Wad successfully updated'
-      redirect_to @wad
-    else
-      if @wad.iwad.nil?
-        @wad.errors.add(:iwad_username, :not_found, message: 'not found')
-      end
-      render 'edit'
-    end
   end
 
   def record_timeline_json
@@ -184,28 +140,4 @@ class WadsController < ApplicationController
       end
     end
   end
-
-  private
-
-    def wad_params
-      params[:wad][:single_map] = (params[:wad][:single_map] == '1')
-      params.require(:wad).permit(:name, :username, :author, :file, :iwad_username, :single_map)
-    end
-
-    # Allows destroy only for new items
-    def age_limit
-      @wad = Wad.find_by(username: params[:id])
-      if @wad.is_frozen?
-        flash[:warning] = 'That Wad is too old to delete from here'
-        redirect_to root_url
-      end
-    end
-
-    # Confirms an admin session
-    def admin_session
-      unless logged_in?
-        flash[:warning] = 'You must be logged in to perform this action'
-        redirect_to(root_url)
-      end
-    end
 end
