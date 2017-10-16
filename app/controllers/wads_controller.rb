@@ -18,7 +18,7 @@ class WadsController < ApplicationController
   end
 
   def show
-    @wad = Wad.find_by(username: params[:id])
+    @wad = Wad.find_by!(username: params[:id])
     subset = params[:level]
     if subset.is_a?(String) && subset.include?('Episode')
       episode = subset.split(' ').last.to_i
