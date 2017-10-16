@@ -62,12 +62,6 @@ class DemosController < ApplicationController
 
   private
 
-  def demo_params
-    params.require(:demo).permit(:guys, :tas, :level, :time, :engine,
-                                 :levelstat, :wad_username, :category_name,
-                                 :recorded_at)
-  end
-
   def parse_tags_form(tags, checks)
     tag_list = []
 
