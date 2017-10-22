@@ -18,6 +18,8 @@ class AuthToken
       { error: 'expired signature' }
     rescue JWT::VerificationError
       { error: 'verification error' }
+    rescue JWT::DecodeError
+      { error: 'decode error' }
     end
 
     def user_from_token(token)
