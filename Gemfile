@@ -33,8 +33,8 @@ group :test do
   gem 'capybara'
   gem 'capybara-webkit', '~> 1.14.0'
   gem 'selenium-webdriver'
-  gem 'minitest-reporters', '1.0.5'
-  gem 'mini_backtrace',     '0.1.3'
+  gem 'minitest-reporters'
+  gem 'mini_backtrace'
 end
 
 group :development do
