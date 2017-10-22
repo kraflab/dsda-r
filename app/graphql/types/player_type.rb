@@ -1,5 +1,3 @@
-require 'players_helper'
-
 Types::PlayerType = GraphQL::ObjectType.define do
   name 'Player'
 
