@@ -7,14 +7,16 @@ class Mutations::AuthenticateUser < GraphQL::Function
   def call(_obj, args, _ctx)
     username = args[:username]
     password = args[:password]
-    return unless username && password
+    raise AuthenticationFailure unless username && password
 
     user = User.find_by(username: username)
-    return unless user && user.authenticate(password)
+    raise AuthenticationFailure unless user && user.authenticate(password)
 
     OpenStruct.new({
       token: AuthToken.token(user),
       username:  user.username
     })
+  rescue AuthenticationFailure
+    GraphQL::ExecutionError.new('Authentication failure.')
   end
 end
