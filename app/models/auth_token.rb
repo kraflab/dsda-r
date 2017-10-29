@@ -28,8 +28,10 @@ class AuthToken
       User.find_by(id: result['user_id'])
     end
 
+    EXPIRATION_TIME = 2.hours
+
     def expiration_time
-      (Time.now + 2.hours).to_i
+      (Time.now + EXPIRATION_TIME).to_i
     end
   end
 end

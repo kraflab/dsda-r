@@ -1,17 +1,20 @@
-class Mutations::AuthenticateUser < GraphQL::function
-  argument :username, !Types::AuthProviderUsernameInput
+class Mutations::AuthenticateUser < GraphQL::Function
+  argument :username, !types.String
+  argument :password, !types.String
 
-  type Types::AuthenticateType
+  type Types::UserTokenType
 
   def call(_obj, args, _ctx)
-    input = args[:username]
-    return unless input
+    username = args[:username]
+    password = args[:password]
+    return unless username && password
 
-    user = User.find_by(username: args[:username])
-    return unless user && user.authenticate(input[:password])
+    user = User.find_by(username: username)
+    return unless user && user.authenticate(password)
 
     OpenStruct.new({
       token: AuthToken.token(user),
-      user:  user
+      username:  user.username
     })
+  end
 end
