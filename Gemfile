@@ -9,6 +9,7 @@ gem 'jquery-rails'
 gem 'jbuilder',     '~> 2.5'
 gem 'bcrypt',       '~> 3.1.7'
 gem 'graphql'
+gem 'jwt'
 
 gem 'faker',                   '1.7.2'
 gem 'kaminari'
@@ -33,8 +34,8 @@ group :test do
   gem 'capybara'
   gem 'capybara-webkit', '~> 1.14.0'
   gem 'selenium-webdriver'
-  gem 'minitest-reporters', '1.0.5'
-  gem 'mini_backtrace',     '0.1.3'
+  gem 'minitest-reporters'
+  gem 'mini_backtrace'
 end
 
 group :development do
