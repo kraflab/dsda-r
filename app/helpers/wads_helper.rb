@@ -43,8 +43,7 @@ module WadsHelper
       [
         demo_details(wad),
         link_to('Stats', wad_stats_path(wad)),
-        level_selector(wad),
-        new_demo_link(wad)
+        level_selector(wad)
       ].join(' ').html_safe
     end
   end
