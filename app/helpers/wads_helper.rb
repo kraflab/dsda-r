@@ -33,8 +33,7 @@ module WadsHelper
     content_tag :h1 do
       [
         link_to(wad.name, wad.file_path),
-        content_tag(:small, wad.author),
-        edit_wad_link(wad)
+        content_tag(:small, wad.author)
       ].join(' ').html_safe
     end
   end
@@ -130,11 +129,5 @@ module WadsHelper
         ].join(' ').html_safe
       end
     end
-  end
-
-  def edit_wad_link(wad)
-  end
-
-  def new_demo_link(wad)
   end
 end
