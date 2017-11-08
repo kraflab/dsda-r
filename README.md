@@ -15,7 +15,7 @@ This repository is for the full stack of the site itself.  For the related
 work in parsing the old archive and extracting new data, see the work
 [here](https://github.com/oleksiykamenyev/DSDA_data_extraction).
 
-Uses `Ruby  2.4.0`  
+Uses `Ruby  2.4.x`
 Uses `Rails 5.0.x`
 
 ## New Features
