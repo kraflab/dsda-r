@@ -19,7 +19,7 @@ class Demo < ApplicationRecord
   scope :within, -> (n) { reorder(recorded_at: :desc).where('recorded_at >= ?', n.days.ago)}
   validates :wad_id,      presence: true
   validates :category_id, presence: true
-  validates :tics,        presence: true, numericality: { greater_than: 0 }
+  validates :tics,        presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :engine,      presence: true, length: { maximum: 50 }
   validates :tas,         presence: true,
                           numericality: { greater_than_or_equal_to: 0 }

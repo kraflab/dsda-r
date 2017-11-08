@@ -30,9 +30,9 @@ class DemoTest < ActiveSupport::TestCase
     assert_not @demo.valid?
   end
 
-  test "tics must be positive" do
+  test "tics must be nonnegative" do
     @demo.tics = 0
-    assert_not @demo.valid?
+    assert @demo.valid?
     @demo.tics = -1
     assert_not @demo.valid?
   end
