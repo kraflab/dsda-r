@@ -5,9 +5,25 @@ class ApplicationController < ActionController::Base
   include DemosHelper
   include WadsHelper
   include PlayersHelper
+  ADMIN_FAIL_LIMIT = 5
   ADMIN_ERR_LOCK = 3
   ADMIN_ERR_FAIL = 2
   ADMIN_SUCCESS  = 1
+
+  def authenticate_admin!
+    username = request.headers["HTTP_API_USERNAME"]
+    password = request.headers["HTTP_API_PASSWORD"]
+    @current_admin = authenticate_admin_via_password(username, password)
+    raise Errors::Unauthorized if @current_admin.nil?
+  end
+
+  def authenticate_admin_via_password(username, password)
+    admin = Admin.find_by(username: username)
+    return nil if admin.nil? || admin.fail_count >= ADMIN_FAIL_LIMIT
+    return admin if admin.authenticate(password)
+    admin.update(fail_count: admin.fail_count + 1)
+    return nil
+  end
 
   # Process admin login credentials
   def authenticate_admin(username, password)
@@ -63,5 +79,10 @@ class ApplicationController < ActionController::Base
   # Basic api check for file data
   def has_file_data?(query)
     query['file'] and query['file']['data'] and query['file']['name']
+  end
+
+  def preprocess_api_request(*required_fields)
+    @request_hash = JSON.parse(request.body.read).deep_symbolize_keys
+    raise Errors::UnprocessableEntity, 'missing required fields' unless required_keys.all? { |k| @request_body.key? k }
   end
 end

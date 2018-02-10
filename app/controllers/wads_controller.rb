@@ -1,5 +1,6 @@
 class WadsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:api_create]
+  before_action :authenticate_admin!, only: [:api_create]
 
   def index
     letter = params[:letter]
@@ -33,8 +34,9 @@ class WadsController < ApplicationController
   end
 
   def api_create
-    query = preprocess_api_authenticate(request)
-    render json: WadCreationService.new(query['wad']).create
+    preprocess_api_request(:wad)
+    response = WadCreationService.new(@request_hash[:wad]).create!
+    render json: response
   end
 
   def record_timeline_json
