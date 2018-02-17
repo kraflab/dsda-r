@@ -22,13 +22,13 @@ class WadCreationService
   end
 
   def iwad
-    Iwad.find_by(name: @request_hash[:iwad]) || Iwad.find_by(username: @request_hash[:iwad])
+    @iwad ||= Iwad.find_by(name: @request_hash[:iwad]) || Iwad.find_by(username: @request_hash[:iwad])
   end
 
   def new_file
     io = Base64StringIO.new(Base64.decode64(@request_hash[:file][:data]))
     io.original_filename = @request_hash[:file][:name][0..23]
-    WadFile.new(iwad: @wad.iwad, data: io)
+    WadFile.new(iwad: iwad, data: io)
   end
 
   def succeed_with(body)

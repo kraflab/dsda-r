@@ -1,0 +1,5 @@
+btsx_zip:
+  id: 123456
+  iwad: doom2
+  data: 'test0.zip'
+  md5: '1234'
