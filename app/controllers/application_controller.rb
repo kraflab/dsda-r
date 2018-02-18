@@ -10,19 +10,10 @@ class ApplicationController < ActionController::Base
   ADMIN_ERR_FAIL = 2
   ADMIN_SUCCESS  = 1
 
-  def authenticate_admin!
-    username = request.headers["HTTP_API_USERNAME"]
-    password = request.headers["HTTP_API_PASSWORD"]
-    @current_admin = authenticate_admin_via_password(username, password)
-    raise Errors::Unauthorized if @current_admin.nil?
-  end
+  include Errors::RescueError
 
-  def authenticate_admin_via_password(username, password)
-    admin = Admin.find_by(username: username)
-    return nil if admin.nil? || admin.fail_count >= ADMIN_FAIL_LIMIT
-    return admin if admin.authenticate(password)
-    admin.update(fail_count: admin.fail_count + 1)
-    return nil
+  def authenticate_admin!
+    @current_admin = AdminAuthenticator.new(request).authenticate!
   end
 
   # Process admin login credentials
