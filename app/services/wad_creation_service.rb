@@ -6,9 +6,7 @@ class WadCreationService
   end
 
   def create!
-    @wad = new_wad
-    @wad.save!
-    succeed_with(id: @wad.id, file_id: @wad.wad_file_id)
+    new_wad.tap { |wad| wad.save! }
   end
 
   private
@@ -29,10 +27,6 @@ class WadCreationService
     io = Base64StringIO.new(Base64.decode64(@request_hash[:file][:data]))
     io.original_filename = @request_hash[:file][:name][0..23]
     WadFile.new(iwad: iwad, data: io)
-  end
-
-  def succeed_with(body)
-    { save: true }.merge(body)
   end
 
   def has_file_data?

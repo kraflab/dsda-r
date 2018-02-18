@@ -30,8 +30,8 @@ describe WadCreationService do
         end
       end
 
-      it 'returns a success hash' do
-        create.keys.must_equal [:save, :id, :file_id]
+      it 'returns the wad' do
+        create.must_be_instance_of Wad
       end
 
       describe 'when a file is associated' do
@@ -60,7 +60,7 @@ describe WadCreationService do
           end
 
           it 'associates the wad with the existing file' do
-            create[:file_id].must_equal file_id
+            create.wad_file_id.must_equal file_id
           end
         end
       end

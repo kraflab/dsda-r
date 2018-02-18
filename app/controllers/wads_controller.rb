@@ -35,8 +35,8 @@ class WadsController < ApplicationController
 
   def api_create
     preprocess_api_request(:wad)
-    response = WadCreationService.new(@request_hash[:wad]).create!
-    render json: response
+    wad = WadCreationService.new(@request_hash[:wad]).create!
+    render json: WadSerializer.new(wad).call
   end
 
   def record_timeline_json
