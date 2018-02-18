@@ -1,4 +1,7 @@
 module Errors
+  class Unauthorized < StandardError; end
+  class UnprocessableEntity < StandardError; end
+
   module RescueError
     def self.included(base)
       base.rescue_from Errors::Unauthorized do |e|
