@@ -72,8 +72,7 @@ class ApplicationController < ActionController::Base
     query['file'] and query['file']['data'] and query['file']['name']
   end
 
-  def preprocess_api_request(*required_fields)
-    @request_hash = JSON.parse(request.body.read).deep_symbolize_keys
-    raise Errors::UnprocessableEntity, 'missing required fields' unless required_keys.all? { |k| @request_body.key? k }
+  def preprocess_api_request(options)
+    @request_hash = ApiRequestParser.new(options.merge(request: request)).parse_json
   end
 end
