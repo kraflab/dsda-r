@@ -10,6 +10,7 @@ bt01speed:
   levelstat: "0:09.99"
   version: 0
   recorded_at: <%= 100.days.ago %>
+  demo_file: demo_zip
 
 bt01pacifist:
   wad: btsx
@@ -24,6 +25,7 @@ bt01pacifist:
   version: 0
   recorded_at: <%= 100.days.ago %>
   video_link: "1op_0sdg923g"
+  demo_file: demo_zip
 
 bt01pacifist_solo:
   wad: btsx
@@ -38,6 +40,7 @@ bt01pacifist_solo:
   levelstat: "0:00.97,1:12"
   version: 0
   recorded_at: <%= 100.days.ago %>
+  demo_file: demo_zip
 
 bt02speed:
   wad: btsx
@@ -51,6 +54,7 @@ bt02speed:
   levelstat: "0:00.97"
   version: 0
   recorded_at: <%= 100.days.ago %>
+  demo_file: demo_zip
 
 bt02speed_slow:
   wad: btsx
@@ -64,6 +68,7 @@ bt02speed_slow:
   levelstat: "0:00.97"
   version: 0
   recorded_at: <%= 100.days.ago %>
+  demo_file: demo_zip
 
 bt02speed_slower:
   wad: btsx
@@ -77,6 +82,7 @@ bt02speed_slower:
   levelstat: "0:00.97"
   version: 0
   recorded_at: <%= 100.days.ago %>
+  demo_file: demo_zip
 
 table_fill:
   wad: btsx
@@ -90,6 +96,7 @@ table_fill:
   levelstat: "0:00.97"
   version: 0
   recorded_at: <%= 100.days.ago %>
+  demo_file: demo_zip
 
 <% 40.times do |n| %>
 demo_<%= n %>:
@@ -106,6 +113,7 @@ demo_<%= n %>:
   created_at: <%= (n + 1).days.ago %>
   updated_at: <%= (n + 1).days.ago %>
   engine: PRBoom+ v2.5.1.4 cl9
+  demo_file: demo_zip
 <% end %>
 
 btep1_a:
@@ -120,6 +128,7 @@ btep1_a:
   levelstat: "0:59\n1:13"
   version: 0
   recorded_at: <%= 100.days.ago %>
+  demo_file: demo_zip
 
 btep1_b:
   wad: btsx
@@ -133,6 +142,7 @@ btep1_b:
   levelstat: "0:54\n1:18"
   version: 0
   recorded_at: <%= 100.days.ago %>
+  demo_file: demo_zip
 
 xlist_speed:
   wad: xlist_test
@@ -144,6 +154,7 @@ xlist_speed:
   has_tics: false
   level: E1M4
   recorded_at: <%= 100.days.ago %>
+  demo_file: demo_zip
 
 xlist_pacifist:
   wad: xlist_test
@@ -155,6 +166,7 @@ xlist_pacifist:
   has_tics: false
   level: E1M4
   recorded_at: <%= 100.days.ago %>
+  demo_file: demo_zip
 
 recent_demo:
   wad: recent_wad
@@ -166,6 +178,7 @@ recent_demo:
   has_tics: false
   level: E1M4
   recorded_at: <%= Time.zone.now %>
+  demo_file: demo_zip
 
 next_demo:
   wad: recent_wad
@@ -177,6 +190,7 @@ next_demo:
   has_tics: false
   level: E1M4
   recorded_at: <%= 5.minutes.ago %>
+  demo_file: demo_zip
 
 nexter_demo:
   wad: recent_wad
@@ -188,3 +202,4 @@ nexter_demo:
   has_tics: true
   level: E1M4
   recorded_at: <%= 10.minutes.ago %>
+  demo_file: demo_zip
