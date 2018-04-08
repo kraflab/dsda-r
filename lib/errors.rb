@@ -15,6 +15,10 @@ module Errors
       base.rescue_from JSON::ParserError do |e|
         render json: { errors: e.message }, status: 422
       end
+
+      base.rescue_from ActiveRecord::RecordInvalid do |e|
+        render json: { errors: e.record.errors.messages }, status: 422
+      end
     end
   end
 end
