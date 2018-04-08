@@ -1,6 +1,6 @@
 class Wad < ApplicationRecord
   belongs_to :iwad, touch: true
-  belongs_to :wad_file
+  belongs_to :wad_file, autosave: true, optional: true
   has_many :demos, dependent: :destroy
   has_many :demo_files
   default_scope -> { order(:username) }
@@ -10,6 +10,7 @@ class Wad < ApplicationRecord
                        uniqueness: true,
                        format: { with: VALID_USERNAME_REGEX }
   validates :author,   presence: true, length: { maximum: 50 }
+  validates_associated :wad_file
   before_save   :clean_strings
   before_update :clean_strings
 

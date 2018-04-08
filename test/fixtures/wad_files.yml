@@ -1,4 +1,4 @@
-demo_zip:
-  wad: btsx
+btsx_zip:
+  iwad: doom2
   data: 'test0.zip'
   md5: '1234'

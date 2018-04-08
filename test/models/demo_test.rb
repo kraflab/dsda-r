@@ -3,12 +3,19 @@ require 'test_helper'
 class DemoTest < ActiveSupport::TestCase
 
   def setup
-    @wad = wads(:btsx)
-    @category = categories(:uvspeed)
-    @demo = Demo.new(wad: @wad, category: @category, tics: 99,
-                     engine: "PRBoom+ v2.5.1.4", tas: 0, guys: 1,
-                     has_tics: true, level: "Map 02",
-                     recorded_at: 20.minutes.ago, levelstat: "0:00.99,1:11:00")
+    @demo = Demo.new(
+      wad: wads(:btsx),
+      category: categories(:uvspeed),
+      tics: 99,
+      engine: "PRBoom+ v2.5.1.4",
+      tas: 0,
+      guys: 1,
+      has_tics: true,
+      level: "Map 02",
+      recorded_at: 20.minutes.ago,
+      levelstat: "0:00.99,1:11:00",
+      demo_file: demo_files(:demo_zip)
+    )
   end
 
   test "should be valid" do
@@ -129,11 +136,8 @@ class DemoTest < ActiveSupport::TestCase
   end
 
   test "fix levelstats before creation" do
-    demo = Demo.create(wad: @wad, category: @category, tics: 99,
-                       engine: "PRBoom+ v2.5.1.4", tas: 0, guys: 1,
-                       has_tics: true, level: "Map 02",
-                       recorded_at: 20.minutes.ago, levelstat: "0:00.99,1:11:00")
-    assert_equal "0:00.99\n1:11:00", demo.levelstat
+    @demo.save
+    assert_equal "0:00.99\n1:11:00", @demo.levelstat
   end
 
   test "should fix levelstats" do

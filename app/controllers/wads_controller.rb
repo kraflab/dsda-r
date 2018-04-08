@@ -1,5 +1,6 @@
 class WadsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:api_create]
+  before_action :authenticate_admin!, only: [:api_create]
 
   def index
     letter = params[:letter]
@@ -33,50 +34,9 @@ class WadsController < ApplicationController
   end
 
   def api_create
-    query, response_hash, admin = preprocess_api_authenticate(request)
-    # admin is nil unless authentication was successful
-    if query and admin
-      wad_query = query['wad']
-      iwad = Iwad.find_by(name: wad_query['iwad']) || Iwad.find_by(username: wad_query['iwad'])
-      if iwad
-        @wad = Wad.new(wad_query.slice('name', 'username', 'author', 'year',
-                                       'compatibility', 'is_commercial', 'single_map'))
-        @wad.iwad = iwad
-        if @wad.valid?
-          success = true
-          if has_file_data?(wad_query)
-            io = Base64StringIO.new(Base64.decode64(wad_query['file']['data']))
-            io.original_filename = wad_query['file']['name'][0..23]
-            new_file = WadFile.new(iwad: @wad.iwad)
-            new_file.data = io
-            if new_file.save
-              @wad.wad_file = new_file
-            else
-              success = false
-              response_hash[:error_message].push 'Wad creation failed', *new_file.errors
-            end
-          elsif wad_query['file_id']
-            if wad_file = WadFile.find_by(id: wad_query['file_id'])
-              @wad.wad_file = wad_file
-            else
-              success = false
-              response_hash[:error_message].push 'Wad creation failed', 'file not found'
-            end
-          end
-          if success
-            @wad.save
-            response_hash[:save] = true
-            response_hash[:wad] = {id: @wad.id, file_id: @wad.wad_file_id}
-          end
-        else
-          response_hash[:error_message].push 'Wad creation failed', *@wad.errors
-        end
-      else
-        response_hash[:error_message].push 'Wad creation failed', 'Iwad not found'
-      end
-    end
-    response_hash[:error] = (response_hash[:error_message].count > 0)
-    render json: response_hash
+    preprocess_api_request(require: [:wad])
+    wad = WadCreationService.new(@request_hash[:wad]).create!
+    render json: WadSerializer.new(wad).call
   end
 
   def record_timeline_json

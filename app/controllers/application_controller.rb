@@ -5,9 +5,16 @@ class ApplicationController < ActionController::Base
   include DemosHelper
   include WadsHelper
   include PlayersHelper
+  ADMIN_FAIL_LIMIT = 5
   ADMIN_ERR_LOCK = 3
   ADMIN_ERR_FAIL = 2
   ADMIN_SUCCESS  = 1
+
+  include Errors::RescueError
+
+  def authenticate_admin!
+    @current_admin = AdminAuthenticator.new(request).authenticate!
+  end
 
   # Process admin login credentials
   def authenticate_admin(username, password)
@@ -63,5 +70,9 @@ class ApplicationController < ActionController::Base
   # Basic api check for file data
   def has_file_data?(query)
     query['file'] and query['file']['data'] and query['file']['name']
+  end
+
+  def preprocess_api_request(options)
+    @request_hash = ApiRequestParser.new(options.merge(request: request)).parse_json
   end
 end

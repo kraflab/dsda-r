@@ -2,11 +2,13 @@ ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 require 'minitest/reporters'
+require 'minitest/spec'
 require 'capybara/rails'
 require 'capybara/minitest'
 Minitest::Reporters.use!
 Capybara.javascript_driver = :selenium
 Capybara.default_driver = :selenium
+CarrierWave.root = 'test/fixtures/files'
 
 class CapybaraIntegrationTest < ActionDispatch::IntegrationTest
   # Make the Capybara DSL available in these integration tests
@@ -28,6 +30,12 @@ end
 
 class ActiveSupport::TestCase
   fixtures :all
+
+  extend MiniTest::Spec::DSL
+
+  register_spec_type self do |desc|
+    true
+  end
 
   # Returns a dummy zip for tests
   def dummy_zip(n = 0)
