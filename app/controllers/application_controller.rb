@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
     @current_admin = AdminAuthenticator.new(request).authenticate!
   end
 
-  # Process admin login credentials
+  # TODO: delete once all uses are replaced
   def authenticate_admin(username, password)
     admin = Admin.find_by(username: username)
     if admin
@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # Basic pass for api
+  # TODO: delete once all uses are replaced
   def preprocess_api(request, require_query = true)
     response_hash = {}
     response_hash[:error_message] = []
@@ -46,7 +46,7 @@ class ApplicationController < ActionController::Base
     [query, response_hash]
   end
 
-  # Preprocess api with authentication
+  # TODO: delete once all uses are replaced
   def preprocess_api_authenticate(request, require_query = true)
     query, response_hash = preprocess_api(request, require_query)
     admin, code = authenticate_admin(request.headers["HTTP_API_USERNAME"],

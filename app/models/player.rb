@@ -105,12 +105,12 @@ class Player < ApplicationRecord
     end
 
     def clean_strings
-      self.twitch   ||= ''
-      self.youtube  ||= ''
-      self.name     = name.strip.gsub(/\s+/, ' ')
+      self.twitch  ||= ''
+      self.youtube ||= ''
+      self.name      = name.strip.gsub(/\s+/, ' ') if name.present?
     end
 
     def check_username
-      self.username = Player.default_username(name) if username.blank?
+      self.username = Player.default_username(name) if username.blank? && name.present?
     end
 end

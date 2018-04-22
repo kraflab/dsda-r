@@ -1,6 +1,7 @@
 class PlayersController < ApplicationController
   autocomplete :player, :username
   skip_before_action :verify_authenticity_token, only: [:api_create]
+  before_action :authenticate_admin!, only: [:api_create]
 
   def index
     @players = Player.all
@@ -17,30 +18,8 @@ class PlayersController < ApplicationController
   end
 
   def api_create
-    query, response_hash, admin = preprocess_api_authenticate(request)
-    # admin is nil unless authentication was successful
-    if query and admin
-      player_query = query['player']
-      @player = Player.new(player_query.slice('name', 'username', 'twitch',
-                                                                  'youtube'))
-      if @player.save
-        response_hash[:save] = true
-        response_hash[:player] = {id: @player.id, username: @player.username}
-      else
-        response_hash[:error_message].push 'Player creation failed', *@player.errors
-      end
-    end
-    response_hash[:error] = (response_hash[:error_message].count > 0)
-    render json: response_hash
-  end
-
-  private
-
-  # Insert default username construction if none provided
-  def check_username(these_params)
-    if these_params[:username].empty?
-      these_params[:username] = Player.default_username(these_params[:name])
-    end
-    these_params
+    preprocess_api_request(require: [:player])
+    player = PlayerCreationService.new(@request_hash[:player]).create!
+    render json: PlayerSerializer.new(player).call
   end
 end
