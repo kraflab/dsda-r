@@ -27,13 +27,6 @@ class Port < ApplicationRecord
     return data.url
   end
 
-  def data_string=(str)
-    puts str
-    io = Base64StringIO.new(str)
-    io.original_filename = str
-    data = io
-  end
-
   private
 
     # Remove excess whitespace
