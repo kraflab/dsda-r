@@ -13,9 +13,6 @@ class DemosController < ApplicationController
     render json: DemoSerializer.new(demo).call
   end
 
-  def api_create
-    parse_tags(demo_query['tags'])
-
   def hidden_tag
     demo = Demo.find(params[:id])
     render plain: demo.hidden_tags_text
