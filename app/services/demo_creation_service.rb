@@ -1,7 +1,6 @@
 class DemoCreationService
   BASE_ATTRIBUTES = [
-    :time, :tas, :guys, :level, :recorded_at, :levelstat, :engine,
-    :version, :category_name, :video_link
+    :time, :tas, :guys, :level, :recorded_at, :levelstat, :engine, :version, :video_link
   ].freeze
 
   def initialize(request_hash)
@@ -19,9 +18,14 @@ class DemoCreationService
   end
 
   def demo_attributes
-    @request_hash.slice(*BASE_ATTRIBUTES).merge(
-      wad: wad, demo_file: demo_file, players: players, sub_categories: sub_categories
-    )
+    @request_hash.slice(*BASE_ATTRIBUTES).merge(associations)
+  end
+
+  def associations
+    {
+      wad: wad, demo_file: demo_file, players: players,
+      sub_categories: sub_categories, category: category
+    }
   end
 
   def wad
@@ -39,6 +43,10 @@ class DemoCreationService
       SubCategory.find_by(name: tag[:text]) ||
         SubCategory.create(name: tag[:text], show: tag[:style])
     end
+  end
+
+  def category
+    @category ||= Category.find_by(name: @request_hash[:category_name])
   end
 
   def new_file

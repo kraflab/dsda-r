@@ -19,10 +19,10 @@ class Demo < ApplicationRecord
   scope :recent, -> (n) { reorder(recorded_at: :desc).limit(n) }
   scope :within, -> (n) { reorder(recorded_at: :desc).where('recorded_at >= ?', n.days.ago)}
 
-  validates :wad_id,      presence: true
-  validates :category_id, presence: true
-  validates :players,     presence: true
-  validates :demo_file,   presence: true
+  validates :wad,       presence: true
+  validates :category,  presence: true
+  validates :players,   presence: true
+  validates :demo_file, presence: true
   validates_associated :demo_file
 
   validates :tics,        presence: true, numericality: { greater_than_or_equal_to: 0 }
@@ -43,11 +43,7 @@ class Demo < ApplicationRecord
   before_create :prune_levelstat
 
   def category_name
-    category.name if category
-  end
-
-  def category_name=(name)
-    self.category = Category.find_by(name: name) unless name.blank?
+    category&.name
   end
 
   def file_path
