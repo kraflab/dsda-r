@@ -29,7 +29,7 @@ class DemoCreationService
   end
 
   def wad
-    @wad ||= Wad.find_by(username: @request_hash[:wad_username])
+    @wad ||= Wad.find_by(username: @request_hash[:wad])
   end
 
   def players
@@ -46,7 +46,7 @@ class DemoCreationService
   end
 
   def category
-    @category ||= Category.find_by(name: @request_hash[:category_name])
+    @category ||= Category.find_by(name: @request_hash[:category])
   end
 
   def new_file
