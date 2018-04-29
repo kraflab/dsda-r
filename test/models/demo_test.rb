@@ -14,7 +14,8 @@ class DemoTest < ActiveSupport::TestCase
       level: "Map 02",
       recorded_at: 20.minutes.ago,
       levelstat: "0:00.99,1:11:00",
-      demo_file: demo_files(:demo_zip)
+      demo_file: demo_files(:demo_zip),
+      players: [players(:kraflab)]
     )
   end
 
