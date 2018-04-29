@@ -1,11 +1,12 @@
 class Demo < ApplicationRecord
   belongs_to :wad, touch: true
   belongs_to :category
-  belongs_to :demo_file
+  belongs_to :demo_file, autosave: true
   has_many :tags, dependent: :destroy
   has_many :sub_categories, through: :tags
   has_many :demo_players, dependent: :destroy
   has_many :players, through: :demo_players
+
   default_scope -> { order(:level, :category_id, :tics) }
   scope :movies, -> { reorder(:level).where("level LIKE 'Ep%' OR level LIKE '%A%'") }
   scope :ils, -> { reorder(:level).where("level NOT LIKE 'Ep%' AND level NOT LIKE '%A%'") }
@@ -17,8 +18,13 @@ class Demo < ApplicationRecord
   }
   scope :recent, -> (n) { reorder(recorded_at: :desc).limit(n) }
   scope :within, -> (n) { reorder(recorded_at: :desc).where('recorded_at >= ?', n.days.ago)}
-  validates :wad_id,      presence: true
-  validates :category_id, presence: true
+
+  validates :wad,       presence: true
+  validates :category,  presence: true
+  validates :players,   presence: true
+  validates :demo_file, presence: true
+  validates_associated :demo_file
+
   validates :tics,        presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :engine,      presence: true, length: { maximum: 50 }
   validates :tas,         presence: true,
@@ -26,34 +32,18 @@ class Demo < ApplicationRecord
   validates :guys,        presence: true, numericality: { greater_than: 0 }
   validates :version,     presence: true,
                           numericality: { greater_than_or_equal_to: 0 }
-  #validates :has_tics,    presence: true
   validates :level,       presence: true, length: { maximum: 10 },
                           format: { with: VALID_PORT_REGEX }
-  #validates :recorded_at, presence: true
   validates :levelstat,   length: { maximum: 500 }
   validates :compatibility, presence: true, numericality: { greater_than_or_equal_to: 0 }
+
   after_save    :update_players
   before_destroy :check_file
   after_destroy :update_players
   before_create :prune_levelstat
 
-  def wad_username
-    wad.username if wad
-  end
-
-  def wad_username=(name)
-    self.wad = Wad.find_by(username: name) unless name.blank?
-    if wad.nil?
-      errors.add(:wad_username, :not_found, message: "not found")
-    end
-  end
-
   def category_name
-    category.name if category
-  end
-
-  def category_name=(name)
-    self.category = Category.find_by(name: name) unless name.blank?
+    category&.name
   end
 
   def file_path
