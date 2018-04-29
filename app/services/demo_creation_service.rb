@@ -25,7 +25,7 @@ class DemoCreationService
     {
       wad: wad, demo_file: demo_file, players: players,
       sub_categories: sub_categories, category: category
-    }
+    }.reject { |k, v| v.nil? }
   end
 
   def wad
@@ -33,13 +33,13 @@ class DemoCreationService
   end
 
   def players
-    @players ||= @request_hash[:players].map do |name|
+    @players ||= @request_hash[:players]&.map do |name|
       Player.find_by(username: name) || Player.find_by!(name: name)
     end
   end
 
   def sub_categories
-    @sub_categories ||= @request_hash[:tags].map do |tag|
+    @sub_categories ||= @request_hash[:tags]&.map do |tag|
       SubCategory.find_by(name: tag[:text]) ||
         SubCategory.create(name: tag[:text], show: tag[:style])
     end
