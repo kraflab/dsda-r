@@ -11,7 +11,9 @@ module Domain
       private
 
       def remove_excess_whitespace!(port)
-        port.family.strip!.gsub!(/\s+/, ' ')
+        return unless port.family
+        port.family.strip!
+        port.family.gsub!(/\s+/, ' ')
       end
     end
   end
