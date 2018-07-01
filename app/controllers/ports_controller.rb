@@ -6,12 +6,12 @@ class PortsController < ApplicationController
   before_action :authenticate_admin!, only: [:api_create]
 
   def index
-    @ports = Port.all
+    @ports = Domain::Port.list
   end
 
   def api_create
     preprocess_api_request(require: [:port])
-    port = PortCreationService.new(@request_hash[:port]).create!
+    port = Domain::Port.create(@request_hash[:port])
     render json: PortSerializer.new(port).call
   end
 end
