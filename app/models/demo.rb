@@ -86,12 +86,6 @@ class Demo < ApplicationRecord
     tas != 0 ? (tas > 0 ? "T#{tas}" : 'T') : ''
   end
 
-  def update_tags
-    self.has_hidden_tag = sub_categories.hidden.exists?
-    self.has_shown_tag = sub_categories.shown.exists?
-    self.save
-  end
-
   def hidden_tags_text
     cell_names(sub_categories.hidden)
   end
