@@ -8,13 +8,20 @@ class DemoCreationService
   end
 
   def create!
-    new_demo.tap { |demo| demo.save! }
+    Demo.transaction do
+      demo.save!
+      Domain::Demo::CreateTags.call(
+        demo: demo, sub_categories: sub_categories
+      )
+    end
+
+    demo
   end
 
   private
 
-  def new_demo
-    Demo.new(demo_attributes)
+  def demo
+    @demo ||= Demo.new(demo_attributes)
   end
 
   def demo_attributes
@@ -23,8 +30,7 @@ class DemoCreationService
 
   def associations
     {
-      wad: wad, demo_file: demo_file, players: players,
-      sub_categories: sub_categories, category: category
+      wad: wad, demo_file: demo_file, players: players, category: category
     }.reject { |k, v| v.nil? }
   end
 
