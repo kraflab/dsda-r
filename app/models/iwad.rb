@@ -6,8 +6,6 @@ class Iwad < ApplicationRecord
                        uniqueness: true,
                        format: { with: VALID_USERNAME_REGEX }
   validates :author,   presence: true, length: { maximum: 50 }
-  before_save   :clean_strings
-  before_update :clean_strings
 
   # Override path
   def to_param
@@ -17,12 +15,4 @@ class Iwad < ApplicationRecord
   def wads_count
     wads.count
   end
-
-  private
-
-    # Remove excess whitespace
-    def clean_strings
-      self.name     = name.strip.gsub(/\s+/, ' ')
-      self.author   = author.strip.gsub(/\s+/, ' ')
-    end
 end
