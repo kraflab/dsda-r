@@ -1,4 +1,3 @@
-require 'callbacks/file_hash_callbacks'
 class Port < ApplicationRecord
   validates :family,  presence: true, length: { maximum: 50},
                       format: { with: VALID_PORT_REGEX }
@@ -9,7 +8,6 @@ class Port < ApplicationRecord
   mount_uploader :data, ZipFileUploader
   validates_presence_of :data
   validates_size_of :data, maximum: 100.megabytes, message: 'File exceeds 100 MB size limit'
-  before_validation FileHashCallbacks.new
 
   # Override path
   def to_param

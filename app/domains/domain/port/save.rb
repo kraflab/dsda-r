@@ -5,6 +5,7 @@ module Domain
 
       def call(port)
         remove_excess_whitespace!(port)
+        store_md5(port)
         port.save!
       end
 
@@ -14,6 +15,10 @@ module Domain
         return unless port.family
         port.family.strip!
         port.family.gsub!(/\s+/, ' ')
+      end
+
+      def store_md5(port)
+        port.md5 = Service::FileData::ComputeMd5.call(port)
       end
     end
   end
