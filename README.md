@@ -11,12 +11,8 @@ The goal of this project is to create a new dsda, from scratch, implementing
 a variety of features and improvements, such as support for additional
 categories, heretic / hexen demos, zandronum demos, and extra stats / options.
 
-This repository is for the full stack of the site itself.  For the related
-work in parsing the old archive and extracting new data, see the work
-[here](https://github.com/oleksiykamenyev/DSDA_data_extraction).
-
-Uses `Ruby  2.4.x`
-Uses `Rails 5.0.x`
+Uses `Ruby  2.4`
+Uses `Rails 5.0`
 
 ## New Features
 Heretic and Hexen support  
@@ -34,6 +30,3 @@ Demo video links
 Record timelines:  
 ![timeline](http://i.imgur.com/0l1dKNy.png)  
 GraphQL API
-
-## Current Focus
-Implement and expand GraphQL API
