@@ -36,6 +36,7 @@ group :test do
   gem 'selenium-webdriver'
   gem 'minitest-reporters'
   gem 'mini_backtrace'
+  gem 'mocha'
 end
 
 group :development do
