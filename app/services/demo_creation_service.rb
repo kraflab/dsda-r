@@ -41,7 +41,7 @@ class DemoCreationService
   def sub_categories
     @sub_categories ||= @request_hash[:tags]&.map do |tag|
       SubCategory.find_by(name: tag[:text]) ||
-        SubCategory.create(name: tag[:text], show: tag[:style])
+        SubCategory.create(name: tag[:text], show: tag[:show])
     end
   end
 

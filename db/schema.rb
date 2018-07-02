@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171022094213) do
+ActiveRecord::Schema.define(version: 20180702184459) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "username"
@@ -110,9 +110,9 @@ ActiveRecord::Schema.define(version: 20171022094213) do
 
   create_table "sub_categories", force: :cascade do |t|
     t.string   "name"
-    t.integer  "style",      default: 0
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.boolean  "show",       default: true
   end
 
   create_table "tags", force: :cascade do |t|

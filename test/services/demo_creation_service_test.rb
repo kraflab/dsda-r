@@ -15,7 +15,7 @@ describe DemoCreationService do
       wad: wad.username,
       category: 'UV Speed',
       players: demo_players.map(&:name),
-      tags: [{ text: 'Also reality', style: 1 }],
+      tags: [{ text: 'Also reality', show: 1 }],
       file: file,
       file_id: file_id
     }
