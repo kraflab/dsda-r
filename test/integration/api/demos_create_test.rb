@@ -18,7 +18,7 @@ class DemosCreateTest < ActionDispatch::IntegrationTest
         wad: @wad.username,
         category: 'UV Speed',
         players: [players(:kraflab).name],
-        tags: [{ text: 'Also reality', style: 1 }],
+        tags: [{ text: 'Also reality', show: 1 }],
         file: {
           data: '1234',
           name: 'test_demo.zip'

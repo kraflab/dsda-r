@@ -87,17 +87,17 @@ class Demo < ApplicationRecord
   end
 
   def update_tags
-    self.has_hidden_tag = sub_categories.where('style & ? = 0', SubCategory.Show).exists?
-    self.has_shown_tag = sub_categories.where('style & ? > 0', SubCategory.Show).exists?
+    self.has_hidden_tag = sub_categories.hidden.exists?
+    self.has_shown_tag = sub_categories.shown.exists?
     self.save
   end
 
   def hidden_tags_text
-    cell_names(sub_categories.where('style & ? = 0', SubCategory.Show))
+    cell_names(sub_categories.hidden)
   end
 
   def shown_tags_text
-    cell_names(sub_categories.where('style & ? > 0', SubCategory.Show))
+    cell_names(sub_categories.shown)
   end
 
   def players_text

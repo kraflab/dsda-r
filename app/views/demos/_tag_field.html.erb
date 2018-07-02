@@ -10,7 +10,7 @@
       <%= text_field_tag "tags[]", tag.sub_category.name, class: "form-control" %>
       <div class="pull-right">
         <%= check_box_tag "shows[]", "No", true, class: "no-display" %>
-        <%= check_box_tag "shows[]", "Yes", tag.sub_category.show? %> Show by default
+        <%= check_box_tag "shows[]", "Yes", tag.sub_category.show %> Show by default
       </div>
     <% end %>
   </div>
