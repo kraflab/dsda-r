@@ -18,6 +18,7 @@ class Demo < ApplicationRecord
   }
   scope :recent, -> (n) { reorder(recorded_at: :desc).limit(n) }
   scope :within, -> (n) { reorder(recorded_at: :desc).where('recorded_at >= ?', n.days.ago)}
+  scope :tas, -> { where('tas > 0') }
 
   validates :wad,       presence: true
   validates :category,  presence: true

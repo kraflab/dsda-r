@@ -13,6 +13,11 @@ class Player < ApplicationRecord
   validates :record_index, presence: true,
                            numericality: { greater_than_or_equal_to: 0 }
 
+ delegate :longest_demo_time, :average_demo_time, :total_demo_time,
+          :average_demo_count, :most_recorded_wad, :most_recorded_category,
+          :tas_count, :wad_count, :demo_count
+          to: :stats
+
   # Calculate and save the record index for a set of players (all by default)
   def self.calculate_record_index!(players = nil)
     players ||= Player.all
@@ -38,47 +43,14 @@ class Player < ApplicationRecord
     self.reload.record_index
   end
 
-  def demo_count
-    demos.count
-  end
-
-  def wad_count
-    demos.select(:wad_id).distinct.count
-  end
-
-  def tas_count
-    demos.where('tas > 0').count
-  end
-
-  def longest_demo_time
-    Demo.tics_to_string(demos.maximum(:tics))
-  end
-
-  def average_demo_time
-    Demo.tics_to_string(demos.sum(:tics) / demos.count)
-  end
-
-  def total_demo_time
-    Demo.tics_to_string(demos.sum(:tics))
-  end
-
-  def average_demo_count
-    wad_counts = demos.group(:wad_id).count
-    wad_counts.values.inject(0) { |sum, k| sum + k } / wad_counts.size
-  end
-
-  def most_recorded_wad
-    wad_counts = demos.group(:wad_id).count
-    Wad.find(wad_counts.max_by { |k, v| v }[0]).name
-  end
-
-  def most_recorded_category
-    category_counts = demos.group(:category_id).count
-    Category.find(category_counts.max_by { |k, v| v }[0]).name
-  end
-
   # Override path
   def to_param
     username
+  end
+
+  private
+
+  def stats
+    @stats ||= Domain::Player::Stats.call(self)
   end
 end
