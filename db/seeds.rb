@@ -19,7 +19,7 @@ heretic.wads.create!(name: "Heretic", username: "heretic", author: "Raven Softwa
   'Lucas Marincak', 'Doug Merrill', 'Jeff N. Easthope', 'PVS', 'Mikhail Volkov',
   'Ch0wW', 'Suicider', 'Oxyde'
 ].each do |name|
-  Player.create!(name: name, username: Player.default_username(name))
+  Domain::Player.create(name: name)
 end
 
 Category.create!(name: "UV Speed",    description: "Exit as fast as possible on skill 4.")
