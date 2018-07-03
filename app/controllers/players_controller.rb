@@ -4,22 +4,22 @@ class PlayersController < ApplicationController
   before_action :authenticate_admin!, only: [:api_create]
 
   def index
-    @players = Player.all
+    @players = Domain::Player.list
   end
 
   def show
-    @player = Player.find_by(username: params[:id])
+    @player = Domain::Player.single(username: params[:id])
     @demos  = @player.demos.includes(:wad).reorder('wads.username',
                                                    :level, :category_id, :tics)
   end
 
   def stats
-    @player = Player.find_by(username: params[:id])
+    @player = Domain::Player.single(username: params[:id])
   end
 
   def api_create
     preprocess_api_request(require: [:player])
-    player = PlayerCreationService.new(@request_hash[:player]).create!
+    player = Domain::Player.create(@request_hash[:player])
     render json: PlayerSerializer.new(player).call
   end
 end

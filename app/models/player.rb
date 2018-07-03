@@ -12,14 +12,6 @@ class Player < ApplicationRecord
                        format: { with: VALID_USERNAME_REGEX }
   validates :record_index, presence: true,
                            numericality: { greater_than_or_equal_to: 0 }
-  before_validation   :clean_strings
-  before_validation   :check_username
-  after_save :update_demos, if: :name_changed?
-
-  # Convert name to valid username
-  def self.default_username(name)
-    I18n.transliterate(name).downcase.strip.gsub(/\s+/, '_').gsub(/[^a-z\d_-]+/, '')
-  end
 
   # Calculate and save the record index for a set of players (all by default)
   def self.calculate_record_index!(players = nil)
@@ -97,20 +89,4 @@ class Player < ApplicationRecord
   def to_param
     username
   end
-
-  private
-
-    def update_demos
-      demos.each { |i| i.touch }
-    end
-
-    def clean_strings
-      self.twitch  ||= ''
-      self.youtube ||= ''
-      self.name      = name.strip.gsub(/\s+/, ' ') if name.present?
-    end
-
-    def check_username
-      self.username = Player.default_username(name) if username.blank? && name.present?
-    end
 end
