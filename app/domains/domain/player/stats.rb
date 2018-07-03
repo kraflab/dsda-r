@@ -12,7 +12,7 @@ module Domain
           total_demo_time: total_demo_time(player),
           average_demo_count: average_demo_count(player),
           most_recorded_wad: most_recorded_wad(player),
-          most_recorded_category: most_recorded_category(player)
+          most_recorded_category: most_recorded_category(player),
           tas_count: tas_count(player),
           wad_count: wad_count(player),
           demo_count: demo_count(player)
@@ -29,7 +29,7 @@ module Domain
         ::Demo.tics_to_string(player.demos.sum(:tics) / player.demos.count)
       end
 
-      def total_demo_time
+      def total_demo_time(player)
         ::Demo.tics_to_string(player.demos.sum(:tics))
       end
 

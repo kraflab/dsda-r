@@ -15,7 +15,7 @@ class Player < ApplicationRecord
 
  delegate :longest_demo_time, :average_demo_time, :total_demo_time,
           :average_demo_count, :most_recorded_wad, :most_recorded_category,
-          :tas_count, :wad_count, :demo_count
+          :tas_count, :wad_count, :demo_count,
           to: :stats
 
   # Calculate and save the record index for a set of players (all by default)
