@@ -82,14 +82,4 @@ class PlayerTest < ActiveSupport::TestCase
     @player.save
     assert_not duplicate_player.valid?
   end
-
-  test "can absorb other players" do
-    player = players(:elim)
-    other = players(:kraflab)
-    initial_count = player.demos.count
-    assert other.demos.count > 0
-    player.absorb! other
-    assert other.demos.count == 0
-    assert player.demos.count > initial_count
-  end
 end

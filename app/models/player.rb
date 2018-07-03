@@ -32,14 +32,6 @@ class Player < ApplicationRecord
     'https://www.youtube.com/' + youtube if youtube.present?
   end
 
-  def absorb!(other)
-    other_demos = DemoPlayer.where(player: other)
-    other_demos.each do |demo|
-      demo.player = self
-      demo.save
-    end
-  end
-
   def record_index!
     self.record_index = demos.reduce(0) { |sum, demo| sum + demo.record_index }
     self.save
