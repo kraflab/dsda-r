@@ -15,5 +15,12 @@ module Domain
         name: name, username: username, twitch: twitch, youtube: youtube
       )
     end
+
+    def refresh_record_index(player: nil, players: nil)
+      players = [player] if player.present?
+      players = list if players == :all
+      raise ArgumentError, 'No player provided' if players.blank?
+      Player::RefreshRecordIndex.call(players)
+    end
   end
 end
