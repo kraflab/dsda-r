@@ -13,10 +13,10 @@ class Player < ApplicationRecord
   validates :record_index, presence: true,
                            numericality: { greater_than_or_equal_to: 0 }
 
- delegate :longest_demo_time, :average_demo_time, :total_demo_time,
-          :average_demo_count, :most_recorded_wad, :most_recorded_category,
-          :tas_count, :wad_count, :demo_count,
-          to: :stats
+  delegate :longest_demo_time, :average_demo_time, :total_demo_time,
+           :average_demo_count, :most_recorded_wad, :most_recorded_category,
+           :tas_count, :wad_count, :demo_count,
+           to: :stats
 
   # Calculate and save the record index for a set of players (all by default)
   def self.calculate_record_index!(players = nil)
