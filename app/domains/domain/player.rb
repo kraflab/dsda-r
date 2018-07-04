@@ -2,8 +2,15 @@ module Domain
   module Player
     extend self
 
-    def list
-      ::Player.all
+    def list(by_record_index: false, limit: nil)
+      query = ::Player.all
+      query = query.record_index_order if by_record_index
+      query = query.limit(limit) if limit
+      query
+    end
+
+    def search(term:)
+      ::Player.where('username LIKE ? OR name LIKE ?', "%#{term}%", "%#{term}%")
     end
 
     def single(username: nil)
