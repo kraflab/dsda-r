@@ -11,8 +11,7 @@ The goal of this project is to create a new dsda, from scratch, implementing
 a variety of features and improvements, such as support for additional
 categories, heretic / hexen demos, zandronum demos, and extra stats / options.
 
-Uses `Ruby  2.4`
-Uses `Rails 5.0`
+Uses `Ruby  2.4` and `Rails 5.0`
 
 ## New Features
 Heretic and Hexen support  
@@ -27,6 +26,9 @@ List of level times for movies
 Date of recording  
 Twitch / YouTube links for players  
 Demo video links  
+GraphQL API  
 Record timelines:  
 ![timeline](http://i.imgur.com/0l1dKNy.png)  
-GraphQL API
+
+## Current Focus
+Cleaning up backend side of the code base
