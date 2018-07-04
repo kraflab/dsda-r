@@ -11,6 +11,8 @@ class Player < ApplicationRecord
   validates :youtube,  length: { maximum: 50 }, allow_blank: true,
                        format: { with: VALID_USERNAME_REGEX }
 
+  scope :record_index_order, -> { reorder(record_index: :desc) }
+
   delegate :longest_demo_time, :average_demo_time, :total_demo_time,
            :average_demo_count, :most_recorded_wad, :most_recorded_category,
            :tas_count, :wad_count, :demo_count,

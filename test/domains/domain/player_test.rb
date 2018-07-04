@@ -14,6 +14,14 @@ describe Domain::Player do
     end
   end
 
+  describe '.search' do
+    let(:player) { players(:elim) }
+
+    it 'returns players matching a search term' do
+      Domain::Player.search(term: player.username).first.must_equal player
+    end
+  end
+
   describe '.single' do
     let(:player) { players(:elim) }
 
