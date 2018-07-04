@@ -2,19 +2,11 @@ require 'test_helper'
 
 describe Domain::Player::RefreshRecordIndex do
   let(:refresh) {
-    Domain::Player::RefreshRecordIndex.call(player: player)
+    Domain::Player::RefreshRecordIndex.call([player])
   }
 
   before do
     Domain::Player::Update.stubs(:call)
-  end
-
-  describe 'when no players are provided' do
-    let(:player) { nil }
-
-    it 'raises error' do
-      proc { refresh }.must_raise ArgumentError
-    end
   end
 
   describe 'when given a player' do

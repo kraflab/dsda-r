@@ -23,7 +23,7 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
   end
 
   test "stats page" do
-    Player.calculate_record_index!
+    Domain::Player.refresh_record_index(players: :all)
     get stats_path
     assert_select "title", "Stats | DSDA"
     assert_select "div.page-header", "Stats & Charts"
