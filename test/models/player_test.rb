@@ -11,11 +11,6 @@ class PlayerTest < ActiveSupport::TestCase
     assert @player.valid?
   end
 
-  test "must have record index" do
-    @player.record_index = nil
-    assert_not @player.valid?
-  end
-
   test "name must be present" do
     @player.name = " "
     assert_not @player.valid?
