@@ -19,17 +19,6 @@ class Wad < ApplicationRecord
     username
   end
 
-  def iwad_username
-    iwad.username if iwad
-  end
-
-  def iwad_username=(name)
-    self.iwad = Iwad.find_by(username: name) unless name.blank?
-    if iwad.nil?
-      errors.add(:iwad_username, :not_found, message: 'not found')
-    end
-  end
-
   def file_path
     wad_file.data.url if wad_file
   end
