@@ -6,20 +6,18 @@ class WadsController < ApplicationController
     letter = params[:letter]
     if (/\A[a-z9]\z/ =~ letter) == 0
       if letter == '9'
-        @wads = Rails.env.production? ?
-          Wad.where('username ~ ?', '^[0-9]') :
-          Wad.where('username REGEXP ?', '^[0-9]')
+        @wads = Domain::Wad.list(numbers: true)
       else
-        @wads = Wad.where('username LIKE ?', "#{letter}%")
+        @wads = Domain::Wad.list(letter: letter)
       end
     else
-      @wads = Wad.page params[:page]
+      @wads = Domain::Wad.list(page: params.fetch(:page, 1))
       @is_paginated = true
     end
   end
 
   def show
-    @wad = Wad.find_by!(username: params[:id])
+    @wad = Domain::Wad.single(short_name: params[:id], assert: true)
     subset = params[:level]
     if subset.is_a?(String) && subset.include?('Episode')
       episode = subset.split(' ').last.to_i
@@ -30,17 +28,17 @@ class WadsController < ApplicationController
   end
 
   def stats
-    @wad = Wad.find_by(username: params[:id])
+    @wad = Domain::Wad.single(short_name: params[:id], assert: true)
   end
 
   def api_create
     preprocess_api_request(require: [:wad])
-    wad = WadCreationService.new(@request_hash[:wad]).create!
+    wad = Domain::Wad.create(@request_hash[:wad])
     render json: WadSerializer.new(wad).call
   end
 
   def record_timeline_json
-    @wad = Wad.find_by(username: params[:id])
+    @wad = Domain::Wad.single(short_name: params[:id], assert: true)
     level = params[:level]
     category = Category.find_by(name: params[:category])
     demos = Demo.where(level: level, category: category, wad: @wad, guys: 1, tas: 0).reorder(:recorded_at)
@@ -64,13 +62,13 @@ class WadsController < ApplicationController
   end
 
   def record_timeline
-    @wad = Wad.find_by(username: params[:id])
+    @wad = Domain::Wad.single(short_name: params[:id], assert: true)
     @level = params[:level]
     @category = params[:category]
   end
 
   def compare_movies_json
-    wad = Wad.find_by(username: params[:id])
+    wad = Domain::Wad.single(short_name: params[:id], assert: true)
     level = params[:level]
     category = params[:category]
     index_0 = params[:index_0].to_i
@@ -86,7 +84,7 @@ class WadsController < ApplicationController
   end
 
   def compare_movies
-    @wad = Wad.find_by(username: params[:id])
+    @wad = Domain::Wad.single(short_name: params[:id], assert: true)
     @level = params[:level]
     @category = params[:category]
     @demos = Demo.where(level: @level, category: Category.find_by(name: @category), wad: @wad, guys: 1, tas: 0)

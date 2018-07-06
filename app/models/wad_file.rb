@@ -1,4 +1,3 @@
-require 'callbacks/file_hash_callbacks'
 class WadFile < ApplicationRecord
   has_many :wads
   belongs_to :iwad
@@ -7,5 +6,4 @@ class WadFile < ApplicationRecord
   mount_uploader :data, ZipFileUploader
   validates_presence_of :data
   validates_size_of :data, maximum: 100.megabytes, message: 'File exceeds 100 MB size limit'
-  before_validation FileHashCallbacks.new
 end

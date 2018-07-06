@@ -11,23 +11,14 @@ class Wad < ApplicationRecord
                        format: { with: VALID_USERNAME_REGEX }
   validates :author,   presence: true, length: { maximum: 50 }
   validates_associated :wad_file
-  before_save   :clean_strings
-  before_update :clean_strings
+
+  delegate :longest_demo_time, :average_demo_time, :total_demo_time,
+           :most_recorded_player, :player_count, :demo_count,
+           to: :stats
 
   # Override path
   def to_param
     username
-  end
-
-  def iwad_username
-    iwad.username if iwad
-  end
-
-  def iwad_username=(name)
-    self.iwad = Iwad.find_by(username: name) unless name.blank?
-    if iwad.nil?
-      errors.add(:iwad_username, :not_found, message: 'not found')
-    end
   end
 
   def file_path
@@ -47,36 +38,9 @@ class Wad < ApplicationRecord
     demos.where(tas: tas, guys: guys, level: level, category: run_categories).reorder(:tics)
   end
 
-  def demos_count
-    demos.count
-  end
-
-  def players_count
-    demos.includes(:demo_players).references(:demo_players).select(:player_id).distinct.count
-  end
-
-  def longest_demo_time
-    Demo.tics_to_string(demos.maximum(:tics))
-  end
-
-  def average_demo_time
-    Demo.tics_to_string(demos.sum(:tics) / demos.count)
-  end
-
-  def total_demo_time
-    Demo.tics_to_string(demos.sum(:tics))
-  end
-
-  def most_recorded_player
-    player_counts = demos.includes(:demo_players).references(:demo_players).group(:player_id).count
-    Player.find(player_counts.max_by { |k, v| v }[0]).name
-  end
-
   private
 
-    # Remove excess whitespace
-    def clean_strings
-      self.name     = name.strip.gsub(/\s+/, ' ')
-      self.author   = author.strip.gsub(/\s+/, ' ')
-    end
+  def stats
+    @stats ||= Domain::Wad::Stats.call(self)
+  end
 end

@@ -11,8 +11,8 @@ Types::WadType = GraphQL::ObjectType.define do
   field :versions,      types.Int
   field :single_map,    types.Boolean
 
-  field :demos_count, !types.Int
-  field :players_count, !types.Int
+  field :demo_count, !types.Int
+  field :player_count, !types.Int
 
   field :longest_demo_time, !types.String
   field :total_demo_time,   !types.String

@@ -5,7 +5,7 @@ class WadFileTest < ActiveSupport::TestCase
   def setup
     @iwad = iwads(:doom2)
     @file = dummy_zip
-    @wad_file = WadFile.new(iwad: @iwad, data: @file)
+    @wad_file = WadFile.new(iwad: @iwad, data: @file, md5: 'wad_file')
   end
 
   test "should be valid" do
@@ -19,8 +19,7 @@ class WadFileTest < ActiveSupport::TestCase
 
   test "must be unique" do
     @wad_file.save
-    new_file = WadFile.new(iwad: @iwad, data: @file)
-    new_file.valid?
+    new_file = WadFile.new(iwad: @iwad, data: @file, md5: 'wad_file')
     assert_not new_file.valid?
   end
 end

@@ -4,11 +4,11 @@ class IwadsController < ApplicationController
   end
 
   def show
-    @iwad = Domain::Iwad.single(short_name: params[:id])
+    @iwad = Domain::Iwad.single(short_name: params[:id], assert: true)
     @wads = @iwad.wads
   end
 
   def stats
-    @iwad = Domain::Iwad.single(short_name: params[:id])
+    @iwad = Domain::Iwad.single(short_name: params[:id], assert: true)
   end
 end
