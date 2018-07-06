@@ -68,15 +68,12 @@ module WadsHelper
   end
 
   def wad_stats(wad, hash = {})
-    hash[:longest_demo] = Demo.tics_to_string(wad.demos.maximum(:tics))
-    hash[:total_time], hash[:average_time] = time_stats(wad, false)
-    hash[:demo_count] ||= wad.demos.count
-    hash[:player_count] ||= DemoPlayer.includes(:demo).where('demos.wad_id = ?', wad.id).references(:demo).select(:player_id).distinct.count
-
-    # group players by number of demos for this wad, get max
-    player_counts = DemoPlayer.includes(:demo).where('demos.wad_id = ?', wad.id).references(:demo).group(:player_id).count
-    top_player = Player.find(player_counts.max_by { |k, v| v }[0])
-    hash[:top_player] = top_player.name
+    hash[:longest_demo] = wad.longest_demo_time
+    hash[:total_time] = wad.total_demo_time
+    hash[:average_time] = wad.average_demo_time
+    hash[:demo_count] ||= wad.demo_count
+    hash[:player_count] ||= wad.player_count
+    hash[:top_player] = wad.most_recorded_player
     hash
   end
 

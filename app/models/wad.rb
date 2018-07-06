@@ -12,6 +12,10 @@ class Wad < ApplicationRecord
   validates :author,   presence: true, length: { maximum: 50 }
   validates_associated :wad_file
 
+  delegate :longest_demo_time, :average_demo_time, :total_demo_time,
+           :most_recorded_player, :player_count, :demo_count,
+           to: :stats
+
   # Override path
   def to_param
     username
@@ -34,28 +38,9 @@ class Wad < ApplicationRecord
     demos.where(tas: tas, guys: guys, level: level, category: run_categories).reorder(:tics)
   end
 
-  def demos_count
-    demos.count
-  end
+  private
 
-  def players_count
-    demos.includes(:demo_players).references(:demo_players).select(:player_id).distinct.count
-  end
-
-  def longest_demo_time
-    Demo.tics_to_string(demos.maximum(:tics))
-  end
-
-  def average_demo_time
-    Demo.tics_to_string(demos.sum(:tics) / demos.count)
-  end
-
-  def total_demo_time
-    Demo.tics_to_string(demos.sum(:tics))
-  end
-
-  def most_recorded_player
-    player_counts = demos.includes(:demo_players).references(:demo_players).group(:player_id).count
-    Player.find(player_counts.max_by { |k, v| v }[0]).name
+  def stats
+    @stats ||= Domain::Wad::Stats.call(self)
   end
 end

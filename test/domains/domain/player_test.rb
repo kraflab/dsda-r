@@ -29,6 +29,12 @@ describe Domain::Player do
       Domain::Player.single(username: player.username).must_equal player
     end
 
+    describe 'when using id' do
+      it 'returns a player' do
+        Domain::Player.single(id: player.id).must_equal player
+      end
+    end
+
     describe 'when the player does not exist' do
       let(:single) {
         Domain::Player.single(username: 'not found', assert: assert_presence)

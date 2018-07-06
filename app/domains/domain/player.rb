@@ -13,9 +13,10 @@ module Domain
       ::Player.where('username LIKE ? OR name LIKE ?', "%#{term}%", "%#{term}%")
     end
 
-    def single(username: nil, assert: false)
+    def single(username: nil, id: nil, assert: false)
       player = nil
       player = ::Player.find_by(username: username) if username
+      player = ::Player.find_by(id: id) if id
       return player if player.present?
       raise ActiveRecord::RecordNotFound if assert
     end
