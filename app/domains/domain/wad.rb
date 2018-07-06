@@ -11,7 +11,7 @@ module Domain
     end
 
     def create(
-      iwad:, name:, short_name:, author:
+      iwad:, name:, short_name:, author:,
       year: nil, compatibility: nil, is_commercial: nil, single_map: false,
       file: nil, file_id: nil
     )
