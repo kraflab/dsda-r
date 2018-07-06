@@ -8,13 +8,13 @@ class PlayersController < ApplicationController
   end
 
   def show
-    @player = Domain::Player.single(username: params[:id])
+    @player = Domain::Player.single(username: params[:id], assert: true)
     @demos  = @player.demos.includes(:wad).reorder('wads.username',
                                                    :level, :category_id, :tics)
   end
 
   def stats
-    @player = Domain::Player.single(username: params[:id])
+    @player = Domain::Player.single(username: params[:id], assert: true)
   end
 
   def api_create
