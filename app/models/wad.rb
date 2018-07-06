@@ -11,8 +11,6 @@ class Wad < ApplicationRecord
                        format: { with: VALID_USERNAME_REGEX }
   validates :author,   presence: true, length: { maximum: 50 }
   validates_associated :wad_file
-  before_save   :clean_strings
-  before_update :clean_strings
 
   # Override path
   def to_param
@@ -60,12 +58,4 @@ class Wad < ApplicationRecord
     player_counts = demos.includes(:demo_players).references(:demo_players).group(:player_id).count
     Player.find(player_counts.max_by { |k, v| v }[0]).name
   end
-
-  private
-
-    # Remove excess whitespace
-    def clean_strings
-      self.name     = name.strip.gsub(/\s+/, ' ')
-      self.author   = author.strip.gsub(/\s+/, ' ')
-    end
 end
