@@ -13,5 +13,11 @@ describe Domain::Iwad do
     it 'returns an iwad' do
       Domain::Iwad.single(short_name: iwad.username).must_equal iwad
     end
+
+    describe 'when using either_name' do
+      it 'returns an iwad' do
+        Domain::Iwad.single(either_name: iwad.username).must_equal iwad
+      end
+    end
   end
 end

@@ -16,10 +16,10 @@ module Domain
       file: nil, file_id: nil
     )
       iwad = Domain::Iwad.single(either_name: iwad)
-      Domain::Iwad::Create.call(
+      Domain::Wad::Create.call(
         iwad: iwad,
         name: name,
-        short_name: short_name,
+        username: short_name,
         author: author,
         year: year,
         compatibility: compatibility,
