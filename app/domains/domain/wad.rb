@@ -2,12 +2,19 @@ module Domain
   module Wad
     extend self
 
-    def list
-      ::Wad.all
+    def list(letter: nil, numbers: nil, page: nil)
+      query = ::Wad.all
+      query = query.where('username LIKE ?', "#{letter}%") if letter
+      query = number_regex_query(query) if numbers
+      query = query.page(page) if page
+      query
     end
 
-    def single(short_name: nil)
-      return ::Wad.find_by(username: short_name) if short_name
+    def single(short_name: nil, assert: false)
+      wad = nil
+      wad = ::Wad.find_by(username: short_name) if short_name
+      return wad if wad.present?
+      raise ActiveRecord::RecordNotFound if assert
     end
 
     def create(
@@ -28,6 +35,13 @@ module Domain
         file: file,
         file_id: file_id
       )
+    end
+
+    private
+
+    def number_regex_query(query)
+      return query.where('username ~ ?', '^[0-9]') if Rails.env.production?
+      query.where('username REGEXP ?', '^[0-9]')
     end
   end
 end
