@@ -3,10 +3,10 @@ module Domain
     extend self
 
     def list(letter: nil, numbers: nil, page: nil)
+      return ::Wad.page(page) if page
       query = ::Wad.all
       query = query.where('username LIKE ?', "#{letter}%") if letter
       query = number_regex_query(query) if numbers
-      query = query.page(page) if page
       query
     end
 

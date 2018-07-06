@@ -7,7 +7,7 @@ class WadsCreateTest < ActionDispatch::IntegrationTest
     @params = {
       wad: {
         name: 'test_wad',
-        username: 'test_wad',
+        short_name: 'test_wad',
         author: 'test_author',
         year: '2020',
         compatibility: 0,

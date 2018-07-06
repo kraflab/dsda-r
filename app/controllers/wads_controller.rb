@@ -11,7 +11,7 @@ class WadsController < ApplicationController
         @wads = Domain::Wad.list(letter: letter)
       end
     else
-      @wads = Domain::Wad.list(page: params[:page])
+      @wads = Domain::Wad.list(page: params.fetch(:page, 1))
       @is_paginated = true
     end
   end
