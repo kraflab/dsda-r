@@ -19,5 +19,27 @@ describe Domain::Iwad do
         Domain::Iwad.single(either_name: iwad.username).must_equal iwad
       end
     end
+
+    describe 'when the iwad does not exist' do
+      let(:single) {
+        Domain::Iwad.single(short_name: 'not found', assert: assert_presence)
+      }
+
+      describe 'when asserting presence' do
+        let(:assert_presence) { true }
+
+        it 'raises error' do
+          proc { single }.must_raise ActiveRecord::RecordNotFound
+        end
+      end
+
+      describe 'when not asserting presence' do
+        let(:assert_presence) { false }
+
+        it 'returns nil' do
+          single.must_be_nil
+        end
+      end
+    end
   end
 end

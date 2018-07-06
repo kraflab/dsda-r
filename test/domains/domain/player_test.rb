@@ -28,6 +28,28 @@ describe Domain::Player do
     it 'returns a player' do
       Domain::Player.single(username: player.username).must_equal player
     end
+
+    describe 'when the player does not exist' do
+      let(:single) {
+        Domain::Player.single(username: 'not found', assert: assert_presence)
+      }
+
+      describe 'when asserting presence' do
+        let(:assert_presence) { true }
+
+        it 'raises error' do
+          proc { single }.must_raise ActiveRecord::RecordNotFound
+        end
+      end
+
+      describe 'when not asserting presence' do
+        let(:assert_presence) { false }
+
+        it 'returns nil' do
+          single.must_be_nil
+        end
+      end
+    end
   end
 
   describe '.refresh_record_index' do
