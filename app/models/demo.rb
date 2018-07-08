@@ -38,11 +38,6 @@ class Demo < ApplicationRecord
   validates :levelstat,   length: { maximum: 500 }
   validates :compatibility, presence: true, numericality: { greater_than_or_equal_to: 0 }
 
-  after_save    :update_players
-  before_destroy :check_file
-  after_destroy :update_players
-  before_create :prune_levelstat
-
   def category_name
     category&.name
   end
@@ -166,27 +161,8 @@ class Demo < ApplicationRecord
 
   private
 
-    # delete related file if this is the only associated demo
-    def check_file
-      if demo_file and demo_file.demos.count == 1
-        temp = demo_file
-        self.demo_file = nil
-        self.save
-        temp.destroy
-      end
-    end
-
-    # touch players when attributes change
-    def update_players
-      players.each { |i| i.touch }
-    end
-
-    # collect names for table cell
-    def cell_names(thing)
-      thing.collect { |i| i.name }.join("\n")
-    end
-
-    def prune_levelstat
-      self.levelstat = levelstat.gsub(/,/, "\n")
-    end
+  # collect names for table cell
+  def cell_names(thing)
+    thing.collect { |i| i.name }.join("\n")
+  end
 end

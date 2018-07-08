@@ -26,7 +26,7 @@ module Domain
     )
       wad = Domain::Wad.single(either_name: wad)
       category = ::Category.find_by(name: category)
-      players.map! { |name| Domain::Player.single(either_name: name) }
+      players = players_from_names(players)
       Domain::Demo::Create.call(
         wad: wad,
         category: category,
@@ -48,6 +48,10 @@ module Domain
     end
 
     private
+
+    def players_from_names(names)
+      names.map { |name| Domain::Player.single(either_name: name, assert: true) }
+    end
 
     def resolve_categories(category, soft_category)
       return ::Category.find_by(name: category) if category
