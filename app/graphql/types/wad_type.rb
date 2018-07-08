@@ -27,7 +27,10 @@ Types::WadType = GraphQL::ObjectType.define do
     argument :tas,       types.Int, default_value: 0
 
     resolve -> (obj, args, _ctx) do
-      obj.record(args[:level], args[:category], args[:guys], args[:tas])
+      Domain::Demo.list(
+        wad_id: obj.id, soft_category: args[:category], guys: args[:guys],
+        level: args[:level], tas: args[:tas], order_by_tics: true
+      ).first
     end
   end
 
@@ -38,7 +41,10 @@ Types::WadType = GraphQL::ObjectType.define do
     argument :tas,       types.Int, default_value: 0
 
     resolve -> (obj, args, _ctx) do
-      obj.run_demos(args[:level], args[:category], args[:guys], args[:tas])
+      Domain::Demo.list(
+        wad_id: obj.id, soft_category: args[:category], guys: args[:guys],
+        level: args[:level], tas: args[:tas], order_by_tics: true
+      )
     end
   end
 

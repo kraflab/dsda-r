@@ -25,19 +25,6 @@ class Wad < ApplicationRecord
     wad_file.data.url if wad_file
   end
 
-  def record(level, category, guys, tas)
-    run_demos(level, category, guys, tas).first
-  end
-
-  def run_demos(level, category, guys, tas)
-    run_categories = [Category.find_by(name: category)]
-    if ['UV Speed', 'SM Speed'].include?(category)
-      run_categories << Category.find_by(name: 'Pacifist')
-    end
-
-    demos.where(tas: tas, guys: guys, level: level, category: run_categories).reorder(:tics)
-  end
-
   private
 
   def stats
