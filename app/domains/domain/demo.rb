@@ -19,6 +19,34 @@ module Domain
       query
     end
 
+    def create(
+      wad:, category:, time:, level:, tas:, guys:, players:,
+      tags: nil, compatibility: 0, version: 0, video_link: nil, levelstat: '',
+      recorded_at: nil, engine: 'Unknown', file: nil, file_id: nil
+    )
+      wad = Domain::Wad.single(either_name: wad)
+      category = ::Category.find_by(name: category)
+      players.map! { |name| Domain::Player.single(either_name: name) }
+      Domain::Demo::Create.call(
+        wad: wad,
+        category: category,
+        time: time,
+        level: level,
+        tas: tas,
+        guys: guys,
+        players: players,
+        tags: tags,
+        compatibility: compatibility,
+        version: version,
+        video_link: video_link,
+        levelstat: levelstat,
+        recorded_at: recorded_at,
+        engine: engine,
+        file: file,
+        file_id: file_id
+      )
+    end
+
     private
 
     def resolve_categories(category, soft_category)
