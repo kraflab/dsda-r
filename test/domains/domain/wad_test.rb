@@ -37,6 +37,12 @@ describe Domain::Wad do
       Domain::Wad.single(short_name: wad.username).must_equal wad
     end
 
+    describe 'when using either_name' do
+      it 'returns a wad' do
+        Domain::Wad.single(either_name: wad.username).must_equal wad
+      end
+    end
+
     describe 'when the wad does not exist' do
       let(:single) {
         Domain::Wad.single(short_name: 'not found', assert: assert_presence)

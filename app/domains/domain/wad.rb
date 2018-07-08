@@ -10,9 +10,10 @@ module Domain
       query
     end
 
-    def single(short_name: nil, assert: false)
+    def single(short_name: nil, either_name: nil, assert: false)
       wad = nil
       wad = ::Wad.find_by(username: short_name) if short_name
+      wad = find_by_either_name(either_name) if either_name
       return wad if wad.present?
       raise ActiveRecord::RecordNotFound if assert
     end
@@ -42,6 +43,10 @@ module Domain
     def number_regex_query(query)
       return query.where('username ~ ?', '^[0-9]') if Rails.env.production?
       query.where('username REGEXP ?', '^[0-9]')
+    end
+
+    def find_by_either_name(either_name)
+      ::Wad.find_by(username: either_name) || ::Wad.find_by(name: either_name)
     end
   end
 end
