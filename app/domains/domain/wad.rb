@@ -10,6 +10,10 @@ module Domain
       query
     end
 
+    def search(term:)
+      ::Wad.where('username LIKE ? OR name LIKE ?', "%#{term}%", "%#{term}%")
+    end
+
     def single(short_name: nil, either_name: nil, assert: false)
       wad = nil
       wad = ::Wad.find_by(username: short_name) if short_name
