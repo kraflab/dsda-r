@@ -84,12 +84,6 @@ class Demo < ApplicationRecord
     cell_names(players)
   end
 
-  # Return true if fastest demo (including ties) *to the second*
-  def is_record?
-    Domain::Demo::ComputeRecordIndex.call(self).present?
-  end
-
-  # Number of slower demos for this run if it is a record (not record = 0)
   def record_index
     Domain::Demo::ComputeRecordIndex.call(self).to_i
   end
