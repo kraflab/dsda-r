@@ -4,7 +4,7 @@ describe Domain::Demo::CreateTags do
   let(:params) {
     {
       demo: demo,
-      sub_categories: [sub_category]
+      tags: [{ text: 'Also reality', show: 1 }]
     }
   }
   let(:demo) { demos(:bt01speed) }
