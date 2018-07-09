@@ -40,7 +40,7 @@ class WadsController < ApplicationController
   def record_timeline_json
     @wad = Domain::Wad.single(short_name: params[:id], assert: true)
     level = params[:level]
-    category = Category.find_by(name: params[:category])
+    category = Domain::Category.single(name: params[:category])
     demos = Domain::Demo.list(
       wad_id: @wad.id, level: level, category: category, guys: 1, tas: 0,
       order_by_record_date: :asc

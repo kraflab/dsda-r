@@ -36,7 +36,7 @@ module Domain
       recorded_at: nil, engine: 'Unknown', file: nil, file_id: nil
     )
       wad = Domain::Wad.single(either_name: wad)
-      category = ::Category.find_by(name: category)
+      category = Domain::Category.single(name: category)
       players = players_from_names(players)
       Domain::Demo::Create.call(
         wad: wad,
@@ -65,8 +65,8 @@ module Domain
     end
 
     def resolve_categories(category, soft_category)
-      return ::Category.find_by(name: category) if category
-      return ::Category.categories_for(soft_category) if soft_category
+      return Domain::Category.single(name: category) if category
+      return Domain::Category.list(soft_category: soft_category) if soft_category
     end
   end
 end

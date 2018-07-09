@@ -4,7 +4,7 @@ module Domain
       extend self
 
       def call(demo)
-        categories = ::Category.categories_for(demo.category.name)
+        categories = Domain::Category.list(soft_category: demo.category.name)
         return unless best?(demo, categories)
         record_index(demo, categories)
       end
@@ -31,7 +31,7 @@ module Domain
       def index_categories(demo, categories)
         categories.pop(categories.size - 1) if categories.size > 1
         if demo.category.name == 'Pacifist'
-          categories.push(*::Category.skill_4_speed)
+          categories.push(*Domain::Category.list(only: :skill_4_speed))
           # Only add speed category if pacifist is also the speed record
           categories.pop(categories.size - 1) unless best?(demo, categories)
         end
