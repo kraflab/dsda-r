@@ -70,14 +70,6 @@ module ApplicationHelper
       end
   end
 
-  # Calculate total time and average time for thing
-  def time_stats(thing, with_tics = true)
-    tics = thing.demos.sum(:tics)
-    count = thing.demos.count
-    [Demo.tics_to_string(tics, with_tics),
-     Demo.tics_to_string(tics / count, with_tics)]
-  end
-
   # return the 5 most active wads of the past n days
   def active_wads(n)
     hash = Hash.new(0)

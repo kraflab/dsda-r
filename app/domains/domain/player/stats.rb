@@ -22,15 +22,15 @@ module Domain
       private
 
       def longest_demo_time(player)
-        ::Demo.tics_to_string(player.demos.maximum(:tics))
+        Service::Tics::ToString.call(player.demos.maximum(:tics))
       end
 
       def average_demo_time(player)
-        ::Demo.tics_to_string(player.demos.sum(:tics) / player.demos.count)
+        Service::Tics::ToString.call(player.demos.sum(:tics) / player.demos.count)
       end
 
       def total_demo_time(player)
-        ::Demo.tics_to_string(player.demos.sum(:tics))
+        Service::Tics::ToString.call(player.demos.sum(:tics))
       end
 
       def average_demo_count(player)

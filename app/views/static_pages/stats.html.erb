@@ -15,10 +15,10 @@
   <h4>Number of demos = <%= demo_count %></h4>
   <h4>Number of players = <%= player_count %></h4>
   <h4>Number of wads = <%= wad_count %></h4>
-  <h4>Total demo time = <%= Demo.tics_to_string(time_sum, false) %> </h4>
+  <h4>Total demo time = <%= Service::Tics::ToString.call(time_sum, with_cs: false) %> </h4>
   <h4>Average demos per player = <%= demo_count / player_count %></h4>
   <h4>Average demos per wad = <%= demo_count/ wad_count %></h4>
-  <h4>Average demo time = <%= Demo.tics_to_string(time_sum / demo_count, false) %></h4>
+  <h4>Average demo time = <%= Service::Tics::ToString.call(time_sum / demo_count, with_cs: false) %></h4>
 
   <hr>
   <div class="center-text">

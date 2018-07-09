@@ -3,18 +3,22 @@ class DemosController < ApplicationController
   before_action :authenticate_admin!, only: [:api_create]
 
   def feed
-    @sort_sym = params[:sort_by] == 'record_date' ? :recorded_at : :updated_at
-    @demos = Demo.reorder(@sort_sym => :desc).page params[:page]
+    sort_key, @sort_field = if params[:sort_by] == 'record_date'
+                              [:order_by_record_date, :recorded_at]
+                            else
+                              [:order_by_update, :updated_at]
+                            end
+    @demos = Domain::Demo.list(page: params[:page] || 1, sort_key => true)
   end
 
   def api_create
     preprocess_api_request(require: [:demo])
-    demo = DemoCreationService.new(@request_hash[:demo]).create!
+    demo = Domain::Demo.create(@request_hash[:demo])
     render json: DemoSerializer.new(demo).call
   end
 
   def hidden_tag
-    demo = Demo.find(params[:id])
+    demo = Domain::Demo.single(id: params[:id], assert: true)
     render plain: demo.hidden_tags_text
   end
 end
