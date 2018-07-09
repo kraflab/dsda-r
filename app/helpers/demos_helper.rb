@@ -34,8 +34,8 @@ module DemosHelper
     ([spl.last] + fields).collect { |i| i.to_i }
   end
 
-  def total_time(thing, with_tics = true)
-    Demo.tics_to_string(thing.demos.sum(:tics), with_tics)
+  def total_time(thing, with_cs = true)
+    Service::Tics::ToString.call(thing.demos.sum(:tics), with_cs: with_cs)
   end
 
   def demo_details(thing)

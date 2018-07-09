@@ -19,15 +19,15 @@ module Domain
       private
 
       def longest_demo_time(wad)
-        ::Demo.tics_to_string(wad.demos.maximum(:tics))
+        Service::Tics::ToString.call(wad.demos.maximum(:tics))
       end
 
       def average_demo_time(wad)
-        ::Demo.tics_to_string(wad.demos.sum(:tics) / wad.demos.count)
+        Service::Tics::ToString.call(wad.demos.sum(:tics) / wad.demos.count)
       end
 
       def total_demo_time(wad)
-        ::Demo.tics_to_string(wad.demos.sum(:tics))
+        Service::Tics::ToString.call(wad.demos.sum(:tics))
       end
 
       def most_recorded_player(wad)
