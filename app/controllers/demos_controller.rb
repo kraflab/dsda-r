@@ -8,7 +8,7 @@ class DemosController < ApplicationController
                             else
                               [:order_by_update, :updated_at]
                             end
-    @demos = Domain::Demo.list(page: params[:page] || 1, sort_key => true)
+    @demos = Domain::Demo.list(page: params[:page] || 1, sort_key => :desc)
   end
 
   def api_create

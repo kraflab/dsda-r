@@ -24,8 +24,8 @@ module Domain
       query = query.where(tas: tas) if tas
       query = query.where(guys: guys) if guys
       query = query.reorder(:tics) if order_by_tics
-      query = query.reorder(recorded_at: :desc) if order_by_record_date
-      query = query.reorder(updated_at: :desc) if order_by_update
+      query = query.reorder(recorded_at: order_by_record_date) if order_by_record_date
+      query = query.reorder(updated_at: order_by_update) if order_by_update
       query = query.page(page) if page
       query
     end

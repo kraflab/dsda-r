@@ -41,7 +41,10 @@ class WadsController < ApplicationController
     @wad = Domain::Wad.single(short_name: params[:id], assert: true)
     level = params[:level]
     category = Category.find_by(name: params[:category])
-    demos = Demo.where(level: level, category: category, wad: @wad, guys: 1, tas: 0).reorder(:recorded_at)
+    demos = Domain::Demo.list(
+      wad_id: @wad.id, level: level, category: category, guys: 1, tas: 0,
+      order_by_record_date: :asc
+    )
     data_full = demos.all.map { |i| [i.players.first.username, i.tics, i.time, i.recorded_at] }
     if data_full.empty?
       render json: {data: [], players: [], error: true}
@@ -73,7 +76,9 @@ class WadsController < ApplicationController
     category = params[:category]
     index_0 = params[:index_0].to_i
     index_1 = params[:index_1].to_i
-    demos = Demo.where(level: level, category: Category.find_by(name: category), wad: wad, guys: 1, tas: 0)
+    demos = Domain::Demo.list(
+      level: level, category: category, wad: wad.id, guys: 1, tas: 0
+    )
     demo_0 = demos[index_0]
     demo_1 = demos[index_1]
     if level.nil? or !level.include?('Ep') or demo_0.nil? or demo_1.nil?
@@ -87,7 +92,9 @@ class WadsController < ApplicationController
     @wad = Domain::Wad.single(short_name: params[:id], assert: true)
     @level = params[:level]
     @category = params[:category]
-    @demos = Demo.where(level: @level, category: Category.find_by(name: @category), wad: @wad, guys: 1, tas: 0)
+    @demos = Domain::Demo.list(
+      level: @level, category: @category, wad: @wad.id, guys: 1, tas: 0
+    )
     if @level.nil? or !@level.include?('Ep') or @demos.count < 2
       if @wad.nil?
         flash[:info] = 'Wad not found'
