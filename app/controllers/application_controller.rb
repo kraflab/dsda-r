@@ -11,11 +11,6 @@ class ApplicationController < ActionController::Base
     @current_admin = AdminAuthenticator.new(request).authenticate!
   end
 
-  # Basic api check for file data
-  def has_file_data?(query)
-    query['file'] and query['file']['data'] and query['file']['name']
-  end
-
   def preprocess_api_request(options)
     @request_hash = ApiRequestParser.new(options.merge(request: request)).parse_json
   end
