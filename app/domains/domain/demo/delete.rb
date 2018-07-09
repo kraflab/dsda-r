@@ -3,11 +3,12 @@ module Domain
     module Delete
       extend self
 
-      def call(attributes)
+      def call(demo)
         ::Demo.transaction do
           demo.destroy!
           cleanup_file(demo)
           touch_players(demo)
+        end
         demo
       end
 
