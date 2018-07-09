@@ -1,5 +1,5 @@
 module Domain
-  module Player
+  module Category
     extend self
 
     SKILL_4_SPEED = ['UV Speed', 'SM Speed'].freeze
