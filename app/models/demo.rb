@@ -52,16 +52,8 @@ class Demo < ApplicationRecord
     Service::Tics::ToString.call(tics, with_cs: has_tics) if tics
   end
 
-  # [hh:]mm:ss[.tt]
-  def time=(str)
-    return if str.blank?
-    spl = str.split('.')
-    fields = spl[0].split(':').reverse
-    return if fields.count < 2
-    self.tics = ( fields.count == 3 ? fields[2].to_i * 360000 : 0 ) +
-                fields[1].to_i * 6000 + fields[0].to_i * 100 +
-                ( spl.count == 2 ? spl[1].to_i : 0 )
-    self.has_tics = (spl.count == 2)
+  def time=(string)
+    self.tics, self.has_tics = Service::Tics::FromString.call(string)
   end
 
   def note
