@@ -12,12 +12,12 @@ class Demo < ApplicationRecord
   scope :ils, -> { reorder(:level).where("level NOT LIKE 'Ep%' AND level NOT LIKE '%A%'") }
   scope :show_movies, -> { where("level LIKE 'Ep%' OR level LIKE '%A%'") }
   scope :show_ils, -> { where("level NOT LIKE 'Ep%' AND level NOT LIKE '%A%'") }
-  scope :episode, -> (ep) {
+  scope :episode, ->(ep) {
     reorder(:level).where("level <> ? AND (level LIKE ? or level = ? or LEVEL LIKE ? or LEVEL = ? #{ep == 2 ? 'or LEVEL = \'Map 31\' or LEVEL = \'Map 32\'' : ''})",
           "Map #{ep - 1}0", "Map #{ep - 1}_", "Map #{ep}0", "E#{ep}M%", "Ep #{ep}")
   }
-  scope :recent, -> (n) { reorder(recorded_at: :desc).limit(n) }
-  scope :within, -> (n) { reorder(recorded_at: :desc).where('recorded_at >= ?', n.days.ago)}
+  scope :recent, ->(n) { reorder(recorded_at: :desc).limit(n) }
+  scope :within, ->(n) { reorder(recorded_at: :desc).where('recorded_at >= ?', n.days.ago)}
   scope :tas, -> { where('tas > 0') }
 
   validates :wad,       presence: true
@@ -38,9 +38,7 @@ class Demo < ApplicationRecord
   validates :levelstat,   length: { maximum: 500 }
   validates :compatibility, presence: true, numericality: { greater_than_or_equal_to: 0 }
 
-  def category_name
-    category&.name
-  end
+  delegate :name, to: :category, prefix: true
 
   def file_path
     demo_file.data.url if demo_file
@@ -51,7 +49,7 @@ class Demo < ApplicationRecord
   end
 
   def time
-    Demo.tics_to_string(tics, has_tics) if tics
+    Service::Tics::ToString.call(tics, with_cs: has_tics) if tics
   end
 
   # [hh:]mm:ss[.tt]
@@ -131,32 +129,6 @@ class Demo < ApplicationRecord
     least_tics = Demo.where(wad: wad, level: level, category: filter_categories,
                              tas: tas, guys: guys).minimum(:tics)
     tics / 100 <= least_tics / 100
-  end
-
-  def self.tics_to_string(t, with_tics = true)
-    s = t / 100
-    t %= 100
-    m = s / 60
-    s %= 60
-    h = m / 60
-    m %= 60
-    (h > 0 ? h.to_s + ':' + m.to_s.rjust(2, '0') : m.to_s) +
-      ":#{s.to_s.rjust(2, '0')}" +
-      (with_tics ? '.' + t.to_s.rjust(2, '0') : '')
-  end
-
-  def self.prune_levelstats
-    Demo.all.each do |demo|
-      if demo.time == demo.levelstat
-        demo.levelstat = ''
-        demo.save
-      else
-        if demo.levelstat.include? ','
-          demo.levelstat = demo.levelstat.gsub(/,/, "\n")
-          demo.save
-        end
-      end
-    end
   end
 
   private

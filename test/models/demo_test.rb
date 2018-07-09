@@ -135,22 +135,4 @@ class DemoTest < ActiveSupport::TestCase
     assert_equal 1, demos(:bt01pacifist).record_index
     assert_equal 2, demos(:bt02speed).record_index
   end
-
-  test "fix levelstats before creation" do
-    @demo.save
-    assert_equal "0:00.99\n1:11:00", @demo.levelstat
-  end
-
-  test "should fix levelstats" do
-    demo = demos(:bt01speed)
-    demo2 = demos(:bt01pacifist)
-    assert_not demo.levelstat.blank?
-    assert demo2.levelstat.include? ','
-    Demo.prune_levelstats
-    demo.reload
-    demo2.reload
-    assert demo.levelstat.blank?
-    assert demo2.levelstat.include? "\n"
-    assert_not demo2.levelstat.include? ','
-  end
 end
