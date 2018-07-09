@@ -14,10 +14,11 @@ module Domain
       ::Wad.where('username LIKE ? OR name LIKE ?', "%#{term}%", "%#{term}%")
     end
 
-    def single(short_name: nil, either_name: nil, assert: false)
+    def single(short_name: nil, either_name: nil, id: nil, assert: false)
       wad = nil
       wad = ::Wad.find_by(username: short_name) if short_name
       wad = find_by_either_name(either_name) if either_name
+      wad = ::Wad.find_by(id: id) if id
       return wad if wad.present?
       raise ActiveRecord::RecordNotFound if assert
     end

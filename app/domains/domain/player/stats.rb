@@ -40,7 +40,7 @@ module Domain
 
       def most_recorded_wad(player)
         wad_counts = player.demos.group(:wad_id).count
-        ::Wad.find(wad_counts.max_by { |k, v| v }[0]).name
+        Domain::Wad.single(wad_counts.max_by { |k, v| v }[0])&.name
       end
 
       def most_recorded_category(player)
