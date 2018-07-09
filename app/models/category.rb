@@ -11,6 +11,7 @@ class Category < ApplicationRecord
     def categories_for(name)
       categories = [Category.find_by(name: name)]
       categories << pacifist if skill_4_speed?(name)
+      categories
     end
 
     def skill_4_speed?(name)

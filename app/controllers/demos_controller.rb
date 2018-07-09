@@ -3,12 +3,12 @@ class DemosController < ApplicationController
   before_action :authenticate_admin!, only: [:api_create]
 
   def feed
-    @sort_sym = if params[:sort_by] == 'record_date'
-                  :order_by_record_date
-                else
-                  :order_by_update
-                end
-    @demos = Domain::Demo.list(page: params[:page] || 1, @sort_sym => true)
+    sort_key, @sort_field = if params[:sort_by] == 'record_date'
+                              [:order_by_record_date, :recorded_at]
+                            else
+                              [:order_by_update, :updated_at]
+                            end
+    @demos = Domain::Demo.list(page: params[:page] || 1, sort_key => true)
   end
 
   def api_create

@@ -18,7 +18,7 @@ module Domain
       private
 
       def average_demo_time(iwad)
-        Service::Tics::ToString.call(iwad.demos.sum(:tics) / iwad.demos.count))
+        Service::Tics::ToString.call(iwad.demos.sum(:tics) / iwad.demos.count)
       end
 
       def total_demo_time(iwad)

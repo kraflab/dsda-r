@@ -21,7 +21,7 @@
     <tbody>
       <% @demos.each do |demo| %>
         <tr>
-          <td><%= safe_date(demo.send(@sort_sym)) %></td>
+          <td><%= safe_date(demo.send(@sort_field)) %></td>
           <td class="wadfile"><%= link_to demo.wad.username, demo.wad %></td>
           <td class="wadfile"><%= link_to demo.wad.iwad.username, demo.wad.iwad %></td>
           <td><%= demo.level %></td>
