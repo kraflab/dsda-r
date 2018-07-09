@@ -12,14 +12,14 @@ module Domain
     # Soft category pulls in related categories
     def list(
       wad_id: nil, tas: nil, guys: nil, level: nil,
-      category: nil, soft_category: nil,
+      category: nil, soft_category: nil, categories: nil,
       order_by_tics: nil, order_by_record_date: nil, order_by_update: nil,
       page: nil
     )
       query = ::Demo.all
       query = query.where(wad_id: wad_id) if wad_id
       query = query.where(level: level) if level
-      categories = resolve_categories(category, soft_category)
+      categories ||= resolve_categories(category, soft_category)
       query = query.where(category: categories) if categories
       query = query.where(tas: tas) if tas
       query = query.where(guys: guys) if guys

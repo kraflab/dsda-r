@@ -86,41 +86,12 @@ class Demo < ApplicationRecord
 
   # Return true if fastest demo (including ties) *to the second*
   def is_record?
-    !record_index!.nil?
+    Domain::Demo::ComputeRecordIndex.call(self).present?
   end
 
   # Number of slower demos for this run if it is a record (not record = 0)
   def record_index
-    record_index!.to_i
-  end
-
-  # Number of slower demos for this run if it is a record (not record = nil)
-  def record_index!
-    filter_categories = [category]
-    if category.name == 'UV Speed' or category.name == 'SM Speed'
-      filter_categories.push(Category.find_by(name: 'Pacifist'))
-    end
-
-    if best_of filter_categories
-      filter_categories.pop if filter_categories.size > 1
-      if category.name == 'Pacifist'
-        filter_categories.push(Category.find_by(name: 'UV Speed'), Category.find_by(name: 'SM Speed'))
-        # Only add these if the demo is faster (i.e., it is also the speed record)
-        filter_categories.pop(2) if !best_of(filter_categories)
-      end
-      index_demos = Demo.where(wad: wad, level: level, category: filter_categories,
-                               tas: tas, guys: guys)
-      index_demos.count - 1
-    else
-      nil
-    end
-  end
-
-  # Return true if demo is the fastest of this set
-  def best_of(filter_categories)
-    least_tics = Demo.where(wad: wad, level: level, category: filter_categories,
-                             tas: tas, guys: guys).minimum(:tics)
-    tics / 100 <= least_tics / 100
+    Domain::Demo::ComputeRecordIndex.call(self).to_i
   end
 
   private

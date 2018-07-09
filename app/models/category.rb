@@ -5,6 +5,8 @@ class Category < ApplicationRecord
   validates :description, presence: true, length: { maximum: 200 }
   validates :game,        presence: true, length: { maximum: 50 }
 
+  SKILL_4_SPEED = ['UV Speed', 'SM Speed'].freeze
+
   class << self
     def categories_for(name)
       categories = [Category.find_by(name: name)]
@@ -12,7 +14,11 @@ class Category < ApplicationRecord
     end
 
     def skill_4_speed?(name)
-      ['UV Speed', 'SM Speed'].include?(name)
+      SKILL_4_SPEED.include?(name)
+    end
+
+    def skill_4_speed
+      SKILL_4_SPEED.map { |name| Category.find_by(name: name) }
     end
 
     def pacifist
