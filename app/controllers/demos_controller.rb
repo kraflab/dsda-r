@@ -18,7 +18,7 @@ class DemosController < ApplicationController
   end
 
   def hidden_tag
-    demo = Domain::Demo.single(id: params[:id])
+    demo = Domain::Demo.single(id: params[:id], assert: true)
     render plain: demo.hidden_tags_text
   end
 end
