@@ -77,7 +77,7 @@ class WadsController < ApplicationController
     index_0 = params[:index_0].to_i
     index_1 = params[:index_1].to_i
     demos = Domain::Demo.list(
-      level: level, category: category, wad: wad.id, guys: 1, tas: 0
+      level: level, category: category, wad_id: wad.id, guys: 1, tas: 0
     )
     demo_0 = demos[index_0]
     demo_1 = demos[index_1]
@@ -93,7 +93,7 @@ class WadsController < ApplicationController
     @level = params[:level]
     @category = params[:category]
     @demos = Domain::Demo.list(
-      level: @level, category: @category, wad: @wad.id, guys: 1, tas: 0
+      level: @level, category: @category, wad_id: @wad.id, guys: 1, tas: 0
     )
     if @level.nil? or !@level.include?('Ep') or @demos.count < 2
       if @wad.nil?
