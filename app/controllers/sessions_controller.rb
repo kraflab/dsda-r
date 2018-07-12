@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
 
   def set
     demo_filter = {category: [], tas: false, coop: false, port: []}
-    Category.all.each do |category|
+    Domain::Category.list.each do |category|
       demo_filter[:category].push(category.name) if params["cat:#{category.name}"] == '0'
     end
     demo_filter[:tas] = params['tas'] == '0'

@@ -15,7 +15,7 @@ class StaticPagesController < ApplicationController
   def search
     @search = params[:search]
     @players = Domain::Player.search(term: @search)
-    @wads = Wad.where('username LIKE ?', "%#{@search}%")
+    @wads = Domain::Wad.search(term: @search)
   end
 
   def no_file

@@ -30,6 +30,14 @@ describe Domain::Wad do
     end
   end
 
+  describe '.search' do
+    let(:wad) { wads(:btsx) }
+
+    it 'returns wads matching a search term' do
+      Domain::Wad.search(term: wad.username).first.must_equal wad
+    end
+  end
+
   describe '.single' do
     let(:wad) { wads(:btsx) }
 

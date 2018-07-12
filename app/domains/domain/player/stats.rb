@@ -40,12 +40,14 @@ module Domain
 
       def most_recorded_wad(player)
         wad_counts = player.demos.group(:wad_id).count
-        ::Wad.find(wad_counts.max_by { |k, v| v }[0]).name
+        Domain::Wad.single(id: wad_counts.max_by { |k, v| v }[0])&.name
       end
 
       def most_recorded_category(player)
         category_counts = player.demos.group(:category_id).count
-        ::Category.find(category_counts.max_by { |k, v| v }[0]).name
+        Domain::Category.single(
+          id: category_counts.max_by { |k, v| v }[0]
+        )&.name
       end
 
       def tas_count(player)
