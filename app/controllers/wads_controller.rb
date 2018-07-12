@@ -40,12 +40,12 @@ class WadsController < ApplicationController
   def record_timeline_json
     @wad = Domain::Wad.single(short_name: params[:id], assert: true)
     level = params[:level]
-    category = Domain::Category.single(name: params[:category])
+    category = params[:category]
     demos = Domain::Demo.list(
       wad_id: @wad.id, level: level, category: category, guys: 1, tas: 0,
       order_by_record_date: :asc
     )
-    data_full = demos.all.map { |i| [i.players.first.username, i.tics, i.time, i.recorded_at] }
+    data_full = demos.map { |i| [i.players.first.username, i.tics, i.time, i.recorded_at] }
     if data_full.empty?
       render json: {data: [], players: [], error: true}
     else
