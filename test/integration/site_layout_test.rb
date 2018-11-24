@@ -28,7 +28,7 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     assert_select "title", "Stats | DSDA"
     assert_select "div.page-header", "Stats & Charts"
     assert_select "div.chart-style[id=?]", "wad_count_by_iwad"
-    assert_select "div.chart-style[id=?]", "demo_count_by_month"
+    assert_select "div.chart-style[id=?]", "demo_count_by_year"
 
     player = Player.reorder(record_index: :desc).first
     assert_select "h3", "Record Index Top 20"

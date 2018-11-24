@@ -31,15 +31,6 @@ module ApplicationHelper
     end.join(' ').html_safe
   end
 
-  # Returns the number of demos by yyyy-mm
-  def demos_by_month(subset)
-    subset.reorder(:recorded_at).group_by { |i| i.recorded_at.nil? ? nil :
-      i.recorded_at.strftime('%Y-%m') }.inject({}) do |hash, (k, v)|
-        hash[k] = v.size if k
-        hash
-      end
-  end
-
   # Returns the number of demos by yyyy
   def demos_by_year(subset)
     data = {}
@@ -68,6 +59,16 @@ module ApplicationHelper
         hash[k] = v.size if k
         hash
       end
+  end
+
+  def default_plot_options
+    {
+      title: { fontSize: 32 },
+      scales: {
+        yAxes: [{ ticks: { fontSize: 16 } }],
+        xAxes: [{ ticks: { fontSize: 16 } }]
+      }
+    }
   end
 
   # return the 5 most active wads of the past n days

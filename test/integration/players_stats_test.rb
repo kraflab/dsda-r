@@ -10,6 +10,6 @@ class PlayersStatsTest < ActionDispatch::IntegrationTest
     get player_stats_path(@player)
     assert_select "title", "#{@player.name} | Stats | DSDA"
     assert_select "div.page-header", "#{@player.name} Stats & Charts"
-    assert_select "div.chart-style[id=?]", "demo_count_by_month"
+    assert_select "div.chart-style[id=?]", "demo_count_by_year"
   end
 end

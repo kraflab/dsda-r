@@ -1,7 +1,7 @@
 $ ->
   pad = (number) ->
     ("0" + number.toString()).slice(-2)
-  
+
   chart = $("#myChart")
   if chart.length > 0
     console.log chart
@@ -25,19 +25,22 @@ $ ->
               }]
             },
             options: {
+              title: { fontSize: 32 },
               elements: {
                 line: {
-                  tension: 0.1
+                  tension: 0
                 }
               },
               legend: {display: false},
               scales: {
                 xAxes: [{
                   type: 'time',
-                  position: 'bottom'
+                  position: 'bottom',
+                  ticks: { fontSize: 16 }
                 }],
                 yAxes: [{
                   ticks: {
+                    fontSize: 16,
                     callback: (label, index, labels) ->
                       tics = label;
                       secs = Math.floor(tics / 100)
@@ -53,6 +56,8 @@ $ ->
                 }],
               },
               tooltips: {
+                titleFontSize: 16,
+                bodyFontSize: 16,
                 callbacks: {
                   label: (tooltipItem, data) ->
                     tics = tooltipItem.yLabel;
