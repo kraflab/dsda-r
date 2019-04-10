@@ -105,4 +105,13 @@ class WadsController < ApplicationController
       end
     end
   end
+
+  def table_view
+    @wad = Domain::Wad.single(short_name: params[:id], assert: true)
+    @category = params[:category] || 'UV Speed'
+    levels = @wad.demos.ils.select(:level).distinct.map(&:level)
+    @demos = Domain::Demo.standard_record_list(
+      wad_id: @wad.id, levels: levels, category: @category
+    )
+  end
 end
