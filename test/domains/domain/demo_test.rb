@@ -14,6 +14,19 @@ describe Domain::Demo do
     end
   end
 
+  describe '.standard_record_list' do
+    before do
+      Domain::Demo::FindStandardRecordList.stubs(:call)
+    end
+
+    it 'finds the standard record' do
+      Domain::Demo::FindStandardRecordList.expects(:call)
+      Domain::Demo.standard_record_list(
+        wad_id: 1, levels: ['Map 01', 'Map 02'], category: 'UV Speed'
+      )
+    end
+  end
+
   describe '.standard_record' do
     before do
       Domain::Demo::FindStandardRecord.stubs(:call)

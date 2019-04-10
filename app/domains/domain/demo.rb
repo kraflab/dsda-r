@@ -9,6 +9,10 @@ module Domain
       raise ActiveRecord::RecordNotFound if assert
     end
 
+    def standard_record_list(wad_id:, levels:, category:)
+      FindStandardRecordList.call(wad_id, levels, category)
+    end
+
     def standard_record(wad_id:, level:, category:)
       FindStandardRecord.call(wad_id, level, category)
     end
