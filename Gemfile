@@ -13,7 +13,7 @@ gem 'jwt'
 
 gem 'faker',                   '1.7.2'
 gem 'kaminari'
-gem 'bootstrap-sass',          '3.3.7'
+gem 'bootstrap-sass',          '~> 3.4.1'
 gem 'bootstrap_form',          '2.5.3'
 gem 'thor',                    '0.19.1'
 gem 'secure_headers',          '~> 3.1'
