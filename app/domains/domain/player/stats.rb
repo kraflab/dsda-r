@@ -34,17 +34,17 @@ module Domain
       end
 
       def average_demo_count(player)
-        wad_counts = player.demos.group(:wad_id).count
+        wad_counts = player.demos.unscoped.group(:wad_id).count
         wad_counts.values.inject(0) { |sum, k| sum + k } / wad_counts.size
       end
 
       def most_recorded_wad(player)
-        wad_counts = player.demos.group(:wad_id).count
+        wad_counts = player.demos.unscoped.group(:wad_id).count
         Domain::Wad.single(id: wad_counts.max_by { |k, v| v }[0])&.name
       end
 
       def most_recorded_category(player)
-        category_counts = player.demos.group(:category_id).count
+        category_counts = player.demos.unscoped.group(:category_id).count
         Domain::Category.single(
           id: category_counts.max_by { |k, v| v }[0]
         )&.name
