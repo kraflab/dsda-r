@@ -10,25 +10,28 @@
         <thead>
           <tr>
             <th>Level</th>
-            <th>Player(s)</th>
-            <th>Engine</th>
-            <th class="center-text">Note</th>
+            <th>Player</th>
             <th class="center-text">Time</th>
             <th><span class="glyphicon glyphicon-play" aria-hidden="true" aria-label="video"></span></th>
           </tr>
         </thead>
         <tbody class="demo-filter">
-          <% @demos.each do |demo| %>
-            <% next unless demo %>
-
-            <tr>
-              <td><%= demo.level %></td>
-              <td class="player-cell"><%= demo.players_text %></td>
-              <td class="engine-cell"><%= demo.engine %></td>
-              <%= demo_hidden_tag(demo) %>
-              <%= demo_time_cell(demo) %>
-              <%= demo_video_link(demo) %>
-            </tr>
+          <% @demos.each do |level, demo| %>
+            <% if demo %>
+              <tr>
+                <td><%= demo.level %></td>
+                <td class="player-cell"><%= demo.players_text %></td>
+                <%= demo_time_cell(demo) %>
+                <%= demo_video_link(demo) %>
+              </tr>
+            <% else %>
+              <tr>
+                <td><%= level %></td>
+                <td class="player-cell"></td>
+                <td></td>
+                <td></td>
+              </tr>
+            <% end %>
           <% end %>
         </tbody>
       </table>
