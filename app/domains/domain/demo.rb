@@ -41,7 +41,8 @@ module Domain
     def create(
       wad:, category:, time:, level:, tas:, guys:, players:,
       tags: nil, compatibility: 0, version: 0, video_link: nil, levelstat: '',
-      recorded_at: nil, engine: 'Unknown', file: nil, file_id: nil
+      recorded_at: nil, engine: 'Unknown', file: nil, file_id: nil,
+      kills: nil, items: nil, secrets: nil
     )
       wad = Domain::Wad.single(either_name: wad)
       category = Domain::Category.single(name: category)
@@ -62,7 +63,10 @@ module Domain
         recorded_at: recorded_at,
         engine: engine,
         file: file,
-        file_id: file_id
+        file_id: file_id,
+        kills: kills,
+        items: items,
+        secrets: secrets
       )
     end
 

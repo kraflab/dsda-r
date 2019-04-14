@@ -17,7 +17,10 @@ describe Domain::Demo::Create do
       players: [players(:kraflab), players(:kingdime)],
       tags: [{ text: 'Also reality', show: 1 }],
       file: { data: '1234', name: 'test_demo.zip' },
-      file_id: file_id
+      file_id: file_id,
+      kills: '7/7',
+      items: '0/42',
+      secrets: '3/5'
     }
   }
   let(:file_id) { nil }
