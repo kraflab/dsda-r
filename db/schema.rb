@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180703165428) do
+ActiveRecord::Schema.define(version: 20190414121556) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "username"
@@ -70,6 +70,9 @@ ActiveRecord::Schema.define(version: 20180703165428) do
     t.boolean  "has_hidden_tag", default: false
     t.boolean  "has_shown_tag",  default: false
     t.integer  "compatibility",  default: 0
+    t.string   "kills"
+    t.string   "items"
+    t.string   "secrets"
     t.index ["category_id"], name: "index_demos_on_category_id"
     t.index ["demo_file_id"], name: "index_demos_on_demo_file_id"
     t.index ["recorded_at"], name: "index_demos_on_recorded_at"
