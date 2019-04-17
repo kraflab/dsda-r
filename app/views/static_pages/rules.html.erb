@@ -1,0 +1,153 @@
+<% provide(:title, 'Rules') %>
+
+<h1>DSDA Rules &amp; Guidelines</h1>
+
+<h2>General</h2>
+
+<h4>Naming Conventions</h4>
+
+<p>Historically, Doom speedruns do not use the now-ubiquitous categories Any% and 100%. The corresponding categories are UV Speed and UV Max. UV stands for ultra-violence, the 4th skill level, which is the standard difficulty use in most runs (though nightmare is also often used). See the category list below for more details.</p>
+
+<h4>Demo Recording</h4>
+
+<p>Unlike most games in the speedrunning community, Doom runs require demo files (.lmp) to be considered legitimate. These files store the inputs entered by a player during the run, frame by frame, and can be played back by anyone else. This requirement offers some key advantages:</p>
+
+<ul>
+<li>Demo files are tiny, so recording and sharing runs is easy and accessible even to people with poor internet connections.</li>
+
+<li>The authenticity of a run, in terms of compatibility with the original game, can be easily determined. If a user made edits to the game logic, their demo file would desync when another player tries to play it back.</li>
+
+<li>Old records can't be lost if a video hosting site goes down or has data loss - due to the small size, we have multiple full backups of our community's history.</li>
+
+<li>Some types of cheating would be visible in the demo file itself, so we are safeguarded against these.</li>
+
+<li>Some categories can be verified more easily (pacifist, max, etc).</li>
+</ul>
+
+<h4>Source Ports</h4>
+
+<p>Source ports are allowed (and generally recommended). The main requirement is to use a port that has the right compatibility. <strong>In order to be considered legitimate, your demo must play back in the original environment</strong>. For Doom this means the original executable. For custom maps, this varies (boom, zdoom, etc). <strong>The currently recommended ports are: Crispy Doom (vanilla) &amp; prboom+ (vanilla &amp; boom)</strong>. For prboom+, you can choose the demo compatibility by using the <code>complevel</code> option on the command line. This makes some changes to the game logic that accurately reflect the original executables. Here are the most important ones:</p>
+
+<ul>
+<li>-complevel 2 (Doom II)</li>
+
+<li>-complevel 3 (Ultimate Doom)</li>
+
+<li>-complevel 4 (Final Doom)</li>
+
+<li>-complevel 9 (Boom)</li>
+</ul>
+
+<p>If you're playing custom maps, the text file included with the wad should tell you which environment / compatibility is needed. If a map requires (g)zdoom, you can more or less use any version of the associated ports that works, but be warned: these ports have poor demo compatibility and your run may only play back in the specific version you used. If possible, we recommend using the latest zdoom since it is final.</p>
+
+<h4>Advanced Features</h4>
+
+<p>Source ports tend to have extra features not present in the original game. Examples include custom HUDs, slowdown, and segmenting. In principle you can use any advanced feature you want, but it may affect the category of your run. The general guideline is to include these details in the text file you include with your demo submission. Here is a summary of some of these tools:</p>
+
+<ul>
+<li><strong>Advanced HUD</strong> - available in many ports, an advanced HUD is usually capable of showing things like monster counts (kills and how many are alive) and the in-game-time. For a regular speedrun this doesn't provide a huge advantage, and is more often used as a convenient way to see what the time is. For max runs (and associated categories) it can give an advantage varying from small to huge. In these cases, it is recommended to include that information in your text file ("Uses advanced HUD").</li>
+
+<li><strong>Slowdown</strong> - any demo that reduces the game speed is considered a TAS (tool-assisted speedrun).</li>
+
+<li><strong>Speedup</strong> - the use of speedup (for instance, while waiting for a long timed lock-in to end) is allowed.</li>
+
+<li><strong>Segmenting</strong> - any demo that is recorded in segments is considered a TAS. Normal runs must be single-segment.</li>
+
+<li><strong>2-Key SR50</strong> - this simplification allows the SR50 technique to be executed with one less key. It only exists in prboom+ v2.5.1.4. Please use a different version or find a build with the feature set as a toggle in the discord.</li>
+
+<li><strong>Always SR50</strong> - any automation of the SR50 technique is not allowed except in a TAS.</li>
+
+<li><strong>SR50 on Turns</strong> - in the original engine, turning while performing SR50 is impossible, so this ability is only allowed in a TAS.</li>
+
+<li><strong>Always Run</strong> - turning on "always run" makes it so you do not need to hold down the run key. This is completely fine and does not need to be noted anywhere.</li>
+
+<li><strong>Vert Mouse</strong> - turning off vertical mouse movement (and back on) at any time is completely fine and does not need to be noted anywhere.</li>
+
+<li><strong>Cheats</strong> - most cheats are incompatible with the demo format, so they can't be used at all. The use of the ones that do work (e.g., iddt) is not allowed in traditional categories. If you want to use a cheat, then make it clear when submitting the run and your demo will go into the "Other" section.</li>
+
+<li><strong>Resolution</strong> - playing the game at a higher resolution than the original environment supported, including widescreen, is allowed.</li>
+
+<li><strong>Longtics</strong> - longtics (increased turning resolution) should not be used with the original games, which could not record demos with this format.</li>
+</ul>
+
+<h2>Categories</h2>
+
+<p>Doom speedrunning has a variety of categories that suit different playstyles. While the entries can change over time based on interest from the community, there is a list generally considered to be standard categories for competition. As a player, you can run any set of restrictions you want, but nonstandard categories will generally be stored in the "Other" area on the demo archive. <strong>One important rule for all categories is you cannot restart a map after dying</strong>. You can die if you exit while dead, but you must restart your run if you have no way of exiting. Any category with all secrets or all kills requires visiting the secret maps in episode / full game runs. Otherwise, this is optional. What follows are the standard categories and their specific rules.</p>
+
+<h4>UV Speed</h4>
+
+<p>This is the equivalent of Any% for Doom. Beat the game or level as fast as you can on UV, with no additional restrictions.</p>
+
+<h4>UV Max</h4>
+
+<p>This is the equivalent of 100% for Doom. Beat the game or level with 100% secrets and all monsters dead, excluding lost souls. Items are not required. Note: if an archvile revives an enemy, your kill counter could still read 100%. However, <strong>all monsters must be dead when you exit</strong> (yielding over 100% in that case). The main exception to this is monsters spawned by the icon of sin. Since they spawn endlessly, you do not need to kill them.</p>
+
+<h4>NM Speed</h4>
+
+<p>This is the same as UV Speed but on NM difficulty.</p>
+
+<h4>NM 100S</h4>
+
+<p>This is the same as NM Speed, but you must collect 100% secrets. Because of enemies respawning, there isn't an easy way of tracking a "Max" style run on NM.</p>
+
+<h4>UV Fast</h4>
+
+<p>This is the same as UV Max, but recorded with the <code>-fast</code> command line parameter. This results in "fast" monsters, which behave similarly to monsters on NM, but without the respawning.</p>
+
+<h4>UV Respawn</h4>
+
+<p>Beat the game or level on UV, with at least 100% kills and secrets (as seen on the score screen), recorded with the <code>-respawn</code> command line parameter. This results in enemies that respawn like they do on NM. The advanced HUD ability to track monster kills gives a significant advantage in this category - see above guidelines on advanced features.</p>
+
+<h4>UV Tyson</h4>
+
+<p>This has the same goal of killing all monsters as Max, but with the restriction of only using weapons on 1 &amp; 2 (pistol, fist, and chainsaw). <strong>You do not need to collect secrets</strong>.</p>
+
+<h4>UV Pacifist</h4>
+
+<p>This is the same as UV Speed, with the added restriction of not damaging any monsters. For the purposes of this category, "monsters" include Romero heads, keens, and lost souls. Here are some specific restrictions:</p>
+
+<ul>
+<li>You <strong>cannot</strong> deal direct damage to a monster.</li>
+
+<li>You <strong>cannot</strong> damage a monster indirectly through splash damage.</li>
+
+<li>You <strong>cannot</strong> shoot a barrel which eventually explodes and damages a monster (even if it was ultimately blown up by a monster).</li>
+
+<li>You <strong>cannot</strong> activate crushers to damage monsters, unless it is unavoidable.</li>
+
+<li>You <strong>cannot</strong> teleport into monsters in order to kill them (telefrag). A note here: it is considered ok if you can't avoid this or it is unintentional. An example would be teleporting back to an earlier part of the map, where monster positions are unpredictable and you don't know if you will hit an enemy. In practice, it is best to avoid this if at all possible.</li>
+
+<li>You <strong>can</strong> provoke infighting (getting monsters to attack each other).</li>
+
+<li>You <strong>can</strong> fire weapons that don't damage a monster (e.g., to shoot a switch or wake them up).</li>
+
+<li>You <strong>can</strong> damage yourself (e.g., to perform a rocket jump).</li>
+</ul>
+
+<h4>NoMo</h4>
+
+<p>This is the same as UV Speed, but recorded with the <code>-nomonsters</code> command line option. This clears the map of monsters so you can focus purely on movement optimization.</p>
+
+<h4>NoMo 100S</h4>
+
+<p>This is the same as NoMo, but with the additional goal of collecting 100% secrets.</p>
+
+<h4>Stroller</h4>
+
+<p>An oddball category, this is the same as UV Pacifist, but with the additional restriction of no strafing, and recorded with the <code>-turbo 50</code> command line option (which sets running speed to walking). The draw of this category is in showing the ridiculousness of beating a doom map without attacking enemies and without even running or strafing.</p>
+
+<h2>Run Submission</h2>
+
+<p>Once you have your completed demo, write up a text file indicating the map, category, time, author, etc, and put them together in a zip file. Post this file to the doomworld forums for the community to see and it will be picked up by the archive maintainer and preserved for all eternity.</p>
+
+<h4>speedrun.com</h4>
+
+<p>The speedrun.com site is not used by most members of the community, has lax rules, and can't be assumed to be up to date. The safe source for runs is the dsda (doomedsda.us for doom and dsdarchive.com for heretic / hexen).</p>
+
+<h4>Ties</h4>
+
+<p>Historically, doom speedrunners do not post ties (considered as having the same time to the second). However, don't let that hold you back if you're proud of your run, or if you've beaten the time by under a second in a significant way (e.g., getting a 9.2 vs a 9.9). There are plans to track some subset of records to the frame instead of to the second, but this is an evolving discussion for the time being.</p>
+
+<h4>Episode Runs</h4>
+
+<p>Historically, ultimate doom episode runs were only timed up to map 7, although it was still required to beat the final map. This was because there was no final score screen in the original game. For this reason, you may see two different times for the same run: the time including map 8 and the time only through map 7. If your goal is to beat an episode as fast as possible, you will use a different route than if your goal is to compete directly with an existing legacy record (m7 timing). Which way you choose is ultimately up to you. For other wads, this distinction is not present - the time including map 8 is what matters.</p>

@@ -20,4 +20,7 @@ class StaticPagesController < ApplicationController
 
   def no_file
   end
+
+  def rules
+  end
 end

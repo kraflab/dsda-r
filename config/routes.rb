@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'search' => 'static_pages#search'
   get 'stats'  => 'static_pages#stats'
   get 'about'  => 'static_pages#about'
+  get 'rules'  => 'static_pages#rules'
 
   get    'settings' => 'sessions#settings'
   patch  'settings' => 'sessions#set'
