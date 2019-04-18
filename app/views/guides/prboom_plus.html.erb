@@ -1,0 +1,71 @@
+<% provide(:title, 'Guides | PRBoom+') %>
+
+<h2>PRBoom+</h2>
+
+<h3>Compatibility</h3>
+
+<p>PRBoom+ is compatible with the vast majority of wads that see competition. In order to achieve this, the port is capable of switching it's compatibility mode (dubbed <code>complevel</code>) at launch via the <code>-complevel x</code> command line option. Each value of x will set the game logic to mimic that of a given environment. Additionally, the port is <strong>limit-removing</strong>. The original executable for doom had various limits in place due to the restrictions of that era, but these limits are removed in the port. This means we can run wads in prboom+ that would break in the original game, but with otherwise identical game logic. For recording demos (and testing as well), the following complevels are most relevant:</p>
+
+<ul>
+<li><strong>2</strong> - Doom II</li>
+
+<li><strong>3</strong> - Ultimate Doom</li>
+
+<li><strong>4</strong> - Final Doom (TNT and Plutonia)</li>
+
+<li><strong>9</strong> - Boom</li>
+
+<li><strong>11</strong> - MBF</li>
+</ul>
+
+<p><strong>If you use the wrong complevel, your run is invalid.</strong> When playing custom maps, the compatibility level is generally listed in the text file. Keep in mind that a custom map using doom as an iwad would be complevel 3, a map using doom 2 would be complevel 2, etc.</p>
+
+<h3>Other Options</h3>
+
+<p>Many command line options are useful for demo recording. Keep the following in mind:</p>
+
+<ul>
+<li><strong>-record x</strong> - records a demo to the file x.lmp.</li>
+
+<li><strong>-levelstat</strong> - outputs a levelstat.txt file with map-by-map stats and times.</li>
+
+<li><strong>-iwad x.wad</strong> - uses x.wad as the iwad (usually doom, doom2, etc).</li>
+
+<li><strong>-file x.wad</strong> - uses x.wad as a pwad (custom maps that will use the resources of the iwad).</li>
+
+<li><strong>-skill x</strong> - sets the skill level for the run. Usually this is 4 (UV) or 5 (NM).</li>
+
+<li><strong>-warp x</strong> - warps to map x. This could be "12" for doom 2 or "1 2" (e1m2) for doom 1.</li>
+
+<li><strong>-shorttics</strong> - this turns on demo-style turning when not recording. It's important for testing and practice.</li>
+
+<li><strong>-longtics</strong> - this causes the demo to use higher precision for turning. This should not be used for the original games, but is allowed for custom maps. Generally, many tricks are harder with this setting. This does not work with complevel 9.</li>
+
+<li><strong>-playdemo x.lmp</strong> - play back a demo file.</li>
+</ul>
+
+<h3>Recording</h3>
+
+<p>In order to record a demo, you'll want to launch prboom+ along with the relevant command line options described above. This can be done on the actual command line, or via a batch file (.bat). Here is an example command:</p>
+
+<blockquote>
+  <p>prboom-plus.exe -iwad /path/to/doom.wad -skill 4 -warp 1 1 -complevel 3 -levelstat -record my_demo</p>
+</blockquote>
+
+<h3>FAQ</h3>
+
+<h4>How do I restart?</h4>
+
+<p>In between attempts, you'll need to exit the game. Each launch starts a new recording.</p>
+
+<h4>Why do I move forward when I move the mouse?</h4>
+
+<p>Doom has "vertical mouse movement" by default. Set your vertical sensitivity to zero in the options to turn this off, or look for the mouse look toggle in the key bindings. You'll generally need this for performing certain tricks, so the toggle is more useful.</p>
+
+<h4>Should I turn on these sr50 options?</h4>
+
+<p>No. The automatic sr50 and sr50 on turns options are for TASing only.</p>
+
+<h4>Can I use the advanced HUD?</h4>
+
+<p>Yes. See the general rules and guidelines for more details on port-specific features.</p>

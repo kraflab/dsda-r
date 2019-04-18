@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   get 'about'  => 'static_pages#about'
   get 'rules'  => 'static_pages#rules'
 
+  get 'guides/prboom_plus' => 'guides#prboom_plus'
+
   get    'settings' => 'sessions#settings'
   patch  'settings' => 'sessions#set'
 
