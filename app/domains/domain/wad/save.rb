@@ -19,6 +19,8 @@ module Domain
       end
 
       def store_md5(wad)
+        return unless wad.wad_file
+
         wad.wad_file.md5 = Service::FileData::ComputeMd5.call(wad.wad_file)
       end
     end
