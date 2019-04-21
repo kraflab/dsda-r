@@ -11,7 +11,13 @@ Iwad.create!(name: "Hexen", username: "hexen", author: "Raven Software")
 
 # Heretic-N
 heretic = Iwad.create!(name: "Heretic", username: "heretic", author: "Raven Software")
-heretic.wads.create!(name: "Heretic", username: "heretic", author: "Raven Software", file: "")
+Domain::Wad.create(
+  iwad: 'heretic',
+  name: 'Heretic',
+  short_name: 'heretic',
+  author: 'Raven Software',
+  is_commercial: true
+)
 [
   'Andrey Boldt', 'Laurent Sebellin', 'JC', 'William Huber', 'Vincent Catalaa',
   'Hitherto', 'QWERTY', 'Radek Pecka', 'Xit Vono', 'Drew DeVore', 'Kimo Xvirus',
@@ -48,22 +54,37 @@ if Rails.env.development?
     twitch   = Faker::Boolean.boolean ? Faker::Internet.user_name(nil, %w(_)) : ""
     youtube  = Faker::Boolean.boolean ? Faker::Internet.user_name(nil, %w(_)) : ""
 
-    Player.create!(name: name, username: username, twitch: twitch,
-                                                   youtube: youtube)
+    Domain::Player.create(
+      name: name,
+      username: username,
+      twitch: twitch,
+      youtube: youtube
+    )
   end
 
   doom = Iwad.first
   50.times do
-    name     = Faker::App.unique.name
-    username = name.gsub(/\s+/, '').slice(0, 8).downcase
-    author   = Faker::Name.name
-    doom.wads.create!(name: name, username: username, author: author, file: "")
+    name       = Faker::App.unique.name
+    short_name = name.gsub(/\s+/, '').slice(0, 8).downcase
+    author     = Faker::Name.name
+    Domain::Wad.create(
+      iwad: doom.name,
+      name: name,
+      short_name: short_name,
+      author: author
+    )
   end
 
-  Port.create!(family: "PRBoom+", version: "v2.5.1.4")
-  Port.create!(family: "GZDoom",  version: "v2.0.05")
-  Port.create!(family: "CNDoom",  version: "v2.0.3.2")
-  Port.create!(family: "PRBoom+", version: "v2.5.1.5")
+  Domain::Port.create(
+    family: "PRBoom+",
+    version: "v2.5.1.4",
+    file: { data: Base64.encode64('prboom2514'), name: 'prboom2514.zip' }
+  )
+  Domain::Port.create(
+    family: "GZDoom",
+    version: "v2.0.05",
+    file: { data: Base64.encode64('gzdoom2005'), name: 'gzdoom2005.zip' }
+  )
 
   player = Player.first
   90.times do
@@ -72,35 +93,38 @@ if Rails.env.development?
     tics = rand(100000) + 1
     is_tas = rand(100) < 10
     is_coop = rand(100) < 10
-    demo = Demo.create!(tics:        tics,
-                        has_tics:    true,
-                        level:       "Map #{(rand(32) + 1).to_s.rjust(2, '0')}",
-                        levelstat:   '',
-                        tas:         is_tas ? 1 : 0,
-                        guys:        is_coop ? 2 : 1,
-                        recorded_at: rand(100).days.ago,
-                        created_at:  rand(100).days.ago,
-                        wad:         wad,
-                        category:    cat,
-                        engine:      "PRBoom+ v2.5.1.4 cl9")
-    player.player_demos.create(demo: demo)
+    Domain::Demo.create(
+      time: Service::Tics::ToString.call(tics),
+      level: "Map #{(rand(32) + 1).to_s.rjust(2, '0')}",
+      levelstat: '',
+      tas: is_tas ? 1 : 0,
+      guys: is_coop ? 2 : 1,
+      recorded_at: rand(100).days.ago,
+      wad: wad.username,
+      category: cat.name,
+      engine: "PRBoom+ v2.5.1.4 cl9",
+      players: [ player.name ],
+      file: { data: Base64.encode64(Faker::Name.name), name: 'demo.zip' }
+    )
   end
 
-  tics = [12340, 8440, 7420, 6032, 5987, 4609, 3295, 3000, 2950, 1546]
-  tics.each_with_index do |tic, n|
+  tics_list = [12340, 8440, 7420, 6032, 5987, 4609, 3295, 3000, 2950, 1546]
+  tics_list.each_with_index do |tics, n|
     @recorded_at ||= 30.days.ago
     @recorded_at += (1 + rand()).days
-    demo = Demo.create!(tics: tic,
-                        has_tics: true,
-                        level: "Map 01",
-                        levelstat: '',
-                        tas: 0,
-                        guys: 1,
-                        recorded_at: @recorded_at,
-                        wad: Wad.first,
-                        category: Category.first,
-                        engine: "PRBoom+ v2.5.1.4 cl9")
-    player.player_demos.create(demo: demo)
+    Domain::Demo.create(
+      time: Service::Tics::ToString.call(tics),
+      level: "Map 01",
+      levelstat: '',
+      tas: 0,
+      guys: 1,
+      recorded_at: @recorded_at,
+      wad: Wad.first.username,
+      category: Category.first.name,
+      engine: "PRBoom+ v2.5.1.4 cl9",
+      players: [ player.name ],
+      file: { data: Base64.encode64(Faker::Name.name), name: 'demo.zip' }
+    )
   end
 
   subcategory = SubCategory.create!(name: "Also reality", show: true)
