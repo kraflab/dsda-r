@@ -81,13 +81,5 @@ describe Domain::Demo do
       Domain::Demo::Create.expects(:call)
       create
     end
-
-    describe 'when the player does not exist' do
-      let(:player) { 'not found' }
-
-      it 'raises error' do
-        proc { create }.must_raise ActiveRecord::RecordNotFound
-      end
-    end
   end
 end

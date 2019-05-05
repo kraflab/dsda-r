@@ -61,6 +61,18 @@ describe Domain::Player do
           single.must_be_nil
         end
       end
+
+      describe 'when creating missing players' do
+        let(:single) {
+          Domain::Player.single(either_name: player_name, create_missing: true)
+        }
+        let(:player_name) { 'new player' }
+
+        it 'creates a new player' do
+          single
+          Player.find_by(name: player_name).must_be_instance_of Player
+        end
+      end
     end
   end
 

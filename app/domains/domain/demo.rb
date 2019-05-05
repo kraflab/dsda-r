@@ -73,7 +73,11 @@ module Domain
     private
 
     def players_from_names(names)
-      names.map { |name| Domain::Player.single(either_name: name, assert: true) }
+      names.map do |name|
+        Domain::Player.single(
+          either_name: name, assert: true, create_missing: true
+        )
+      end
     end
 
     def resolve_categories(category, soft_category)
