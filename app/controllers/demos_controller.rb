@@ -17,6 +17,16 @@ class DemosController < ApplicationController
     render json: DemoSerializer.new(demo).call
   end
 
+  def record
+    wad = Domain::Wad.single(short_name: params[:wad])
+    demo = wad.present? && Domain::Demo.standard_record(
+      wad_id: wad.id,
+      level: params[:level],
+      category: params[:category]
+    )
+    render json: RecordSerializer.call(demo, wad)
+  end
+
   def hidden_tag
     demo = Domain::Demo.single(id: params[:id], assert: true)
     render plain: demo.hidden_tags_text
