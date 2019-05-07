@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   post 'api/players/' => "players#api_create"
   post 'api/ports/'   => "ports#api_create"
 
-  get 'api/demos/record' => 'demos#record'
+  get 'api/demos/records' => 'demos#record'
 
   get 'no_file' => "static_pages#no_file"
 

@@ -14,14 +14,14 @@ class DemosRecordTest < ActionDispatch::IntegrationTest
   end
 
   test 'get record' do
-    get '/api/demos/record', params: @params, as: :json
+    get '/api/demos/records', params: @params, as: :json
     response_hash = JSON.parse(response.body)
     assert_equal response_hash['time'], @demo.time
     assert_equal response_hash['level'], @demo.level
   end
 
   test 'missing record' do
-    get '/api/demos/record', params: { wad: ':^)' }, as: :json
+    get '/api/demos/records', params: { wad: ':^)' }, as: :json
     response_hash = JSON.parse(response.body)
     assert_equal response_hash['error'], 'not found'
   end
