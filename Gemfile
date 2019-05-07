@@ -8,8 +8,6 @@ gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
 gem 'jbuilder',     '~> 2.5'
 gem 'bcrypt',       '~> 3.1.7'
-gem 'graphql'
-gem 'jwt'
 
 gem 'faker',                   '1.7.2'
 gem 'kaminari'
