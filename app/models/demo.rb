@@ -18,7 +18,7 @@ class Demo < ApplicationRecord
   }
   scope :recent, ->(n) { reorder(recorded_at: :desc).limit(n) }
   scope :within, ->(n) { reorder(recorded_at: :desc).where('recorded_at >= ?', n.days.ago)}
-  scope :tas, -> { where('tas > 0') }
+  scope :tas, -> { where(tas: true) }
 
   validates :wad,       presence: true
   validates :category,  presence: true
@@ -28,8 +28,7 @@ class Demo < ApplicationRecord
 
   validates :tics,        presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :engine,      presence: true, length: { maximum: 50 }
-  validates :tas,         presence: true,
-                          numericality: { greater_than_or_equal_to: 0 }
+  validates :tas,         inclusion: [true, false]
   validates :guys,        presence: true, numericality: { greater_than: 0 }
   validates :version,     presence: true,
                           numericality: { greater_than_or_equal_to: 0 }
@@ -69,7 +68,7 @@ class Demo < ApplicationRecord
   end
 
   def tas_text
-    tas != 0 ? (tas > 0 ? "T#{tas}" : 'T') : ''
+    tas ? 'TAS' : ''
   end
 
   def hidden_tags_text

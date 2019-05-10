@@ -91,13 +91,13 @@ if Rails.env.development?
     cat  = Category.order("RANDOM()").first
     wad  = Wad.first #reorder("RANDOM()").first
     tics = rand(100000) + 1
-    is_tas = rand(100) < 10
+    tas = rand(100) < 10
     is_coop = rand(100) < 10
     Domain::Demo.create(
       time: Service::Tics::ToString.call(tics),
       level: "Map #{(rand(32) + 1).to_s.rjust(2, '0')}",
       levelstat: '',
-      tas: is_tas ? 1 : 0,
+      tas: tas,
       guys: is_coop ? 2 : 1,
       recorded_at: rand(100).days.ago,
       wad: wad.username,
@@ -116,7 +116,7 @@ if Rails.env.development?
       time: Service::Tics::ToString.call(tics),
       level: "Map 01",
       levelstat: '',
-      tas: 0,
+      tas: false,
       guys: 1,
       recorded_at: @recorded_at,
       wad: Wad.first.username,

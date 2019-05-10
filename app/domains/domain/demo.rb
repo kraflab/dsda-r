@@ -39,7 +39,7 @@ module Domain
     end
 
     def create(
-      wad:, category:, time:, level:, tas:, guys:, players:,
+      wad:, category:, time:, level:, tas: false, guys:, players:,
       tags: nil, compatible: true, version: 0, video_link: nil, levelstat: '',
       recorded_at: nil, engine: 'Unknown', file: nil, file_id: nil,
       kills: nil, items: nil, secrets: nil

@@ -3,7 +3,7 @@ bt01speed:
   category_id: 1
   tics: 999
   engine: PRBoom+ v2.5.1.4 cl9
-  tas: 0
+  tas: false
   guys: 2
   has_tics: true
   level: Map 01
@@ -17,7 +17,7 @@ bt01pacifist:
   category_id: 3
   tics: 99
   engine: PRBoom+ v2.5.1.4 cl9
-  tas: 0
+  tas: false
   guys: 2
   has_tics: true
   level: Map 01
@@ -32,7 +32,7 @@ bt01pacifist_solo:
   category_id: 3
   tics: 9
   engine: PRBoom+ v2.5.1.4 cl9
-  tas: 0
+  tas: false
   guys: 1
   has_tics: true
   level: Map 01
@@ -46,7 +46,7 @@ bt02speed_solo:
   category_id: 1
   tics: 999
   engine: PRBoom+ v2.5.1.4 cl9
-  tas: 0
+  tas: false
   guys: 1
   has_tics: true
   level: Map 02
@@ -60,7 +60,7 @@ bt02speed:
   category_id: 1
   tics: 999
   engine: PRBoom+ v2.5.1.4 cl9
-  tas: 0
+  tas: false
   guys: 2
   has_tics: true
   level: Map 02
@@ -74,7 +74,7 @@ bt02speed_slow:
   category_id: 1
   tics: 9999
   engine: PRBoom+ v2.5.1.4 cl9
-  tas: 0
+  tas: false
   guys: 2
   has_tics: true
   level: Map 02
@@ -88,7 +88,7 @@ bt02speed_slower:
   category_id: 1
   tics: 99999
   engine: PRBoom+ v2.5.1.4 cl9
-  tas: 0
+  tas: false
   guys: 2
   has_tics: true
   level: Map 02
@@ -102,7 +102,7 @@ table_fill:
   category_id: 4
   tics: 99999
   engine: PRBoom+ v2.5.1.4 cl9
-  tas: 0
+  tas: false
   guys: 2
   has_tics: true
   level: Map 02
@@ -119,7 +119,7 @@ demo_<%= n %>:
   has_tics: true
   level: <%= "Map #{n.to_s.rjust(2, '0')}" %>
   levelstat: "0:00.97"
-  tas: 0
+  tas: false
   guys: 1
   version: 0
   recorded_at: <%= (n + 1).days.ago %>
@@ -134,7 +134,7 @@ btep1_a:
   category_id: 1
   tics: 999
   engine: PRBoom+ v2.5.1.4 cl9
-  tas: 0
+  tas: false
   guys: 1
   has_tics: false
   level: Ep 1
@@ -148,7 +148,7 @@ btep1_b:
   category_id: 1
   tics: 999
   engine: PRBoom+ v2.5.1.4 cl9
-  tas: 0
+  tas: false
   guys: 1
   has_tics: false
   level: Ep 1
@@ -162,7 +162,7 @@ xlist_speed:
   category_id: 2
   tics: 2400
   engine: Heretic v1.3
-  tas: 0
+  tas: false
   guys: 1
   has_tics: false
   level: E1M4
@@ -174,7 +174,7 @@ xlist_pacifist:
   category_id: 3
   tics: 2000
   engine: Heretic v1.3
-  tas: 0
+  tas: false
   guys: 1
   has_tics: false
   level: E1M4
@@ -186,7 +186,7 @@ recent_demo:
   category_id: 3
   tics: 2000
   engine: Heretic v1.3
-  tas: 0
+  tas: false
   guys: 1
   has_tics: false
   level: E1M4
@@ -198,7 +198,7 @@ next_demo:
   category_id: 3
   tics: 2000
   engine: Heretic v1.3
-  tas: 0
+  tas: false
   guys: 1
   has_tics: false
   level: E1M4
@@ -210,7 +210,7 @@ nexter_demo:
   category_id: 3
   tics: 2001
   engine: Heretic v1.3
-  tas: 0
+  tas: false
   guys: 1
   has_tics: true
   level: E1M4

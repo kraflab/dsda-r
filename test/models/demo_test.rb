@@ -8,7 +8,7 @@ class DemoTest < ActiveSupport::TestCase
       category: categories(:uvspeed),
       tics: 99,
       engine: "PRBoom+ v2.5.1.4",
-      tas: 0,
+      tas: false,
       guys: 1,
       has_tics: true,
       level: "Map 02",
@@ -65,11 +65,6 @@ class DemoTest < ActiveSupport::TestCase
     assert_not @demo.valid?
   end
 
-  test "tas must be positive" do
-    @demo.tas = -1
-    assert_not @demo.valid?
-  end
-
   test "must have guys" do
     @demo.guys = nil
     assert_not @demo.valid?
@@ -106,10 +101,10 @@ class DemoTest < ActiveSupport::TestCase
     assert_match @demo.note.strip, ""
     @demo.guys = 2
     assert_match @demo.note.strip, "2P"
-    @demo.tas = 3
-    assert_match @demo.note.strip, "2P T3"
+    @demo.tas = true
+    assert_match @demo.note.strip, "2P TAS"
     @demo.guys = 1
-    assert_match @demo.note.strip, "T3"
+    assert_match @demo.note.strip, "TAS"
   end
 
   test "time text should be right" do

@@ -72,7 +72,7 @@ describe Domain::Demo do
     let(:create) {
       Domain::Demo.create(
         wad: wads(:btsx).name, category: 'UV Speed', time: '1:11', level: 'E1M1',
-        tas: 0, guys: 1, players: [player]
+        tas: false, guys: 1, players: [player]
       )
     }
     let(:player) { players(:elim).name }

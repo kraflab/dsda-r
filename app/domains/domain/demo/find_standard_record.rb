@@ -11,7 +11,7 @@ module Domain
           .where(level: level)
           .where(category: categories)
           .where(guys: 1)
-          .where(tas: 0)
+          .where(tas: false)
           .reorder(:tics)
           .first
       end

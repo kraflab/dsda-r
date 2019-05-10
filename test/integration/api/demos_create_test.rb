@@ -7,7 +7,7 @@ class DemosCreateTest < ActionDispatch::IntegrationTest
     @params = {
       demo: {
         time: '1:11.13',
-        tas: 0,
+        tas: false,
         guys: 1,
         level: 'E1M1',
         recorded_at: '2018-03-15 23:08:46 +0100',

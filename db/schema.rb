@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190510184642) do
+ActiveRecord::Schema.define(version: 20190510202808) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "username"
@@ -52,7 +52,6 @@ ActiveRecord::Schema.define(version: 20190510184642) do
 
   create_table "demos", force: :cascade do |t|
     t.integer  "tics"
-    t.integer  "tas"
     t.integer  "guys"
     t.string   "level"
     t.datetime "recorded_at"
@@ -73,6 +72,7 @@ ActiveRecord::Schema.define(version: 20190510184642) do
     t.string   "items"
     t.string   "secrets"
     t.boolean  "compatible",     default: true
+    t.boolean  "tas",            default: false
     t.index ["category_id"], name: "index_demos_on_category_id"
     t.index ["demo_file_id"], name: "index_demos_on_demo_file_id"
     t.index ["recorded_at"], name: "index_demos_on_recorded_at"

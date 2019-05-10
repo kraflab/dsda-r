@@ -42,7 +42,7 @@ class WadsController < ApplicationController
     level = params[:level]
     category = params[:category]
     demos = Domain::Demo.list(
-      wad_id: @wad.id, level: level, category: category, guys: 1, tas: 0,
+      wad_id: @wad.id, level: level, category: category, guys: 1, tas: false,
       order_by_record_date: :asc
     )
     data_full = demos.map { |i| [i.players.first.username, i.tics, i.time, i.recorded_at] }
@@ -77,7 +77,7 @@ class WadsController < ApplicationController
     index_0 = params[:index_0].to_i
     index_1 = params[:index_1].to_i
     demos = Domain::Demo.list(
-      level: level, category: category, wad_id: wad.id, guys: 1, tas: 0
+      level: level, category: category, wad_id: wad.id, guys: 1, tas: false
     )
     demo_0 = demos[index_0]
     demo_1 = demos[index_1]
@@ -93,7 +93,7 @@ class WadsController < ApplicationController
     @level = params[:level]
     @category = params[:category]
     @demos = Domain::Demo.list(
-      level: @level, category: @category, wad_id: @wad.id, guys: 1, tas: 0
+      level: @level, category: @category, wad_id: @wad.id, guys: 1, tas: false
     )
     if @level.nil? or !@level.include?('Ep') or @demos.count < 2
       if @wad.nil?
