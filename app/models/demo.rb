@@ -36,7 +36,7 @@ class Demo < ApplicationRecord
   validates :level,       presence: true, length: { maximum: 10 },
                           format: { with: VALID_PORT_REGEX }
   validates :levelstat,   length: { maximum: 500 }
-  validates :compatibility, presence: true, numericality: { greater_than_or_equal_to: 0 }
+  validates :compatible,  inclusion: [true, false]
 
   delegate :name, to: :category, prefix: true
 

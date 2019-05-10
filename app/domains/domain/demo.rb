@@ -40,7 +40,7 @@ module Domain
 
     def create(
       wad:, category:, time:, level:, tas:, guys:, players:,
-      tags: nil, compatibility: 0, version: 0, video_link: nil, levelstat: '',
+      tags: nil, compatible: true, version: 0, video_link: nil, levelstat: '',
       recorded_at: nil, engine: 'Unknown', file: nil, file_id: nil,
       kills: nil, items: nil, secrets: nil
     )
@@ -56,7 +56,7 @@ module Domain
         guys: guys,
         players: players,
         tags: tags,
-        compatibility: compatibility,
+        compatible: compatible,
         version: version,
         video_link: video_link,
         levelstat: levelstat,

@@ -34,7 +34,6 @@ bt01pacifist_solo:
   engine: PRBoom+ v2.5.1.4 cl9
   tas: 0
   guys: 1
-  compatibility: 2
   has_tics: true
   level: Map 01
   levelstat: "0:00.97,1:12"

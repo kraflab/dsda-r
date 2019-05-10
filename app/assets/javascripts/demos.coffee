@@ -32,8 +32,7 @@ $ ->
   filtered = (row, filter) ->
     rowLength = row.cells.length
     note = row.cells[rowLength - noteDelta].innerHTML
-    compatibility = toI($(row.cells[rowLength - engineDelta]).data("cl"))
-    (filter.tas and note.search("T") >= 0) or (filter.coop and note.search("P") >= 0) or filter.compatibility < compatibility
+    (filter.tas and note.search("T") >= 0) or (filter.coop and note.search("P") >= 0)
 
   getRunTime = (row) ->
     lastCell = row.cells[row.cells.length - timeDelta]
@@ -148,7 +147,7 @@ $ ->
   if filter_body
     filter = Cookies.get("demo_filter")
     if filter is undefined
-      filter = {category: [], tas: false, coop: false, compatibility: 3}
+      filter = {category: [], tas: false, coop: false}
     else
       # cookie has converted space to +, so convert back
       filter = filter.replace "+", " "
