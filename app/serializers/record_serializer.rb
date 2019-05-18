@@ -1,11 +1,12 @@
 class RecordSerializer
-  def self.call(demo, wad)
-    new(demo, wad).call
+  def self.call(demo, wad, base_url)
+    new(demo, wad, base_url).call
   end
 
-  def initialize(demo, wad)
+  def initialize(demo, wad, base_url)
     @demo = demo
     @wad = wad
+    @base_url = base_url
   end
 
   def call
@@ -14,7 +15,7 @@ class RecordSerializer
 
   private
 
-  attr_reader :demo, :wad
+  attr_reader :demo, :wad, :base_url
 
   def missing?
     demo.nil? || wad.nil?
@@ -32,7 +33,8 @@ class RecordSerializer
       level: demo.level,
       wad: wad.username,
       engine: demo.engine,
-      date: demo.recorded_at
+      date: demo.recorded_at,
+      file: base_url + demo.file_path
     }
   end
 end

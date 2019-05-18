@@ -24,7 +24,7 @@ class DemosController < ApplicationController
       level: params[:level],
       category: params[:category]
     )
-    render json: RecordSerializer.call(demo, wad)
+    render json: RecordSerializer.call(demo, wad, request.base_url)
   end
 
   def hidden_tag
