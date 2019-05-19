@@ -38,6 +38,7 @@ Rails.application.routes.draw do
   resources :wads, only: [:show, :index]
   get 'wads/:id/stats' => 'wads#stats', as: 'wad_stats'
   get 'wads/:id/table_view' => 'wads#table_view', as: 'wad_table_view'
+  get 'wads/:id/leaderboard' => 'wads#leaderboard', as: 'wad_leaderboard'
 
   resources :ports, only: [:index], :id => /([^\/])+/ do
     get :autocomplete_port_family, :on => :collection

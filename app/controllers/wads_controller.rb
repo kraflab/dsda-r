@@ -114,4 +114,13 @@ class WadsController < ApplicationController
       wad_id: @wad.id, levels: levels, category: @category
     )
   end
+
+  def leaderboard
+    @wad = Domain::Wad.single(short_name: params[:id], assert: true)
+    @category = params[:category] || 'UV Speed'
+    @level = params[:level]
+    @demos = Domain::Demo.list(
+      wad_id: @wad.id, soft_category: @category, level: @level, standard: true
+    ).to_a.sort { |d| d.tics }.uniq { |d| d.players.first.id }
+  end
 end

@@ -19,7 +19,7 @@ module Domain
 
     # Soft category pulls in related categories
     def list(
-      wad_id: nil, tas: nil, guys: nil, level: nil,
+      wad_id: nil, tas: nil, guys: nil, level: nil, standard: nil,
       category: nil, soft_category: nil, categories: nil,
       order_by_tics: nil, order_by_record_date: nil, order_by_update: nil,
       page: nil
@@ -31,6 +31,7 @@ module Domain
       query = query.where(category: categories) if categories
       query = query.where(tas: tas) if tas
       query = query.where(guys: guys) if guys
+      query = query.where(tas: false, guys: 1) if standard
       query = query.reorder(:tics) if order_by_tics
       query = query.reorder(recorded_at: order_by_record_date) if order_by_record_date
       query = query.reorder(updated_at: order_by_update) if order_by_update
