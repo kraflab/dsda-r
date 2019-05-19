@@ -121,6 +121,6 @@ class WadsController < ApplicationController
     @level = params[:level]
     @demos = Domain::Demo.list(
       wad_id: @wad.id, soft_category: @category, level: @level, standard: true
-    ).to_a.sort { |d| d.tics }.uniq { |d| d.players.first.id }
+    ).to_a.sort_by { |d| d.tics }.uniq { |d| d.players.first.id }
   end
 end
