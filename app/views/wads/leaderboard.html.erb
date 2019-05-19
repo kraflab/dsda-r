@@ -4,7 +4,7 @@
   <%= wad_header(@wad) %>
   <h2><%= @level %> <%= @category %> Leaderboard</h2>
 
-  <% cache ['wad_leaderboard_v001', @demos, @category, @level] do %>
+  <% cache ['wad_leaderboard_v002', @demos, @category, @level] do %>
     <div class="panel panel-default panel-modest left-text">
       <table class="table table-striped table-modest">
         <thead>
