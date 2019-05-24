@@ -29,7 +29,7 @@ module Domain
       query = query.where(level: level) if level
       categories ||= resolve_categories(category, soft_category)
       query = query.where(category: categories) if categories
-      query = query.where(tas: tas) if tas
+      query = query.where(tas: tas) if !tas.nil?
       query = query.where(guys: guys) if guys
       query = query.where(tas: false, guys: 1) if standard
       query = query.reorder(:tics) if order_by_tics
