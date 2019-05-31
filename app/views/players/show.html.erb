@@ -20,7 +20,7 @@
           </tr>
         </thead>
         <tbody>
-          <% @demos.chunk { |i| i.wad.username }.each do |chunk_w| %>
+          <% @demos.chunk { |i| i.wad.short_name }.each do |chunk_w| %>
             <% chunk_w[1].chunk { |i| i.level }.each do |chunk_l| %>
               <% chunk_l[1].chunk { |i| i.category }.each do |chunk_c| %>
                 <% chunk_c[1].each do |demo| %>

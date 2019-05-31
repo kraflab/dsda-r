@@ -34,7 +34,7 @@ describe Domain::Wad do
     let(:wad) { wads(:btsx) }
 
     it 'returns wads matching a search term' do
-      Domain::Wad.search(term: wad.username).first.must_equal wad
+      Domain::Wad.search(term: wad.short_name).first.must_equal wad
     end
   end
 
@@ -42,12 +42,12 @@ describe Domain::Wad do
     let(:wad) { wads(:btsx) }
 
     it 'returns a wad' do
-      Domain::Wad.single(short_name: wad.username).must_equal wad
+      Domain::Wad.single(short_name: wad.short_name).must_equal wad
     end
 
     describe 'when using either_name' do
       it 'returns a wad' do
-        Domain::Wad.single(either_name: wad.username).must_equal wad
+        Domain::Wad.single(either_name: wad.short_name).must_equal wad
       end
     end
 

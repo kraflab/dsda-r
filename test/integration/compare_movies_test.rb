@@ -10,7 +10,7 @@ class CompareMoviesTest < ActionDispatch::IntegrationTest
   test "should compare levelstats" do
     get compare_movies_path, params: {
       category: @demo_a.category.name,
-      id: @demo_a.wad.username,
+      id: @demo_a.wad.short_name,
       level: @demo_a.level
     }
     assert_response :success
@@ -26,7 +26,7 @@ class CompareMoviesTest < ActionDispatch::IntegrationTest
   test "should respond to ajax" do
     get compare_movies_json_path, params: {
       category: @demo_a.category.name,
-      id: @demo_a.wad.username,
+      id: @demo_a.wad.short_name,
       level: @demo_a.level,
       index_0: 0,
       index_1: 1

@@ -1,25 +1,25 @@
 btsx:
   name: Back to Saturn X
-  username: btsx
+  short_name: btsx
   author: Various
   iwad: doom2
 
 <% 40.times do |n| %>
 wad_<%= n %>:
   name: <%= Faker::App.name + "#{n}" %>
-  username: <%= "#{n}" + Faker::App.name.gsub(/\s+/, '').slice(0, 8).downcase %>
+  short_name: <%= "#{n}" + Faker::App.name.gsub(/\s+/, '').slice(0, 8).downcase %>
   author: <%= Faker::Name.name %>
   iwad: doom2
 <% end %>
 
 xlist_test:
   name: XList Test
-  username: xlist_test
+  short_name: xlist_test
   author: XList Author
   iwad: doom2
 
 recent_wad:
   name: Recent Wad
-  username: recent_wad
+  short_name: recent_wad
   author: Recent Author
   iwad: doom

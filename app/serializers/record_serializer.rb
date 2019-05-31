@@ -31,7 +31,7 @@ class RecordSerializer
       time: demo.time,
       category: demo.category_name,
       level: demo.level,
-      wad: wad.username,
+      wad: wad.short_name,
       engine: demo.engine,
       date: demo.recorded_at,
       file: base_url + demo.file_path

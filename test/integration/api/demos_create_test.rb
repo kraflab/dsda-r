@@ -15,7 +15,7 @@ class DemosCreateTest < ActionDispatch::IntegrationTest
         engine: 'ZDoom v2.7',
         version: 0,
         video_link: 'xyz',
-        wad: @wad.username,
+        wad: @wad.short_name,
         category: 'UV Speed',
         players: [players(:kraflab).name],
         tags: [{ text: 'Also reality', show: 1 }],

@@ -11,12 +11,12 @@ describe Domain::Iwad do
     let(:iwad) { iwads(:doom) }
 
     it 'returns an iwad' do
-      Domain::Iwad.single(short_name: iwad.username).must_equal iwad
+      Domain::Iwad.single(short_name: iwad.short_name).must_equal iwad
     end
 
     describe 'when using either_name' do
       it 'returns an iwad' do
-        Domain::Iwad.single(either_name: iwad.username).must_equal iwad
+        Domain::Iwad.single(either_name: iwad.short_name).must_equal iwad
       end
     end
 

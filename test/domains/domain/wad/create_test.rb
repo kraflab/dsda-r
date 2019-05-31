@@ -4,7 +4,7 @@ describe Domain::Wad::Create do
   let(:params) {
     {
       name: 'test_wad',
-      username: 'test_wad',
+      short_name: 'test_wad',
       author: 'test_author',
       year: '2020',
       compatibility: 0,

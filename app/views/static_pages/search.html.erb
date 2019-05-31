@@ -12,6 +12,6 @@
 <h4>Wad results (<%= @wads.count %>):</h4>
 <% @wads.each do |wad| %>
   <li>
-    <%= link_to "#{wad.name} (#{wad.username})", wad_path(wad) %>
+    <%= link_to "#{wad.name} (#{wad.short_name})", wad_path(wad) %>
   </li>
 <% end %>

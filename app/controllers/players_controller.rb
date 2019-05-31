@@ -9,7 +9,7 @@ class PlayersController < ApplicationController
 
   def show
     @player = Domain::Player.single(username: params[:id], assert: true)
-    @demos  = @player.demos.includes(:wad).reorder('wads.username',
+    @demos  = @player.demos.includes(:wad).reorder('wads.short_name',
                                                    :level, :category_id, :tics)
   end
 

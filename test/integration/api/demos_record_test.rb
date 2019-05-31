@@ -8,7 +8,7 @@ class DemosRecordTest < ActionDispatch::IntegrationTest
     )
     @params = {
       level: @demo.level,
-      wad: @wad.username,
+      wad: @wad.short_name,
       category: @demo.category_name
     }
   end

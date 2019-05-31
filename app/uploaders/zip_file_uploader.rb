@@ -10,9 +10,9 @@ class ZipFileUploader < CarrierWave::Uploader::Base
   def store_dir
     case model.class.to_s.underscore
     when 'demo_file'
-      "files/demos/#{model.wad.username}/#{model.id}/"
+      "files/demos/#{model.wad.short_name}/#{model.id}/"
     when 'wad_file'
-      "files/wads/#{model.iwad.username}/#{model.id}/"
+      "files/wads/#{model.iwad.short_name}/#{model.id}/"
     when 'port'
       "files/ports/#{model.id}/"
     else

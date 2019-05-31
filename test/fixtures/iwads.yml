@@ -1,8 +1,8 @@
 doom:
   name: Doom
-  username: doom
+  short_name: doom
   author: id Software
 doom2:
   name: Doom II
-  username: doom2
+  short_name: doom2
   author: id Software

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190510202808) do
+ActiveRecord::Schema.define(version: 20190531165404) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "username"
@@ -81,11 +81,11 @@ ActiveRecord::Schema.define(version: 20190510202808) do
 
   create_table "iwads", force: :cascade do |t|
     t.string   "name"
-    t.string   "username"
+    t.string   "short_name"
     t.string   "author"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["username"], name: "index_iwads_on_username", unique: true
+    t.index ["short_name"], name: "index_iwads_on_short_name", unique: true
   end
 
   create_table "players", force: :cascade do |t|
@@ -153,7 +153,7 @@ ActiveRecord::Schema.define(version: 20190510202808) do
 
   create_table "wads", force: :cascade do |t|
     t.string   "name"
-    t.string   "username"
+    t.string   "short_name"
     t.string   "author"
     t.string   "year"
     t.string   "compatibility"
@@ -164,8 +164,8 @@ ActiveRecord::Schema.define(version: 20190510202808) do
     t.datetime "updated_at",                    null: false
     t.boolean  "single_map",    default: false
     t.integer  "wad_file_id"
-    t.index ["iwad_id", "username"], name: "index_wads_on_iwad_id_and_username"
-    t.index ["username"], name: "index_wads_on_username", unique: true
+    t.index ["iwad_id", "short_name"], name: "index_wads_on_iwad_id_and_short_name"
+    t.index ["short_name"], name: "index_wads_on_short_name", unique: true
     t.index ["wad_file_id"], name: "index_wads_on_wad_file_id"
   end
 

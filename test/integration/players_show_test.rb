@@ -21,7 +21,7 @@ class PlayersShowTest < ActionDispatch::IntegrationTest
     assert_select "h1 > small"
     assert_match @player.name, response.body
     demo = @player.demos.first
-    assert_select "td", demo.wad.username
+    assert_select "td", demo.wad.short_name
     assert_select "td", demo.level
     assert_select "td", demo.category.name
     assert_select "td", demo.engine

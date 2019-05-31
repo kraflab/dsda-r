@@ -3,13 +3,13 @@ class Wad < ApplicationRecord
   belongs_to :wad_file, autosave: true, optional: true
   has_many :demos, dependent: :destroy
   has_many :demo_files
-  default_scope -> { order(:username) }
-  validates :iwad_id,  presence: true
-  validates :name,     presence: true, length: { maximum: 50 }
-  validates :username, presence: true, length: { maximum: 50 },
-                       uniqueness: true,
-                       format: { with: VALID_USERNAME_REGEX }
-  validates :author,   presence: true, length: { maximum: 50 }
+  default_scope -> { order(:short_name) }
+  validates :iwad_id,    presence: true
+  validates :name,       presence: true, length: { maximum: 50 }
+  validates :short_name, presence: true, length: { maximum: 50 },
+                         uniqueness: true,
+                         format: { with: VALID_USERNAME_REGEX }
+  validates :author,     presence: true, length: { maximum: 50 }
   validates_associated :wad_file
 
   delegate :longest_demo_time, :average_demo_time, :total_demo_time,
@@ -18,7 +18,7 @@ class Wad < ApplicationRecord
 
   # Override path
   def to_param
-    username
+    short_name
   end
 
   def file_path

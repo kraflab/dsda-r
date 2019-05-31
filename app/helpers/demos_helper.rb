@@ -111,7 +111,7 @@ module DemosHelper
         [
           demo.category.name,
           if (chunk.count > 5 and !chunk.any? { |i| i.recorded_at.nil? })
-            link_to record_timeline_path(id: wad.username, level: demo.level, category: demo.category.name) do
+            link_to record_timeline_path(id: wad.short_name, level: demo.level, category: demo.category.name) do
               content_tag :span, '', class: 'glyphicon glyphicon-stats',
                 'aria-hidden': 'true', 'aria-label': 'Timeline'
             end
