@@ -102,7 +102,7 @@ class DemoTest < ActiveSupport::TestCase
     @demo.guys = 2
     assert_match @demo.note.strip, "2P"
     @demo.tas = true
-    assert_match @demo.note.strip, "2P TAS"
+    assert_match @demo.note.strip, "2P\nTAS"
     @demo.guys = 1
     assert_match @demo.note.strip, "TAS"
   end

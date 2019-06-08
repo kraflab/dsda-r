@@ -56,7 +56,10 @@ class Demo < ApplicationRecord
   end
 
   def note
-    "#{coop_text} #{tas_text}"
+    [
+      coop_text,
+      tas_text
+    ].compact.join("\n")
   end
 
   def movie_text
@@ -64,11 +67,11 @@ class Demo < ApplicationRecord
   end
 
   def coop_text
-    guys > 1 ? "#{guys}P" : ''
+    "#{guys}P" if guys > 1
   end
 
   def tas_text
-    tas ? 'TAS' : ''
+    'TAS' if tas
   end
 
   def hidden_tags_text

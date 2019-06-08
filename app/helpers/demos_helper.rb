@@ -66,19 +66,6 @@ module DemosHelper
     []
   end
 
-  def demo_hidden_tag(demo)
-    content_tag :td, class: 'right-text' do
-      [
-        if demo.has_hidden_tag
-          content_tag :a, '*', id: demo.id, class: 'hidden-tag'
-        else
-          nil
-        end,
-        demo.note
-      ].join(' ').html_safe
-    end
-  end
-
   def demo_video_link(demo)
     content_tag :td do
       if !demo.video_link.blank?
