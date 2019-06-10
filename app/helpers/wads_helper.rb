@@ -101,12 +101,7 @@ module WadsHelper
             ].join(' ').html_safe
           end),
           (content_tag :ul, class: 'dropdown-menu scrollable-menu' do
-            ([
-              (content_tag :li do
-                content_tag :a, 'Everything', href: wad_path
-              end)
-            ] +
-            wad_episodes(wad).collect do |ep|
+            (wad_episodes(wad).collect do |ep|
               (content_tag :li do
                 content_tag :a, ep, href: wad_path(level: ep)
               end)

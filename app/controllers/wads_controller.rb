@@ -1,4 +1,6 @@
 class WadsController < ApplicationController
+  DEMO_RENDER_LIMIT = 500
+
   skip_before_action :verify_authenticity_token, only: [:api_create]
   before_action :authenticate_admin!, only: [:api_create]
 
@@ -24,6 +26,10 @@ class WadsController < ApplicationController
       @demos = @wad.demos.episode(episode)
     else
       @demos = subset.nil? ? @wad.demos : @wad.demos.where(level: subset)
+    end
+
+    if @demos.count > DEMO_RENDER_LIMIT && subset.nil?
+      @demos = @wad.demos.where(level: @demos.ils.first.level)
     end
   end
 
