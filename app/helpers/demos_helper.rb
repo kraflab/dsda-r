@@ -1,5 +1,4 @@
 module DemosHelper
-
   def demo_feed_sub_header
     content_tag :p do
       [
@@ -133,5 +132,29 @@ module DemosHelper
         content_tag :td, '', class: 'no-display', colspan: '5'
       end
     end
+  end
+
+  def demo_note_cell(demo)
+    content_tag :td, class: 'note-cell' do
+      [
+        demo_record_glyph(demo),
+        demo_first_to_second_glyph(demo),
+        demo.note
+      ].compact.join(' ').html_safe
+    end
+  end
+
+  def demo_record_glyph(demo)
+    return unless demo.record?
+
+    content_tag :span, '', class: 'glyphicon glyphicon-king',
+      'aria-hidden': 'true', 'aria-label': 'Record', 'title': 'Record'
+  end
+
+  def second_record_glyph(demo)
+    return unless demo.second_record?
+
+    content_tag :span, '', class: 'glyphicon glyphicon-time',
+      'aria-hidden': 'true', 'aria-label': 'Second Record', 'title': 'Second Record'
   end
 end

@@ -4,8 +4,9 @@ module Domain
 
     SKILL_4_SPEED = ['UV Speed', 'SM Speed'].freeze
 
-    def list(soft_category: nil, only: nil)
-      return categories_for(soft_category) if soft_category
+    def list(soft_category: nil, soft_category_id: nil, only: nil)
+      return categories_for_name(soft_category) if soft_category
+      return categories_for_id(soft_category_id) if soft_category_id
       return skill_4_speed if only == :skill_4_speed
       ::Category.all
     end
@@ -20,9 +21,15 @@ module Domain
 
     private
 
-    def categories_for(name)
+    def categories_for_name(name)
       categories = [::Category.find_by(name: name)]
       categories << pacifist if skill_4_speed?(name)
+      categories
+    end
+
+    def categories_for_id(id)
+      categories = [::Category.find_by(id: id)]
+      categories << pacifist if skill_4_speed?(categories.first.name)
       categories
     end
 

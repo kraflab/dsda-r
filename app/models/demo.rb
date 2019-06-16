@@ -19,6 +19,8 @@ class Demo < ApplicationRecord
   scope :recent, ->(n) { reorder(recorded_at: :desc).limit(n) }
   scope :within, ->(n) { reorder(recorded_at: :desc).where('recorded_at >= ?', n.days.ago)}
   scope :tas, -> { where(tas: true) }
+  scope :standard, -> { where(tas: false, guys: 1) }
+  scope :at_second, ->(n) { where('tics >= ? && tics < ?', n * 100, (n + 1) * 100) }
 
   validates :wad,       presence: true
   validates :category,  presence: true
@@ -88,6 +90,10 @@ class Demo < ApplicationRecord
 
   def record_index
     Domain::Demo::ComputeRecordIndex.call(self).to_i
+  end
+
+  def second
+    tics / 100
   end
 
   private
