@@ -5,7 +5,7 @@ class Wad < ApplicationRecord
   has_many :demo_files
   default_scope -> { order(:short_name) }
   validates :iwad_id,    presence: true
-  validates :name,       presence: true, length: { maximum: 50 }
+  validates :name,       presence: true, length: { maximum: 100 }
   validates :short_name, presence: true, length: { maximum: 50 },
                          uniqueness: true,
                          format: { with: VALID_USERNAME_REGEX }
