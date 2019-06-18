@@ -1,7 +1,7 @@
-<% cache wad do %>
+<% cache ['wad_partial_v001', wad] do %>
   <tr>
     <td class="wadfile"><%= link_to wad.short_name, wad %></td>
-    <td><%= wad.name %></td>
+    <td><%= wad.name.truncate(25) %></td>
     <td><%= wad.author %></td>
     <td class="wadfile"><%= link_to wad.iwad.short_name, wad.iwad %></td>
     <td><%= wad.demos.count %></td>
