@@ -42,7 +42,7 @@ module DemosHelper
   end
 
   def last_update
-    Demo.reorder(:updated_at).last.updated_at
+    Demo.reorder(:id).last.created_at
   end
 
   def map_number_to_episode(n)
