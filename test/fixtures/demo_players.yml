@@ -47,3 +47,15 @@ demo_player_<%= n %>:
   player: kraflab
   demo: demo_<%= n %>
 <% end %>
+
+record_demo_dp:
+  player: kraflab
+  demo: record_demo
+
+second_record_demo_dp:
+  player: kraflab
+  demo: second_record_demo
+
+non_record_demo_dp:
+  player: kraflab
+  demo: non_record_demo

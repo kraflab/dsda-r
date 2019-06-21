@@ -138,14 +138,14 @@ module DemosHelper
     content_tag :td, class: 'note-cell' do
       [
         demo_record_glyph(demo),
-        demo_first_to_second_glyph(demo),
+        second_record_glyph(demo),
         demo.note
       ].compact.join(' ').html_safe
     end
   end
 
   def demo_record_glyph(demo)
-    return unless demo.record?
+    return unless demo.tic_record?
 
     content_tag :span, '', class: 'glyphicon glyphicon-king',
       'aria-hidden': 'true', 'aria-label': 'Record', 'title': 'Record'

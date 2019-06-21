@@ -216,3 +216,39 @@ nexter_demo:
   level: E1M4
   recorded_at: <%= 10.minutes.ago %>
   demo_file: demo_zip
+
+record_demo:
+  wad: record_wad
+  category_id: 1
+  tics: 100
+  engine: PRBoom+ v2.5.1.3
+  tas: false
+  guys: 1
+  has_tics: true
+  level: E1M1
+  recorded_at: <%= 10.minutes.ago %>
+  demo_file: demo_zip
+
+second_record_demo:
+  wad: record_wad
+  category_id: 1
+  tics: 197
+  engine: PRBoom+ v2.5.1.3
+  tas: false
+  guys: 1
+  has_tics: true
+  level: E1M1
+  recorded_at: <%= 100.minutes.ago %>
+  demo_file: demo_zip
+
+non_record_demo:
+  wad: record_wad
+  category_id: 1
+  tics: 297
+  engine: PRBoom+ v2.5.1.3
+  tas: false
+  guys: 1
+  has_tics: true
+  level: E1M1
+  recorded_at: <%= 100.minutes.ago %>
+  demo_file: demo_zip

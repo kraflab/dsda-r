@@ -23,3 +23,9 @@ recent_wad:
   short_name: recent_wad
   author: Recent Author
   iwad: doom
+
+record_wad:
+  name: Record Wad
+  short_name: record_wad
+  author: Record Author
+  iwad: doom

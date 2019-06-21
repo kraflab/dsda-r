@@ -1,7 +1,7 @@
 module Domain
   module Demo
     class UpdateRecordFields
-      delegate :wad_id, :level, :category_id, to: demo
+      delegate :wad_id, :level, :category_id, to: :demo
 
       def initialize(demo)
         @demo = demo
@@ -24,13 +24,13 @@ module Domain
 
       # Only reset for the specific category
       def reset_demos
-        demos_for_category.update_all(record: false, second_record: false)
+        demos_for_category.update_all(tic_record: false, second_record: false)
       end
 
       def save_record
         return unless record.category_id == category_id
 
-        record.update!(record: true)
+        record.update!(tic_record: true)
       end
 
       def save_second_record
