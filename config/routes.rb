@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'about'  => 'static_pages#about'
   get 'rules'  => 'static_pages#intro'
   get 'intro'  => 'static_pages#intro'
+  get 'changelog' => 'static_pages#changelog'
 
   get 'guides/prboom_plus' => 'guides#prboom_plus'
 
