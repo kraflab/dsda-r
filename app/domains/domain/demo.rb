@@ -21,7 +21,7 @@ module Domain
     def list(
       wad_id: nil, tas: nil, guys: nil, level: nil, standard: nil,
       category: nil, soft_category: nil, categories: nil,
-      order_by_tics: nil, order_by_record_date: nil, order_by_update: nil,
+      order_by_tics: nil, order_by_record_date: nil, order_by_id: nil,
       page: nil
     )
       query = ::Demo.all
@@ -34,7 +34,7 @@ module Domain
       query = query.where(tas: false, guys: 1) if standard
       query = query.reorder(:tics) if order_by_tics
       query = query.reorder(recorded_at: order_by_record_date) if order_by_record_date
-      query = query.reorder(updated_at: order_by_update) if order_by_update
+      query = query.reorder(id: order_by_id) if order_by_id
       query = query.page(page) if page
       query
     end

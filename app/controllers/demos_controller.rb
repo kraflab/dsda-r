@@ -6,7 +6,7 @@ class DemosController < ApplicationController
     sort_key, @sort_field = if params[:sort_by] == 'record_date'
                               [:order_by_record_date, :recorded_at]
                             else
-                              [:order_by_update, :updated_at]
+                              [:order_by_id, :created_at]
                             end
     @demos = Domain::Demo.list(page: params[:page] || 1, sort_key => :desc)
   end

@@ -3,7 +3,7 @@ module DemosHelper
     content_tag :p do
       [
         link_to('Sort by Record Date', feed_path(sort_by: 'record_date')),
-        link_to('Sort by Update Date', feed_path(sort_by: 'update_date'))
+        link_to('Sort by Upload Date', feed_path(sort_by: 'upload_date'))
       ].join(' | ').html_safe
     end
   end
