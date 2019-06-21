@@ -5,7 +5,7 @@ module Domain
 
       def call(wad_id, levels, category)
         levels.map do |level|
-          [level, FindStandardRecord.call(wad_id, level, category)]
+          [level, FindStandardRecord.call(wad_id, level, category: category)]
         end
       end
     end

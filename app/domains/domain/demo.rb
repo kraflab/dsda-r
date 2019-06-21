@@ -14,7 +14,7 @@ module Domain
     end
 
     def standard_record(wad_id:, level:, category:)
-      FindStandardRecord.call(wad_id, level, category)
+      FindStandardRecord.call(wad_id, level, category: category)
     end
 
     # Soft category pulls in related categories
