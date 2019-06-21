@@ -16,6 +16,9 @@
       most of the backend is complete, but much of the work needed to parse
       old data and extract new data is still underway.</strong>
     </p>
+    <p>
+      New? Check out the <%= link_to('Intro', intro_path) %> for general rules and useful information.
+    </p>
     <% cache "home_v001:#{last_update}" do %>
       <h4>
         Hosting <%= Demo.count %> demos, by <%= Player.count %> players, for
