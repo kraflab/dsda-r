@@ -21,6 +21,6 @@ class StaticPagesController < ApplicationController
   def no_file
   end
 
-  def rules
+  def intro
   end
 end
