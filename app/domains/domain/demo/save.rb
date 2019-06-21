@@ -8,6 +8,7 @@ module Domain
         store_md5(demo)
         ::Demo.transaction do
           demo.save!
+          Demo::UpdateRecordFields.call(demo)
           touch_players(demo)
         end
       end

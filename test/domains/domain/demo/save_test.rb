@@ -12,11 +12,17 @@ describe Domain::Demo::Save do
     demo.stubs(:save!)
     player.stubs(:touch)
     Service::FileData::ComputeMd5.stubs(call: '1234')
+    Domain::Demo::UpdateRecordFields.stubs(call: true)
   end
 
   it 'formats levelstat' do
     Domain::Demo::Save.call(demo)
     demo.levelstat.must_equal "1\n2"
+  end
+
+  it 'updates record fields' do
+    Domain::Demo::UpdateRecordFields.expects(:call).with(demo)
+    Domain::Demo::Save.call(demo)
   end
 
   it 'saves the demo' do
