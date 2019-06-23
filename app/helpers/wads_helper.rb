@@ -20,6 +20,16 @@ module WadsHelper
     end
   end
 
+  def table_view_category_list(wad)
+    content_tag :ul, class: 'dropdown-menu' do
+      Domain::Category.list(iwad: wad.iwad_short_name).map do |cat|
+        content_tag :li do
+          link_to(cat.name, wad_table_view_path(wad, category: cat.name))
+        end
+      end.join(' ').html_safe
+    end
+  end
+
   def wads_header(wads)
     [
       content_tag(:h1, 'Wad List'),
@@ -27,6 +37,15 @@ module WadsHelper
         pluralize(wads.count, 'wad')
       end)
     ].join(' ').html_safe
+  end
+
+  def table_view_wad_header(wad)
+    content_tag :h1 do
+      [
+        link_to(wad.name, wad_path(wad)),
+        content_tag(:small, wad.author)
+      ].join(' ').html_safe
+    end
   end
 
   def wad_header(wad)
@@ -42,7 +61,11 @@ module WadsHelper
     content_tag :p, class: 'p-short one-line' do
       [
         demo_details(wad),
+        '|',
+        link_to('Table View', wad_table_view_path(wad)),
+        '|',
         link_to('Stats', wad_stats_path(wad)),
+        '|',
         level_selector(wad)
       ].join(' ').html_safe
     end

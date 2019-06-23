@@ -1,10 +1,20 @@
 <% provide(:title, @wad.name) %>
 
 <div class="center-text">
-  <%= wad_header(@wad) %>
-  <h2><%= @category %> Table</h2>
-
-  <% cache ['wad_table_view_v001', @demos, @category] do %>
+  <%= table_view_wad_header(@wad) %>
+  <h3 class="p-short one-line">
+    Table View
+    <div class="one-line">
+      <div class="btn-group shift-right">
+        <button type="button" class="btn btn-primary fix-dropdown dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <%= @category %> <span class="caret"></span>
+        </button>
+        <%= table_view_category_list(@wad) %>
+      </div>
+    </div>
+  </h3>
+  <br>
+  <% cache ['wad_table_view_v001', @wad, @category] do %>
     <div class="panel panel-default panel-modest left-text">
       <table class="table table-striped table-modest">
         <thead>
@@ -12,7 +22,7 @@
             <th>Level</th>
             <th>Player</th>
             <th class="center-text">Time</th>
-            <th><span class="glyphicon glyphicon-play" aria-hidden="true" aria-label="video"></span></th>
+            <th><span class="glyphicon glyphicon-info-sign" aria-hidden="true" aria-label="cross-listed category" title="Cross-listed Category"></span></th>
           </tr>
         </thead>
         <tbody>
@@ -22,7 +32,11 @@
                 <td><%= demo.level %></td>
                 <td class="player-cell"><%= demo.players_text %></td>
                 <%= demo_time_cell(demo) %>
-                <%= demo_video_link(demo) %>
+                <td>
+                  <% if @category != demo.category_name %>
+                  <span class="glyphicon glyphicon-info-sign" aria-hidden="true" aria-label="cross-listed category" title="<%= demo.category_name %>"></span>
+                  <% end %>
+                </td>
               </tr>
             <% else %>
               <tr>

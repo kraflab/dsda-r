@@ -114,11 +114,15 @@ class WadsController < ApplicationController
 
   def table_view
     @wad = Domain::Wad.single(short_name: params[:id], assert: true)
-    @category = params[:category] || 'UV Speed'
+    @category = params[:category] || default_table_view_category
     levels = @wad.demos.ils.select(:level).distinct.map(&:level)
     @demos = Domain::Demo.standard_record_list(
-      wad_id: @wad.id, levels: levels, category: @category
+      wad_id: @wad.id, levels: levels, category: @category, very_soft: true
     )
+  end
+
+  def default_table_view_category
+    Domain::Category.list(iwad: @wad.iwad_short_name).first.name
   end
 
   def leaderboard

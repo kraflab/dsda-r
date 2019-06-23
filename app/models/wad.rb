@@ -16,6 +16,8 @@ class Wad < ApplicationRecord
            :most_recorded_player, :player_count, :demo_count,
            to: :stats
 
+  delegate :short_name, to: :iwad, prefix: true
+
   # Override path
   def to_param
     short_name

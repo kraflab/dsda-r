@@ -3,9 +3,11 @@ module Domain
     module RelevantDemoList
       extend self
 
-      def call(wad_id, level, category: nil, category_id: nil)
+      def call(wad_id, level, category: nil, category_id: nil, very_soft: nil)
         categories = Domain::Category.list(
-          soft_category: category, soft_category_id: category_id
+          soft_category: category,
+          soft_category_id: category_id,
+          very_soft: very_soft
         )
 
         ::Demo

@@ -9,12 +9,16 @@ module Domain
       raise ActiveRecord::RecordNotFound if assert
     end
 
-    def standard_record_list(wad_id:, levels:, category:)
-      FindStandardRecordList.call(wad_id, levels, category)
+    def standard_record_list(wad_id:, levels:, category:, very_soft: nil)
+      FindStandardRecordList.call(
+        wad_id, levels, category: category, very_soft: very_soft
+      )
     end
 
-    def standard_record(wad_id:, level:, category:)
-      FindStandardRecord.call(wad_id, level, category: category)
+    def standard_record(wad_id:, level:, category:, very_soft: nil)
+      FindStandardRecord.call(
+        wad_id, level, category: category, very_soft: very_soft
+      )
     end
 
     # Soft category pulls in related categories

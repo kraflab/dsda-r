@@ -2,12 +2,17 @@ module Domain
   module Category
     extend self
 
-    SKILL_4_SPEED = ['UV Speed', 'SM Speed'].freeze
+    SKILL_4_SPEED = ['UV Speed', 'SM Speed', 'Sk4 Speed'].freeze
+    SKILL_4_MAX = ['UV Max', 'SM Max', 'Sk4 Max'].freeze
 
-    def list(soft_category: nil, soft_category_id: nil, only: nil)
-      return categories_for_name(soft_category) if soft_category
-      return categories_for_id(soft_category_id) if soft_category_id
+    def list(
+      soft_category: nil, soft_category_id: nil, only: nil, very_soft: nil,
+      iwad: nil
+    )
+      return categories_for_name(soft_category, very_soft) if soft_category
+      return categories_for_id(soft_category_id, very_soft) if soft_category_id
       return skill_4_speed if only == :skill_4_speed
+      return ListForIwad.call(iwad) if iwad
       ::Category.all
     end
 
@@ -21,15 +26,22 @@ module Domain
 
     private
 
-    def categories_for_name(name)
-      categories = [::Category.find_by(name: name)]
-      categories << pacifist if skill_4_speed?(name)
-      categories
+    def categories_for_name(name, very_soft)
+      base_category = ::Category.find_by(name: name)
+      soft_categories_for(base_category, very_soft)
     end
 
-    def categories_for_id(id)
-      categories = [::Category.find_by(id: id)]
-      categories << pacifist if skill_4_speed?(categories.first.name)
+    def categories_for_id(id, very_soft)
+      base_category = ::Category.find_by(id: id)
+      soft_categories_for(base_category, very_soft)
+    end
+
+    def soft_categories_for(base_category, very_soft)
+      categories = [base_category]
+      if skill_4_speed?(base_category.name)
+        categories << pacifist
+        categories += max if very_soft
+      end
       categories
     end
 
@@ -43,6 +55,10 @@ module Domain
 
     def pacifist
       ::Category.find_by(name: 'Pacifist')
+    end
+
+    def max
+      SKILL_4_MAX.map { |name| ::Category.find_by(name: name) }
     end
   end
 end

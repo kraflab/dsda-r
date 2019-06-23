@@ -22,3 +22,9 @@
     name: NM Speed
     description: Exit as fast as possible on skill 5.
     game: Doom
+
+- sk4speed:
+    id: 5
+    name: Sk4 Speed
+    description: Exit as fast as possible on skill 4.
+    game: Hexen

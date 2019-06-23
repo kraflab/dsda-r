@@ -16,7 +16,16 @@ describe Domain::Category do
     describe 'when asking for only skill 4 speed categories' do
       it 'returns them' do
         Domain::Category.list(only: :skill_4_speed)
-          .map(&:name).must_equal ['UV Speed', 'SM Speed']
+          .map(&:name).must_equal ['UV Speed', 'SM Speed', 'Sk4 Speed']
+      end
+    end
+
+    describe 'when asking for an iwad' do
+      it 'returns all the categories for the iwad' do
+        Domain::Category.list(iwad: 'heretic').size.must_equal(12)
+        Domain::Category.list(iwad: 'hexen').size.must_equal(10)
+        Domain::Category.list(iwad: 'doom').size.must_equal(12)
+        Domain::Category.list(iwad: 'other').size.must_equal(12)
       end
     end
   end
