@@ -117,4 +117,15 @@ class DemoTest < ActiveSupport::TestCase
     assert_equal 1, demos(:bt01pacifist).record_index
     assert_equal 2, demos(:bt02speed).record_index
   end
+
+  test "standard?" do
+    @demo.assign_attributes(tas: false, guys: 1)
+    assert_equal true, @demo.standard?
+    @demo.assign_attributes(tas: true, guys: 1)
+    assert_equal false, @demo.standard?
+    @demo.assign_attributes(tas: false, guys: 2)
+    assert_equal false, @demo.standard?
+    @demo.assign_attributes(tas: true, guys: 2)
+    assert_equal false, @demo.standard?
+  end
 end

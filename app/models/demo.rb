@@ -96,6 +96,10 @@ class Demo < ApplicationRecord
     tics / 100
   end
 
+  def standard?
+    guys == 1 && !tas?
+  end
+
   private
 
   # collect names for table cell
