@@ -16,7 +16,7 @@ class SubCategoryTest < ActiveSupport::TestCase
   end
 
   test "name should not be too long" do
-    @sub.name = "a" * 51
+    @sub.name = "a" * 201
     assert_not @sub.valid?
   end
 end
