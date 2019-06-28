@@ -34,20 +34,25 @@ module Domain
       end
 
       def average_demo_count(player)
-        wad_counts = player.demos.unscoped.group(:wad_id).count
-        wad_counts.values.inject(0) { |sum, k| sum + k } / wad_counts.size
+        demo_count(player) / wad_count(player)
       end
 
       def most_recorded_wad(player)
-        wad_counts = player.demos.unscoped.group(:wad_id).count
-        Domain::Wad.single(id: wad_counts.max_by { |k, v| v }[0])&.name
+        wad_ids = player.demos.select(:wad_id).map(&:wad_id)
+        return '' if wad_ids.empty?
+
+        counts = wad_ids.inject(Hash.new(0)) { |h, v| h[v] += 1; h }
+        wad_id = counts.max_by { |_, v| v }[0]
+        Domain::Wad.single(id: wad_id)&.name
       end
 
       def most_recorded_category(player)
-        category_counts = player.demos.unscoped.group(:category_id).count
-        Domain::Category.single(
-          id: category_counts.max_by { |k, v| v }[0]
-        )&.name
+        category_ids = player.demos.select(:category_id).map(&:category_id)
+        return '' if category_ids.empty?
+
+        counts = category_ids.inject(Hash.new(0)) { |h, v| h[v] += 1; h }
+        category_id = counts.max_by { |_, v| v }[0]
+        Domain::Category.single(id: category_id)&.name
       end
 
       def tas_count(player)
