@@ -106,7 +106,7 @@ module WadsHelper
       episodes = episodes + demo_episode(demo.level)
     end
     episodes.uniq{ |x| x.to_i }.collect do |ep|
-      "Episode #{ep}"
+      "Episode #{ep} ILs"
     end
   end
 
@@ -129,6 +129,13 @@ module WadsHelper
                 content_tag :a, ep, href: wad_path(level: ep)
               end)
             end +
+            [
+              if wad.demos.movies.any?
+                content_tag :li do
+                  content_tag :a, 'Movies', href: wad_path(level: 'Movies')
+                end
+              end
+            ] +
             wad.demos.ils.select(:level).distinct.collect do |field|
               content_tag :li do
                 content_tag :a, field.level, href: wad_path(level: field.level)

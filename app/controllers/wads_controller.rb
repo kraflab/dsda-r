@@ -21,9 +21,11 @@ class WadsController < ApplicationController
   def show
     @wad = Domain::Wad.single(short_name: params[:id], assert: true)
     subset = params[:level]
-    if subset.is_a?(String) && subset.include?('Episode')
-      episode = subset.split(' ').last.to_i
+    if subset.is_a?(String) && subset.include?('ILs')
+      episode = subset.split(' ')[1].to_i
       @demos = @wad.demos.episode(episode)
+    elsif subset == 'Movies'
+      @demos = @wad.demos.show_movies
     else
       @demos = subset.nil? ? @wad.demos : @wad.demos.where(level: subset)
     end
