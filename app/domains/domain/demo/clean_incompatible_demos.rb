@@ -36,6 +36,7 @@ module Domain
               .where(
                 "engine LIKE '%Z%' OR " \
                 "engine LIKE '%ManDoom%' OR " \
+                "engine LIKE '%Legacy%' OR " \
                 "engine LIKE '%Doomsday%' OR " \
                 "engine LIKE '%wHeretic%'"
               )
