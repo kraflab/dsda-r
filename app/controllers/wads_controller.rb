@@ -1,5 +1,5 @@
 class WadsController < ApplicationController
-  DEMO_RENDER_LIMIT = 500
+  DEMO_RENDER_LIMIT = 1000
 
   skip_before_action :verify_authenticity_token, only: [:api_create]
   before_action :authenticate_admin!, only: [:api_create]
