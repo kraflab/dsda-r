@@ -12,8 +12,11 @@ module Domain
       end
 
       def call
+        return if demo.category_name == 'Other'
+
         reset_demos
         return if demos_for_category.count < 2
+
         save_record
         save_second_record
       end
