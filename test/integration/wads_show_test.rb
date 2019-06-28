@@ -29,7 +29,7 @@ class WadsShowTest < ActionDispatch::IntegrationTest
   test "level selection" do
     get wad_path(@wad, level: "Map 01")
     assert_select 'td', { count: 0, text: 'Map 02' }, 'maps not filtered by params'
-    get wad_path(@wad, level: "Episode 2")
+    get wad_path(@wad, level: "Episode 2 ILs")
     assert_select 'td', { count: 0, text: 'Map 01' }
     assert_select 'td', 'Map 11'
   end
