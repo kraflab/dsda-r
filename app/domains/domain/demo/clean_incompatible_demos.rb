@@ -31,12 +31,14 @@ module Domain
       end
 
       def incompatible_demos
-        ::Demo.where(wad_id: wad_id).where(
-          "engine LIKE '%Z%' OR " \
-          "engine LIKE '%ManDoom%' OR " \
-          "engine LIKE '%Doomsday%' OR " \
-          "engine LIKE '%wHeretic%'"
-        )
+        ::Demo.where(wad_id: wad_id)
+              .where.not(category_id: other.id)
+              .where(
+                "engine LIKE '%Z%' OR " \
+                "engine LIKE '%ManDoom%' OR " \
+                "engine LIKE '%Doomsday%' OR " \
+                "engine LIKE '%wHeretic%'"
+              )
       end
 
       def move_to_other(demo)
