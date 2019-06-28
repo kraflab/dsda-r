@@ -24,7 +24,10 @@ module Domain
 
       # Only reset for the specific category
       def reset_demos
-        demos_for_category.update_all(tic_record: false, second_record: false)
+        demos_for_category.find_by(tic_record: true)
+                          &.update!(tic_record: false)
+        demos_for_category.find_by(second_record: true)
+                          &.update!(second_record: false)
       end
 
       def save_record
