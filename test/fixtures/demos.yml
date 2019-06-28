@@ -221,7 +221,7 @@ record_demo:
   wad: record_wad
   category_id: 1
   tics: 100
-  engine: PRBoom+ v2.5.1.3
+  engine: ZDoom v2.8.1
   tas: false
   guys: 1
   has_tics: true

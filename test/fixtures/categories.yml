@@ -28,3 +28,9 @@
     name: Sk4 Speed
     description: Exit as fast as possible on skill 4.
     game: Hexen
+
+- other:
+    id: 6
+    name: Other
+    description: Other
+    game: Doom
