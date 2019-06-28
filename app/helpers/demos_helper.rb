@@ -96,7 +96,7 @@ module DemosHelper
       content_tag :td, class: 'no-stripe-panel', rowspan: 3 * chunk.count do
         [
           demo.category.name,
-          if (chunk.count > 5 and !chunk.any? { |i| i.recorded_at.nil? })
+          if (chunk.count > 5 and !chunk.any? { |i| i.recorded_at.nil? }) && demo.category_name != 'Other'
             link_to record_timeline_path(id: wad.short_name, level: demo.level, category: demo.category.name) do
               content_tag :span, '', class: 'glyphicon glyphicon-stats',
                 'aria-hidden': 'true', 'aria-label': 'Timeline'
