@@ -13,8 +13,8 @@ class Demo < ApplicationRecord
   scope :show_movies, -> { where("level LIKE 'Ep%' OR level LIKE '%All'") }
   scope :show_ils, -> { where("level NOT LIKE 'Ep%' AND level NOT LIKE '%All'") }
   scope :episode, ->(ep) {
-    reorder(:level, :category_id, :tics).where("level <> ? AND (level LIKE ? or level = ? or LEVEL LIKE ? or LEVEL = ? #{ep == 2 ? 'or LEVEL = \'Map 31\' or LEVEL = \'Map 32\'' : ''})",
-          "Map #{ep - 1}0", "Map #{ep - 1}_", "Map #{ep}0", "E#{ep}M%", "Episode #{ep}")
+    reorder(:level, :category_id, :tics).where("level <> ? AND (level LIKE ? or level = ? or LEVEL LIKE ? or LEVEL = ? #{ep == 2 ? 'or LEVEL LIKE \'Map 31%\' or LEVEL = \'Map 32\'' : ''})",
+          "Map #{ep - 1}0", "Map #{ep - 1}%", "Map #{ep}0", "E#{ep}M%", "Episode #{ep}")
   }
   scope :recent, ->(n) { reorder(recorded_at: :desc).limit(n) }
   scope :within, ->(n) { reorder(recorded_at: :desc).where('recorded_at >= ?', n.days.ago)}
