@@ -83,7 +83,7 @@ class DemoTest < ActiveSupport::TestCase
   end
 
   test "level must not be too long" do
-    @demo.level = "a" * 11
+    @demo.level = "a" * 13
     assert_not @demo.valid?
   end
 
