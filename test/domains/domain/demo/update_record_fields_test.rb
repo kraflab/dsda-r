@@ -19,4 +19,18 @@ describe Domain::Demo::UpdateRecordFields do
     record_fields(second_record_demo.reload).must_equal([false, true])
     record_fields(non_record_demo.reload).must_equal([false, false])
   end
+
+  describe 'when a pacifist record beats the speed' do
+    before do
+      record_demo.update(category_id: 3) # Pacifist
+    end
+
+    it 'sets the record fields' do
+      Domain::Demo::UpdateRecordFields.call(non_record_demo)
+      # This one is false / false because it is the only pacifist
+      record_fields(record_demo.reload).must_equal([false, false])
+      record_fields(second_record_demo.reload).must_equal([false, true])
+      record_fields(non_record_demo.reload).must_equal([false, false])
+    end
+  end
 end

@@ -19,6 +19,8 @@ module Domain
 
         save_record
         save_second_record
+
+        chain_affected_categories
       end
 
       private
@@ -63,6 +65,13 @@ module Domain
 
       def demos_for_category
         @demos_for_category ||= demos.where(category_id: category_id)
+      end
+
+      def chain_affected_categories
+        return unless demo.category_name == 'Pacifist'
+
+        speed_record = FindStandardRecord(wad_id, level, only: :skill_4_speed)
+        UpdateRecordFields.call(speed_record) if speed_record
       end
     end
   end
