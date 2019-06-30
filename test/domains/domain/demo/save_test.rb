@@ -1,7 +1,11 @@
 require 'test_helper'
 
 describe Domain::Demo::Save do
-  let(:demo) { Demo.new(levelstat: '1,2', guys: 1, tas: false) }
+  let(:demo) do
+    Demo.new(
+      levelstat: '1,2', guys: 1, tas: false, category: categories(:uvspeed)
+    )
+  end
   let(:demo_file) { Struct.new(:md5).new(nil) }
   let(:players) { [player] }
   let(:player) { mock() }

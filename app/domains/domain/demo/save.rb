@@ -5,12 +5,13 @@ module Domain
 
       def call(demo)
         previous_record = standard_record(demo)
+        linked_record = standard_linked_record(demo)
         format_levelstat(demo)
         store_md5(demo)
         ::Demo.transaction do
           demo.save!
           Demo::UpdateRecordFields.call(demo)
-          refresh_record_index(previous_record, demo)
+          refresh_record_index(previous_record, linked_record, demo)
           touch_players(demo)
         end
       end
@@ -33,10 +34,19 @@ module Domain
         )
       end
 
-      def refresh_record_index(previous_record, demo)
+      def standard_linked_record(demo)
+        return unless demo.standard? && demo.category_name == 'Pacifist'
+
+        Demo::FindStandardRecord.call(
+          demo.wad_id, demo.level, only: :skill_4_speed
+        )
+      end
+
+      def refresh_record_index(previous_record, linked_record, demo)
         return unless demo.standard?
 
         refresh_player_record_index(previous_record) if previous_record
+        refresh_player_record_index(linked_record) if linked_record
         refresh_player_record_index(demo) if demo.tic_record?
       end
 
