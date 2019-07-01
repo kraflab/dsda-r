@@ -34,12 +34,10 @@
         </thead>
         <tbody>
           <% @record_index_players.each do |player| %>
-            <% cache player do %>
-              <tr>
-                <td><%= link_to player.name, player_path(player) %></td>
-                <td><%= player.record_index %></td>
-              </tr>
-            <% end %>
+            <tr>
+              <td><%= link_to player.name, player_path(player) %></td>
+              <td><%= player.record_index %></td>
+            </tr>
           <% end %>
         </tbody>
       </table>
