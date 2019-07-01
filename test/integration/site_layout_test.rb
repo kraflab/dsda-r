@@ -23,16 +23,16 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
   end
 
   test "stats page" do
-    Domain::Player.refresh_record_index(players: :all)
-    get stats_path
-    assert_select "title", "Stats | DSDA"
-    assert_select "div.page-header", "Stats & Charts"
-    assert_select "div.chart-style[id=?]", "demo_count_by_year"
-
-    player = Player.reorder(record_index: :desc).first
-    #assert_select "h3", "Record Index Top 50"
-    #assert_select "td", "#{player.record_index}"
-    #assert_select "td", player.name
+    # Domain::Player.refresh_record_index(players: :all)
+    # get stats_path
+    # assert_select "title", "Stats | DSDA"
+    # assert_select "div.page-header", "Stats & Charts"
+    # assert_select "div.chart-style[id=?]", "demo_count_by_year"
+    #
+    # player = Player.reorder(record_index: :desc).first
+    # assert_select "h3", "Record Index Top 50"
+    # assert_select "td", "#{player.record_index}"
+    # assert_select "td", player.name
   end
 
   test "about page" do

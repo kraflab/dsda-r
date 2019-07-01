@@ -6,7 +6,7 @@
   </h1>
 </div>
 
-<% cache "stats:#{last_update}" do %>
+<!-- <% cache "stats:#{last_update}" do %>
   <% time_sum = Demo.all.sum(:tics) %>
   <% demo_count = Demo.count %>
   <% player_count = Player.count %>
@@ -20,7 +20,7 @@
   <h4>Average demos per wad = <%= demo_count/ wad_count %></h4>
   <h4>Average demo time = <%= Service::Tics::ToString.call(time_sum / demo_count, with_cs: false) %></h4>
 
-  <!-- <hr>
+  <hr>
   <div class="center-text">
     <h3>Record Index Top 50</h3>
     <p>The Record Index is the number of demos beaten by record runs.</p>
@@ -44,7 +44,7 @@
         </tbody>
       </table>
     </div>
-  </div> -->
+  </div>
 <% end %>
 
 <div id="demo_count_by_year" class="chart-style">
@@ -53,4 +53,4 @@
   library: default_plot_options,
   nonce: content_security_policy_script_nonce,
   id: 'demo_count_by_year', html: '' %>
-</div>
+</div> -->
