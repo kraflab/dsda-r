@@ -1,5 +1,5 @@
 class StaticPagesController < ApplicationController
-  RECORD_INDEX_LIMIT = 20
+  RECORD_INDEX_LIMIT = 50
 
   def home
   end

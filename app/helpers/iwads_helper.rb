@@ -37,8 +37,4 @@ module IwadsHelper
     hash[:average_time] = iwad.average_demo_time
     hash
   end
-
-  def iwad_by_wad_count
-    Hash[Iwad.all.map {|i| [i.name, i.wads.count]}]
-  end
 end
