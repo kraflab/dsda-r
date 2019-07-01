@@ -7,7 +7,7 @@
 </div>
 
 <% cache "stats:#{last_update}" do %>
-  <% time_sum = Demo.all.sum(:tics) %>
+  <!-- <% time_sum = Demo.all.sum(:tics) %>
   <% demo_count = Demo.count %>
   <% player_count = Player.count %>
   <% wad_count = Wad.count %>
@@ -18,7 +18,7 @@
   <h4>Total demo time = <%= Service::Tics::ToString.call(time_sum, with_cs: false) %> </h4>
   <h4>Average demos per player = <%= demo_count / player_count %></h4>
   <h4>Average demos per wad = <%= demo_count/ wad_count %></h4>
-  <h4>Average demo time = <%= Service::Tics::ToString.call(time_sum / demo_count, with_cs: false) %></h4>
+  <h4>Average demo time = <%= Service::Tics::ToString.call(time_sum / demo_count, with_cs: false) %></h4> -->
 
   <hr>
   <div class="center-text">
