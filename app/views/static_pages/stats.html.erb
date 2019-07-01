@@ -7,7 +7,18 @@
 </div>
 
 <% cache "stats:#{last_update}" do %>
+  <% time_sum = Demo.all.sum(:tics) %>
+  <% demo_count = Demo.count %>
+  <% player_count = Player.count %>
+  <% wad_count = Wad.count %>
 
+  <h4>Number of demos = <%= demo_count %></h4>
+  <h4>Number of players = <%= player_count %></h4>
+  <h4>Number of wads = <%= wad_count %></h4>
+  <h4>Total demo time = <%= Service::Tics::ToString.call(time_sum, with_cs: false) %> </h4>
+  <h4>Average demos per player = <%= demo_count / player_count %></h4>
+  <h4>Average demos per wad = <%= demo_count/ wad_count %></h4>
+  <h4>Average demo time = <%= Service::Tics::ToString.call(time_sum / demo_count, with_cs: false) %></h4>
 
   <hr>
   <div class="center-text">
@@ -36,10 +47,10 @@
   </div>
 <% end %>
 
-<div id="demo_count_by_year" class="chart-style">
-  <%= column_chart demos_by_year(Demo),
+<!-- <div id="demo_count_by_year" class="chart-style">
+  <%#= column_chart demos_by_year(Demo),
   title: 'Demo Count by Year',
   library: default_plot_options,
   nonce: content_security_policy_script_nonce,
   id: 'demo_count_by_year', html: '' %>
-</div>
+</div> -->
