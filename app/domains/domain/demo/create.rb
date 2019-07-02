@@ -10,6 +10,7 @@ module Domain
         ::Demo.transaction do
           Demo::Save.call(demo)
           Demo::CreateTags.call(demo: demo, tags: tags)
+          Demo::Year.increment(demo.recorded_at)
         end
         demo
       end

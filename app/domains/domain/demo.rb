@@ -75,6 +75,13 @@ module Domain
       )
     end
 
+    def update(id: nil, recorded_at: nil)
+      Domain::Demo::Update.call(
+        ::Demo.find(id),
+        recorded_at: recorded_at
+      )
+    end
+
     private
 
     def players_from_names(names)

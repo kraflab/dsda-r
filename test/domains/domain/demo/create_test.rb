@@ -30,6 +30,7 @@ describe Domain::Demo::Create do
     Service::FileData::Read.stubs(:call).returns(data)
     Domain::Demo::Save.stubs(:call).returns(true)
     Domain::Demo::CreateTags.stubs(:call).returns(true)
+    Domain::Demo::Year.stubs(:increment).returns(true)
   end
 
   it 'reads file data' do
@@ -45,6 +46,11 @@ describe Domain::Demo::Create do
 
   it 'creates tags' do
     Domain::Demo::CreateTags.expects(:call)
+    Domain::Demo::Create.call(params)
+  end
+
+  it 'increments demo year cache' do
+    Domain::Demo::Year.expects(:increment).with(params[:recorded_at])
     Domain::Demo::Create.call(params)
   end
 

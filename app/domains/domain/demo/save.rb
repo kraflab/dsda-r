@@ -7,6 +7,7 @@ module Domain
         previous_record = standard_record(demo)
         linked_record = standard_linked_record(demo)
         format_levelstat(demo)
+        assign_year(demo)
         store_md5(demo)
         ::Demo.transaction do
           demo.save!
@@ -17,6 +18,10 @@ module Domain
       end
 
       private
+
+      def assign_year(demo)
+        demo.year = demo.recorded_at&.year
+      end
 
       def format_levelstat(demo)
         demo.levelstat.gsub!(/,/, "\n")

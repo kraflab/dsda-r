@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190621130053) do
+ActiveRecord::Schema.define(version: 20190702100027) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "username"
@@ -50,6 +50,14 @@ ActiveRecord::Schema.define(version: 20190621130053) do
     t.index ["player_id"], name: "index_demo_players_on_player_id"
   end
 
+  create_table "demo_years", force: :cascade do |t|
+    t.integer  "year",                   null: false
+    t.integer  "count",      default: 0
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.index ["year"], name: "index_demo_years_on_year", unique: true
+  end
+
   create_table "demos", force: :cascade do |t|
     t.integer  "tics"
     t.integer  "guys"
@@ -75,6 +83,7 @@ ActiveRecord::Schema.define(version: 20190621130053) do
     t.boolean  "tas",            default: false
     t.boolean  "tic_record",     default: false
     t.boolean  "second_record",  default: false
+    t.integer  "year"
     t.index ["category_id"], name: "index_demos_on_category_id"
     t.index ["demo_file_id"], name: "index_demos_on_demo_file_id"
     t.index ["recorded_at"], name: "index_demos_on_recorded_at"

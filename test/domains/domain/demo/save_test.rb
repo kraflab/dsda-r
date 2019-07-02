@@ -3,7 +3,8 @@ require 'test_helper'
 describe Domain::Demo::Save do
   let(:demo) do
     Demo.new(
-      levelstat: '1,2', guys: 1, tas: false, category: categories(:uvspeed)
+      levelstat: '1,2', guys: 1, tas: false,
+      category: categories(:uvspeed), recorded_at: Time.now
     )
   end
   let(:demo_file) { Struct.new(:md5).new(nil) }
@@ -25,6 +26,11 @@ describe Domain::Demo::Save do
     Domain::Demo::UpdateRecordFields.stubs(call: true)
     Domain::Player.stubs(refresh_record_index: true)
     Domain::Demo::FindStandardRecord.stubs(call: previous_record)
+  end
+
+  it 'assigns year' do
+    Domain::Demo::Save.call(demo)
+    demo.year.must_equal(demo.recorded_at.year)
   end
 
   it 'formats levelstat' do

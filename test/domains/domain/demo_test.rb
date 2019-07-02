@@ -82,4 +82,16 @@ describe Domain::Demo do
       create
     end
   end
+
+  describe '.update' do
+    let(:update) {
+      Domain::Demo.update(id: demo.id, recorded_at: Time.now)
+    }
+    let(:demo) { demos(:bt01speed) }
+
+    it 'delegates to the update object' do
+      Domain::Demo::Update.expects(:call)
+      update
+    end
+  end
 end
