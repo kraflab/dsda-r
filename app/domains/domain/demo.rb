@@ -82,6 +82,10 @@ module Domain
       )
     end
 
+    def demo_count_by_year
+      Hash[::DemoYear.all.map { |dy| [dy.year, dy.count]}]
+    end
+
     private
 
     def players_from_names(names)

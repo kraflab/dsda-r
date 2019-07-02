@@ -94,4 +94,15 @@ describe Domain::Demo do
       update
     end
   end
+
+  describe '.demo_count_by_year' do
+    before do
+      DemoYear.create(year: 2012, count: 1234)
+      DemoYear.create(year: 2013, count: 3333)
+    end
+
+    it 'returns demo count by year' do
+      Domain::Demo.demo_count_by_year.must_equal(2012 => 1234, 2013 => 3333)
+    end
+  end
 end
