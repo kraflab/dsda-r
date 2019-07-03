@@ -79,12 +79,6 @@ module WadsHelper
         end),
         (content_tag :td, class: 'no-wrap' do
           "#{demo_count}"
-        end),
-        (content_tag :td, class: 'no-wrap' do
-          "#{wad.author}"
-        end),
-        (content_tag :td, class: 'no-wrap' do
-          "#{demo_details(wad)}"
         end)
       ].join(' ').html_safe
     end

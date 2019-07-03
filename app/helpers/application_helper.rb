@@ -71,16 +71,16 @@ module ApplicationHelper
     }
   end
 
-  # return the 5 most active wads of the past n days
+  # return the 10 most active wads of the past n days
   def active_wads(n)
     hash = Hash.new(0)
     Demo.within(n).select(:id, :wad_id).each do |demo|
       hash[demo.wad_id] += 1
     end
-    hash.sort_by { |k, v| -v }[0..2]
+    hash.sort_by { |k, v| -v }[0..9]
   end
 
-  # return the 5 most active players of the past n days
+  # return the 10 most active players of the past n days
   def active_players(n)
     hash = Hash.new(0)
     DemoPlayer.includes(:demo).
@@ -88,6 +88,6 @@ module ApplicationHelper
       references(:demo).each do |dp|
       hash[dp.player_id] += 1
     end
-    hash.sort_by { |k, v| -v }[0..2]
+    hash.sort_by { |k, v| -v }[0..9]
   end
 end

@@ -12,9 +12,11 @@
         Speed Demo Forum
       </a>
       on DoomWorld.
+    </p>
+    <p>
       <strong>The site is currently a work in progress:
-      most of the backend is complete, but much of the work needed to parse
-      old data and extract new data is still underway.</strong>
+      most of Andy's DSDA is mirrored, but it is still the primary source.
+      There are many errors and omissions that we are working on.</strong>
     </p>
     <p>
       New? Check out the <%= link_to('Intro', intro_path) %> for general rules and useful information.
@@ -29,7 +31,7 @@
   </div>
 </div>
 
-<% cache "home_active_v001:#{last_update}" do %>
+<% cache "home_active_v002:#{last_update}" do %>
   <% day_range = 90 %>
   <div class="container">
     <div class="center-text col-md-6">
@@ -37,13 +39,11 @@
         <div class="panel-heading">
           <h3 class="panel-title">Active Wads (last <%= day_range %> days)</h3>
         </div>
-        <div class="panel-body">
-          <table class="table table-modest">
-            <% active_wads(day_range).each do |wad_id, count| %>
-              <%= active_wad_entry(Wad.find(wad_id), count) %>
-            <% end %>
-          </table>
-        </div>
+        <table class="table table-modest">
+          <% active_wads(day_range).each do |wad_id, count| %>
+            <%= active_wad_entry(Wad.find(wad_id), count) %>
+          <% end %>
+        </table>
       </div>
     </div>
     <div class="center-text col-md-6">
@@ -51,13 +51,11 @@
         <div class="panel-heading">
           <h3 class="panel-title">Active Players (last <%= day_range %> days)</h3>
         </div>
-        <div class="panel-body">
-          <table class="table table-modest">
-            <% active_players(day_range).each do |player_id, count| %>
-              <%= active_player_entry(Player.find(player_id), count) %>
-            <% end %>
-          </table>
-        </div>
+        <table class="table table-modest">
+          <% active_players(day_range).each do |player_id, count| %>
+            <%= active_player_entry(Player.find(player_id), count) %>
+          <% end %>
+        </table>
       </div>
     </div>
   </div>

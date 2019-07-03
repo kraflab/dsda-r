@@ -49,9 +49,6 @@ module PlayersHelper
         end),
         (content_tag :td, class: 'no-wrap' do
           "#{demo_count}"
-        end),
-        (content_tag :td, class: 'no-wrap' do
-          "#{demo_details(player)}"
         end)
       ].join(' ').html_safe
     end
