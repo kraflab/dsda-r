@@ -9,12 +9,14 @@ kingdime:
   username: kingdime
   twitch: ""
   youtube: ""
+  record_index: 1
 
 elim:
   name: elim
   username: elim
   twitch: ""
   youtube: ""
+  record_index: 3
 
 cyber:
   name: cyber
