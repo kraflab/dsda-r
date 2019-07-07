@@ -19,6 +19,7 @@ module Domain
 
         save_record
         save_second_record
+        update_record_index
 
         chain_affected_categories
       end
@@ -29,10 +30,20 @@ module Domain
 
       # Only reset for the specific category
       def reset_demos
+        demos_for_category.where('record_index > 0').update_all(record_index: 0)
         demos_for_category.find_by(tic_record: true)
                           &.update!(tic_record: false)
         demos_for_category.find_by(second_record: true)
                           &.update!(second_record: false)
+      end
+
+      def update_record_index
+        record_index_demos = demos.where.not(record_index: 0).to_a
+        record_index_demos |= [record]
+        record_index_demos.each do |d|
+          record_index = Domain::Demo::ComputeRecordIndex.call(d).to_i
+          d.update!(record_index: record_index)
+        end
       end
 
       def save_record

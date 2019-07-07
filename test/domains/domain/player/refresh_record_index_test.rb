@@ -11,12 +11,8 @@ describe Domain::Player::RefreshRecordIndex do
 
   describe 'when given a player' do
     let(:player) { players(:elim) }
-    let(:demos) { [mock(), mock()] }
 
     before do
-      demos.first.stubs(:record_index).returns(1)
-      demos.second.stubs(:record_index).returns(2)
-      player.stubs(:demos).returns(demos)
       player.stubs(:record_index).returns(record_index)
     end
 

@@ -38,6 +38,7 @@ class Demo < ApplicationRecord
                           format: { with: VALID_PORT_REGEX }
   validates :levelstat,   length: { maximum: 500 }
   validates :compatible,  inclusion: [true, false]
+  validates :record_index, presence: true, numericality: { greater_than_or_equal_to: 0 }
 
   delegate :name, to: :category, prefix: true
 
@@ -86,10 +87,6 @@ class Demo < ApplicationRecord
 
   def players_text
     cell_names(players)
-  end
-
-  def record_index
-    Domain::Demo::ComputeRecordIndex.call(self).to_i
   end
 
   def second

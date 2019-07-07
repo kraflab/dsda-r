@@ -111,13 +111,6 @@ class DemoTest < ActiveSupport::TestCase
     assert_match @demo.time, "0:00.99"
   end
 
-  test "should determine record_index properly" do
-    assert_equal 0, demos(:bt01speed).record_index
-    assert_equal 0, demos(:table_fill).record_index
-    assert_equal 1, demos(:bt01pacifist).record_index
-    assert_equal 2, demos(:bt02speed).record_index
-  end
-
   test "standard?" do
     @demo.assign_attributes(tas: false, guys: 1)
     assert_equal true, @demo.standard?

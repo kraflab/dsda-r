@@ -14,7 +14,7 @@ module Domain
       private
 
       def record_index(player)
-        player.demos.reduce(0) { |sum, demo| sum + demo.record_index }
+        player.demos.sum(:record_index)
       end
     end
   end

@@ -24,6 +24,7 @@ bt01pacifist:
   levelstat: "0:00.97,1:12"
   version: 0
   recorded_at: <%= 100.days.ago %>
+  record_index: 99
   video_link: "1op_0sdg923g"
   demo_file: demo_zip
 
@@ -81,6 +82,7 @@ bt02speed_slow:
   levelstat: "0:00.97"
   version: 0
   recorded_at: <%= 100.days.ago %>
+  record_index: 3
   demo_file: demo_zip
 
 bt02speed_slower:
