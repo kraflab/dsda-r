@@ -145,7 +145,7 @@ $ ->
 
   filter_body = $(".demo-filter")[0]
   if filter_body
-    filter = Cookies.get("demo_filter")
+    filter = undefined # Cookies.get("demo_filter")
     if filter is undefined
       filter = {category: [], tas: false, coop: false}
     else

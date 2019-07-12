@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   def settings
-    cookies.permanent['demo_filter'] ||= '{"category": [], "tas": false, "coop": false}'
+    # cookies.permanent['demo_filter'] ||= '{"category": [], "tas": false, "coop": false}'
   end
 
   def set
