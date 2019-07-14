@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190707110549) do
+ActiveRecord::Schema.define(version: 20190714104604) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "username"
@@ -85,6 +85,7 @@ ActiveRecord::Schema.define(version: 20190707110549) do
     t.boolean  "second_record",  default: false
     t.integer  "year"
     t.integer  "record_index",   default: 0
+    t.boolean  "solo_net",       default: false
     t.index ["category_id"], name: "index_demos_on_category_id"
     t.index ["demo_file_id"], name: "index_demos_on_demo_file_id"
     t.index ["record_index"], name: "index_demos_on_record_index"
