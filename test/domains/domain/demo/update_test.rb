@@ -1,7 +1,8 @@
 require 'test_helper'
 
 describe Domain::Demo::Update do
-  let(:demo) { Demo.new }
+  let(:demo) { Demo.new(category: categories(:uvspeed)) }
+  let(:old_run) { Domain::Demo::Run.new(demo) }
   let(:old_recorded_at) { '2019-07-02'.to_datetime }
   let(:new_recorded_at) { old_recorded_at }
   let(:update) do
@@ -16,6 +17,7 @@ describe Domain::Demo::Update do
 
   before do
     Domain::Demo::Save.stubs(:call)
+    Domain::Demo::Run.stubs(:new).returns(old_run)
     demo.stubs(:attributes).returns(old_attributes).then.returns(new_attributes)
   end
 
@@ -25,7 +27,7 @@ describe Domain::Demo::Update do
   end
 
   it 'saves the demo' do
-    Domain::Demo::Save.expects(:call).with(demo)
+    Domain::Demo::Save.expects(:call).with(demo, old_run)
     update
   end
 

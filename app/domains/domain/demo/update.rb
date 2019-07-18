@@ -8,6 +8,7 @@ module Domain
       def initialize(demo, attributes)
         @demo = demo
         @old_attributes = demo.attributes.with_indifferent_access
+        @old_run = Run.new(demo)
         @attributes = attributes
       end
 
@@ -15,14 +16,14 @@ module Domain
         demo.assign_attributes(attributes)
 
         ::Demo.transaction do
-          Demo::Save.call(demo)
+          Demo::Save.call(demo, old_run)
           adjust_demo_year_cache
         end
       end
 
       private
 
-      attr_reader :demo, :old_attributes, :attributes
+      attr_reader :demo, :old_attributes, :attributes, :old_run
 
       def adjust_demo_year_cache
         return unless changed?(:year)
