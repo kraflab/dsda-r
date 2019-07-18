@@ -43,6 +43,27 @@ describe Domain::Demo::Save do
     Domain::Demo::Save.call(demo)
   end
 
+  describe 'when given an old run too' do
+    describe 'when the old run is the same' do
+      let(:old_run) { Domain::Demo::Run.new(demo) }
+
+      it 'only updates the record fields for the demo' do
+        Domain::Demo::UpdateRecordFields.expects(:call).with(demo)
+        Domain::Demo::Save.call(demo, old_run)
+      end
+    end
+
+    describe 'when the old run is different' do
+      it 'updates the record fields for both' do
+        old_run = Domain::Demo::Run.new(demo)
+        demo.wad_id = 999
+        Domain::Demo::UpdateRecordFields.expects(:call).with(demo)
+        Domain::Demo::UpdateRecordFields.expects(:call).with(old_run)
+        Domain::Demo::Save.call(demo, old_run)
+      end
+    end
+  end
+
   it 'saves the demo' do
     demo.expects(:save!)
     Domain::Demo::Save.call(demo)
