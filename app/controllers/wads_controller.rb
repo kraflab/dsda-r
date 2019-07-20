@@ -117,7 +117,7 @@ class WadsController < ApplicationController
   def table_view
     @wad = Domain::Wad.single(short_name: params[:id], assert: true)
     @category = params[:category] || default_table_view_category
-    levels = @wad.demos.ils.select(:level).distinct.map(&:level)
+    levels = Domain::Wad::TableLevelList.call(@wad, @category)
     @demos = Domain::Demo.standard_record_list(
       wad_id: @wad.id, levels: levels, category: @category, very_soft: true
     )

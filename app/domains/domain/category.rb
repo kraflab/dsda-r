@@ -4,6 +4,11 @@ module Domain
 
     SKILL_4_SPEED = ['UV Speed', 'SM Speed', 'Sk4 Speed'].freeze
     SKILL_4_MAX = ['UV Max', 'SM Max', 'Sk4 Max'].freeze
+    MULTIPLE_EXIT_CATEGORIES = [
+      'UV Speed', 'SM Speed', 'Sk4 Speed',
+      'Pacifist', 'Stroller', 'NoMo',
+      'NM Speed', 'BP Speed', 'Sk5 Speed'
+    ].freeze
 
     def list(
       soft_category: nil, soft_category_id: nil, only: nil, very_soft: nil,
@@ -22,6 +27,10 @@ module Domain
       category = ::Category.find_by(id: id) if id
       return category if category.present?
       raise ActiveRecord::RecordNotFound if assert
+    end
+
+    def multiple_exits?(name:)
+      MULTIPLE_EXIT_CATEGORIES.include?(name)
     end
 
     private

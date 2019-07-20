@@ -56,6 +56,20 @@ bt02speed_solo:
   recorded_at: <%= 100.days.ago %>
   demo_file: demo_zip
 
+bt02speed_secret:
+  wad: btsx
+  category_id: 1
+  tics: 8999
+  engine: PRBoom+ v2.5.1.4 cl9
+  tas: false
+  guys: 1
+  has_tics: true
+  level: Map 02s
+  levelstat: "0:00.97"
+  version: 0
+  recorded_at: <%= 100.days.ago %>
+  demo_file: demo_zip
+
 bt02speed:
   wad: btsx
   category_id: 1

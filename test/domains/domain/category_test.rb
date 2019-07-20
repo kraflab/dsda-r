@@ -65,4 +65,18 @@ describe Domain::Category do
       end
     end
   end
+
+  describe '.multiple_exits?' do
+    describe 'when the category has multiple exits' do
+      it 'is true' do
+        Domain::Category.multiple_exits?(name: 'UV Speed').must_equal(true)
+      end
+    end
+
+    describe 'when the category does not have multiple exits' do
+      it 'is false' do
+        Domain::Category.multiple_exits?(name: 'NoMo 100S').must_equal(false)
+      end
+    end
+  end
 end
