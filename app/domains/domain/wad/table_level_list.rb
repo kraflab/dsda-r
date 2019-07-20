@@ -3,12 +3,8 @@ module Domain
     module TableLevelList
       extend self
 
-      REJECT_LIST = [
-        'Other Movie'
-      ].freeze
-
       def call(wad, category)
-        list = raw_list(wad) - REJECT_LIST
+        list = raw_list(wad)
 
         unless Domain::Category.multiple_exits?(name: category)
           list = list.reject { |l| l =~ /s/ }

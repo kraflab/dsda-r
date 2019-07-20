@@ -8,10 +8,10 @@ class Demo < ApplicationRecord
   has_many :players, through: :demo_players
 
   default_scope -> { order(:level, :category_id, :tics) }
-  scope :movies, -> { reorder(:level).where("level LIKE 'Ep%' OR level LIKE '%All'") }
-  scope :ils, -> { reorder(:level).where("level NOT LIKE 'Ep%' AND level NOT LIKE '%All'") }
-  scope :show_movies, -> { where("level LIKE 'Ep%' OR level LIKE '%All'") }
-  scope :show_ils, -> { where("level NOT LIKE 'Ep%' AND level NOT LIKE '%All'") }
+  scope :movies, -> { reorder(:level).show_movies }
+  scope :ils, -> { reorder(:level).show_ils }
+  scope :show_movies, -> { where("level LIKE 'Ep%' OR level LIKE '%All' OR level LIKE '%Movie'") }
+  scope :show_ils, -> { where("level NOT LIKE 'Ep%' AND level NOT LIKE '%All' AND level NOT LIKE '%Movie'") }
   scope :episode, ->(ep) {
     reorder(:level, :category_id, :tics).where("level <> ? AND (level LIKE ? or level = ? or LEVEL LIKE ? or LEVEL = ? #{ep == 2 ? 'or LEVEL LIKE \'Map 31%\' or LEVEL = \'Map 32\'' : ''})",
           "Map #{ep - 1}0", "Map #{ep - 1}%", "Map #{ep}0", "E#{ep}M%", "Episode #{ep}")
