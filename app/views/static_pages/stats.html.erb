@@ -6,7 +6,7 @@
   </h1>
 </div>
 
-<% cache [:stats_v001, last_update] do %>
+<% cache [:stats_v002, last_update] do %>
   <% time_sum = Demo.all.sum(:tics) %>
   <% demo_count = Demo.count %>
   <% player_count = Player.count %>
@@ -35,13 +35,11 @@
         </thead>
         <tbody>
           <% @record_index_players.each_with_index do |player, i| %>
-            <% cache [:stats_player_entry_v001, player] do %>
-              <tr>
-                <td><%= i %></td>
-                <td><%= link_to player.name, player_path(player) %></td>
-                <td><%= player.record_index %></td>
-              </tr>
-            <% end %>
+            <tr>
+              <td><%= i + 1 %></td>
+              <td><%= link_to player.name, player_path(player) %></td>
+              <td><%= player.record_index %></td>
+            </tr>
           <% end %>
         </tbody>
       </table>
