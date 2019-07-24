@@ -26,7 +26,7 @@ module Domain
       wad_id: nil, tas: nil, guys: nil, level: nil, standard: nil,
       category: nil, soft_category: nil, categories: nil,
       order_by_tics: nil, order_by_record_date: nil, order_by_id: nil,
-      page: nil
+      solo_net: nil, page: nil
     )
       query = ::Demo.all
       query = query.where(wad_id: wad_id) if wad_id
@@ -34,6 +34,7 @@ module Domain
       categories ||= resolve_categories(category, soft_category)
       query = query.where(category: categories) if categories
       query = query.where(tas: tas) if !tas.nil?
+      query = query.where(solo_net: solo_net) if !solo_net.nil?
       query = query.where(guys: guys) if guys
       query = query.standard if standard
       query = query.reorder(:tics) if order_by_tics

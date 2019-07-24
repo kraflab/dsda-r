@@ -13,19 +13,20 @@ module Domain
 
       def best?(demo, categories)
         least_tics = related_demos(demo, categories).first.tics
-        demo.tics / 100 <= least_tics / 100
+        demo.tics == least_tics
       end
 
       def related_demos(demo, categories)
         Demo.list(
           wad_id: demo.wad_id, level: demo.level, categories: categories,
-          tas: demo.tas, guys: demo.guys, order_by_tics: true
+          tas: demo.tas, guys: demo.guys, solo_net: demo.solo_net,
+          order_by_tics: true
         )
       end
 
       def record_index(demo, categories)
         categories = index_categories(demo, categories)
-        related_demos(demo, categories).count - 1
+        related_demos(demo, categories).select { |d| d.tics > demo.tics }.count
       end
 
       def index_categories(demo, categories)
