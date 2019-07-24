@@ -19,7 +19,7 @@ class Demo < ApplicationRecord
   scope :recent, ->(n) { reorder(recorded_at: :desc).limit(n) }
   scope :within, ->(n) { reorder(recorded_at: :desc).where('recorded_at >= ?', n.days.ago)}
   scope :tas, -> { where(tas: true) }
-  scope :standard, -> { where(tas: false, guys: 1) }
+  scope :standard, -> { where(tas: false, guys: 1, solo_net: false) }
   scope :at_second, ->(n) { where('tics >= ? AND tics < ?', n * 100, (n + 1) * 100) }
 
   validates :wad,       presence: true
@@ -61,6 +61,7 @@ class Demo < ApplicationRecord
   def note
     [
       coop_text,
+      solo_net_text,
       tas_text
     ].compact.join("\n")
   end
@@ -75,6 +76,10 @@ class Demo < ApplicationRecord
 
   def tas_text
     'TAS' if tas
+  end
+
+  def solo_net_text
+    'SN' if solo_net
   end
 
   def hidden_tags_text
@@ -94,7 +99,7 @@ class Demo < ApplicationRecord
   end
 
   def standard?
-    guys == 1 && !tas?
+    guys == 1 && !tas? && !solo_net?
   end
 
   private

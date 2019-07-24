@@ -35,7 +35,7 @@ module Domain
       query = query.where(category: categories) if categories
       query = query.where(tas: tas) if !tas.nil?
       query = query.where(guys: guys) if guys
-      query = query.where(tas: false, guys: 1) if standard
+      query = query.standard if standard
       query = query.reorder(:tics) if order_by_tics
       query = query.reorder(recorded_at: order_by_record_date) if order_by_record_date
       query = query.reorder(id: order_by_id) if order_by_id
