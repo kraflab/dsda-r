@@ -152,7 +152,7 @@ btep1_a:
   engine: PRBoom+ v2.5.1.4 cl9
   tas: false
   guys: 1
-  has_tics: false
+  has_tics: true
   level: Ep 1
   levelstat: "0:59\n1:13"
   version: 0
@@ -166,7 +166,7 @@ btep1_b:
   engine: PRBoom+ v2.5.1.4 cl9
   tas: false
   guys: 1
-  has_tics: false
+  has_tics: true
   level: Ep 1
   levelstat: "0:54\n1:18"
   version: 0
@@ -180,7 +180,7 @@ xlist_speed:
   engine: Heretic v1.3
   tas: false
   guys: 1
-  has_tics: false
+  has_tics: true
   level: E1M4
   recorded_at: <%= 100.days.ago %>
   demo_file: demo_zip
@@ -192,7 +192,7 @@ xlist_pacifist:
   engine: Heretic v1.3
   tas: false
   guys: 1
-  has_tics: false
+  has_tics: true
   level: E1M4
   recorded_at: <%= 100.days.ago %>
   demo_file: demo_zip
@@ -204,7 +204,7 @@ recent_demo:
   engine: Heretic v1.3
   tas: false
   guys: 1
-  has_tics: false
+  has_tics: true
   level: E1M4
   recorded_at: <%= Time.zone.now %>
   demo_file: demo_zip
@@ -216,7 +216,7 @@ next_demo:
   engine: Heretic v1.3
   tas: false
   guys: 1
-  has_tics: false
+  has_tics: true
   level: E1M4
   recorded_at: <%= 5.minutes.ago %>
   demo_file: demo_zip
