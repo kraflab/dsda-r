@@ -5,7 +5,7 @@ describe Domain::Demo::Delete do
   let(:demo_file) { Struct.new(:demos).new(Struct.new(:count).new(count)) }
   let(:players) { [player] }
   let(:player) { mock() }
-  let(:count) { 1 }
+  let(:count) { 0 }
 
   before do
     demo_file.stubs(:destroy!)
@@ -31,7 +31,7 @@ describe Domain::Demo::Delete do
   end
 
   describe 'when the file is associated with other demos' do
-    let(:count) { 2 }
+    let(:count) { 1 }
 
     it 'does not destroy the file' do
       demo_file.expects(:destroy!).never

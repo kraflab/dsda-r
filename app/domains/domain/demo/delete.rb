@@ -20,7 +20,7 @@ module Domain
       end
 
       def cleanup_file(demo)
-        return unless demo.demo_file&.demos&.count == 1
+        return unless demo.demo_file&.demos&.count == 0
         demo.demo_file.destroy!
       end
     end
