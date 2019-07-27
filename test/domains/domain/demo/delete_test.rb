@@ -1,7 +1,7 @@
 require 'test_helper'
 
 describe Domain::Demo::Delete do
-  let(:demo) { Demo.new(levelstat: '1,2') }
+  let(:demo) { Demo.new(levelstat: '1,2', category: categories(:uvspeed)) }
   let(:demo_file) { Struct.new(:demos).new(Struct.new(:count).new(count)) }
   let(:players) { [player] }
   let(:player) { mock() }
@@ -13,6 +13,7 @@ describe Domain::Demo::Delete do
     demo.stubs(:demo_file).returns(demo_file)
     demo.stubs(:destroy!)
     player.stubs(:touch)
+    Domain::Demo::UpdateRecordFields.stubs(:call)
   end
 
   it 'touches the players' do
@@ -27,6 +28,11 @@ describe Domain::Demo::Delete do
 
   it 'destroys the file' do
     demo_file.expects(:destroy!)
+    Domain::Demo::Delete.call(demo)
+  end
+
+  it 'updates record fields on the old run' do
+    Domain::Demo::UpdateRecordFields.expects(:call)
     Domain::Demo::Delete.call(demo)
   end
 
