@@ -79,8 +79,12 @@ module DemosHelper
   end
 
   def demo_time_cell(demo)
+    time_text = demo.time
+    unless demo.has_tics
+      time_text += '   '
+    end
     content_tag :td, class: 'right-text demo-time' do
-      link_to(demo.time, demo.file_path, title: demo.levelstat)
+      link_to(time_text, demo.file_path, title: demo.levelstat)
     end
   end
 
