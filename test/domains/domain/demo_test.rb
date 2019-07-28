@@ -105,4 +105,13 @@ describe Domain::Demo do
       Domain::Demo.demo_count_by_year.must_equal(2012 => 1234, 2013 => 3333)
     end
   end
+
+  describe '.find_matches' do
+    let(:details) { { level: 'Map 01' } }
+
+    it 'delegates' do
+      Domain::Demo::FindMatches.expects(:call).with(details)
+      Domain::Demo.find_matches(details)
+    end
+  end
 end

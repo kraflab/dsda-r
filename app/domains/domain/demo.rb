@@ -2,6 +2,10 @@ module Domain
   module Demo
     extend self
 
+    def find_matches(details)
+      FindMatches.call(details)
+    end
+
     def single(id: nil, assert: false)
       demo = nil
       demo = ::Demo.find_by(id: id) if id
