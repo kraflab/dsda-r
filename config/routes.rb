@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   get 'demos/:id/hidden_tag' => 'demos#hidden_tag'
 
   post 'api/demos/'   => "demos#api_create"
+  patch 'api/demos/'  => "demos#api_update"
   post 'api/wads'     => "wads#api_create"
   post 'api/players/' => "players#api_create"
   post 'api/ports/'   => "ports#api_create"

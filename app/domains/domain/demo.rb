@@ -81,11 +81,11 @@ module Domain
       )
     end
 
-    def update(id: nil, recorded_at: nil)
-      Domain::Demo::Update.call(
-        ::Demo.find(id),
-        recorded_at: recorded_at
-      )
+    def update(id:, wad: nil, category: nil, players: nil, **attributes)
+      attributes[:wad] = Domain::Wad.single(either_name: wad) if wad
+      attributes[:category] = Domain::Category.single(name: category) if category
+      attributes[:players] = players_from_names(players) if players
+      Domain::Demo::Update.call(::Demo.find(id), attributes)
     end
 
     def demo_count_by_year
