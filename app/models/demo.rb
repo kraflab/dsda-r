@@ -28,6 +28,7 @@ class Demo < ApplicationRecord
   validates :demo_file, presence: true
   validates_associated :demo_file
 
+  validates :year, numericality: { greater_than: 1993 }, allow_nil: true
   validates :tics,        presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :engine,      presence: true, length: { maximum: 50 }
   validates :tas,         inclusion: [true, false]

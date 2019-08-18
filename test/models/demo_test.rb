@@ -111,6 +111,11 @@ class DemoTest < ActiveSupport::TestCase
     assert_match @demo.time, "0:00.99"
   end
 
+  test 'year must be after release date' do
+    @demo.year = 1990
+    assert_not @demo.valid?
+  end
+
   test "standard?" do
     @demo.assign_attributes(tas: false, guys: 1)
     assert_equal true, @demo.standard?
