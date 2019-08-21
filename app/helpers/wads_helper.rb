@@ -39,11 +39,16 @@ module WadsHelper
     ].join(' ').html_safe
   end
 
-  def table_view_wad_header(wad)
-    content_tag :h1 do
+  def table_view_wad_sub_header(wad)
+    content_tag :p, class: 'p-short one-line' do
       [
-        link_to(wad.name, wad_path(wad)),
-        content_tag(:small, wad.author)
+        demo_details(wad),
+        '|',
+        link_to('Default View', wad_path(wad)),
+        '|',
+        link_to('Stats', wad_stats_path(wad)),
+        '|',
+        category_selector(wad)
       ].join(' ').html_safe
     end
   end
@@ -101,6 +106,22 @@ module WadsHelper
     end
     episodes.uniq{ |x| x.to_i }.collect do |ep|
       "Episode #{ep} ILs"
+    end
+  end
+
+  def category_selector(wad)
+    content_tag :div, id: 'levelSelectDropdown', class: 'one-line ' do
+      content_tag :div, class: 'btn-group shift-right' do
+        [
+          (content_tag :button, type: 'button', class: 'btn btn-primary fix-dropdown dropdown-toggle', 'data-toggle': 'dropdown', 'aria-haspopup': 'true', 'aria-expanded': 'false' do
+            [
+              'Category Select',
+              (content_tag :span, '', class: 'caret')
+            ].join(' ').html_safe
+          end),
+          table_view_category_list(wad)
+        ].join(' ').html_safe
+      end
     end
   end
 

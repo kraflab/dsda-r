@@ -1,17 +1,12 @@
 <% provide(:title, @wad.name) %>
 
 <div class="center-text">
-  <%= table_view_wad_header(@wad) %>
+  <% cache ['wad_table_view_header_v001', @wad] do %>
+    <%= wad_header(@wad) %>
+    <%= table_view_wad_sub_header(@wad) %>
+  <% end %>
   <h3 class="p-short one-line">
-    Table View
-    <div class="one-line">
-      <div class="btn-group shift-right">
-        <button type="button" class="btn btn-primary fix-dropdown dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <%= @category %> <span class="caret"></span>
-        </button>
-        <%= table_view_category_list(@wad) %>
-      </div>
-    </div>
+    <%= @category %>
   </h3>
   <br>
   <% cache ['wad_table_view_v002', @wad, @category] do %>
