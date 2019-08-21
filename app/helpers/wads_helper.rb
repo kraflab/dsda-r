@@ -30,6 +30,16 @@ module WadsHelper
     end
   end
 
+  def leaderboard_category_list(wad, level)
+    content_tag :ul, class: 'dropdown-menu' do
+      Domain::Category.list(iwad: wad.iwad_short_name).map do |cat|
+        content_tag :li do
+          link_to(cat.name, wad_leaderboard_path(wad, level: level, category: cat.name))
+        end
+      end.join(' ').html_safe
+    end
+  end
+
   def wads_header(wads)
     [
       content_tag(:h1, 'Wad List'),
@@ -53,6 +63,22 @@ module WadsHelper
     end
   end
 
+  def leaderboard_wad_sub_header(wad, category, level)
+    content_tag :p, class: 'p-short one-line' do
+      [
+        demo_details(wad),
+        '|',
+        link_to('Default View', wad_path(wad)),
+        '|',
+        link_to('Stats', wad_stats_path(wad)),
+        '|',
+        leaderboard_level_selector(wad, category),
+        '|',
+        leaderboard_category_selector(wad, level)
+      ].join(' ').html_safe
+    end
+  end
+
   def wad_header(wad)
     content_tag :h1 do
       [
@@ -68,6 +94,8 @@ module WadsHelper
         demo_details(wad),
         '|',
         link_to('Table View', wad_table_view_path(wad)),
+        '|',
+        link_to('Leaderboard', wad_leaderboard_path(wad)),
         '|',
         link_to('Stats', wad_stats_path(wad)),
         '|',
@@ -120,6 +148,49 @@ module WadsHelper
             ].join(' ').html_safe
           end),
           table_view_category_list(wad)
+        ].join(' ').html_safe
+      end
+    end
+  end
+
+  def leaderboard_category_selector(wad, level)
+    content_tag :div, id: 'levelSelectDropdown', class: 'one-line ' do
+      content_tag :div, class: 'btn-group shift-right' do
+        [
+          (content_tag :button, type: 'button', class: 'btn btn-primary fix-dropdown dropdown-toggle', 'data-toggle': 'dropdown', 'aria-haspopup': 'true', 'aria-expanded': 'false' do
+            [
+              'Category Select',
+              (content_tag :span, '', class: 'caret')
+            ].join(' ').html_safe
+          end),
+          leaderboard_category_list(wad, level)
+        ].join(' ').html_safe
+      end
+    end
+  end
+
+  def leaderboard_level_selector(wad, category)
+    content_tag :div, id: 'levelSelectDropdown', class: 'one-line ' do
+      content_tag :div, class: 'btn-group shift-right' do
+        [
+          (content_tag :button, type: 'button', class: 'btn btn-primary fix-dropdown dropdown-toggle', 'data-toggle': 'dropdown', 'aria-haspopup': 'true', 'aria-expanded': 'false' do
+            [
+              'Map Select',
+              (content_tag :span, '', class: 'caret')
+            ].join(' ').html_safe
+          end),
+          (content_tag :ul, class: 'dropdown-menu scrollable-menu' do
+            (wad.demos.ils.select(:level).distinct.collect do |field|
+              content_tag :li do
+                content_tag :a, field.level, href: wad_leaderboard_path(level: field.level, category: category)
+              end
+            end +
+            wad.demos.movies.select(:level).distinct.collect do |field|
+              content_tag :li do
+                content_tag :a, field.level, href: wad_leaderboard_path(level: field.level, category: category)
+              end
+            end).join(' ').html_safe
+          end)
         ].join(' ').html_safe
       end
     end

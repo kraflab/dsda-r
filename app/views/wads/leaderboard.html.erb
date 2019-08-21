@@ -1,9 +1,14 @@
 <% provide(:title, @wad.name) %>
 
 <div class="center-text">
-  <%= wad_header(@wad) %>
-  <h2><%= @level %> <%= @category %> Leaderboard</h2>
-
+  <% cache ['wad_leaderboard_header_v001', @wad, @category, @level] do %>
+    <%= wad_header(@wad) %>
+    <%= leaderboard_wad_sub_header(@wad, @category, @level) %>
+  <% end %>
+  <h3 class="p-short one-line">
+    <%= @level %> <%= @category %> Leaderboard
+  </h3>
+  <br>
   <% cache ['wad_leaderboard_v002', @demos, @category, @level] do %>
     <div class="panel panel-default panel-modest left-text">
       <table class="table table-striped table-modest">
