@@ -26,4 +26,7 @@ class StaticPagesController < ApplicationController
 
   def changelog
   end
+
+  def stream
+  end
 end
