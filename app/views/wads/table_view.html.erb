@@ -1,4 +1,5 @@
 <% provide(:title, @wad.name) %>
+<% provide(:description, "Table view of speedruns for #{@wad.name}") %>
 
 <div class="center-text">
   <% cache ['wad_table_view_header_v001', @wad] do %>

@@ -1,4 +1,5 @@
 <% provide(:title, @wad.name) %>
+<% provide(:description, "Speedrunning leaderboard for #{@wad.name}") %>
 
 <div class="center-text">
   <% cache ['wad_leaderboard_header_v001', @wad, @category, @level] do %>

@@ -1,4 +1,5 @@
 <% provide(:title, 'Ports') %>
+<% provide(:description, 'Main index of source ports for demo playback') %>
 
 <div class="center-text">
   <%= ports_header(@ports) %>
@@ -12,7 +13,7 @@
             <td>
               <% last = chunk[1].pop %>
               <% chunk[1].each do |port| %>
-                <%= link_to port.version, port.file_path %>, 
+                <%= link_to port.version, port.file_path %>,
               <% end %>
               <%= link_to last.version, last.file_path %>
             </td>

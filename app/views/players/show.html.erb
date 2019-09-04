@@ -1,4 +1,5 @@
 <% provide(:title, @player.name) %>
+<% provide(:description, "List of speedrun demos by #{@player.name}") %>
 
 <% cache @player do %>
   <div class="center-text">
