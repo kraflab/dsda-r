@@ -1,4 +1,5 @@
 demo_zip:
   wad: btsx
   data: 'test0.zip'
+  base_path: 'btsx'
   md5: '1234'

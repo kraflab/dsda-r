@@ -3,6 +3,7 @@ class DemoFile < ApplicationRecord
   belongs_to :wad
   validates :wad_id, presence: true
   validates :md5, presence: true, uniqueness: true
+  validates :base_path, presence: true
   mount_uploader :data, ZipFileUploader
   validates_presence_of :data
   validates_size_of :data, maximum: 100.megabytes, message: 'File exceeds 100 MB size limit'

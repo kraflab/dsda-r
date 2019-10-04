@@ -22,7 +22,11 @@ module Domain
         file_id = attributes.delete(:file_id)
         return ::DemoFile.find(file_id) if file_id
         data = Service::FileData::Read.call(file_hash: file)
-        ::DemoFile.new(wad: attributes[:wad], data: data)
+        ::DemoFile.new(
+          wad: attributes[:wad],
+          base_path: attributes[:wad]&.short_name,
+          data: data
+        )
       end
     end
   end
