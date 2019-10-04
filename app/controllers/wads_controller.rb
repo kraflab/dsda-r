@@ -33,6 +33,8 @@ class WadsController < ApplicationController
     if @demos.count > DEMO_RENDER_LIMIT && subset.nil?
       @demos = @wad.demos.where(level: @demos.ils.first.level)
     end
+
+    @demos = @demos.includes(:players).includes(:category).includes(:demo_file)
   end
 
   def stats
