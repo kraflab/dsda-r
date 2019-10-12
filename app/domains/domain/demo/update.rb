@@ -13,6 +13,7 @@ module Domain
       end
 
       def call
+        unset_record_fields
         demo.assign_attributes(attributes)
 
         ::Demo.transaction do
@@ -24,6 +25,14 @@ module Domain
       private
 
       attr_reader :demo, :old_attributes, :attributes, :old_run
+
+      def unset_record_fields
+        @attributes = attributes.merge(
+          record_index: 0,
+          tic_record: false,
+          second_record: false
+        )
+      end
 
       def adjust_demo_year_cache
         return unless changed?(:year)
