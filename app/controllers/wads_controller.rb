@@ -16,6 +16,8 @@ class WadsController < ApplicationController
       @wads = Domain::Wad.list(page: params.fetch(:page, 1))
       @is_paginated = true
     end
+
+    @wads = @wads.includes(:iwad).includes(:wad_file)
   end
 
   def show
