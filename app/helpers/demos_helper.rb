@@ -38,7 +38,7 @@ module DemosHelper
   end
 
   def count_and_total_time(thing, with_cs = true)
-    result = thing.demos.pluck('sum(demos.tics), count(*)').first
+    result = thing.demos.reorder(nil).pluck('sum(demos.tics), count(*)').first
     OpenStruct.new(
       total_time: Service::Tics::ToString.call(result[0] || 0, with_cs: with_cs),
       count: result[1]
