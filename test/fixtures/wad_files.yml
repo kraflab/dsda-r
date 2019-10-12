@@ -1,4 +1,5 @@
 btsx_zip:
   iwad: doom2
   data: 'test0.zip'
+  base_path: 'doom2'
   md5: '1234'

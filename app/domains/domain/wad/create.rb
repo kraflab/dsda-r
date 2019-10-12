@@ -20,7 +20,11 @@ module Domain
         return if file.nil?
 
         data = Service::FileData::Read.call(file_hash: file)
-        ::WadFile.new(iwad: attributes[:iwad], data: data)
+        ::WadFile.new(
+          iwad: attributes[:iwad],
+          base_path: attributes[:iwad]&.short_name,
+          data: data
+        )
       end
     end
   end

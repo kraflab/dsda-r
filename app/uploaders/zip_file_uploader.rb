@@ -12,7 +12,7 @@ class ZipFileUploader < CarrierWave::Uploader::Base
     when 'demo_file'
       "files/demos/#{model.base_path}/#{model.id}/"
     when 'wad_file'
-      "files/wads/#{model.iwad.short_name}/#{model.id}/"
+      "files/wads/#{model.base_path}/#{model.id}/"
     when 'port'
       "files/ports/#{model.id}/"
     else

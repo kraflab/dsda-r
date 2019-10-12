@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191004105503) do
+ActiveRecord::Schema.define(version: 20191012153002) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "username"
@@ -163,6 +163,7 @@ ActiveRecord::Schema.define(version: 20191004105503) do
     t.string   "md5"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "base_path"
     t.index ["iwad_id"], name: "index_wad_files_on_iwad_id"
     t.index ["md5"], name: "index_wad_files_on_md5"
   end
