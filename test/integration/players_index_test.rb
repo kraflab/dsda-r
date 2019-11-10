@@ -13,7 +13,7 @@ class PlayersIndexTest < ActionDispatch::IntegrationTest
     players.each do |player|
       assert_select 'a[href=?]', player_path(player)
       assert_select 'td', player.demos.count.to_s
-      assert_select 'td', total_demo_time(player)
+      assert_select 'td', total_demo_time(player, false)
     end
   end
 end
