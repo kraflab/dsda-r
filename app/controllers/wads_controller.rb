@@ -17,7 +17,7 @@ class WadsController < ApplicationController
       @is_paginated = true
     end
 
-    @wads = @wads.includes(:iwad).includes(:wad_file)
+    @wads = @wads.includes(:iwad)
   end
 
   def show
