@@ -14,10 +14,12 @@ module Domain
 
       def call
         unset_record_fields
+        tags = attributes.delete(:tags)
         demo.assign_attributes(attributes)
 
         ::Demo.transaction do
           Demo::Save.call(demo, old_run)
+          replace_tags(tags)
           adjust_demo_year_cache
         end
       end
@@ -25,6 +27,13 @@ module Domain
       private
 
       attr_reader :demo, :old_attributes, :attributes, :old_run
+
+      def replace_tags(tags)
+        return unless tags
+
+        demo.tags.destroy_all
+        Demo::CreateTags.call(demo: demo, tags: tags)
+      end
 
       def unset_record_fields
         @attributes = attributes.merge(

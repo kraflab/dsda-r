@@ -16,7 +16,10 @@ class DemosUpdateTest < ActionDispatch::IntegrationTest
           wad: @demo.wad.name,
           category: @demo.category_name,
           time: '9.99'
-        }
+        },
+        tags: [
+          { text: 'Ballerina', show: true }
+        ]
       }
     }
     @wrong_params = { demo_update: @params[:demo_update].merge(wad: 'foo') }
@@ -37,6 +40,7 @@ class DemosUpdateTest < ActionDispatch::IntegrationTest
     assert_equal @demo.wad_id, @wad.id
     assert_equal @demo.category_name, 'Pacifist'
     assert_equal @demo.players.first.name, 'elim'
+    assert_equal @demo.sub_categories.map(&:name), ['Ballerina']
     response_hash = JSON.parse(response.body)
     assert response_hash['save']
     assert_equal response_hash['demo']['id'], @demo.id
