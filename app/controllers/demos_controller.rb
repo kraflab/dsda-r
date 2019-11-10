@@ -27,6 +27,8 @@ class DemosController < ApplicationController
                               [:order_by_id, :created_at]
                             end
     @demos = Domain::Demo.list(page: params[:page] || 1, sort_key => :desc)
+               .includes(:players).includes(:category).includes(:demo_file)
+               .includes(wad: :iwad)
   end
 
   def api_create
