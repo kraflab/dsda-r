@@ -1,7 +1,8 @@
 <% cache player do %>
   <tr>
     <td><%= link_to player.name, player %></td>
-    <td><%= player.demos.count %></td>
-    <td class="demo-time right-text"><%= total_time(player) %></td>
+    <% data = count_and_total_time(player, false) %>
+    <td><%= data.count %></td>
+    <td class="right-text demo-time"><%= data.total_time %></td>
   </tr>
 <% end %>
