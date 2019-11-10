@@ -30,9 +30,9 @@ module Domain
 
       # Only reset for the specific category
       def reset_demos
-        demos_for_category.where('record_index > 0').update_all(record_index: 0)
-        demos_for_category.where(tic_record: true).update_all(tic_record: false)
-        demos_for_category.where(second_record: true).update_all(second_record: false)
+        demos_for_category.where('record_index > 0').update_all(record_index: 0, updated_at: Time.now)
+        demos_for_category.where(tic_record: true).update_all(tic_record: false, updated_at: Time.now)
+        demos_for_category.where(second_record: true).update_all(second_record: false, updated_at: Time.now)
       end
 
       def update_record_index
