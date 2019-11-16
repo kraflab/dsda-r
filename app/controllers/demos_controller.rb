@@ -40,7 +40,7 @@ class DemosController < ApplicationController
 
   def api_update
     preprocess_api_request(require: [:demo_update])
-    demo = find_match(@request_hash[:demo_update][:match_details])
+    demo = find_demo
     params = @request_hash[:demo_update].slice(*ALLOWED_UPDATE_PARAMS)
     Domain::Demo.update(params.merge(id: demo.id))
     render json: DemoSerializer.new(demo).call
@@ -63,8 +63,27 @@ class DemosController < ApplicationController
 
   private
 
-  def find_match(details)
-    matches = Domain::Demo.find_matches(details)
+  def find_demo
+    if match_details[:id]
+      find_by_id
+    else
+      find_by_details
+    end
+  end
+
+  def match_details
+    @request_hash[:demo_update][:match_details]
+  end
+
+  def find_by_id
+    demo = ::Domain::Demo.single(id: match_details[:id])
+    return demo if demo
+
+    raise Errors::NoMatches
+  end
+
+  def find_by_details
+    matches = Domain::Demo.find_matches(match_details)
 
     raise Errors::NoMatches if matches.count == 0
     raise Errors::TooManyMatches if matches.count > 1

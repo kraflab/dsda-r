@@ -47,6 +47,13 @@ class DemosUpdateTest < ActionDispatch::IntegrationTest
     assert_equal response_hash['demo']['file_id'], @demo.demo_file.id
   end
 
+  test 'update via id' do
+    @params[:demo_update][:match_details] = { id: @demo.id }
+    patch '/api/demos/', params: @params, as: :json, headers: @headers
+    @demo.reload
+    assert_equal @demo.time, '1:11.13'
+  end
+
   test 'imprecise details demo update' do
     @params[:demo_update][:match_details].delete(:time)
     patch '/api/demos/', params: @params, as: :json, headers: @headers
