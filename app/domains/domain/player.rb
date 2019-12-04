@@ -14,11 +14,10 @@ module Domain
     end
 
     def single(username: nil, either_name: nil, id: nil, create_missing: false, assert: false)
-      player = nil
-      player = ::Player.find_by(username: username) if username
-      player = find_by_either_name(either_name) if either_name
-      player = ::Player.find_by(id: id) if id
-      player = create(name: either_name) if create_missing && player.nil?
+      player = Player::Find.call(
+        username: username, either_name: either_name, id: id
+      )
+      player ||= create(name: either_name) if create_missing
       return player if player.present?
 
       raise ActiveRecord::RecordNotFound if assert
@@ -35,12 +34,6 @@ module Domain
       players = list if players == :all
       raise ArgumentError, 'No player provided' if players.blank?
       Player::RefreshRecordIndex.call(players)
-    end
-
-    private
-
-    def find_by_either_name(either_name)
-      ::Player.find_by(username: either_name) || ::Player.find_by(name: either_name)
     end
   end
 end

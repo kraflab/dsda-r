@@ -29,6 +29,14 @@ describe Domain::Player do
       Domain::Player.single(username: player.username).must_equal player
     end
 
+    describe 'when using an alias' do
+      it 'returns a player' do
+        Domain::Player.single(
+          either_name: aliases(:elim_alias).name
+        ).must_equal player
+      end
+    end
+
     describe 'when using either_name' do
       it 'returns a player' do
         Domain::Player.single(either_name: player.username).must_equal player

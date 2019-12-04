@@ -15,7 +15,7 @@ btsx02:
   demo: bt02speed
 
 btsx02b:
-  player: elim
+  player_id: 1234 # elim
   demo: bt02speed_slow
 
 btsxep1a:

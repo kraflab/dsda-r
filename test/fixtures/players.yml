@@ -17,6 +17,7 @@ elim:
   twitch: ""
   youtube: ""
   record_index: 3
+  id: 1234
 
 cyber:
   name: cyber
