@@ -15,6 +15,7 @@ module Domain
         transfer_demos
 
         ::Player.transaction do
+          register_aliases
           Player::Save.call(into)
           from.destroy!
         end
@@ -35,6 +36,11 @@ module Domain
           players << into
           demo.players = players
         end
+      end
+
+      def register_aliases
+        ::PlayerAlias.create(name: from.name, player_id: into.id)
+        ::PlayerAlias.create(name: from.username, player_id: into.id)
       end
     end
   end
