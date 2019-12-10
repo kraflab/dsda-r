@@ -32,7 +32,7 @@ module Domain
 
       def find_by_alias(*names)
         names.compact.each do |name|
-          id = ::Alias.find_by(name: name)&.player_id
+          id = ::PlayerAlias.find_by(name: name)&.player_id
           next unless id
 
           player = ::Player.find_by(id: id)

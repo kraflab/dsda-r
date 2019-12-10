@@ -32,7 +32,7 @@ describe Domain::Player do
     describe 'when using an alias' do
       it 'returns a player' do
         Domain::Player.single(
-          either_name: aliases(:elim_alias).name
+          either_name: player_aliases(:elim_alias).name
         ).must_equal player
       end
     end
