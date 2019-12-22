@@ -3,7 +3,7 @@ module Service
     module Read
       extend self
 
-      FILE_NAME_LIMIT = 31
+      FILE_NAME_LIMIT = 47
 
       def call(file_hash: nil)
         return unless file_data_exists?(file_hash)
