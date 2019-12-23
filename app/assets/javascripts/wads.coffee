@@ -17,15 +17,15 @@ $ ->
               datasets: [{
                 label: 'Record Timeline',
                 fill: true,
-                backgroundColor: 'rgba(0,64,255,0.1)',
-                borderColor: 'rgba(0,64,255,0.5)',
-                pointBackgroundColor: 'rgba(0,0,0,1)',
-                pointBorderColor: 'rgba(0,0,0,0)',
+                backgroundColor: 'rgba(42,159,214,0.3)',
+                borderColor: '#2a9fd6',
+                pointBackgroundColor: '#fff',
+                pointBorderColor: '#fff',
                 data: response.data
               }]
             },
             options: {
-              title: { fontSize: 32 },
+              title: { fontSize: 32, fontColor: '#fff' },
               elements: {
                 line: {
                   tension: 0
@@ -36,11 +36,12 @@ $ ->
                 xAxes: [{
                   type: 'time',
                   position: 'bottom',
-                  ticks: { fontSize: 16 }
+                  ticks: { fontSize: 16, fontColor: '#eee' },
+                  gridLines: { color: 'rgba(255,255,255,0.3)' }
                 }],
                 yAxes: [{
                   ticks: {
-                    fontSize: 16,
+                    fontSize: 16, fontColor: '#eee',
                     callback: (label, index, labels) ->
                       tics = label;
                       secs = Math.floor(tics / 100)
@@ -52,7 +53,8 @@ $ ->
                         hours.toString() + ":" + pad(mins) + ":" + pad(secs)
                       else
                         pad(mins) + ":" + pad(secs)
-                  }
+                  },
+                  gridLines: { color: 'rgba(255,255,255,0.3)' }
                 }],
               },
               tooltips: {
