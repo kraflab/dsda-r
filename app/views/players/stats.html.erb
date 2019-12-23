@@ -25,6 +25,7 @@
 
 <div id="demo_count_by_year" class="chart-style">
   <%= column_chart demos_by_year(demos),
+  dataset: default_bar_plot_options,
   library: default_plot_options,
   title: 'Demo Count by Year',
   nonce: content_security_policy_script_nonce,

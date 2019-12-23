@@ -63,12 +63,16 @@ module ApplicationHelper
 
   def default_plot_options
     {
-      title: { fontSize: 32 },
+      title: { fontSize: 32, fontColor: '#fff' },
       scales: {
-        yAxes: [{ ticks: { fontSize: 16 } }],
-        xAxes: [{ ticks: { fontSize: 16 } }]
+        yAxes: [{ ticks: { fontSize: 16, fontColor: '#eee' }, gridLines: { color: 'rgba(255,255,255,0.3)' } }],
+        xAxes: [{ ticks: { fontSize: 16, fontColor: '#eee' }, gridLines: { color: 'rgba(255,255,255,0.3)' } }]
       }
     }
+  end
+
+  def default_bar_plot_options
+    { backgroundColor: 'rgba(42,159,214,0.5)', borderColor: '#2a9fd6' }
   end
 
   # return the 10 most active wads of the past n days
