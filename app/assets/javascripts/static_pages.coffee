@@ -4,5 +4,5 @@ $ ->
       width: "100%",
       height: 480,
       channel: "doomspeeddemos",
-      theme: "light"
+      theme: "dark"
     })
