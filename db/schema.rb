@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191210154940) do
+ActiveRecord::Schema.define(version: 20191231004955) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "username"
@@ -64,29 +64,30 @@ ActiveRecord::Schema.define(version: 20191210154940) do
     t.integer  "guys"
     t.string   "level"
     t.datetime "recorded_at"
-    t.text     "levelstat",      default: ""
+    t.text     "levelstat",         default: ""
     t.boolean  "has_tics"
     t.string   "engine"
-    t.integer  "version",        default: 0
+    t.integer  "version",           default: 0
     t.integer  "wad_id"
     t.integer  "category_id"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.integer  "download_count", default: 0
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.integer  "download_count",    default: 0
     t.string   "video_link"
     t.integer  "demo_file_id"
-    t.boolean  "has_hidden_tag", default: false
-    t.boolean  "has_shown_tag",  default: false
+    t.boolean  "has_hidden_tag",    default: false
+    t.boolean  "has_shown_tag",     default: false
     t.string   "kills"
     t.string   "items"
     t.string   "secrets"
-    t.boolean  "compatible",     default: true
-    t.boolean  "tas",            default: false
-    t.boolean  "tic_record",     default: false
-    t.boolean  "second_record",  default: false
+    t.boolean  "compatible",        default: true
+    t.boolean  "tas",               default: false
+    t.boolean  "tic_record",        default: false
+    t.boolean  "second_record",     default: false
     t.integer  "year"
-    t.integer  "record_index",   default: 0
-    t.boolean  "solo_net",       default: false
+    t.integer  "record_index",      default: 0
+    t.boolean  "solo_net",          default: false
+    t.boolean  "undisputed_record", default: false
     t.index ["category_id"], name: "index_demos_on_category_id"
     t.index ["demo_file_id"], name: "index_demos_on_demo_file_id"
     t.index ["record_index"], name: "index_demos_on_record_index"
