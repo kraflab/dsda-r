@@ -46,6 +46,7 @@ module Domain
         demo.update!(
           tic_record: false,
           second_record: false,
+          undisputed_record: false,
           category: other
         )
       end

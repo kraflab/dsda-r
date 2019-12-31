@@ -29,8 +29,14 @@
     description: Exit as fast as possible on skill 4.
     game: Hexen
 
-- other:
+- nomo:
     id: 6
+    name: Tyson
+    description: Exit as fast as possible with -nomonsters
+    game: Doom
+
+- other:
+    id: 7
     name: Other
     description: Other
     game: Doom

@@ -39,7 +39,8 @@ module Domain
         @attributes = attributes.merge(
           record_index: 0,
           tic_record: false,
-          second_record: false
+          second_record: false,
+          undisputed_record: false
         )
       end
 

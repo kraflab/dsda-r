@@ -15,12 +15,11 @@ module Domain
         return if demo.category_name == 'Other'
 
         reset_demos
-        return if demos_for_category.count < 2
 
-        save_record
-        save_second_record
+        return unless record
+
+        update_record_flags
         update_record_index
-
         chain_affected_categories
       end
 
@@ -30,9 +29,24 @@ module Domain
 
       # Only reset for the specific category
       def reset_demos
-        demos_for_category.where('record_index > 0').update_all(record_index: 0, updated_at: Time.now)
-        demos_for_category.where(tic_record: true).update_all(tic_record: false, updated_at: Time.now)
-        demos_for_category.where(second_record: true).update_all(second_record: false, updated_at: Time.now)
+        demos_for_category.where(
+          "record_index > 0 OR tic_record = 't' OR second_record = 't' OR undisputed_record = 't'"
+        ).update_all(
+          record_index: 0,
+          tic_record: false,
+          second_record: false,
+          undisputed_record: false,
+          updated_at: Time.now
+        )
+      end
+
+      def update_record_flags
+        if demos_for_category.count < 2
+          save_undisputed_record
+        else
+          save_record
+          save_second_record
+        end
       end
 
       def update_record_index
@@ -55,6 +69,12 @@ module Domain
         return unless second_record.category_id == category_id
 
         second_record.update!(second_record: true)
+      end
+
+      def save_undisputed_record
+        return unless record.category_id == category_id
+
+        record.update!(undisputed_record: true)
       end
 
       def record
