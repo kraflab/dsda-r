@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'intro'  => 'static_pages#intro'
   get 'changelog' => 'static_pages#changelog'
   get 'stream' => 'static_pages#stream'
+  get 'advice' => 'static_pages#advice'
 
   get 'guides/prboom_plus' => 'guides#prboom_plus'
 

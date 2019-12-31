@@ -29,4 +29,7 @@ class StaticPagesController < ApplicationController
 
   def stream
   end
+
+  def advice
+  end
 end

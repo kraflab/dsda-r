@@ -17,6 +17,8 @@
     </p>
     <p>
       New? Check out the <%= link_to('Intro', intro_path) %> for general rules and useful information.
+      Also see the <%= link_to('Advice', advice_path) %> page for recommendations on how to improve
+      when starting out.
     </p>
     <% cache "home_v001:#{last_update}" do %>
       <h4>
