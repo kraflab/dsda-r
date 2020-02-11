@@ -11,7 +11,7 @@ require 'mocha/minitest'
 Minitest::Reporters.use!
 Capybara.javascript_driver = :selenium
 Capybara.default_driver = :selenium
-CarrierWave.root = 'test/fixtures/files'
+CarrierWave.root = 'test/fixtures/public'
 
 class CapybaraIntegrationTest < ActionDispatch::IntegrationTest
   # Make the Capybara DSL available in these integration tests
@@ -42,7 +42,7 @@ class ActiveSupport::TestCase
 
   # Returns a dummy zip for tests
   def dummy_zip(n = 0)
-    File.open(Rails.root.join("test/fixtures/files/test#{n}.zip"))
+    File.open(Rails.root.join("test/fixtures/public/test#{n}.zip"))
   end
 
   # get total time for thing's demos
