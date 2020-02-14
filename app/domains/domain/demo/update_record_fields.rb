@@ -12,7 +12,7 @@ module Domain
       end
 
       def call
-        return if demo.category_name == 'Other'
+        return if demo.category_name == 'Other' || demo.level == 'Other Movie'
 
         reset_demos
 
