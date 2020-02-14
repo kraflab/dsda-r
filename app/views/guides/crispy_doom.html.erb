@@ -1,0 +1,55 @@
+<% provide(:title, 'Guides | Crispy') %>
+<% provide(:description, 'Guide for speedrunning Doom using Crispy Doom') %>
+
+<h2>Crispy Doom</h2>
+
+<h3>Compatibility</h3>
+
+<p>Crispy Doom is only compatible with the original games. That means Crispy supports the following compatibility levels by default:</p>
+
+<ul>
+<li><strong>2</strong> - Doom II</li>
+
+<li><strong>3</strong> - Ultimate Doom</li>
+
+<li><strong>4</strong> - Final Doom (TNT and Plutonia)</li>
+</ul>
+<p>If you're playing a custom mapset that requires boom, mbf, zdoom, or other compatibility levels, you'll need to use a different source port.</p>
+
+<h3>Options</h3>
+
+<p>Many command line options are useful for demo recording. Keep the following in mind:</p>
+
+<ul>
+<li><strong>-record x</strong> - records a demo to the file x.lmp.</li>
+
+<li><strong>-iwad x.wad</strong> - uses x.wad as the iwad (usually doom, doom2, etc).</li>
+
+<li><strong>-file x.wad</strong> - uses x.wad as a pwad (custom maps that will use the resources of the iwad).</li>
+
+<li><strong>-skill x</strong> - sets the skill level for the run. Usually this is 4 (UV) or 5 (NM).</li>
+
+<li><strong>-warp x</strong> - warps to map x. This could be "12" for doom 2 or "1 2" (e1m2) for doom 1.</li>
+
+<li><strong>-shorttics</strong> - this turns on demo-style turning when not recording. It's important for testing and practice.</li>
+
+<li><strong>-longtics</strong> - this causes the demo to use higher precision for turning. This should not be used for the original games, but is allowed for custom maps. Generally, many tricks are harder with this setting.</li>
+
+<li><strong>-playdemo x.lmp</strong> - play back a demo file.</li>
+</ul>
+
+<h3>Recording</h3>
+
+<p>In order to record a demo, you'll want to launch Crispy Doom along with the relevant command line options described above. This can be done on the actual command line, or via a batch file (.bat). Here is an example command:</p>
+
+<blockquote>
+  <p>crispy-doom.exe -iwad /path/to/doom.wad -skill 4 -warp 1 1 -record my_demo</p>
+</blockquote>
+
+<h3>FAQ</h3>
+
+<h4>How do I restart?</h4>
+<p>Crispy Doom since v5.6.4 (which you should be using) support restarting a demo without the need to close and re-open the client.</p>
+
+<h4>Why do I move forward when I move the mouse?</h4>
+<p>Doom has "vertical mouse movement" by default. Set your vertical sensitivity to zero in the options to turn this off, or look for the vertical mouse toggle bind and use it accordingly.</p>

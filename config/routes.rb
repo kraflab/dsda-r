@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'stream' => 'static_pages#stream'
   get 'advice' => 'static_pages#advice'
 
+  get 'guides/crispy_doom' => 'guides#crispy_doom'
   get 'guides/prboom_plus' => 'guides#prboom_plus'
 
   get    'settings' => 'sessions#settings'
