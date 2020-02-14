@@ -11,6 +11,7 @@ module Domain
     end
 
     def search(term:)
+      return ::Wad.where('short_name ILIKE ? OR name ILIKE ?', "%#{term}%", "%#{term}%") if Rails.env.production?
       ::Wad.where('short_name LIKE ? OR name LIKE ?', "%#{term}%", "%#{term}%")
     end
 

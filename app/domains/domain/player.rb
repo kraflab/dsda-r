@@ -10,6 +10,7 @@ module Domain
     end
 
     def search(term:)
+      return ::Player.where('username ILIKE ? OR name ILIKE ?', "%#{term}%", "%#{term}%") if Rails.env.production?
       ::Player.where('username LIKE ? OR name LIKE ?', "%#{term}%", "%#{term}%")
     end
 
