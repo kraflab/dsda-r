@@ -47,10 +47,20 @@ module Domain
 
     def soft_categories_for(base_category, very_soft)
       categories = [base_category]
+
       if skill_4_speed?(base_category.name)
         categories << pacifist
         categories += max if very_soft
       end
+
+      if base_category.name == 'NoMo'
+        categories << nomo_100s if very_soft
+      end
+
+      if base_category.name == 'NM Speed'
+        categories << nm_100s if very_soft
+      end
+
       categories
     end
 
@@ -64,6 +74,14 @@ module Domain
 
     def pacifist
       ::Category.find_by(name: 'Pacifist')
+    end
+
+    def nomo_100s
+      ::Category.find_by(name: 'NoMo 100S')
+    end
+
+    def nm_100s
+      ::Category.find_by(name: 'NM 100S')
     end
 
     def max
