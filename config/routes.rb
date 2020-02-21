@@ -37,6 +37,7 @@ Rails.application.routes.draw do
     get :autocomplete_player_username, :on => :collection
   end
   get 'players/:id/stats' => 'players#stats', as: 'player_stats'
+  get 'players/:id/record_view' => 'players#record_view', as: 'player_record_view'
 
   resources :iwads, only: [:show, :index]
   get 'iwads/:id/stats' => 'iwads#stats', as: 'iwad_stats'
