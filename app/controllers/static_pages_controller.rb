@@ -16,6 +16,12 @@ class StaticPagesController < ApplicationController
     @search = params[:search]
     @players = Domain::Player.search(term: @search)
     @wads = Domain::Wad.search(term: @search)
+
+    if @players.count == 1 && @wads.count == 0
+      redirect_to player_url(@players.first)
+    elsif @wads.count == 1 && @players.count == 0
+      redirect_to wad_url(@wads.first)
+    end
   end
 
   def no_file
