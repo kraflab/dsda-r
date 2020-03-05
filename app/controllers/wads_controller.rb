@@ -57,7 +57,7 @@ class WadsController < ApplicationController
       wad_id: @wad.id, level: level, category: category, standard: true,
       order_by_record_date: :asc
     )
-    data_full = demos.map { |i| [i.players.first.username, i.tics, i.time, i.recorded_at] }
+    data_full = demos.map { |i| [i.players.first.username, i.tics, i.time, i.recorded_at.to_date.to_s] }
     if data_full.empty?
       render json: {data: [], players: [], error: true}
     else
