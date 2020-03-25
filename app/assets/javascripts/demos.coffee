@@ -64,7 +64,7 @@ $ ->
               insertIndex = destination.coopTasIndex
           else
             if (runTime < destination.tas or destination.tas is 0) and !filter.tas
-              destination.coopTas = -1
+              destination.tas = -1
               insertIndex = destination.tasIndex
         else if note.search("P") >= 0
           if (runTime < destination.coop or destination.coop is 0) and !filter.coop
