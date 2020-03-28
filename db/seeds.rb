@@ -5,12 +5,12 @@ when "production"
   Admin.create!(username: "kraflab", password: ENV["SECRET_ADMIN_PASS"], fail_count: 0)
 end
 
-Iwad.create!(name: "Doom", username: "doom", author: "id Software")
-Iwad.create!(name: "Doom II", username: "doom2", author: "id Software")
-Iwad.create!(name: "Hexen", username: "hexen", author: "Raven Software")
+Iwad.create!(name: "Doom", short_name: "doom", author: "id Software")
+Iwad.create!(name: "Doom II", short_name: "doom2", author: "id Software")
+Iwad.create!(name: "Hexen", short_name: "hexen", author: "Raven Software")
 
 # Heretic-N
-heretic = Iwad.create!(name: "Heretic", username: "heretic", author: "Raven Software")
+heretic = Iwad.create!(name: "Heretic", short_name: "heretic", author: "Raven Software")
 Domain::Wad.create(
   iwad: 'heretic',
   name: 'Heretic',
@@ -100,7 +100,7 @@ if Rails.env.development?
       tas: tas,
       guys: is_coop ? 2 : 1,
       recorded_at: rand(100).days.ago,
-      wad: wad.username,
+      wad: wad.short_name,
       category: cat.name,
       engine: "PRBoom+ v2.5.1.4 cl9",
       players: [ player.name ],
@@ -119,7 +119,7 @@ if Rails.env.development?
       tas: false,
       guys: 1,
       recorded_at: @recorded_at,
-      wad: Wad.first.username,
+      wad: Wad.first.short_name,
       category: Category.first.name,
       engine: "PRBoom+ v2.5.1.4 cl9",
       players: [ player.name ],
