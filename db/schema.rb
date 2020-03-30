@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191231004955) do
+ActiveRecord::Schema.define(version: 20200330150726) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "username"
@@ -152,18 +152,6 @@ ActiveRecord::Schema.define(version: 20191231004955) do
     t.index ["demo_id"], name: "index_tags_on_demo_id"
     t.index ["sub_category_id", "demo_id"], name: "index_tags_on_sub_category_id_and_demo_id", unique: true
     t.index ["sub_category_id"], name: "index_tags_on_sub_category_id"
-  end
-
-  create_table "users", force: :cascade do |t|
-    t.string   "username"
-    t.string   "password_digest"
-    t.string   "otp_secret"
-    t.datetime "last_otp_at"
-    t.boolean  "can_query",       default: false
-    t.boolean  "can_mutate",      default: false
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
-    t.index ["username"], name: "index_users_on_username", unique: true
   end
 
   create_table "wad_files", force: :cascade do |t|
