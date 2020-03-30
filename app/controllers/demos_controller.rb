@@ -33,12 +33,16 @@ class DemosController < ApplicationController
   end
 
   def api_create
+    AdminAuthorizer.authorize!(@current_admin, :create)
+
     preprocess_api_request(require: [:demo])
     demo = Domain::Demo.create(@request_hash[:demo])
     render json: DemoSerializer.new(demo).call
   end
 
   def api_update
+    AdminAuthorizer.authorize!(@current_admin, :update)
+
     preprocess_api_request(require: [:demo_update])
     demo = find_demo
     params = @request_hash[:demo_update].slice(*ALLOWED_UPDATE_PARAMS)

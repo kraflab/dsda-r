@@ -44,6 +44,8 @@ class WadsController < ApplicationController
   end
 
   def api_create
+    AdminAuthorizer.authorize!(@current_admin, :create)
+
     preprocess_api_request(require: [:wad])
     wad = Domain::Wad.create(@request_hash[:wad])
     render json: WadSerializer.new(wad).call

@@ -33,6 +33,8 @@ class PlayersController < ApplicationController
   end
 
   def api_create
+    AdminAuthorizer.authorize!(@current_admin, :create)
+
     preprocess_api_request(require: [:player])
     player = Domain::Player.create(@request_hash[:player])
     render json: PlayerSerializer.new(player).call

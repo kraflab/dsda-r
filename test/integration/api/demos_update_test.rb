@@ -5,6 +5,7 @@ class DemosUpdateTest < ActionDispatch::IntegrationTest
     @demo = demos(:bt01speed)
     @wad = wads(:wad_10)
     @admin = admins(:elim)
+    @unauthorized_admin = admins(:bob)
     @params = {
       demo_update: {
         time: '1:11.13',
@@ -25,6 +26,10 @@ class DemosUpdateTest < ActionDispatch::IntegrationTest
     @wrong_params = { demo_update: @params[:demo_update].merge(wad: 'foo') }
     @headers = {
       'HTTP_API_USERNAME' => @admin.username,
+      'HTTP_API_PASSWORD' => 'password1234'
+    }
+    @unauthorized_headers = {
+      'HTTP_API_USERNAME' => @unauthorized_admin.username,
       'HTTP_API_PASSWORD' => 'password1234'
     }
     @wrong_headers = {
@@ -78,6 +83,13 @@ class DemosUpdateTest < ActionDispatch::IntegrationTest
 
   test 'unauthenticated demo update' do
     patch '/api/demos/', params: @params, as: :json, headers: @wrong_headers
+    assert_equal @demo.time, @demo.reload.time
+    assert_equal response.status, 401
+    assert_includes response.body, 'Unauthorized'
+  end
+
+  test 'unauthorized demo update' do
+    patch '/api/demos/', params: @params, as: :json, headers: @unauthorized_headers
     assert_equal @demo.time, @demo.reload.time
     assert_equal response.status, 401
     assert_includes response.body, 'Unauthorized'

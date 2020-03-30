@@ -2,3 +2,14 @@ elim:
   username: elim
   password_digest: <%= Admin.digest('password1234') %>
   fail_count: 0
+  can_create: true
+  can_delete: true
+  can_update: true
+
+bob:
+  username: bob
+  password_digest: <%= Admin.digest('password1234') %>
+  fail_count: 0
+  can_create: true
+  can_delete: false
+  can_update: false
