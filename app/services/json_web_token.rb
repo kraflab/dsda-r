@@ -6,12 +6,12 @@ module JsonWebToken
 
   extend self
 
-  def encode(admin)
+  def encode(admin, exp: EXPIRATION_TIME.from_now.to_i)
     payload = {
       iss: 'dsda',
       aud: 'dsda',
       sub: admin.id.to_s,
-      exp: EXPIRATION_TIME.from_now.to_i
+      exp: exp
     }
     JWT.encode(payload, SECRET_KEY)
   end
