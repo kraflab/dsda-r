@@ -36,6 +36,7 @@ group :test do
   gem 'minitest-reporters'
   gem 'mini_backtrace'
   gem 'mocha'
+  gem 'timecop'
 end
 
 group :development do
