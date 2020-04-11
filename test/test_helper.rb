@@ -50,6 +50,20 @@ class ActiveSupport::TestCase
     Service::Tics::ToString.call(thing.demos.sum(:tics), with_cs: with_cs)
   end
 
+  def setup_auth_headers
+    @headers = {
+      'Authorization' => "Bearer #{JsonWebToken.encode(@admin)}"
+    }
+    @wrong_headers = {
+      'Authorization' => "Bearer bad-jwt"
+    }
+
+    return unless @unauthorized_admin
+    @unauthorized_headers = {
+      'Authorization' => "Bearer #{JsonWebToken.encode(@unauthorized_admin)}"
+    }
+  end
+
   private
 
     # Returns true inside an integration test.

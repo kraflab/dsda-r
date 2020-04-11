@@ -21,14 +21,7 @@ class WadsCreateTest < ActionDispatch::IntegrationTest
       }
     }
     @wrong_params = { wad: @params[:wad].merge(iwad: nil) }
-    @headers = {
-      'HTTP_API_USERNAME' => @admin.username,
-      'HTTP_API_PASSWORD' => 'password1234'
-    }
-    @wrong_headers = {
-      'HTTP_API_USERNAME' => @admin.username,
-      'HTTP_API_PASSWORD' => 'password5678'
-    }
+    setup_auth_headers
   end
 
   test 'authenticated wad upload' do

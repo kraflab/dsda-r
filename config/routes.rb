@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   post 'api/wads'     => "wads#api_create"
   post 'api/players/' => "players#api_create"
   post 'api/ports/'   => "ports#api_create"
+  post 'api/tokens/'  => "tokens#api_create"
 
   get 'api/demos/records' => 'demos#record'
 
