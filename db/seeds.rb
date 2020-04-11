@@ -1,8 +1,12 @@
-case Rails.env
-when "development"
-  Admin.create!(username: "kraflab", password: "password1234", fail_count: 0)
-when "production"
-  Admin.create!(username: "kraflab", password: ENV["SECRET_ADMIN_PASS"], fail_count: 0)
+if Rails.env.development?
+  Admin.create!(
+    username: "kraflab",
+    password: "password1234",
+    can_create: true,
+    can_update: true,
+    can_delete: true,
+    fail_count: 0
+  )
 end
 
 Iwad.create!(name: "Doom", short_name: "doom", author: "id Software")
