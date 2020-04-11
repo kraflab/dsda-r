@@ -1,4 +1,6 @@
 class TokensController < ApplicationController
+  skip_before_action :verify_authenticity_token
+
   EXPIRATION_TIME = 1.week
 
   def api_create
