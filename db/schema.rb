@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200330151557) do
+ActiveRecord::Schema.define(version: 20200505145646) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "username"
@@ -91,6 +91,7 @@ ActiveRecord::Schema.define(version: 20200330151557) do
     t.integer  "record_index",      default: 0
     t.boolean  "solo_net",          default: false
     t.boolean  "undisputed_record", default: false
+    t.boolean  "cheated",           default: false
     t.index ["category_id"], name: "index_demos_on_category_id"
     t.index ["demo_file_id"], name: "index_demos_on_demo_file_id"
     t.index ["record_index"], name: "index_demos_on_record_index"
@@ -121,9 +122,10 @@ ActiveRecord::Schema.define(version: 20200330151557) do
     t.string   "username"
     t.string   "twitch"
     t.string   "youtube"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.integer  "record_index", default: 0
+    t.boolean  "cheater",      default: false
     t.index ["name"], name: "index_players_on_name"
     t.index ["record_index"], name: "index_players_on_record_index"
     t.index ["username"], name: "index_players_on_username", unique: true
