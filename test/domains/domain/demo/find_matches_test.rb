@@ -45,7 +45,7 @@ describe Domain::Demo::FindMatches do
     end
 
     it 'returns all matches' do
-      result.count.must_equal(2)
+      result.count.must_equal(3)
     end
 
     describe 'when restricting by flags' do

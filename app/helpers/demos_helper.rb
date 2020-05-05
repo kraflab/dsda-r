@@ -151,6 +151,7 @@ module DemosHelper
       [
         demo_record_glyph(demo),
         second_record_glyph(demo),
+        suspect_glyph(demo),
         demo.note
       ].compact.join(' ').html_safe
     end
@@ -166,7 +167,28 @@ module DemosHelper
   def second_record_glyph(demo)
     return unless demo.second_record?
 
-    content_tag :span, '', class: 'glyphicon glyphicon-time',
-      'aria-hidden': 'true', 'aria-label': 'Second Record', 'title': 'Second Record'
+    content_tag :span, '',
+      class: 'glyphicon glyphicon-time',
+      'aria-hidden': 'true',
+      'aria-label': 'First to break the second barrier',
+      'title': 'First to break the second barrier'
+  end
+
+  def suspect_glyph(demo)
+    return unless demo.suspect? || demo.cheated?
+
+    if demo.cheated?
+      content_tag :span, '',
+        class: 'glyphicon glyphicon-alert',
+        'aria-hidden': 'true',
+        'aria-label': 'Cheated demo',
+        'title': 'Cheated demo'
+    else
+      content_tag :span, '',
+        class: 'glyphicon glyphicon-question-sign',
+        'aria-hidden': 'true',
+        'aria-label': 'Dubious demo (player history of cheating)',
+        'title': 'Dubious demo (player history of cheating)'
+    end
   end
 end

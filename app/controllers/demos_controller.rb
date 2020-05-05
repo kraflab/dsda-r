@@ -8,6 +8,8 @@ class DemosController < ApplicationController
     :wad,
     :level,
     :tas,
+    :cheated,
+    :suspect,
     :guys,
     :players,
     :video_link,
