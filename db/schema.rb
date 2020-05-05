@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200505145646) do
+ActiveRecord::Schema.define(version: 20200505151835) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "username"
@@ -92,6 +92,7 @@ ActiveRecord::Schema.define(version: 20200505145646) do
     t.boolean  "solo_net",          default: false
     t.boolean  "undisputed_record", default: false
     t.boolean  "cheated",           default: false
+    t.boolean  "suspect",           default: false
     t.index ["category_id"], name: "index_demos_on_category_id"
     t.index ["demo_file_id"], name: "index_demos_on_demo_file_id"
     t.index ["record_index"], name: "index_demos_on_record_index"
