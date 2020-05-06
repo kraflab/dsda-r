@@ -25,7 +25,7 @@ module Domain
       end
 
       def assign_suspect(demo)
-        return unless demo.players.any?(&:cheater?)
+        return unless demo.players.any?(&:cheater?) && !demo.tas?
 
         demo.suspect = true
       end

@@ -28,6 +28,8 @@ module Domain
         return unless changed?(:cheater) && attributes[:cheater]
 
         player.demos.each do |demo|
+          next if demo.tas?
+
           Domain::Demo::Update.call(demo, suspect: true)
         end
       end
