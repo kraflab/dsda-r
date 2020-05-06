@@ -8,6 +8,7 @@ module Domain
         linked_record = standard_linked_record(demo)
         format_levelstat(demo)
         assign_year(demo)
+        assign_suspect(demo)
         store_md5(demo)
         ::Demo.transaction do
           demo.save!
@@ -21,6 +22,12 @@ module Domain
 
       def assign_year(demo)
         demo.year = demo.recorded_at&.year
+      end
+
+      def assign_suspect(demo)
+        return unless demo.players.any?(&:cheater?)
+
+        demo.suspect = true
       end
 
       def format_levelstat(demo)

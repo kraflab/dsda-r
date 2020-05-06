@@ -14,6 +14,7 @@ describe Domain::Demo::Save do
   let(:previous_player) { mock() }
   let(:tic_record) { true }
   let(:previous_record) { Demo.new }
+  let(:cheater) { false }
 
   before do
     demo.stubs(:players).returns(players)
@@ -21,6 +22,7 @@ describe Domain::Demo::Save do
     demo.stubs(:save!)
     demo.stubs(:tic_record?).returns(tic_record)
     player.stubs(:touch)
+    player.stubs(cheater?: cheater)
     previous_record.stubs(:players).returns(previous_players)
     Service::FileData::ComputeMd5.stubs(call: '1234')
     Domain::Demo::UpdateRecordFields.stubs(call: true)
@@ -41,6 +43,20 @@ describe Domain::Demo::Save do
   it 'updates record fields' do
     Domain::Demo::UpdateRecordFields.expects(:call).with(demo)
     Domain::Demo::Save.call(demo)
+  end
+
+  it 'does not set suspect' do
+    Domain::Demo::Save.call(demo)
+    demo.suspect.must_equal false
+  end
+
+  describe 'when a player is a cheater' do
+    let(:cheater) { true }
+
+    it 'sets the demo suspect' do
+      Domain::Demo::Save.call(demo)
+      demo.suspect.must_equal true
+    end
   end
 
   describe 'when given an old run too' do
