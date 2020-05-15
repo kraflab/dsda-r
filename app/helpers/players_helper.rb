@@ -39,6 +39,8 @@ module PlayersHelper
         '|',
         link_to('Record View', player_record_view_path(player)),
         '|',
+        link_to('History View', player_history_path(player)),
+        '|',
         link_to('Stats', player_stats_path(player))
       ].join(' ').html_safe
     end
@@ -48,6 +50,22 @@ module PlayersHelper
     content_tag :p do
       [
         demo_details(player),
+        '|',
+        link_to('Default View', player_path(player)),
+        '|',
+        link_to('History View', player_history_path(player)),
+        '|',
+        link_to('Stats', player_stats_path(player))
+      ].join(' ').html_safe
+    end
+  end
+
+  def player_history_sub_header(player)
+    content_tag :p do
+      [
+        demo_details(player),
+        '|',
+        link_to('Record View', player_record_view_path(player)),
         '|',
         link_to('Default View', player_path(player)),
         '|',

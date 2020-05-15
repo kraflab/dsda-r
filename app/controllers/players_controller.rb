@@ -28,6 +28,17 @@ class PlayersController < ApplicationController
                      .reorder('wads.short_name', :level, :category_id, :tics)
   end
 
+  def history
+    @player = Domain::Player.single(username: params[:id], assert: true)
+    @demos  = @player.demos
+                     .includes(:players)
+                     .includes(:category)
+                     .includes(:demo_file)
+                     .includes(:wad)
+                     .reorder(recorded_at: :desc)
+                     .order('wads.short_name', :level, :category_id, :tics)
+  end
+
   def stats
     @player = Domain::Player.single(username: params[:id], assert: true)
   end

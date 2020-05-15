@@ -39,6 +39,7 @@ Rails.application.routes.draw do
   end
   get 'players/:id/stats' => 'players#stats', as: 'player_stats'
   get 'players/:id/record_view' => 'players#record_view', as: 'player_record_view'
+  get 'players/:id/history' => 'players#history', as: 'player_history'
 
   resources :iwads, only: [:show, :index]
   get 'iwads/:id/stats' => 'iwads#stats', as: 'iwad_stats'
