@@ -136,12 +136,12 @@ module DemosHelper
     end
   end
 
-  def demo_tags(demo)
+  def demo_tags(demo, colspan: '5')
     content_tag :tr, '' do
       if demo.has_shown_tag
-        content_tag :td, demo.shown_tags_text, class: 'tag-text', colspan: '5'
+        content_tag :td, demo.shown_tags_text, class: 'tag-text', colspan: colspan
       else
-        content_tag :td, '', class: 'no-display', colspan: '5'
+        content_tag :td, '', class: 'no-display', colspan: colspan
       end
     end
   end
