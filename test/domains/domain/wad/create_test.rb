@@ -38,7 +38,7 @@ describe Domain::Wad::Create do
     let(:file_id) { wad_files(:btsx_zip).id }
 
     it 'associates the existing wad file' do
-      Domain::Wad::Create.call(params).wad_file_id.must_equal file_id
+      _(Domain::Wad::Create.call(params).wad_file_id).must_equal file_id
     end
   end
 end

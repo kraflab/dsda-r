@@ -10,7 +10,7 @@ describe Domain::Player do
 
   describe '.list' do
     it 'returns a list of players' do
-      Domain::Player.list.first.must_be_instance_of Player
+      _(Domain::Player.list.first).must_be_instance_of Player
     end
   end
 
@@ -18,7 +18,7 @@ describe Domain::Player do
     let(:player) { players(:elim) }
 
     it 'returns players matching a search term' do
-      Domain::Player.search(term: player.username).first.must_equal player
+      _(Domain::Player.search(term: player.username).first).must_equal player
     end
   end
 
@@ -26,26 +26,26 @@ describe Domain::Player do
     let(:player) { players(:elim) }
 
     it 'returns a player' do
-      Domain::Player.single(username: player.username).must_equal player
+      _(Domain::Player.single(username: player.username)).must_equal player
     end
 
     describe 'when using an alias' do
       it 'returns a player' do
-        Domain::Player.single(
-          either_name: player_aliases(:elim_alias).name
+        _(
+          Domain::Player.single(either_name: player_aliases(:elim_alias).name)
         ).must_equal player
       end
     end
 
     describe 'when using either_name' do
       it 'returns a player' do
-        Domain::Player.single(either_name: player.username).must_equal player
+        _(Domain::Player.single(either_name: player.username)).must_equal player
       end
     end
 
     describe 'when using id' do
       it 'returns a player' do
-        Domain::Player.single(id: player.id).must_equal player
+        _(Domain::Player.single(id: player.id)).must_equal player
       end
     end
 
@@ -58,7 +58,7 @@ describe Domain::Player do
         let(:assert_presence) { true }
 
         it 'raises error' do
-          proc { single }.must_raise ActiveRecord::RecordNotFound
+          _(proc { single }).must_raise ActiveRecord::RecordNotFound
         end
       end
 
@@ -66,7 +66,7 @@ describe Domain::Player do
         let(:assert_presence) { false }
 
         it 'returns nil' do
-          single.must_be_nil
+          _(single).must_be_nil
         end
       end
 
@@ -78,7 +78,7 @@ describe Domain::Player do
 
         it 'creates a new player' do
           single
-          Player.find_by(name: player_name).must_be_instance_of Player
+          _(Player.find_by(name: player_name)).must_be_instance_of Player
         end
       end
     end
@@ -97,7 +97,7 @@ describe Domain::Player do
       let(:player) { nil }
 
       it 'raises error' do
-        proc { refresh }.must_raise ArgumentError
+        _(proc { refresh }).must_raise ArgumentError
       end
     end
 

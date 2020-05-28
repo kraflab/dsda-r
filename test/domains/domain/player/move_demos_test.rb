@@ -10,7 +10,7 @@ describe Domain::Player::MoveDemos do
     Domain::Player::MoveDemos.call(
       from_player: from_player, to_player: to_player
     )
-    from_player.demos.count.must_equal 0
-    to_player.demos.count.must_equal total
+    _(from_player.demos.count).must_equal 0
+    _(to_player.demos.count).must_equal total
   end
 end

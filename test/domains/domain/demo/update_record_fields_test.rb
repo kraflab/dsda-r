@@ -17,9 +17,9 @@ describe Domain::Demo::UpdateRecordFields do
 
   it 'sets the record fields' do
     Domain::Demo::UpdateRecordFields.call(non_record_demo)
-    record_fields(record_demo.reload).must_equal([true, false, false, 2])
-    record_fields(second_record_demo.reload).must_equal([false, true, false, 0])
-    record_fields(non_record_demo.reload).must_equal([false, false, false, 0])
+    _(record_fields(record_demo.reload)).must_equal([true, false, false, 2])
+    _(record_fields(second_record_demo.reload)).must_equal([false, true, false, 0])
+    _(record_fields(non_record_demo.reload)).must_equal([false, false, false, 0])
   end
 
   describe 'when a pacifist record beats the speed' do
@@ -30,9 +30,9 @@ describe Domain::Demo::UpdateRecordFields do
     it 'sets the record fields' do
       Domain::Demo::UpdateRecordFields.call(non_record_demo)
       # This one is false / false because it is the only pacifist
-      record_fields(record_demo.reload).must_equal([false, false, false, 2])
-      record_fields(second_record_demo.reload).must_equal([false, true, false, 0])
-      record_fields(non_record_demo.reload).must_equal([false, false, false, 0])
+      _(record_fields(record_demo.reload)).must_equal([false, false, false, 2])
+      _(record_fields(second_record_demo.reload)).must_equal([false, true, false, 0])
+      _(record_fields(non_record_demo.reload)).must_equal([false, false, false, 0])
     end
   end
 
@@ -45,7 +45,7 @@ describe Domain::Demo::UpdateRecordFields do
 
     it 'sets the undisputed record field' do
       Domain::Demo::UpdateRecordFields.call(non_record_demo)
-      record_fields(non_record_demo.reload).must_equal([false, false, true, 0])
+      _(record_fields(non_record_demo.reload)).must_equal([false, false, true, 0])
     end
   end
 end

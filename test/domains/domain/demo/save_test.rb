@@ -32,12 +32,12 @@ describe Domain::Demo::Save do
 
   it 'assigns year' do
     Domain::Demo::Save.call(demo)
-    demo.year.must_equal(demo.recorded_at.year)
+    _(demo.year).must_equal(demo.recorded_at.year)
   end
 
   it 'formats levelstat' do
     Domain::Demo::Save.call(demo)
-    demo.levelstat.must_equal "1\n2"
+    _(demo.levelstat).must_equal "1\n2"
   end
 
   it 'updates record fields' do
@@ -47,7 +47,7 @@ describe Domain::Demo::Save do
 
   it 'does not set suspect' do
     Domain::Demo::Save.call(demo)
-    demo.suspect.must_equal false
+    _(demo.suspect).must_equal false
   end
 
   describe 'when a player is a cheater' do
@@ -55,7 +55,7 @@ describe Domain::Demo::Save do
 
     it 'sets the demo suspect' do
       Domain::Demo::Save.call(demo)
-      demo.suspect.must_equal true
+      _(demo.suspect).must_equal true
     end
   end
 
@@ -88,7 +88,7 @@ describe Domain::Demo::Save do
   it 'computes the file md5 hash' do
     Service::FileData::ComputeMd5.expects(:call).returns('1234')
     Domain::Demo::Save.call(demo)
-    demo_file.md5.must_equal '1234'
+    _(demo_file.md5).must_equal '1234'
   end
 
   it 'updates affected players record index' do

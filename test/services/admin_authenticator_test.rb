@@ -19,7 +19,7 @@ describe AdminAuthenticator do
       let(:admin) { Admin.new(id: 0) }
 
       it 'raises an error' do
-        proc { authenticate }.must_raise Errors::Unauthorized
+        _(proc { authenticate }).must_raise Errors::Unauthorized
       end
     end
 
@@ -27,14 +27,14 @@ describe AdminAuthenticator do
       let(:token) { 'bad-token' }
 
       it 'raises an error' do
-        proc { authenticate }.must_raise Errors::Unauthorized
+        _(proc { authenticate }).must_raise Errors::Unauthorized
       end
     end
 
     describe 'when the token is correct and the admin exists' do
       describe 'and the password is correct' do
         it 'returns the admin' do
-          authenticate.must_equal admin
+          _(authenticate).must_equal admin
         end
       end
     end
@@ -55,14 +55,14 @@ describe AdminAuthenticator do
         let(:username) { 'wrong' }
 
         it 'raises an error' do
-          proc { authenticate }.must_raise Errors::Unauthorized
+          _(proc { authenticate }).must_raise Errors::Unauthorized
         end
       end
 
       describe 'when the admin exists' do
         describe 'and the password is correct' do
           it 'returns the admin' do
-            authenticate.must_equal admin
+            _(authenticate).must_equal admin
           end
         end
 
@@ -70,7 +70,7 @@ describe AdminAuthenticator do
           let(:password) { 'wrong' }
 
           it 'raises an error' do
-            proc { authenticate }.must_raise Errors::Unauthorized
+            _(proc { authenticate }).must_raise Errors::Unauthorized
           end
         end
       end

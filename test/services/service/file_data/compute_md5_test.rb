@@ -10,7 +10,7 @@ describe Service::FileData::ComputeMd5 do
     }
 
     it 'returns the md5' do
-      md5.must_equal Digest::MD5.hexdigest('1234')
+      _(md5).must_equal Digest::MD5.hexdigest('1234')
     end
   end
 
@@ -18,7 +18,7 @@ describe Service::FileData::ComputeMd5 do
     let(:object) { stub(data: nil) }
 
     it 'returns nil' do
-      md5.must_be_nil
+      _(md5).must_be_nil
     end
   end
 end

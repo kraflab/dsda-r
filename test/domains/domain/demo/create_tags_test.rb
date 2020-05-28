@@ -18,7 +18,7 @@ describe Domain::Demo::CreateTags do
 
   it 'updates demo tag fields' do
     create_tags
-    demo.has_shown_tag.must_equal true
-    demo.has_hidden_tag.must_equal false
+    _(demo.has_shown_tag).must_equal true
+    _(demo.has_hidden_tag).must_equal false
   end
 end
