@@ -8,7 +8,7 @@ describe AdminAuthorizer do
       let(:admin) { admins(:elim) }
 
       it 'succeeds' do
-        authorize.must_equal true
+        _(authorize).must_equal true
       end
     end
 
@@ -16,7 +16,7 @@ describe AdminAuthorizer do
       let(:admin) { admins(:bob) }
 
       it 'raises an error' do
-        proc { authorize }.must_raise Errors::Unauthorized
+        _(proc { authorize }).must_raise Errors::Unauthorized
       end
     end
   end

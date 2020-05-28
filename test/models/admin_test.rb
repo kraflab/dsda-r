@@ -10,14 +10,14 @@ describe Admin do
 
   describe 'validity' do
     it 'is valid' do
-      admin.must_be :valid?
+      _(admin).must_be:valid?
     end
 
     describe 'when the username is blank' do
       let(:username) { ' ' }
 
       it 'is invalid' do
-        admin.wont_be :valid?
+        _(admin).wont_be :valid?
       end
     end
 
@@ -25,7 +25,7 @@ describe Admin do
       let(:username) { 'a' * 51 }
 
       it 'is invalid' do
-        admin.wont_be :valid?
+        _(admin).wont_be :valid?
       end
     end
 
@@ -33,7 +33,7 @@ describe Admin do
       [' me ', "a\tbc", 'hey$'].each do |invalid_username|
         it 'is invalid' do
           admin.username = invalid_username
-          admin.wont_be :valid?
+          _(admin).wont_be :valid?
         end
       end
     end
@@ -43,7 +43,7 @@ describe Admin do
 
       it 'is invalid' do
         admin.save
-        duplicate_admin.wont_be :valid?
+        _(duplicate_admin).wont_be :valid?
       end
     end
 
@@ -51,21 +51,21 @@ describe Admin do
       let(:password) { 'short' }
 
       it 'is invalid' do
-        admin.wont_be :valid?
+        _(admin).wont_be :valid?
       end
     end
   end
 
   describe '#account_locked?' do
     it 'is false by default' do
-      admin.account_locked?.must_equal false
+      _(admin.account_locked?).must_equal false
     end
 
     describe 'after too many failed login attempts' do
       let(:fail_count) { Admin::LOGIN_FAIL_LIMIT }
 
       it 'is locked' do
-        admin.account_locked?.must_equal true
+        _(admin.account_locked?).must_equal true
       end
     end
   end
@@ -85,7 +85,7 @@ describe Admin do
     describe 'when the password is correct' do
       describe 'and the account is not locked' do
         it 'returns the admin' do
-          try_authenticate.must_equal admin
+          _(try_authenticate).must_equal admin
         end
       end
 
@@ -93,7 +93,7 @@ describe Admin do
         let(:fail_count) { Admin::LOGIN_FAIL_LIMIT }
 
         it 'returns nil' do
-          try_authenticate.must_be_nil
+          _(try_authenticate).must_be_nil
         end
       end
     end
@@ -102,7 +102,7 @@ describe Admin do
       let(:auth_password) { 'wrong' }
 
       it 'returns nil' do
-        try_authenticate.must_be_nil
+        _(try_authenticate).must_be_nil
       end
 
       it 'increments the fail count' do

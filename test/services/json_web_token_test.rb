@@ -15,7 +15,7 @@ describe JsonWebToken do
   describe '.encode' do
     it 'encodes the admin' do
       Timecop.freeze do
-        JsonWebToken.encode(admin).must_equal token
+        _(JsonWebToken.encode(admin)).must_equal token
       end
     end
   end
@@ -24,16 +24,16 @@ describe JsonWebToken do
     let(:token) { JsonWebToken.encode(admin) }
 
     it 'decodes the token' do
-      JsonWebToken.decode(token)[:sub].must_equal admin.id.to_s
+      _(JsonWebToken.decode(token)[:sub]).must_equal admin.id.to_s
     end
 
     describe 'when the token is bad' do
       let(:token) { 'foo-bad-wrong' }
 
       it 'raises an error' do
-        proc {
-          JsonWebToken.decode(token)
-        }.must_raise JsonWebToken::DecodeError
+        _(
+          proc { JsonWebToken.decode(token) }
+        ).must_raise JsonWebToken::DecodeError
       end
     end
   end

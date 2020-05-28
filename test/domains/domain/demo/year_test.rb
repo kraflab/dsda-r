@@ -11,9 +11,9 @@ describe Domain::Demo::Year do
 
     it 'increments the count' do
       increment(now)
-      DemoYear.find_by(year: now.year).count.must_equal(1)
+      _(DemoYear.find_by(year: now.year).count).must_equal(1)
       increment(now)
-      DemoYear.find_by(year: now.year).count.must_equal(2)
+      _(DemoYear.find_by(year: now.year).count).must_equal(2)
     end
 
     it 'does not increment other years' do
@@ -41,14 +41,14 @@ describe Domain::Demo::Year do
 
     it 'decrements the count' do
       decrement(now)
-      DemoYear.find_by(year: now.year).count.must_equal(3)
+      _(DemoYear.find_by(year: now.year).count).must_equal(3)
       decrement(now)
-      DemoYear.find_by(year: now.year).count.must_equal(2)
+      _(DemoYear.find_by(year: now.year).count).must_equal(2)
     end
 
     it 'does not decrement other years' do
       decrement(last_year)
-      DemoYear.find_by(year: now.year).count.must_equal(4)
+      _(DemoYear.find_by(year: now.year).count).must_equal(4)
     end
 
     describe 'when given nil' do

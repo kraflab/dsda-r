@@ -7,13 +7,13 @@ describe Domain::Player::Merge do
   it 'merges the record index' do
     sum = from.record_index + into.record_index
     Domain::Player::Merge.call(from: from, into: into)
-    into.record_index.must_equal(sum)
+    _(into.record_index).must_equal(sum)
   end
 
   it 'merges the demos' do
     sum = from.demos.count + into.demos.count
     Domain::Player::Merge.call(from: from, into: into)
-    into.demos.count.must_equal(sum)
+    _(into.demos.count).must_equal(sum)
   end
 
   it 'does not change the demo player count' do
@@ -30,7 +30,8 @@ describe Domain::Player::Merge do
 
   it 'creates aliases' do
     Domain::Player::Merge.call(from: from, into: into)
-    PlayerAlias.find_by(name: from.name, player_id: into.id)
-               .must_be_instance_of PlayerAlias
+    _(
+      PlayerAlias.find_by(name: from.name, player_id: into.id)
+    ).must_be_instance_of PlayerAlias
   end
 end

@@ -23,7 +23,7 @@ describe Domain::Demo::Update do
 
   it 'assigns the attributes' do
     update
-    demo.recorded_at.must_equal(new_recorded_at)
+    _(demo.recorded_at).must_equal(new_recorded_at)
   end
 
   it 'saves the demo' do
@@ -42,8 +42,8 @@ describe Domain::Demo::Update do
 
       it 'updates the demo year cache' do
         update
-        DemoYear.find_by(year: old_recorded_at.year).count.must_equal(0)
-        DemoYear.find_by(year: new_recorded_at.year).count.must_equal(2)
+        _(DemoYear.find_by(year: old_recorded_at.year).count).must_equal(0)
+        _(DemoYear.find_by(year: new_recorded_at.year).count).must_equal(2)
       end
     end
 

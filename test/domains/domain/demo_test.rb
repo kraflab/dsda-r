@@ -3,13 +3,15 @@ require 'test_helper'
 describe Domain::Demo do
   describe '.list' do
     it 'returns a list of demos' do
-      Domain::Demo.list.first.must_be_instance_of Demo
+      _(Domain::Demo.list.first).must_be_instance_of Demo
     end
 
     describe 'when using a soft category' do
       it 'returns demos for multiple categories' do
-        Domain::Demo.list(soft_category: 'UV Speed')
-          .map(&:category_name).uniq.size.must_equal 2
+        _(
+          Domain::Demo.list(soft_category: 'UV Speed')
+                      .map(&:category_name).uniq.size
+        ).must_equal 2
       end
     end
   end
@@ -42,7 +44,7 @@ describe Domain::Demo do
     let(:demo) { demos(:bt01speed) }
 
     it 'returns a player' do
-      Domain::Demo.single(id: demo.id).must_equal demo
+      _(Domain::Demo.single(id: demo.id)).must_equal demo
     end
 
     describe 'when the player does not exist' do
@@ -54,7 +56,7 @@ describe Domain::Demo do
         let(:assert_presence) { true }
 
         it 'raises error' do
-          proc { single }.must_raise ActiveRecord::RecordNotFound
+          _(proc { single }).must_raise ActiveRecord::RecordNotFound
         end
       end
 
@@ -62,7 +64,7 @@ describe Domain::Demo do
         let(:assert_presence) { false }
 
         it 'returns nil' do
-          single.must_be_nil
+          _(single).must_be_nil
         end
       end
     end
@@ -102,7 +104,7 @@ describe Domain::Demo do
     end
 
     it 'returns demo count by year' do
-      Domain::Demo.demo_count_by_year.must_equal(2012 => 1234, 2013 => 3333)
+      _(Domain::Demo.demo_count_by_year).must_equal(2012 => 1234, 2013 => 3333)
     end
   end
 

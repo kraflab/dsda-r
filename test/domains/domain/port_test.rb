@@ -10,7 +10,7 @@ describe Domain::Port do
 
   describe '.list' do
     it 'returns a list of ports' do
-      Domain::Port.list.first.must_be_instance_of Port
+      _(Domain::Port.list.first).must_be_instance_of Port
     end
   end
 end

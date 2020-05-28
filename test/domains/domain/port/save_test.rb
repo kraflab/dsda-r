@@ -10,7 +10,7 @@ describe Domain::Port::Save do
 
   it 'removes excess namespace in family' do
     Domain::Port::Save.call(port)
-    port.family.must_equal 'family name'
+    _(port.family).must_equal 'family name'
   end
 
   it 'saves the port' do
@@ -21,6 +21,6 @@ describe Domain::Port::Save do
   it 'computes the file md5 hash' do
     Service::FileData::ComputeMd5.expects(:call).returns('1234')
     Domain::Port::Save.call(port)
-    port.md5.must_equal '1234'
+    _(port.md5).must_equal '1234'
   end
 end

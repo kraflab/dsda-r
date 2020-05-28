@@ -9,7 +9,7 @@ describe Domain::Player::Save do
 
   it 'removes excess space in name' do
     Domain::Player::Save.call(player)
-    player.name.must_equal 'first last'
+    _(player.name).must_equal 'first last'
   end
 
   it 'saves the player' do
@@ -19,8 +19,8 @@ describe Domain::Player::Save do
 
   it 'sets default social links' do
     Domain::Player::Save.call(player)
-    player.youtube.must_equal ''
-    player.twitch.must_equal ''
+    _(player.youtube).must_equal ''
+    _(player.twitch).must_equal ''
   end
 
   describe 'when changing the player name' do

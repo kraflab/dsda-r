@@ -13,8 +13,8 @@ describe Service::FileData::Read do
     let(:data) { '1234' }
 
     it 'reads the file data' do
-      read_data.read.must_equal Base64.decode64(data)
-      read_data.original_filename.must_equal 'zip.zip'
+      _(read_data.read).must_equal Base64.decode64(data)
+      _(read_data.original_filename).must_equal 'zip.zip'
     end
   end
 end

@@ -21,11 +21,11 @@ describe Domain::Wad::Rename do
 
   it 'renames the wad' do
     rename
-    wad.reload.short_name.must_equal new_name
+    _(wad.reload.short_name).must_equal new_name
   end
 
   it 'moves files' do
     rename
-    file.reload.data.url.include?(new_name).must_equal true
+    _(file.reload.data.url.include?(new_name)).must_equal true
   end
 end

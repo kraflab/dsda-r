@@ -13,7 +13,7 @@ describe Domain::Demo::FindMatches do
     end
 
     it 'returns an empty array' do
-      result.must_equal([])
+      _(result).must_equal([])
     end
   end
 
@@ -30,8 +30,8 @@ describe Domain::Demo::FindMatches do
     let(:demo) { demos(:bt01speed) }
 
     it 'finds matches' do
-      result.count.must_equal(1)
-      result.first.must_equal(demo)
+      _(result.count).must_equal(1)
+      _(result.first).must_equal(demo)
     end
   end
 
@@ -45,7 +45,7 @@ describe Domain::Demo::FindMatches do
     end
 
     it 'returns all matches' do
-      result.count.must_equal(3)
+      _(result.count).must_equal(3)
     end
 
     describe 'when restricting by flags' do
@@ -62,8 +62,8 @@ describe Domain::Demo::FindMatches do
       let(:demo) { demos(:bt01pacifist) }
 
       it 'finds the right match' do
-        result.count.must_equal(1)
-        result.first.must_equal(demo)
+        _(result.count).must_equal(1)
+        _(result.first).must_equal(demo)
       end
     end
   end

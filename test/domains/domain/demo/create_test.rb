@@ -58,7 +58,7 @@ describe Domain::Demo::Create do
     let(:file_id) { demo_files(:demo_zip).id }
 
     it 'associates the existing wad file' do
-      Domain::Demo::Create.call(params).demo_file_id.must_equal file_id
+      _(Domain::Demo::Create.call(params).demo_file_id).must_equal file_id
     end
   end
 end

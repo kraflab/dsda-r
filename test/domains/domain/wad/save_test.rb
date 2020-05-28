@@ -12,8 +12,8 @@ describe Domain::Wad::Save do
 
   it 'removes excess namespace' do
     Domain::Wad::Save.call(wad)
-    wad.author.must_equal 'jane doe'
-    wad.name.must_equal 'so good'
+    _(wad.author).must_equal 'jane doe'
+    _(wad.name).must_equal 'so good'
   end
 
   it 'saves the wad' do
@@ -24,6 +24,6 @@ describe Domain::Wad::Save do
   it 'computes the file md5 hash' do
     Service::FileData::ComputeMd5.expects(:call).returns('1234')
     Domain::Wad::Save.call(wad)
-    wad_file.md5.must_equal '1234'
+    _(wad_file.md5).must_equal '1234'
   end
 end
