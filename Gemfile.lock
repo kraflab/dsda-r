@@ -230,8 +230,7 @@ GEM
     sassc (2.0.1)
       ffi (~> 1.9)
       rake
-    secure_headers (3.9.0)
-      useragent
+    secure_headers (6.3.0)
     selenium-webdriver (3.6.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.0)
@@ -262,7 +261,6 @@ GEM
       thread_safe (~> 0.1)
     uglifier (3.2.0)
       execjs (>= 0.3.0, < 3)
-    useragent (0.16.10)
     web-console (3.5.1)
       actionview (>= 5.0)
       activemodel (>= 5.0)
@@ -309,7 +307,7 @@ DEPENDENCIES
   rails (~> 5.2.0)
   rails-jquery-autocomplete
   sass-rails (~> 5.0)
-  secure_headers (~> 3.9)
+  secure_headers (~> 6.0)
   selenium-webdriver
   spring
   spring-watcher-listen (~> 2.0.0)
