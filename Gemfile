@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails',        '~> 5.1.0'
+gem 'rails',        '~> 5.2.0'
 gem 'puma',         '~> 3.12'
 gem 'sass-rails',   '~> 5.0'
 gem 'uglifier',     '>= 1.3.0'
@@ -15,12 +15,13 @@ gem 'kaminari'
 gem 'bootstrap-sass',          '~> 3.4.1'
 gem 'bootstrap_form',          '2.5.3'
 gem 'thor',                    '0.19.1'
-gem 'secure_headers',          '~> 3.9'
+gem 'secure_headers',          '~> 6.0'
 gem 'chartkick', '~> 3.3'
 gem 'jquery-ui-rails'
 gem 'rails-jquery-autocomplete'
 gem 'js_cookie_rails'
 gem 'carrierwave', '~> 1.0'
+gem 'bootsnap'
 
 group :development, :test do
   gem 'sqlite3'
