@@ -6,7 +6,11 @@ module Domain
       def call(wad)
         remove_excess_whitespace!(wad)
         store_md5(wad)
-        wad.save!
+
+        ::Wad.transaction do
+          wad.save!
+          touch_demos(wad)
+        end
       end
 
       private
@@ -22,6 +26,11 @@ module Domain
         return unless wad.wad_file
 
         wad.wad_file.md5 = Service::FileData::ComputeMd5.call(wad.wad_file)
+      end
+
+      # Invalidate demo cache
+      def touch_demos(wad)
+        wad.demos.each { |i| i.touch }
       end
     end
   end
