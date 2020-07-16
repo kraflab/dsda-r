@@ -24,6 +24,18 @@ describe Domain::Wad do
     end
   end
 
+  describe '.update' do
+    let(:update) {
+      Domain::Wad.update(id: wad.id, author: 'kraflab')
+    }
+    let(:wad) { wads(:btsx) }
+
+    it 'delegates to the update object' do
+      Domain::Wad::Update.expects(:call)
+      update
+    end
+  end
+
   describe '.list' do
     it 'returns a list of wads' do
       _(Domain::Wad.list.first).must_be_instance_of Wad

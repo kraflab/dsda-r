@@ -44,6 +44,11 @@ module Domain
       )
     end
 
+    def update(id:, iwad: nil, **attributes)
+      attributes[:iwad] = Domain::Iwad.single(either_name: iwad) if iwad
+      Domain::Wad::Update.call(::Wad.find(id), attributes)
+    end
+
     private
 
     def number_regex_query(query)
