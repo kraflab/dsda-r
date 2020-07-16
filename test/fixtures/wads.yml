@@ -3,6 +3,7 @@ btsx:
   short_name: btsx
   author: Various
   iwad: doom2
+  wad_file: btsx_zip
 
 <% 40.times do |n| %>
 wad_<%= n %>:
