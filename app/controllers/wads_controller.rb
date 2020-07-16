@@ -1,8 +1,21 @@
 class WadsController < ApplicationController
   DEMO_RENDER_LIMIT = 1000
 
-  skip_before_action :verify_authenticity_token, only: [:api_create]
-  before_action :authenticate_admin!, only: [:api_create]
+  skip_before_action :verify_authenticity_token, only: [:api_create, :api_update]
+  before_action :authenticate_admin!, only: [:api_create, :api_update]
+
+  ALLOWED_UPDATE_PARAMS = [
+    :iwad,
+    :file,
+    :file_id,
+    :name,
+    :short_name,
+    :author,
+    :year,
+    :compatibility,
+    :is_commercial,
+    :single_map
+  ].freeze
 
   def index
     letter = params[:letter]
@@ -48,6 +61,16 @@ class WadsController < ApplicationController
 
     preprocess_api_request(require: [:wad])
     wad = Domain::Wad.create(@request_hash[:wad])
+    render json: WadSerializer.new(wad).call
+  end
+
+  def api_update
+    AdminAuthorizer.authorize!(@current_admin, :update)
+
+    preprocess_api_request(require: [:wad_update])
+    wad = Domain::Wad.single(short_name: params[:id], assert: true)
+    params = @request_hash[:wad_update].slice(*ALLOWED_UPDATE_PARAMS)
+    Domain::Wad.update(params.merge(id: wad.id))
     render json: WadSerializer.new(wad).call
   end
 

@@ -23,12 +23,13 @@ Rails.application.routes.draw do
   get 'feed'         => 'demos#feed'
   get 'demos/:id/hidden_tag' => 'demos#hidden_tag'
 
-  post 'api/demos/'   => "demos#api_create"
-  patch 'api/demos/'  => "demos#api_update"
-  post 'api/wads'     => "wads#api_create"
-  post 'api/players/' => "players#api_create"
-  post 'api/ports/'   => "ports#api_create"
-  post 'api/tokens/'  => "tokens#api_create"
+  post  'api/demos/'   => "demos#api_create"
+  patch 'api/demos/'   => "demos#api_update"
+  post  'api/wads'     => "wads#api_create"
+  patch 'api/wads/:id' => "wads#api_update"
+  post  'api/players/' => "players#api_create"
+  post  'api/ports/'   => "ports#api_create"
+  post  'api/tokens/'  => "tokens#api_create"
 
   get 'api/demos/records' => 'demos#record'
 
