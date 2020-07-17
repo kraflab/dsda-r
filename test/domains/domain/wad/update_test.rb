@@ -31,7 +31,7 @@ describe Domain::Wad::Update do
   end
 
   describe 'file updating' do
-    let(:wad) { wads(:btsx) }
+    let(:wad) { wads(:record_wad) }
     let(:new_attributes) do
       {
         file: {
