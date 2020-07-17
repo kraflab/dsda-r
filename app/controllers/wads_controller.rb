@@ -71,7 +71,7 @@ class WadsController < ApplicationController
     wad = Domain::Wad.single(short_name: params[:id], assert: true)
     params = @request_hash[:wad_update].slice(*ALLOWED_UPDATE_PARAMS)
     Domain::Wad.update(params.merge(id: wad.id))
-    render json: WadSerializer.new(wad).call
+    render json: WadSerializer.new(wad.reload).call
   end
 
   def record_timeline_json
