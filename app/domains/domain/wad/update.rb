@@ -44,11 +44,12 @@ module Domain
       end
 
       def cleanup_file
-        return unless changed?(:wad_file)
+        return unless changed?(:wad_file_id) && old_attributes[:wad_file_id]
 
-        return unless old_attributes[:wad_file]&.wads&.count == 0
+        old_wad_file = ::WadFile.find(old_attributes[:wad_file_id])
+        return unless old_wad_file.wads.count == 0
 
-        old_attributes[:wad_file].destroy!
+        old_wad_file.destroy!
       end
 
       def changed?(attribute)
