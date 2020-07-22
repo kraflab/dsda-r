@@ -13,6 +13,7 @@ class DemosCreateTest < ActionDispatch::IntegrationTest
         recorded_at: '2018-03-15 23:08:46 +0100',
         levelstat: '',
         engine: 'ZDoom v2.7',
+        secret_exit: false,
         version: 0,
         video_link: 'xyz',
         wad: @wad.short_name,

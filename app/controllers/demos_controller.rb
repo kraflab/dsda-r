@@ -20,7 +20,8 @@ class DemosController < ApplicationController
     :items,
     :secrets,
     :solo_net,
-    :tags
+    :tags,
+    :secret_exit
   ].freeze
 
   def feed

@@ -52,7 +52,7 @@ module Domain
       wad:, category:, time:, level:, tas: false, guys:, players:,
       tags: nil, compatible: true, version: 0, video_link: nil, levelstat: '',
       recorded_at: nil, engine: 'Unknown', file: nil, file_id: nil,
-      kills: nil, items: nil, secrets: nil, solo_net: false
+      kills: nil, items: nil, secrets: nil, solo_net: false, secret_exit: false
     )
       wad = Domain::Wad.single(either_name: wad)
       category = Domain::Category.single(name: category)
@@ -77,7 +77,8 @@ module Domain
         file_id: file_id,
         kills: kills,
         items: items,
-        secrets: secrets
+        secrets: secrets,
+        secret_exit: secret_exit
       )
     end
 
