@@ -3,8 +3,8 @@ require 'test_helper'
 describe Domain::Demo::Save do
   let(:demo) do
     Demo.new(
-      levelstat: '1,2', guys: 1, tas: false,
-      category: categories(:uvspeed), recorded_at: Time.now
+      levelstat: '1,2', guys: 1, tas: false, level: 'E1M3s',
+      category: categories(:uvmax), recorded_at: Time.now
     )
   end
   let(:demo_file) { Struct.new(:md5).new(nil) }
@@ -38,6 +38,11 @@ describe Domain::Demo::Save do
   it 'formats levelstat' do
     Domain::Demo::Save.call(demo)
     _(demo.levelstat).must_equal "1\n2"
+  end
+
+  it 'formats level' do
+    Domain::Demo::Save.call(demo)
+    _(demo.level).must_equal "E1M3"
   end
 
   it 'updates record fields' do

@@ -40,3 +40,9 @@
     name: Other
     description: Other
     game: Doom
+
+- uvmax:
+    id: 8
+    name: UV Max
+    description: UV Max
+    game: Doom

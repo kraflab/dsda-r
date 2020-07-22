@@ -7,6 +7,7 @@ module Domain
         previous_record = standard_record(demo)
         linked_record = standard_linked_record(demo)
         format_levelstat(demo)
+        format_level(demo)
         assign_year(demo)
         assign_suspect(demo)
         store_md5(demo)
@@ -32,6 +33,12 @@ module Domain
 
       def format_levelstat(demo)
         demo.levelstat.gsub!(/,/, "\n")
+      end
+
+      def format_level(demo)
+        return if Domain::Category.multiple_exits?(name: demo.category_name)
+
+        demo.level.gsub!(/s\z/i, "")
       end
 
       def store_md5(demo)
