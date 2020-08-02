@@ -20,6 +20,25 @@ describe Domain::Player::Update do
     Domain::Player::Update.call(player, attributes)
   end
 
+  describe 'updating username' do
+    let(:attributes) { { username: 'elim2' } }
+
+    it 'adds an alias for the old name' do
+      assert_difference "PlayerAlias.where(name: 'elim').count", +1 do
+        Domain::Player::Update.call(player, attributes)
+      end
+    end
+  end
+
+  describe 'adding an alias' do
+    let(:attributes) { { alias: 'elimzke' } }
+
+    it 'adds the alias' do
+      Domain::Player::Update.call(player, attributes)
+      _(PlayerAlias.where(name: 'elimzke').count).must_equal 1
+    end
+  end
+
   describe 'when the player is a cheater' do
     let(:attributes) { { cheater: true } }
 

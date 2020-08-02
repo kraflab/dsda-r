@@ -8,13 +8,15 @@ module Domain
       def initialize(player, attributes)
         @player = player
         @old_attributes = player.attributes.with_indifferent_access
-        @attributes = attributes
+        @attributes = attributes.except(:alias)
+        @new_alias = attributes[:alias]
       end
 
       def call
         player.assign_attributes(attributes)
 
         ::Player.transaction do
+          update_aliases
           mark_suspect_demos
           Player::Save.call(player)
         end
@@ -22,7 +24,7 @@ module Domain
 
       private
 
-      attr_reader :player, :old_attributes, :attributes
+      attr_reader :player, :old_attributes, :attributes, :new_alias
 
       def mark_suspect_demos
         return unless changed?(:cheater) && attributes[:cheater]
@@ -31,6 +33,20 @@ module Domain
           next if demo.tas?
 
           Domain::Demo::Update.call(demo, suspect: true)
+        end
+      end
+
+      def update_aliases
+        if new_alias
+          ::PlayerAlias.create(name: new_alias, player_id: player.id)
+        end
+
+        if changed?(:username)
+          ::PlayerAlias.create(name: old_attributes[:username], player_id: player.id)
+        end
+
+        if changed?(:name)
+          ::PlayerAlias.create(name: old_attributes[:name], player_id: player.id)
         end
       end
 
