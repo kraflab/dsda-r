@@ -30,6 +30,10 @@ module Domain
       )
     end
 
+    def update(id:, **attributes)
+      Domain::Player::Update.call(::Player.find_by!(username: id), attributes)
+    end
+
     def refresh_record_index(player: nil, players: nil)
       players = [player] if player.present?
       players = list if players == :all

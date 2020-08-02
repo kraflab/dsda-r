@@ -22,6 +22,18 @@ describe Domain::Player do
     end
   end
 
+  describe '.update' do
+    let(:update) {
+      Domain::Player.update(id: player.username, username: 'elim2')
+    }
+    let(:player) { players(:elim) }
+
+    it 'delegates to the update object' do
+      Domain::Player::Update.expects(:call)
+      update
+    end
+  end
+
   describe '.single' do
     let(:player) { players(:elim) }
 
