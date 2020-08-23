@@ -39,6 +39,7 @@ module Domain
       end
 
       def register_aliases
+        ::PlayerAlias.where(player_id: from.id).update_all(player_id: into.id)
         ::PlayerAlias.create(name: from.name, player_id: into.id)
         ::PlayerAlias.create(name: from.username, player_id: into.id)
       end

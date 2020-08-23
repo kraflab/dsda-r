@@ -28,10 +28,19 @@ describe Domain::Player::Merge do
     assert_nil Player.find_by(id: from_id)
   end
 
-  it 'creates aliases' do
-    Domain::Player::Merge.call(from: from, into: into)
-    _(
-      PlayerAlias.find_by(name: from.name, player_id: into.id)
-    ).must_be_instance_of PlayerAlias
+  describe 'aliases' do
+    before do
+      PlayerAlias.create(player_id: from.id, name: 'fake_alias')
+    end
+
+    it 'creates aliases' do
+      Domain::Player::Merge.call(from: from, into: into)
+      _(
+        PlayerAlias.find_by(name: from.name, player_id: into.id)
+      ).must_be_instance_of PlayerAlias
+      _(
+        PlayerAlias.find_by(name: 'fake_alias', player_id: into.id)
+      ).must_be_instance_of PlayerAlias
+    end
   end
 end
