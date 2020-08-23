@@ -31,6 +31,10 @@ module Errors
         render json: { errors: 'No matches found! Cannot update.' },
           status: 404
       end
+
+      base.rescue_from ActiveRecord::RecordNotFound do |e|
+        render json: { errors: 'Not Found' }, status: 404
+      end
     end
   end
 end
