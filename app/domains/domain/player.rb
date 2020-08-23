@@ -34,6 +34,12 @@ module Domain
       Domain::Player::Update.call(::Player.find_by!(username: id), attributes)
     end
 
+    def merge(from:, into:)
+      from = ::Player.find_by!(username: from)
+      into = ::Player.find_by!(username: into)
+      Domain::Player::Merge.call(from: from, into: into)
+    end
+
     def refresh_record_index(player: nil, players: nil)
       players = [player] if player.present?
       players = list if players == :all

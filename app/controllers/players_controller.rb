@@ -1,7 +1,7 @@
 class PlayersController < ApplicationController
   autocomplete :player, :username
-  skip_before_action :verify_authenticity_token, only: [:api_create, :api_update]
-  before_action :authenticate_admin!, only: [:api_create, :api_update]
+  skip_before_action :verify_authenticity_token, only: [:api_create, :api_update, :api_merge]
+  before_action :authenticate_admin!, only: [:api_create, :api_update, :api_merge]
 
   ALLOWED_UPDATE_PARAMS = [
     :name,
@@ -68,5 +68,14 @@ class PlayersController < ApplicationController
     params = @request_hash[:player_update].slice(*ALLOWED_UPDATE_PARAMS)
     Domain::Player.update(params.merge(id: player.username))
     render json: PlayerSerializer.new(player.reload).call
+  end
+
+  def api_merge
+    AdminAuthorizer.authorize!(@current_admin, :update)
+
+    preprocess_api_request(require: [:merge_players])
+    params = @request_hash[:merge_players]
+    Domain::Player.merge(from: params[:from], into: params[:into])
+    render json: { merged: true }
   end
 end
