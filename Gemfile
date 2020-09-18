@@ -9,6 +9,7 @@ gem 'jquery-rails'
 gem 'jbuilder',     '~> 2.5'
 gem 'jwt'
 gem 'bcrypt',       '~> 3.1.7'
+gem 'rotp'
 
 gem 'faker',                   '1.7.2'
 gem 'kaminari'
