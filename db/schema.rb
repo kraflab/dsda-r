@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_22_172457) do
+ActiveRecord::Schema.define(version: 2020_09_18_154420) do
 
   create_table "admins", force: :cascade do |t|
     t.string "username"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 2020_07_22_172457) do
     t.boolean "can_create", default: false
     t.boolean "can_delete", default: false
     t.boolean "can_update", default: false
+    t.string "otp"
+    t.integer "last_otp_at", default: 0
     t.index ["username"], name: "index_admins_on_username", unique: true
   end
 
