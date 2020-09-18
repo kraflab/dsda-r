@@ -29,6 +29,4 @@ module OtpHandler
   def crypt
     @crypt ||= ActiveSupport::MessageEncryptor.new(SECRET_KEY[0..31])
   end
-
-  attr_reader :user
 end
