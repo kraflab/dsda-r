@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   post  'api/merge_players' => "players#api_merge"
   post  'api/ports/'        => "ports#api_create"
   post  'api/tokens/'       => "tokens#api_create"
+  post  'api/otp/'          => "otp#reset"
 
   get 'api/demos/records' => 'demos#record'
 
