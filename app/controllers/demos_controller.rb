@@ -1,5 +1,5 @@
 class DemosController < ApplicationController
-  skip_before_action :verify_authenticity_token, only: [:api_create, :api_update]
+  skip_before_action :verify_authenticity_token, only: [:api_create, :api_update, :api_delete]
   before_action :authenticate_admin!, only: [:api_create, :api_update, :api_delete]
   before_action :verify_otp!, only: :api_delete
 
