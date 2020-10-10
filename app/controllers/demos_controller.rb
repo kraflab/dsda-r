@@ -1,6 +1,7 @@
 class DemosController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:api_create, :api_update]
-  before_action :authenticate_admin!, only: [:api_create, :api_update]
+  before_action :authenticate_admin!, only: [:api_create, :api_update, :api_delete]
+  before_action :verify_otp!, only: :api_delete
 
   ALLOWED_UPDATE_PARAMS = [
     :time,
@@ -53,6 +54,14 @@ class DemosController < ApplicationController
     render json: DemoSerializer.new(demo).call
   end
 
+  def api_delete
+    AdminAuthorizer.authorize!(@current_admin, :delete)
+
+    preprocess_api_request(require: [:demo_delete])
+    Domain::Demo.delete(id: find_by_details.id)
+    render json: { success: true }, status: :ok
+  end
+
   def record
     wad = Domain::Wad.single(short_name: params[:wad])
     demo = wad.present? && Domain::Demo.standard_record(
@@ -79,7 +88,7 @@ class DemosController < ApplicationController
   end
 
   def match_details
-    @request_hash[:demo_update][:match_details]
+    (@request_hash[:demo_update] || @request_hash[:demo_delete])[:match_details]
   end
 
   def find_by_id

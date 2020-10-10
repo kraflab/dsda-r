@@ -25,6 +25,7 @@ Rails.application.routes.draw do
 
   post  'api/demos/'        => "demos#api_create"
   patch 'api/demos/'        => "demos#api_update"
+  delete 'api/demos/'       => "demos#api_delete"
   post  'api/wads'          => "wads#api_create"
   patch 'api/wads/:id'      => "wads#api_update"
   post  'api/players/'      => "players#api_create"

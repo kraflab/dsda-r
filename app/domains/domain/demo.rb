@@ -89,6 +89,10 @@ module Domain
       Domain::Demo::Update.call(::Demo.find(id), attributes)
     end
 
+    def delete(id:)
+      Domain::Demo::Delete.call(::Demo.find(id))
+    end
+
     def demo_count_by_year
       Hash[::DemoYear.all.map { |dy| [dy.year, dy.count]}]
     end

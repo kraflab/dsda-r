@@ -50,7 +50,7 @@ class ActiveSupport::TestCase
     Service::Tics::ToString.call(thing.demos.sum(:tics), with_cs: with_cs)
   end
 
-  def setup_auth_headers
+  def setup_auth_headers(with_otp: false)
     @headers = {
       'Authorization' => "Bearer #{JsonWebToken.encode(@admin)}"
     }
@@ -58,16 +58,25 @@ class ActiveSupport::TestCase
       'Authorization' => "Bearer bad-jwt"
     }
 
+    @headers['OTP'] = otp_for(@admin) if with_otp
+
     return unless @unauthorized_admin
+
     @unauthorized_headers = {
       'Authorization' => "Bearer #{JsonWebToken.encode(@unauthorized_admin)}"
     }
+
+    @unauthorized_headers['OTP'] = otp_for(@unauthorized_admin) if with_otp
   end
 
   private
 
-    # Returns true inside an integration test.
-    def integration_test?
-      defined?(post_via_redirect)
-    end
+  def integration_test?
+    defined?(post_via_redirect)
+  end
+
+  def otp_for(object)
+    raw_otp = OtpHandler.reset_otp!(object)
+    ROTP::TOTP.new(raw_otp).now
+  end
 end

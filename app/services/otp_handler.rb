@@ -8,7 +8,7 @@ module OtpHandler
   def reset_otp!(object)
     raw_otp = ROTP::Base32.random
     stored_otp = crypt.encrypt_and_sign(raw_otp)
-    object.update!(otp: stored_otp, last_otp_at: Time.now.to_i)
+    object.update!(otp: stored_otp, last_otp_at: 0)
     raw_otp
   end
 
