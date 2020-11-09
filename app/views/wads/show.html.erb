@@ -2,7 +2,8 @@
 <% provide(:description, "List of #{@wad.name} speedrun demos") %>
 
 <div class="center-text">
-  <% cache ['wad_header_v010', @wad] do %>
+  <% cache ['wad_header_v011', @wad] do %>
+    <%= wad_version_banner(@wad) %>
     <%= wad_header(@wad) %>
     <%= wad_sub_header(@wad) %>
   <% end %>

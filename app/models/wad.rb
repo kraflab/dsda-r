@@ -1,6 +1,7 @@
 class Wad < ApplicationRecord
   belongs_to :iwad, touch: true
   belongs_to :wad_file, autosave: true, optional: true
+  belongs_to :parent, optional: true, class_name: 'Wad'
   has_many :demos, dependent: :destroy
   has_many :demo_files
   default_scope -> { order(:short_name) }

@@ -79,6 +79,18 @@ module WadsHelper
     end
   end
 
+  def wad_version_banner(wad)
+    return unless wad.parent
+
+    content_tag :div, class: 'alert alert-danger' do
+      [
+        'This wad has a more recent ',
+        link_to('version', wad_path(wad.parent), class: 'alert-link'),
+        '.'
+      ].join.html_safe
+    end
+  end
+
   def wad_header(wad)
     content_tag :h1 do
       [
