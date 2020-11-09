@@ -14,6 +14,7 @@ class WadsCreateTest < ActionDispatch::IntegrationTest
         is_commercial: false,
         single_map: false,
         iwad: @iwad.name,
+        parent: wads(:wad_1).short_name,
         file: {
           data: '1234',
           name: 'test_wad.zip'
@@ -28,6 +29,7 @@ class WadsCreateTest < ActionDispatch::IntegrationTest
     post '/api/wads/', params: @params, as: :json, headers: @headers
     created_wad = Wad.find_by(name: 'test_wad')
     assert created_wad.present?
+    assert_equal created_wad.parent, wads(:wad_1)
     response_hash = JSON.parse(response.body)
     assert response_hash['save']
     assert_equal response_hash['id'], created_wad.id

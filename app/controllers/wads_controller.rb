@@ -14,7 +14,8 @@ class WadsController < ApplicationController
     :year,
     :compatibility,
     :is_commercial,
-    :single_map
+    :single_map,
+    :parent
   ].freeze
 
   def index

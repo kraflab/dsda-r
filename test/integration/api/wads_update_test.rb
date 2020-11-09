@@ -7,7 +7,8 @@ class WadsUpdateTest < ActionDispatch::IntegrationTest
     @unauthorized_admin = admins(:bob)
     @params = {
       wad_update: {
-        author: 'fred'
+        author: 'fred',
+        parent: wads(:wad_1).short_name
       }
     }
     @wrong_params = { wad_update: @params[:wad_update].merge(iwad: 'foo') }
@@ -18,6 +19,7 @@ class WadsUpdateTest < ActionDispatch::IntegrationTest
     patch '/api/wads/btsx', params: @params, as: :json, headers: @headers
     @wad.reload
     assert_equal @wad.author, 'fred'
+    assert_equal @wad.parent, wads(:wad_1)
     response_hash = JSON.parse(response.body)
     assert response_hash['save']
     assert_equal response_hash['id'], @wad.id

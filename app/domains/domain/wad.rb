@@ -27,9 +27,10 @@ module Domain
     def create(
       iwad:, name:, short_name:, author:,
       year: nil, compatibility: nil, is_commercial: nil, single_map: false,
-      file: nil, file_id: nil
+      file: nil, file_id: nil, parent: nil
     )
       iwad = Domain::Iwad.single(either_name: iwad)
+      parent = Domain::Wad.single(either_name: parent) if parent
       Domain::Wad::Create.call(
         iwad: iwad,
         name: name,
@@ -40,12 +41,14 @@ module Domain
         is_commercial: is_commercial,
         single_map: single_map,
         file: file,
-        file_id: file_id
+        file_id: file_id,
+        parent: parent
       )
     end
 
-    def update(id:, iwad: nil, **attributes)
+    def update(id:, iwad: nil, parent: nil, **attributes)
       attributes[:iwad] = Domain::Iwad.single(either_name: iwad) if iwad
+      attributes[:parent] = Domain::Wad.single(either_name: parent) if parent
       Domain::Wad::Update.call(::Wad.find(id), attributes)
     end
 
