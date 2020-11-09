@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_18_154420) do
+ActiveRecord::Schema.define(version: 2020_11_09_202134) do
 
   create_table "admins", force: :cascade do |t|
     t.string "username"
@@ -187,7 +187,9 @@ ActiveRecord::Schema.define(version: 2020_09_18_154420) do
     t.datetime "updated_at", null: false
     t.boolean "single_map", default: false
     t.integer "wad_file_id"
+    t.integer "parent_id"
     t.index ["iwad_id", "short_name"], name: "index_wads_on_iwad_id_and_short_name"
+    t.index ["parent_id"], name: "index_wads_on_parent_id"
     t.index ["short_name"], name: "index_wads_on_short_name", unique: true
     t.index ["wad_file_id"], name: "index_wads_on_wad_file_id"
   end
