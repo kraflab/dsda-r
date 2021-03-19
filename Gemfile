@@ -21,7 +21,7 @@ gem 'chartkick', '~> 3.4'
 gem 'jquery-ui-rails'
 gem 'rails-jquery-autocomplete'
 gem 'js_cookie_rails'
-gem 'carrierwave', '~> 1.0'
+gem 'carrierwave', '~> 1.3'
 gem 'bootsnap'
 
 group :development, :test do
