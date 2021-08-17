@@ -1,13 +1,13 @@
-<% provide(:title, 'Guides | PRBoom+') %>
-<% provide(:description, 'Guide for speedrunning Doom using PRBoom+') %>
+<% provide(:title, 'Guides | DSDA-Doom') %>
+<% provide(:description, 'Guide for speedrunning Doom using DSDA-Doom') %>
 
-<h2>PRBoom+</h2>
+<h2>DSDA-Doom</h2>
 
-<p>Latest release: <a href="https://www.dsdarchive.com/files/ports/55/prboom-plus-2.5.1.5.r4526-win32.zip">here</a>.</p>
+<p>Latest release: <a href="https://www.doomworld.com/forum/topic/118074/">here</a>.</p>
 
 <h3>Compatibility</h3>
 
-<p>PRBoom+ is compatible with the vast majority of wads that see competition. In order to achieve this, the port is capable of switching it's compatibility mode (dubbed <code>complevel</code>) at launch via the <code>-complevel x</code> command line option. Each value of x will set the game logic to mimic that of a given environment. Additionally, the port is <strong>limit-removing</strong>. The original executable for doom had various limits in place due to the restrictions of that era, but these limits are removed in the port. This means we can run wads in prboom+ that would break in the original game, but with otherwise identical game logic. For recording demos (and testing as well), the following complevels are most relevant:</p>
+<p>DSDA-Doom is compatible with the vast majority of wads that see competition. In order to achieve this, the port is capable of switching it's compatibility mode (dubbed <code>complevel</code>) at launch via the <code>-complevel x</code> command line option. Each value of x will set the game logic to mimic that of a given environment. Additionally, the port is <strong>limit-removing</strong>. The original executable for doom had various limits in place due to the restrictions of that era, but these limits are removed in the port. This means we can run wads in DSDA-Doom that would break in the original game, but with otherwise identical game logic. For recording demos (and testing as well), the following complevels are most relevant:</p>
 
 <ul>
 <li><strong>2</strong> - Doom II</li>
@@ -49,10 +49,10 @@
 
 <h3>Recording</h3>
 
-<p>In order to record a demo, you'll want to launch prboom+ along with the relevant command line options described above. This can be done on the actual command line, or via a batch file (.bat). Here is an example command:</p>
+<p>In order to record a demo, you'll want to launch DSDA-Doom along with the relevant command line options described above. This can be done on the actual command line, or via a batch file (.bat). Here is an example command:</p>
 
 <blockquote>
-  <p>prboom-plus.exe -iwad /path/to/doom.wad -skill 4 -warp 1 1 -complevel 3 -levelstat -record my_demo</p>
+  <p>dsda-doom.exe -iwad /path/to/doom.wad -skill 4 -warp 1 1 -complevel 3 -levelstat -record my_demo</p>
 </blockquote>
 
 <h3>FAQ</h3>

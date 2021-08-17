@@ -1,4 +1,4 @@
 class GuidesController < ApplicationController
-  def prboom_plus
+  def dsda_doom
   end
 end

@@ -10,7 +10,8 @@ Rails.application.routes.draw do
   get 'advice' => 'static_pages#advice'
 
   get 'guides/crispy_doom' => 'guides#crispy_doom'
-  get 'guides/prboom_plus' => 'guides#prboom_plus'
+  get 'guides/prboom_plus' => 'guides#dsda_doom'
+  get 'guides/dsda_doom' => 'guides#dsda_doom'
 
   get    'settings' => 'sessions#settings'
   patch  'settings' => 'sessions#set'
