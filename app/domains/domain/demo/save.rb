@@ -14,6 +14,7 @@ module Domain
         ::Demo.transaction do
           demo.save!
           update_record_fields(demo, old_run)
+          demo.reload # changes from record field updates
           refresh_record_index(previous_record, linked_record, demo)
           touch_players(demo)
         end

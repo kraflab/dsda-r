@@ -21,6 +21,7 @@ describe Domain::Demo::Save do
     demo.stubs(:demo_file).returns(demo_file)
     demo.stubs(:save!)
     demo.stubs(:tic_record?).returns(tic_record)
+    demo.stubs(:reload).returns(demo)
     player.stubs(:touch)
     player.stubs(cheater?: cheater)
     previous_record.stubs(:players).returns(previous_players)
