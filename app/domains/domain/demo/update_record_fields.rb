@@ -29,15 +29,7 @@ module Domain
 
       # Only reset for the specific category
       def reset_demos
-        # If something changed here, it won't show up in demos_for_category
-        if demo.is_a?(Demo) && !demo.standard?
-          demo.update(
-            record_index: 0,
-            tic_record: false,
-            second_record: false,
-            undisputed_record: false
-          )
-        end
+        reset_demo
 
         demos_for_category.where(
           "record_index > 0 OR tic_record = 't' OR second_record = 't' OR undisputed_record = 't'"
@@ -48,6 +40,18 @@ module Domain
           undisputed_record: false,
           updated_at: Time.now
         )
+      end
+
+      def reset_demo
+        # If something changed here, it won't show up in demos_for_category
+        if demo.is_a?(Demo) && !demo.standard?
+          demo.update(
+            record_index: 0,
+            tic_record: false,
+            second_record: false,
+            undisputed_record: false
+          )
+        end
       end
 
       def update_record_flags
