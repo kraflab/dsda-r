@@ -44,7 +44,7 @@ module Domain
 
       def reset_demo
         # If something changed here, it won't show up in demos_for_category
-        if demo.is_a?(Demo) && !demo.standard?
+        if demo.respond_to?(:standard?) && !demo.standard?
           demo.update(
             record_index: 0,
             tic_record: false,
