@@ -101,7 +101,7 @@ class Demo < ApplicationRecord
   end
 
   def standard?
-    guys == 1 && !tas? && !solo_net?
+    guys == 1 && !tas? && !solo_net? && !cheated && !suspect
   end
 
   private
