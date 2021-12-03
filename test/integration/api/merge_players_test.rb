@@ -19,7 +19,7 @@ class MergePlayersTest < ActionDispatch::IntegrationTest
 
   test 'authenticated player merge' do
     post '/api/merge_players', params: @params, as: :json, headers: @headers
-    assert_equal Player.find_by(username: @from.username), nil
+    assert_nil Player.find_by(username: @from.username)
     assert_equal @demo_count, @into.reload.demos.count
     response_hash = JSON.parse(response.body)
     assert response_hash['merged']
