@@ -18,6 +18,7 @@ class DemosRecordTest < ActionDispatch::IntegrationTest
     response_hash = JSON.parse(response.body)
     assert_equal response_hash['time'], @demo.time
     assert_equal response_hash['level'], @demo.level
+    assert_equal response_hash['notes'].sort, ['Also reality', 'Intended route']
   end
 
   test 'missing record' do

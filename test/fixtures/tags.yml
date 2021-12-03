@@ -1,3 +1,11 @@
 bt01speed_intended:
   demo: bt01speed
   sub_category: intended
+
+bt01pacifist_solo_intended:
+  demo: bt01pacifist_solo
+  sub_category: intended
+
+bt01pacifist_solo_reality:
+  demo: bt01pacifist_solo
+  sub_category: reality

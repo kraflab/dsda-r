@@ -34,6 +34,7 @@ class RecordSerializer
       wad: wad.short_name,
       engine: demo.engine,
       date: demo.recorded_at,
+      notes: demo.sub_categories.collect { |s| s.name },
       file: base_url + demo.file_path
     }
   end
