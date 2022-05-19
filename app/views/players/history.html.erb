@@ -7,7 +7,7 @@
     <%= player_history_sub_header(@player) %>
   <% end %>
 
-  <% cache ['player_demo_table_v001', @demos] do %>
+  <% cache ['player_demo_table_v002', @demos] do %>
     <div class="panel panel-default panel-modest left-text">
       <table class="table table-striped table-modest">
         <thead>
@@ -31,10 +31,8 @@
               <td rowspan=3><%= demo.level %></td>
               <td rowspan=3><%= demo.category.name %></td>
               <%= render demo %>
-              <% cache demo do %>
-                <tr></tr>
-                <%= demo_tags(demo) %>
-              <% end %>
+              <tr></tr>
+              <%= demo_tags(demo) %>
             </tr>
           <% end %>
         </tbody>

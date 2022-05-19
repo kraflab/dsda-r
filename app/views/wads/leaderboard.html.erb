@@ -10,7 +10,7 @@
     <%= @level %> <%= @category %> Leaderboard
   </h3>
   <br>
-  <% cache ['wad_leaderboard_v003', @demos, @category, @level] do %>
+  <% cache ['wad_leaderboard_v004', @demos, @category, @level] do %>
     <div class="panel panel-default panel-modest left-text">
       <table class="table table-striped table-modest">
         <thead>
@@ -31,10 +31,8 @@
               <%= render demo %>
               <td><%= safe_date(demo.recorded_at) %></td>
             </tr>
-            <% cache demo do %>
-              <tr></tr>
-              <%= demo_tags(demo, colspan: '6') %>
-            <% end %>
+            <tr></tr>
+            <%= demo_tags(demo, colspan: '6') %>
           <% end %>
         </tbody>
       </table>

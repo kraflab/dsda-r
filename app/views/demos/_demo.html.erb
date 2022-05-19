@@ -1,7 +1,5 @@
-<% cache ['demo_partial_v002', demo] do %>
-  <td class="player-cell"><%= demo.players_text %></td>
-  <td class="engine-cell"><%= demo.engine %></td>
-  <%= demo_note_cell(demo) %>
-  <%= demo_time_cell(demo) %>
-  <%= demo_video_link(demo) %>
-<% end %>
+<td class="player-cell"><%= demo.players_text %></td>
+<td class="engine-cell"><%= demo.engine %></td>
+<%= demo_note_cell(demo) %>
+<%= demo_time_cell(demo) %>
+<%= demo_video_link(demo) %>

@@ -7,7 +7,7 @@
     <%= player_sub_header(@player) %>
   <% end %>
 
-  <% cache ['player_demo_table_v001', @demos] do %>
+  <% cache ['player_demo_table_v002', @demos] do %>
     <div class="panel panel-default panel-modest left-text">
       <table class="table table-striped table-modest">
         <thead>
@@ -33,10 +33,8 @@
                     <%= demo_category_cell_lite(demo, chunk_c[1]) %>
                     <%= render demo %>
                   </tr>
-                  <% cache demo do %>
-                    <tr></tr>
-                    <%= demo_tags(demo) %>
-                  <% end %>
+                  <tr></tr>
+                  <%= demo_tags(demo) %>
                 <% end %>
               <% end %>
             <% end %>
