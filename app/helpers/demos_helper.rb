@@ -91,7 +91,7 @@ module DemosHelper
     unless demo.has_tics
       time_text += '   '
     end
-    content_tag :td, class: 'right-text demo-time' do
+    content_tag :td, class: 'right-text demo-time', id: "demo-#{demo.id}" do
       link_to(time_text, demo.file_path, title: demo.levelstat)
     end
   end
