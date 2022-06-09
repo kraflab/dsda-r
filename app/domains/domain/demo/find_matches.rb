@@ -18,6 +18,7 @@ module Domain
         query_tas
         query_solo_net
         query_coop
+        query_id
 
         query
       end
@@ -62,6 +63,12 @@ module Domain
         return if details[:coop].nil?
 
         @query = query.where('guys > 1')
+      end
+
+      def query_id
+        return if details[:id].nil?
+
+        @query = query.where(id: details[:id])
       end
 
       def wad_id
