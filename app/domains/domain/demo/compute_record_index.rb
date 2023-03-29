@@ -4,6 +4,8 @@ module Domain
       extend self
 
       def call(demo)
+        return 0 if !demo.standard?
+
         categories = Domain::Category.list(soft_category: demo.category.name)
         return unless best?(demo, categories)
         record_index(demo, categories)
@@ -19,7 +21,7 @@ module Domain
       def related_demos(demo, categories)
         Demo.list(
           wad_id: demo.wad_id, level: demo.level, categories: categories,
-          tas: demo.tas, guys: demo.guys, solo_net: demo.solo_net,
+          standard: true,
           order_by_tics: true
         )
       end
