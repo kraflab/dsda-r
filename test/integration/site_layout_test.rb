@@ -15,7 +15,6 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", wads_url
     assert_select "a[href=?]", ports_url
     assert_select "a[href=?]", stats_url
-    assert_select "a[href=?]", settings_url
     assert_select "a[href=?]", about_url
     assert_select "a[href=?]", "https://www.doomworld.com/forum/37-doom-speed-demos/"
     assert_match Wad.find(active_wads(90).first[0]).name, response.body

@@ -13,9 +13,6 @@ Rails.application.routes.draw do
   get 'guides/prboom_plus' => 'guides#dsda_doom'
   get 'guides/dsda_doom' => 'guides#dsda_doom'
 
-  get    'settings' => 'sessions#settings'
-  patch  'settings' => 'sessions#set'
-
   get 'record_timeline'      => 'wads#record_timeline'
   get 'record_timeline_json' => 'wads#record_timeline_json'
   get 'compare_movies'      => 'wads#compare_movies'
