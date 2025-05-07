@@ -23,17 +23,16 @@ gem 'rails-jquery-autocomplete'
 gem 'js_cookie_rails'
 gem 'carrierwave', '~> 1.3'
 gem 'bootsnap'
+gem 'nokogiri', '~> 1.12.0'
 
 group :development, :test do
-  gem 'sqlite3'
+  gem 'sqlite3', '~> 1.3.7'
   gem 'byebug', platform: :mri
-  gem 'sqlite3_ar_regexp', '~> 2.2'
   gem 'pry'
 end
 
 group :test do
   gem 'capybara'
-  gem 'capybara-webkit', '~> 1.14.0'
   gem 'selenium-webdriver'
   gem 'minitest-reporters'
   gem 'mini_backtrace'
