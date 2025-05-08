@@ -16,11 +16,11 @@ describe Domain::Player::Create do
 
   it 'generates a username' do
     Player.expects(:new).with(params.merge(username: 'adam_williamson'))
-    Domain::Player::Create.call(params)
+    Domain::Player::Create.call(**params)
   end
 
   it 'saves the player' do
     Domain::Player::Save.expects(:call).returns(true)
-    Domain::Player::Create.call(params)
+    Domain::Player::Create.call(**params)
   end
 end

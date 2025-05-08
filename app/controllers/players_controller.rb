@@ -56,7 +56,7 @@ class PlayersController < ApplicationController
     AdminAuthorizer.authorize!(@current_admin, :create)
 
     preprocess_api_request(require: [:player])
-    player = Domain::Player.create(@request_hash[:player])
+    player = Domain::Player.create(**@request_hash[:player])
     render json: PlayerSerializer.new(player).call
   end
 
@@ -66,7 +66,7 @@ class PlayersController < ApplicationController
     preprocess_api_request(require: [:player_update])
     player = Domain::Player.single(username: params[:id], assert: true)
     params = @request_hash[:player_update].slice(*ALLOWED_UPDATE_PARAMS)
-    Domain::Player.update(params.merge(id: player.username))
+    Domain::Player.update(**params.merge(id: player.username))
     render json: PlayerSerializer.new(player.reload).call
   end
 

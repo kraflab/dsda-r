@@ -9,7 +9,7 @@ describe Domain::Demo::CreateTags do
   }
   let(:demo) { demos(:bt01speed) }
   let(:sub_category) { sub_categories(:reality) }
-  let(:create_tags) { Domain::Demo::CreateTags.call(params) }
+  let(:create_tags) { Domain::Demo::CreateTags.call(**params) }
 
   it 'creates a tag' do
     Tag.expects(:create!).with(demo: demo, sub_category: sub_category)

@@ -7,7 +7,7 @@ describe Domain::Demo::FindStandardRecord do
   it 'finds the standard record' do
     _(
       Domain::Demo::FindStandardRecord
-        .call(wad.id, 'Map 01', category: 'UV Speed')
+        .call(wad_id: wad.id, level: 'Map 01', category_options: 'UV Speed')
     ).must_equal(demo)
   end
 end

@@ -4,7 +4,7 @@ module Domain
       extend self
 
       def call(
-        wad_id, level,
+        wad_id:, level:,
         category: nil, category_id: nil, very_soft: nil, only: nil
       )
         categories = Domain::Category.list(
