@@ -1,32 +1,33 @@
 source 'https://rubygems.org'
 
-gem 'rails',        '~> 5.2.6'
+gem 'rails',        '~> 6.0.6.1'
 gem 'puma',         '~> 4.3'
 gem 'sass-rails',   '~> 5.0'
 gem 'uglifier',     '>= 1.3.0'
-gem 'coffee-rails', '~> 4.2'
+gem 'coffee-rails', '~> 5.0'
 gem 'jquery-rails'
 gem 'jbuilder',     '~> 2.5'
 gem 'jwt'
 gem 'bcrypt',       '~> 3.1.7'
 gem 'rotp'
 
-gem 'faker',                   '1.7.2'
+gem 'faker',                   '~> 2.19'
 gem 'kaminari'
 gem 'bootstrap-sass',          '~> 3.4.1'
 gem 'bootstrap_form',          '2.5.3'
-gem 'thor',                    '0.19.1'
+gem 'thor',                    '0.20.3'
 gem 'secure_headers',          '~> 6.0'
 gem 'chartkick', '~> 3.4'
 gem 'jquery-ui-rails'
 gem 'rails-jquery-autocomplete'
 gem 'js_cookie_rails'
 gem 'carrierwave', '~> 1.3'
-gem 'bootsnap'
-gem 'nokogiri', '~> 1.12.0'
+gem 'bootsnap', '>= 1.7.0'
+gem 'nokogiri', '~> 1.16.0'
+gem 'concurrent-ruby', '1.3.4'
 
 group :development, :test do
-  gem 'sqlite3', '~> 1.3.7'
+  gem 'sqlite3', '~> 1.7.0'
   gem 'byebug', platform: :mri
   gem 'pry'
 end
@@ -53,5 +54,5 @@ group :development do
 end
 
 group :production do
-  gem 'pg', '~> 0.18'
+  gem 'pg', '~> 1.5'
 end
