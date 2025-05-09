@@ -5,9 +5,9 @@ module Domain
 
       def call(name:, username: nil, twitch: nil, youtube: nil)
         username ||= generate_username(name)
-        player = ::Player.new(
+        player = ::Player.new({
           name: name, username: username, twitch: twitch, youtube: youtube
-        )
+        })
         Player::Save.call(player)
         player
       end
