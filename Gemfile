@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails',        '~> 6.1.0'
+gem 'rails',        '~> 7.0.0'
 gem 'puma',         '~> 4.3'
 gem 'sass-rails',   '~> 5.0'
 gem 'uglifier',     '>= 1.3.0'
@@ -49,8 +49,8 @@ group :development do
   gem 'capistrano3-puma',   require: false
   gem 'web-console',           '>= 3.3.0'
   gem 'listen',                '~> 3.0.5'
-  gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'spring',                '~> 4.3.0'
+  gem 'spring-watcher-listen'
 end
 
 group :production do
