@@ -48,7 +48,7 @@ module Domain
 
       def standard_record(demo)
         Demo::FindStandardRecord.call(
-          demo.wad_id, demo.level, category_id: demo.category_id
+          wad_id: demo.wad_id, level: demo.level, category_id: demo.category_id
         )
       end
 
@@ -56,7 +56,7 @@ module Domain
         return unless demo.category_name == 'Pacifist'
 
         Demo::FindStandardRecord.call(
-          demo.wad_id, demo.level, only: :skill_4_speed
+          wad_id: demo.wad_id, level: demo.level, only: :skill_4_speed
         )
       end
 

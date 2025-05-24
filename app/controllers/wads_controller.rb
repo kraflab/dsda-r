@@ -61,7 +61,7 @@ class WadsController < ApplicationController
     AdminAuthorizer.authorize!(@current_admin, :create)
 
     preprocess_api_request(require: [:wad])
-    wad = Domain::Wad.create(@request_hash[:wad])
+    wad = Domain::Wad.create(**@request_hash[:wad])
     render json: WadSerializer.new(wad).call
   end
 
@@ -71,7 +71,7 @@ class WadsController < ApplicationController
     preprocess_api_request(require: [:wad_update])
     wad = Domain::Wad.single(short_name: params[:id], assert: true)
     params = @request_hash[:wad_update].slice(*ALLOWED_UPDATE_PARAMS)
-    Domain::Wad.update(params.merge(id: wad.id))
+    Domain::Wad.update(**params.merge(id: wad.id))
     render json: WadSerializer.new(wad.reload).call
   end
 

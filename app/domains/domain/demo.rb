@@ -21,7 +21,7 @@ module Domain
 
     def standard_record(wad_id:, level:, category:, very_soft: nil)
       FindStandardRecord.call(
-        wad_id, level, category: category, very_soft: very_soft
+        wad_id: wad_id, level: level, category_options: category, very_soft: very_soft
       )
     end
 

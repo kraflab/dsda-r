@@ -18,11 +18,11 @@ describe Domain::Port::Create do
   it 'reads file data' do
     Service::FileData::Read.expects(:call)
       .with(file_hash: params[:file]).returns(data)
-    Domain::Port::Create.call(params)
+    Domain::Port::Create.call(**params)
   end
 
   it 'saves the port' do
     Domain::Port::Save.expects(:call).returns(true)
-    Domain::Port::Create.call(params)
+    Domain::Port::Create.call(**params)
   end
 end

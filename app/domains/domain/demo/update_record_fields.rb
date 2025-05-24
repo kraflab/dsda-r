@@ -93,7 +93,7 @@ module Domain
 
       def record
         @record ||=
-          FindStandardRecord.call(wad_id, level, category_id: category_id)
+          FindStandardRecord.call(wad_id: wad_id, level: level, category_id: category_id)
       end
 
       def second_record
@@ -103,7 +103,7 @@ module Domain
 
       def demos
         @demos ||=
-          RelevantDemoList.call(wad_id, level, category_id: category_id)
+          RelevantDemoList.call(wad_id: wad_id, level: level, category_id: category_id)
       end
 
       def demos_for_category

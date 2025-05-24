@@ -13,7 +13,7 @@ class PortsController < ApplicationController
     AdminAuthorizer.authorize!(@current_admin, :create)
 
     preprocess_api_request(require: [:port])
-    port = Domain::Port.create(@request_hash[:port])
+    port = Domain::Port.create(**@request_hash[:port])
     render json: PortSerializer.new(port).call
   end
 end
