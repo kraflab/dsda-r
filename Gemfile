@@ -42,7 +42,7 @@ group :test do
 end
 
 group :development do
-  gem 'capistrano',         '3.7.2', require: false
+  gem 'capistrano',         '3.17', require: false
   gem 'capistrano-rvm',     require: false
   gem 'capistrano-rails',   require: false
   gem 'capistrano-bundler', require: false
