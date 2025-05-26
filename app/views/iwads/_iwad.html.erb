@@ -1,7 +1,7 @@
 <% cache iwad do %>
   <tr>
-    <td><%= link_to iwad.name, iwad %></td>
+    <td><%= link_to iwad.name, Wad.find_by(name: iwad.name) %></td>
     <td><%= iwad.author %></td>
-    <td><%= iwad.wads.count %></td>
+    <td><%= link_to iwad.wads.count, iwad %></td>
   </tr>
 <% end %>
