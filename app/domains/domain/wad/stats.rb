@@ -23,7 +23,7 @@ module Domain
       end
 
       def average_demo_time(wad)
-        Service::Tics::ToString.call(wad.demos.sum(:tics) / wad.demos.count)
+        Service::Tics::ToString.call(wad.demos.count != 0 ? wad.demos.sum(:tics) / wad.demos.count : 0)
       end
 
       def total_demo_time(wad)

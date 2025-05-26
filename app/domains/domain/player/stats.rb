@@ -26,7 +26,7 @@ module Domain
       end
 
       def average_demo_time(player)
-        Service::Tics::ToString.call(player.demos.sum(:tics) / player.demos.count)
+        Service::Tics::ToString.call(player.demos.count != 0 ? player.demos.sum(:tics) / player.demos.count : 0)
       end
 
       def total_demo_time(player)
