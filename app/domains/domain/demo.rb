@@ -15,7 +15,7 @@ module Domain
 
     def standard_record_list(wad_id:, levels:, category:, very_soft: nil)
       FindStandardRecordList.call(
-        wad_id, levels, category: category, very_soft: very_soft
+        wad_id: wad_id, levels: levels, category_options: category, very_soft: very_soft
       )
     end
 
