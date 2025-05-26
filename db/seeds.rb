@@ -54,9 +54,9 @@ Category.create!(name: "FDA",         description: "First demo attempt: play a m
 if Rails.env.development?
   50.times do
     name     = Faker::Name.name
-    username = Faker::Internet.unique.user_name(nil, %w(_))
-    twitch   = Faker::Boolean.boolean ? Faker::Internet.user_name(nil, %w(_)) : ""
-    youtube  = Faker::Boolean.boolean ? Faker::Internet.user_name(nil, %w(_)) : ""
+    username = Faker::Internet.unique.user_name(specifier: nil, separators: %w(_))
+    twitch   = Faker::Boolean.boolean ? Faker::Internet.user_name(specifier: nil, separators: %w(_)) : ""
+    youtube  = Faker::Boolean.boolean ? Faker::Internet.user_name(specifier: nil, separators: %w(_)) : ""
 
     Domain::Player.create(
       name: name,

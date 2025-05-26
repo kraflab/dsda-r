@@ -11,7 +11,7 @@ gem 'jwt'
 gem 'bcrypt',       '~> 3.1.7'
 gem 'rotp'
 
-gem 'faker',                   '~> 2.19'
+gem 'faker',                   '~> 3.5'
 gem 'kaminari'
 gem 'bootstrap-sass',          '~> 3.4.1'
 gem 'bootstrap_form',          '2.5.3'

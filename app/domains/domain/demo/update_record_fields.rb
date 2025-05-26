@@ -113,7 +113,7 @@ module Domain
       def chain_affected_categories
         return unless demo.category_name == 'Pacifist'
 
-        speed_record = FindStandardRecord.call(wad_id, level, only: :skill_4_speed)
+        speed_record = FindStandardRecord.call(wad_id: wad_id, level: level, only: :skill_4_speed)
         UpdateRecordFields.call(speed_record) if speed_record
       end
     end
