@@ -3,31 +3,53 @@
 
 <div class="center-text">
   <h4>
-    This is the list of ports needed
-    to play back the demos you find on the archive.
+    This is the list of ports allowed
+    for recording most demos.
+    <br>
+    <a href="https://www.doomworld.com/forum/topic/149931-source-port-enforcement-announcement-for-dsda-submissions/">Source port enforcement thread</a>
   </h4>
   <h4>
     What port you should use to <i>record</i> demos
-    depends on the intended environment for each wad.
+    depends on the intended environment for each WAD.
+    <br>
+    Some WADS may require a port from the Archived list
   </h4>
-  <%= ports_header(@ports) %>
 
-  <div class="panel panel-default panel-modest left-text">
-    <table class="table table-striped">
-      <tbody>
-        <% @ports.chunk { |i| i.family }.each do |chunk| %>
-          <tr>
-            <td><%= chunk[0] %></td>
-            <td>
-              <% last = chunk[1].pop %>
-              <% chunk[1].each do |port| %>
-                <%= link_to port.version, port.file_path %>,
-              <% end %>
-              <%= link_to last.version, last.file_path %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
+    <div class="hidden-overflow">
+      <div class="center-text">
+        <div class="panel panel-default panel-modest">
+          <div class="panel-heading">
+            <h3 class="panel-title">Allowed</h3>
+          </div>
+          <table class="table table-striped left-text">
+            <tr>
+              <td>DSDA-Doom</td>
+              <td><a href="https://github.com/kraflab/dsda-doom/releases">v0.28.2 or newer</a></td>
+            </tr>
+            <tr>
+              <td>Woof</td>
+              <td><a href="https://github.com/fabiangreffrath/woof/releases">v14.5.0 or newer</a></td>
+            </tr>
+            <tr>
+              <td>Crispy-Doom</td>
+              <td><a href="https://github.com/fabiangreffrath/crispy-doom/releases">v7.0.0 or newer</a></td>
+            </tr>
+            <tr>
+              <td>Vanilla EXEs</td>
+              <td>Doom, Doom 2, Final Doom</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="center-text">
+        <div class="panel panel-default panel-modest">
+          <div class="panel-heading">
+            <h3 class="panel-title">Archived</h3>
+          </div>
+          <table class="table table-striped left-text">
+            <%= ports_table(@ports, false) %>
+          </table>
+        </div>
+      </div>
+    </div>
 </div>
