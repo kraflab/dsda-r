@@ -3,6 +3,13 @@
 
 <h3>"<%= @search %>" search results:</h3>
 
+<h4>Iwad results (<%= @iwads.count %>):</h4>
+<% @iwads.each do |iwad| %>
+  <li>
+    <%= link_to "#{iwad.name} (#{iwad.short_name})", wad_path(iwad) %>
+  </li>
+<% end %>
+
 <h4>Player results (<%= @players.count %>):</h4>
 <% @players.each do |player| %>
   <li>
