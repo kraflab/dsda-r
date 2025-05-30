@@ -3,23 +3,44 @@
 
 <h3>"<%= @search %>" search results:</h3>
 
-<h4>Iwad results (<%= @iwads.count %>):</h4>
-<% @iwads.each do |iwad| %>
-  <li>
-    <%= link_to "#{iwad.name} (#{iwad.short_name})", wad_path(iwad) %>
-  </li>
-<% end %>
+<div>
+  <button data-toggle="collapse" data-target="#iwad_results">
+    <span class="glyphicon glyphicon-chevron-down"></span> Iwad results (<%= @iwads.count %>):
+  </button>
+  <div id="iwad_results" class="collapse in">
+    <% @iwads.each do |iwad| %>
+      <li>
+        <%= link_to "#{iwad.name} (#{iwad.short_name})", wad_path(iwad) %>
+      </li>
+    <% end %>
+  </div>
+</div>
+<br>
 
-<h4>Player results (<%= @players.count %>):</h4>
-<% @players.each do |player| %>
-  <li>
-    <%= link_to "#{player.name} (#{player.username})", player_path(player) %>
-  </li>
-<% end %>
+<div>
+  <button data-toggle="collapse" data-target="#player_results">
+    <span class="glyphicon glyphicon-chevron-down"></span> Player results (<%= @players.count %>):
+  </button>
+  <div id="player_results" class="collapse in">
+    <% @players.each do |player| %>
+      <li>
+        <%= link_to "#{player.name} (#{player.username})", player_path(player) %>
+      </li>
+    <% end %>
+  </div>
+</div>
+<br>
 
-<h4>Wad results (<%= @wads.count %>):</h4>
-<% @wads.each do |wad| %>
-  <li>
-    <%= link_to "#{wad.name} (#{wad.short_name})", wad_path(wad) %>
-  </li>
-<% end %>
+<div>
+  <button data-toggle="collapse" data-target="#wad_results">
+    <span class="glyphicon glyphicon-chevron-down"></span> Wad results (<%= @wads.count %>):
+  </button>
+  <div id="wad_results" class="collapse in">
+    <% @wads.each do |wad| %>
+      <li>
+        <%= link_to "#{wad.name} (#{wad.short_name})", wad_path(wad) %>
+      </li>
+    <% end %>
+  </div>
+</div>
+<br>
