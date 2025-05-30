@@ -6,6 +6,11 @@ module Domain
       ::Iwad.all
     end
 
+    def search(term:)
+      return ::Iwad.where('short_name ILIKE ? OR name ILIKE ?', "%#{term}%", "%#{term}%") if Rails.env.production?
+      ::Iwad.where('short_name LIKE ? OR name LIKE ?', "%#{term}%", "%#{term}%")
+    end
+
     def single(short_name: nil, either_name: nil, assert: false)
       iwad = nil
       iwad = ::Iwad.find_by(short_name: short_name) if short_name

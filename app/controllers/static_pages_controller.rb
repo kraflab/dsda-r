@@ -14,12 +14,15 @@ class StaticPagesController < ApplicationController
 
   def search
     @search = params[:search]
+    @iwads = Domain::Iwad.search(term: @search)
     @players = Domain::Player.search(term: @search)
     @wads = Domain::Wad.search(term: @search)
 
-    if @players.count == 1 && @wads.count == 0
+    if @iwads.count == 1 && @players.count == 0 && @wads.count == 0
+      redirect_to iwad_url(@iwads.first)
+    elsif @players.count == 1 && @iwads.count == 0 && @wads.count == 0
       redirect_to player_url(@players.first)
-    elsif @wads.count == 1 && @players.count == 0
+    elsif @wads.count == 1 && @iwads.count == 0 && @players.count == 0
       redirect_to wad_url(@wads.first)
     end
   end
