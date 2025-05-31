@@ -32,6 +32,7 @@ class RecordSerializer
       category: demo.category_name,
       level: demo.level,
       wad: wad.short_name,
+      wad_name: wad.name,
       engine: demo.engine,
       date: demo.recorded_at,
       notes: demo.sub_categories.collect { |s| s.name },
