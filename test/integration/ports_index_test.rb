@@ -8,7 +8,7 @@ class PortsIndexTest < ActionDispatch::IntegrationTest
 
   test "index layout" do
     get ports_path
-    assert_select "h1", "Port List"
+    assert_select "h3", "Archived"
     ports = Port.all
     ports.each do |port|
       assert_match port.family, response.body
