@@ -32,7 +32,7 @@ module Domain
         reset_demo
 
         demos_for_category.where(
-          "record_index > 0 OR tic_record = 't' OR second_record = 't' OR undisputed_record = 't'"
+          "record_index > 0 OR tic_record OR second_record OR undisputed_record"
         ).update_all(
           record_index: 0,
           tic_record: false,

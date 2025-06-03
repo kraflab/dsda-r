@@ -21,7 +21,7 @@ class Demo < ApplicationRecord
   scope :tas, -> { where(tas: true) }
   scope :standard, -> { where(tas: false, guys: 1, solo_net: false, suspect: false, cheated: false) }
   scope :at_second, ->(n) { where('tics >= ? AND tics < ?', n * 100, (n + 1) * 100) }
-  scope :only_records, -> { where("tic_record = 't' OR undisputed_record = 't'") }
+  scope :only_records, -> { where("tic_record OR undisputed_record") }
 
   validates :wad,       presence: true
   validates :category,  presence: true
