@@ -71,6 +71,19 @@ namespace :deploy do
   after  :finishing,    :cleanup
 end
 
+namespace :invoke do
+  desc "Run a rake task"
+  task :rake do
+    on roles(:app) do
+      within release_path do
+        with rails_env: fetch(:rails_env) do
+          execute :bundle, :exec, :rake, ENV['TASK']
+        end
+      end
+    end
+  end
+end
+
 # ps aux | grep puma    # Get puma pid
 # kill -s SIGUSR2 pid   # Restart puma
 # kill -s SIGTERM pid   # Stop puma
