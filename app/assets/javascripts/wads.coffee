@@ -1,4 +1,30 @@
 $ ->
+# =========================
+# Auto resize selectors based on the selected test
+# =========================
+  resize = (select) ->
+    selected = select.options[select.selectedIndex]
+    return unless selected?
+
+    temp = document.createElement('span')
+    temp.style.visibility = 'hidden'
+    temp.style.whiteSpace = 'nowrap'
+    temp.style.position = 'absolute'
+    temp.style.font = getComputedStyle(select).font
+    temp.innerText = selected.text
+    document.body.appendChild(temp)
+
+    select.style.width = (temp.offsetWidth + 2) + 'px'
+    
+    temp.remove()
+
+  for select in document.querySelectorAll('select.fix-dropdown')
+    resize(select)
+    select.addEventListener('change', () => resize(select))
+
+# =========================
+# Draw chart
+# =========================
   pad = (number) ->
     ("0" + number.toString()).slice(-2)
 
