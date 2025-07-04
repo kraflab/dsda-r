@@ -80,7 +80,7 @@ module WadsHelper
     end
   end
 
-  def wad_sub_header(wad)
+  def wad_sub_header(wad, category, level)
     content_tag :p, class: 'p-short' do
       [
         demo_details(wad),
@@ -89,7 +89,9 @@ module WadsHelper
         '|',
         view_selector(wad),
         '|',
-        level_selector(wad)
+        level_selector(wad, category: category),
+        '|',
+        category_selector(wad, level: level)
       ].join(' ').html_safe
     end
   end
@@ -127,6 +129,16 @@ module WadsHelper
     end
   end
 
+  def path_from_selector(level: nil, category: nil)
+    if action_name == "show" then
+      wad_path(level: level, category: category)
+    elsif action_name == "table_view" then
+      wad_table_view_path(category: category)
+    elsif action_name == "leaderboard" then
+      wad_leaderboard_path(level: level, category: category)
+    end
+  end
+
   def view_selector(wad)
     options = [
       ["Default View", wad_path(wad)],
@@ -149,20 +161,18 @@ module WadsHelper
     options = Domain::Category.list(iwad: wad.iwad_short_name).map do |category|
       [
         category.name,
-        if action_name == "show" then
-          wad_path(wad, category: category.name)
-        elsif action_name == "table_view" then
-          wad_table_view_path(wad, category: category.name)
-        elsif action_name == "leaderboard" then
-          wad_leaderboard_path(wad, level: level, category: category.name)
-        end
+        path_from_selector(level: level, category: category.name)
       ]
+    end
+
+    if action_name == "show"
+      options.unshift(['Category Select', path_from_selector(level: level), true])
     end
 
     content_tag :span do
       select_tag = content_tag :select, class: "fix-dropdown", title: "Category Select", style: "width: 40px;", onchange: "location = this.value;" do
-        options.map do |label, path|
-          content_tag(:option, label, value: path, selected: current_page?(path))
+        options.map do |label, path, default|
+          content_tag(:option, label, value: path, selected: default || current_page?(path))
         end.join.html_safe
       end
 
@@ -175,47 +185,33 @@ module WadsHelper
     first ||= wad.demos.movies.select(:level).distinct.first
     return '' if first.nil?
 
-    levels = []
+    options = []
 
-    # Dont get grouped levels in leaderboard
-    if action_name != "leaderboard" then
-      levels << "Map Select"
+    # Allow grouped levels only in the default view
+    if action_name == "show" then
+      options << ["Map Select", path_from_selector(category: category)]
 
       wad_episodes(wad).collect do |episode|
-        levels << episode
+        options << [episode, path_from_selector(level: episode, category: category)]
       end
 
       if wad.demos.movies.any?
-        levels << "Movies"
+        options << ["Movies", path_from_selector(level: "Movies", category: category)]
       end
     end
 
     wad.demos.ils.select(:level).distinct.collect do |field|
-      levels << field.level
+      options << [field.level, path_from_selector(level: field.level, category: category)]
     end
 
     wad.demos.movies.select(:level).distinct.collect do |field|
-      levels << field.level
+      options << [field.level, path_from_selector(level: field.level, category: category)]
     end
 
     content_tag :span do
       select_tag = content_tag :select, class: "fix-dropdown", title: "Map Select", style: "width: 40px;", onchange: "location = this.value;" do
-        levels.map do |level|
-          path = ""
-
-          if action_name == "show" then
-            path = wad_path(level: level)
-          elsif action_name == "table_view" then
-            path = wad_table_view_path(wad, level: level)
-          elsif action_name == "leaderboard" then
-            path = wad_leaderboard_path(wad, level: level, category: category)
-          end
-
-          if level == "Map Select" then
-            content_tag(:option, level, value: path, selected: true, disabled: true)
-          else
-            content_tag(:option, level, value: path, selected: current_page?(path))
-          end
+        options.map do |label, path, default|
+          content_tag(:option, label, value: path, selected: default || current_page?(path))
         end.join.html_safe
       end
 

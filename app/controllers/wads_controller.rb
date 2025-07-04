@@ -36,21 +36,27 @@ class WadsController < ApplicationController
 
   def show
     @wad = Domain::Wad.single(short_name: params[:id], assert: true)
-    subset = params[:level]
-    if subset.is_a?(String) && subset.include?('ILs')
-      episode = subset.split(' ')[1].to_i
-      @demos = @wad.demos.episode(episode)
-    elsif subset == 'Movies'
-      @demos = @wad.demos.show_movies
-    else
-      @demos = subset.nil? ? @wad.demos : @wad.demos.where(level: subset)
+    @category = params[:category]
+    @level = params[:level]
+
+    @demos = Domain::Demo.list(
+      wad_id: @wad.id, soft_category: @category
+    )
+
+    if @level.is_a?(String) && @level.include?('ILs')
+      episode = @level.split(' ')[1].to_i
+      @demos = @demos.episode(episode)
+    elsif @level == 'Movies'
+      @demos = @demos.show_movies
+    elsif !@level.nil?
+      @demos = @demos.where(level: @level)
     end
 
-    if @demos.count > DEMO_RENDER_LIMIT && subset.nil?
+    if @demos.count > DEMO_RENDER_LIMIT && @level.nil?
       @demos = @wad.demos.where(level: @demos.ils.first.level)
     end
 
-    @demos = @demos.includes(:players).includes(:category).includes(:demo_file)
+    @demos = @demos.includes(:players).includes(:demo_file)
   end
 
   def stats
