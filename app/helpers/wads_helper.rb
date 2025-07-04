@@ -158,7 +158,7 @@ module WadsHelper
   end
 
   def category_selector(wad, level: nil)
-    options = Domain::Category.list(iwad: wad.iwad_short_name).map do |category|
+    options = Domain::Category.list(iwad: wad.iwad_short_name).compact.map do |category|
       [
         category.name,
         path_from_selector(level: level, category: category.name)
