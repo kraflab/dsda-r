@@ -36,7 +36,7 @@ module WadsHelper
         '|',
         link_to('Stats', wad_stats_path(wad)),
         '|',
-        view_selector(wad),
+        wad_view_selector(wad),
         '|',
         category_selector(wad)
       ].join(' ').html_safe
@@ -50,7 +50,7 @@ module WadsHelper
         '|',
         link_to('Stats', wad_stats_path(wad)),
         '|',
-        view_selector(wad),
+        wad_view_selector(wad),
         '|',
         level_selector(wad, category: category),
         '|',
@@ -87,7 +87,7 @@ module WadsHelper
         '|',
         link_to('Stats', wad_stats_path(wad)),
         '|',
-        view_selector(wad),
+        wad_view_selector(wad),
         '|',
         level_selector(wad, category: category),
         '|',
@@ -139,7 +139,7 @@ module WadsHelper
     end
   end
 
-  def view_selector(wad)
+  def wad_view_selector(wad)
     options = [
       ["Default View", wad_path(wad)],
       ["Table View", wad_table_view_path(wad)],

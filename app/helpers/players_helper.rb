@@ -24,8 +24,7 @@ module PlayersHelper
               link_to 'YouTube', player.youtube_url
             else
               nil
-            end,
-            edit_player_link(player)
+            end
           ].join(' ').html_safe
         end)
       ].join(' ').html_safe
@@ -37,11 +36,9 @@ module PlayersHelper
       [
         demo_details(player),
         '|',
-        link_to('Record View', player_record_view_path(player)),
+        link_to('Stats', player_stats_path(player)),
         '|',
-        link_to('History View', player_history_path(player)),
-        '|',
-        link_to('Stats', player_stats_path(player))
+        player_view_selector(player)
       ].join(' ').html_safe
     end
   end
@@ -51,11 +48,9 @@ module PlayersHelper
       [
         demo_details(player),
         '|',
-        link_to('Default View', player_path(player)),
+        link_to('Stats', player_stats_path(player)),
         '|',
-        link_to('History View', player_history_path(player)),
-        '|',
-        link_to('Stats', player_stats_path(player))
+        player_view_selector(player)
       ].join(' ').html_safe
     end
   end
@@ -65,11 +60,9 @@ module PlayersHelper
       [
         demo_details(player),
         '|',
-        link_to('Record View', player_record_view_path(player)),
+        link_to('Stats', player_stats_path(player)),
         '|',
-        link_to('Default View', player_path(player)),
-        '|',
-        link_to('Stats', player_stats_path(player))
+        player_view_selector(player)
       ].join(' ').html_safe
     end
   end
@@ -100,6 +93,21 @@ module PlayersHelper
     hash
   end
 
-  def edit_player_link(player)
+  def player_view_selector(player)
+    options = [
+      ["Default View", player_path(player)],
+      ["Record View", player_record_view_path(player)],
+      ["History View", player_history_path(player)]
+    ]
+
+    content_tag :span do
+      select_tag = content_tag :select, class: "fix-dropdown", title: "View Select", onchange: "location = this.value;" do
+        options.map do |label, path|
+          content_tag(:option, label, value: path, selected: current_page?(path))
+        end.join.html_safe
+      end
+
+      [select_tag, content_tag(:span, '', class: 'caret')].join.html_safe
+    end
   end
 end
