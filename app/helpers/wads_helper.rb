@@ -20,26 +20,6 @@ module WadsHelper
     end
   end
 
-  def table_view_category_list(wad)
-    content_tag :ul, class: 'dropdown-menu' do
-      Domain::Category.list(iwad: wad.iwad_short_name).map do |cat|
-        content_tag :li do
-          link_to(cat.name, wad_table_view_path(wad, category: cat.name))
-        end
-      end.join(' ').html_safe
-    end
-  end
-
-  def leaderboard_category_list(wad, level)
-    content_tag :ul, class: 'dropdown-menu' do
-      Domain::Category.list(iwad: wad.iwad_short_name).map do |cat|
-        content_tag :li do
-          link_to(cat.name, wad_leaderboard_path(wad, level: level, category: cat.name))
-        end
-      end.join(' ').html_safe
-    end
-  end
-
   def wads_header(wads)
     [
       content_tag(:h1, 'Wad List'),
@@ -50,7 +30,7 @@ module WadsHelper
   end
 
   def table_view_wad_sub_header(wad)
-    content_tag :p, class: 'p-short one-line' do
+    content_tag :p, class: 'p-short' do
       [
         demo_details(wad),
         '|',
@@ -64,7 +44,7 @@ module WadsHelper
   end
 
   def leaderboard_wad_sub_header(wad, category, level)
-    content_tag :p, class: 'p-short one-line' do
+    content_tag :p, class: 'p-short' do
       [
         demo_details(wad),
         '|',
@@ -72,9 +52,9 @@ module WadsHelper
         '|',
         view_selector(wad),
         '|',
-        leaderboard_level_selector(wad, category),
+        level_selector(wad, category: category),
         '|',
-        leaderboard_category_selector(wad, level)
+        category_selector(wad, level: level)
       ].join(' ').html_safe
     end
   end
@@ -101,7 +81,7 @@ module WadsHelper
   end
 
   def wad_sub_header(wad)
-    content_tag :p, class: 'p-short one-line' do
+    content_tag :p, class: 'p-short' do
       [
         demo_details(wad),
         '|',
@@ -147,65 +127,6 @@ module WadsHelper
     end
   end
 
-  def category_selector(wad)
-    content_tag :div, id: 'levelSelectDropdown', class: 'one-line ' do
-      content_tag :div, class: 'btn-group shift-right' do
-        [
-          (content_tag :button, type: 'button', class: 'fix-dropdown dropdown-toggle', 'data-toggle': 'dropdown', 'aria-haspopup': 'true', 'aria-expanded': 'false' do
-            [
-              'Category Select',
-              (content_tag :span, '', class: 'caret')
-            ].join(' ').html_safe
-          end),
-          table_view_category_list(wad)
-        ].join(' ').html_safe
-      end
-    end
-  end
-
-  def leaderboard_category_selector(wad, level)
-    content_tag :div, id: 'levelSelectDropdown', class: 'one-line ' do
-      content_tag :div, class: 'btn-group shift-right' do
-        [
-          (content_tag :button, type: 'button', class: 'fix-dropdown dropdown-toggle', 'data-toggle': 'dropdown', 'aria-haspopup': 'true', 'aria-expanded': 'false' do
-            [
-              'Category Select',
-              (content_tag :span, '', class: 'caret')
-            ].join(' ').html_safe
-          end),
-          leaderboard_category_list(wad, level)
-        ].join(' ').html_safe
-      end
-    end
-  end
-
-  def leaderboard_level_selector(wad, category)
-    content_tag :div, id: 'levelSelectDropdown', class: 'one-line ' do
-      content_tag :div, class: 'btn-group shift-right' do
-        [
-          (content_tag :button, type: 'button', class: 'fix-dropdown dropdown-toggle', 'data-toggle': 'dropdown', 'aria-haspopup': 'true', 'aria-expanded': 'false' do
-            [
-              'Map Select',
-              (content_tag :span, '', class: 'caret')
-            ].join(' ').html_safe
-          end),
-          (content_tag :ul, class: 'dropdown-menu scrollable-menu' do
-            (wad.demos.ils.select(:level).distinct.collect do |field|
-              content_tag :li do
-                content_tag :a, field.level, href: wad_leaderboard_path(level: field.level, category: category)
-              end
-            end +
-            wad.demos.movies.select(:level).distinct.collect do |field|
-              content_tag :li do
-                content_tag :a, field.level, href: wad_leaderboard_path(level: field.level, category: category)
-              end
-            end).join(' ').html_safe
-          end)
-        ].join(' ').html_safe
-      end
-    end
-  end
-
   def view_selector(wad)
     options = [
       ["Default View", wad_path(wad)],
@@ -214,7 +135,7 @@ module WadsHelper
     ]
 
     content_tag :span do
-      select_tag = content_tag :select, id: "view-dropdown", style: "width: 40px;", onchange: "location = this.value;" do
+      select_tag = content_tag :select, class: "fix-dropdown", title: "View Select", style: "width: 40px;", onchange: "location = this.value;" do
         options.map do |label, path|
           content_tag(:option, label, value: path, selected: current_page?(path))
         end.join.html_safe
@@ -224,45 +145,81 @@ module WadsHelper
     end
   end
 
-  def level_selector(wad)
+  def category_selector(wad, level: nil)
+    options = Domain::Category.list(iwad: wad.iwad_short_name).map do |category|
+      [
+        category.name,
+        if action_name == "show" then
+          wad_path(wad, category: category.name)
+        elsif action_name == "table_view" then
+          wad_table_view_path(wad, category: category.name)
+        elsif action_name == "leaderboard" then
+          wad_leaderboard_path(wad, level: level, category: category.name)
+        end
+      ]
+    end
+
+    content_tag :span do
+      select_tag = content_tag :select, class: "fix-dropdown", title: "Category Select", style: "width: 40px;", onchange: "location = this.value;" do
+        options.map do |label, path|
+          content_tag(:option, label, value: path, selected: current_page?(path))
+        end.join.html_safe
+      end
+
+      [select_tag, content_tag(:span, '', class: 'caret')].join.html_safe
+    end
+  end
+
+  def level_selector(wad, category: nil)
     first = wad.demos.ils.select(:level).distinct.first
     first ||= wad.demos.movies.select(:level).distinct.first
     return '' if first.nil?
-    content_tag :div, id: 'levelSelectDropdown', class: 'one-line ' do
-      content_tag :div, class: 'btn-group shift-right' do
-        [
-          (content_tag :button, type: 'button', class: 'fix-dropdown dropdown-toggle', 'data-toggle': 'dropdown', 'aria-haspopup': 'true', 'aria-expanded': 'false' do
-            [
-              'Map Select',
-              (content_tag :span, '', class: 'caret')
-            ].join(' ').html_safe
-          end),
-          (content_tag :ul, class: 'dropdown-menu scrollable-menu' do
-            (wad_episodes(wad).collect do |ep|
-              (content_tag :li do
-                content_tag :a, ep, href: wad_path(level: ep)
-              end)
-            end +
-            [
-              if wad.demos.movies.any?
-                content_tag :li do
-                  content_tag :a, 'Movies', href: wad_path(level: 'Movies')
-                end
-              end
-            ] +
-            wad.demos.ils.select(:level).distinct.collect do |field|
-              content_tag :li do
-                content_tag :a, field.level, href: wad_path(level: field.level)
-              end
-            end +
-            wad.demos.movies.select(:level).distinct.collect do |field|
-              content_tag :li do
-                content_tag :a, field.level, href: wad_path(level: field.level)
-              end
-            end).join(' ').html_safe
-          end)
-        ].join(' ').html_safe
+
+    levels = []
+
+    # Dont get grouped levels in leaderboard
+    if action_name != "leaderboard" then
+      levels << "Map Select"
+
+      wad_episodes(wad).collect do |episode|
+        levels << episode
       end
+
+      if wad.demos.movies.any?
+        levels << "Movies"
+      end
+    end
+
+    wad.demos.ils.select(:level).distinct.collect do |field|
+      levels << field.level
+    end
+
+    wad.demos.movies.select(:level).distinct.collect do |field|
+      levels << field.level
+    end
+
+    content_tag :span do
+      select_tag = content_tag :select, class: "fix-dropdown", title: "Map Select", style: "width: 40px;", onchange: "location = this.value;" do
+        levels.map do |level|
+          path = ""
+
+          if action_name == "show" then
+            path = wad_path(level: level)
+          elsif action_name == "table_view" then
+            path = wad_table_view_path(wad, level: level)
+          elsif action_name == "leaderboard" then
+            path = wad_leaderboard_path(wad, level: level, category: category)
+          end
+
+          if level == "Map Select" then
+            content_tag(:option, level, value: path, selected: true, disabled: true)
+          else
+            content_tag(:option, level, value: path, selected: current_page?(path))
+          end
+        end.join.html_safe
+      end
+
+      [select_tag, content_tag(:span, '', class: 'caret')].join.html_safe
     end
   end
 end
