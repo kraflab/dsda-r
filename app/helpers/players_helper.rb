@@ -101,7 +101,7 @@ module PlayersHelper
     ]
 
     content_tag :span do
-      select_tag = content_tag :select, class: "fix-dropdown", title: "View Select", onchange: "location = this.value;" do
+      select_tag = content_tag :select, class: "fix-dropdown", title: "View Select" do
         options.map do |label, path|
           content_tag(:option, label, value: path, selected: current_page?(path))
         end.join.html_safe

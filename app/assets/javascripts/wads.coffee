@@ -1,6 +1,6 @@
 $ ->
 # =========================
-# Auto resize selectors based on the selected test
+# Add event to dropdowns and resize them
 # =========================
   resize = (select) ->
     selected = select.options[select.selectedIndex]
@@ -20,7 +20,7 @@ $ ->
 
   for select in document.querySelectorAll('select.fix-dropdown')
     resize(select)
-    select.addEventListener('change', () => resize(select))
+    select.addEventListener('change', (event) => window.location.href = event.target.value)
 
 # =========================
 # Draw chart
