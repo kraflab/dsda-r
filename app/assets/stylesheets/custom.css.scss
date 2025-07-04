@@ -4,6 +4,7 @@
 @import "bootswatch/cyborg/bootswatch";
 
 @import "static_pages.scss";
+@import "wads.scss";
 
 code {
   background-color: transparent;
@@ -37,17 +38,6 @@ row-no-top {
 
 .shift-right {
   margin-left: 5px;
-}
-
-.fix-dropdown {
-  position: relative;
-  top: -2px;
-  left: -3px;
-  margin: 0;
-  padding: 0;
-  color: $link-color;
-  background-color: transparent;
-  border-color: transparent;
 }
 
 .navbar-form {

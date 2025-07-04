@@ -1,3 +1,40 @@
 // Place all the styles related to the Wads controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.caret {
+  color: $link-color;
+}
+
+.fix-dropdown {
+  position: relative;
+  top: -2px;
+  left: -3px;
+  margin: 0;
+  padding: 0;
+  color: $link-color;
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.fix-dropdown:hover,
+.fix-dropdown:focus {
+  outline: none;
+  text-decoration: underline;
+}
+
+#view-dropdown {
+  appearance: none;
+  margin: 0;
+  padding: 0;
+  color: $link-color;
+  background-color: transparent;
+  border-color: transparent;
+  cursor: pointer;
+}
+
+#view-dropdown:hover,
+#view-dropdown:focus {
+  outline: none;
+  text-decoration: underline;
+}

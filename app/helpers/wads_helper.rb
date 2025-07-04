@@ -54,9 +54,9 @@ module WadsHelper
       [
         demo_details(wad),
         '|',
-        link_to('Default View', wad_path(wad)),
-        '|',
         link_to('Stats', wad_stats_path(wad)),
+        '|',
+        view_selector(wad),
         '|',
         category_selector(wad)
       ].join(' ').html_safe
@@ -68,9 +68,9 @@ module WadsHelper
       [
         demo_details(wad),
         '|',
-        link_to('Default View', wad_path(wad)),
-        '|',
         link_to('Stats', wad_stats_path(wad)),
+        '|',
+        view_selector(wad),
         '|',
         leaderboard_level_selector(wad, category),
         '|',
@@ -105,11 +105,9 @@ module WadsHelper
       [
         demo_details(wad),
         '|',
-        link_to('Table View', wad_table_view_path(wad)),
-        '|',
-        link_to('Leaderboard', wad_leaderboard_path(wad)),
-        '|',
         link_to('Stats', wad_stats_path(wad)),
+        '|',
+        view_selector(wad),
         '|',
         level_selector(wad)
       ].join(' ').html_safe
@@ -205,6 +203,24 @@ module WadsHelper
           end)
         ].join(' ').html_safe
       end
+    end
+  end
+
+  def view_selector(wad)
+    options = [
+      ["Default View", wad_path(wad)],
+      ["Table View", wad_table_view_path(wad)],
+      ["Leaderboard", wad_leaderboard_path(wad)]
+    ]
+
+    content_tag :span do
+      select_tag = content_tag :select, id: "view-dropdown", style: "width: 40px;", onchange: "location = this.value;" do
+        options.map do |label, path|
+          content_tag(:option, label, value: path, selected: current_page?(path))
+        end.join.html_safe
+      end
+
+      [select_tag, content_tag(:span, '', class: 'caret')].join.html_safe
     end
   end
 
