@@ -13,6 +13,8 @@
 .dropdown-toggle {
   position: relative;
   appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
   top: -1px;
   left: 2px;
   margin: 0;
