@@ -94,4 +94,31 @@ module ApplicationHelper
     end
     hash.sort_by { |k, v| -v }[0..9]
   end
+
+  # options are an array where each item has 3 values
+  # [label, path, selected]
+  def create_selector(options:)
+    selected = options.find { |opt| opt[:selected] }
+    if selected.nil?
+      options.first[:selected] = true
+    end
+
+    content_tag :div, class: 'btn-group' do
+      [
+        (content_tag :button, type: 'button', class: 'dropdown-toggle', 'data-toggle': 'dropdown', 'aria-haspopup': 'true', 'aria-expanded': 'false' do
+          [
+            options.reverse.find { |opt| opt[:selected] }[:label],
+            (content_tag :span, '', class: 'caret')
+          ].join(' ').html_safe
+        end),
+        (content_tag :ul, class: 'dropdown-menu' do
+          options.map do |opt|
+            content_tag :li, class: opt[:selected] ? 'dropdown-selected' : nil do
+              link_to(opt[:label], opt[:path])
+            end
+          end.join.html_safe
+        end)
+      ].join(' ').html_safe
+    end
+  end
 end

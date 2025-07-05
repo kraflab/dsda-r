@@ -32,7 +32,7 @@ module PlayersHelper
   end
 
   def player_sub_header(player)
-    content_tag :p do
+    content_tag :p, class: 'p-short one-line' do
       [
         demo_details(player),
         '|',
@@ -44,7 +44,7 @@ module PlayersHelper
   end
 
   def player_record_view_sub_header(player)
-    content_tag :p do
+    content_tag :p, class: 'p-short one-line' do
       [
         demo_details(player),
         '|',
@@ -56,7 +56,7 @@ module PlayersHelper
   end
 
   def player_history_sub_header(player)
-    content_tag :p do
+    content_tag :p, class: 'p-short one-line' do
       [
         demo_details(player),
         '|',
@@ -95,19 +95,15 @@ module PlayersHelper
 
   def player_view_selector(player)
     options = [
-      ["Default View", player_path(player)],
-      ["Record View", player_record_view_path(player)],
-      ["History View", player_history_path(player)]
+      {label: "Default View", path: player_path(player), selected: false},
+      {label: "Record View", path: player_record_view_path(player), selected: false},
+      {label: "History View", path: player_history_path(player), selected: false}
     ]
 
-    content_tag :span do
-      select_tag = content_tag :select, class: "fix-dropdown", title: "View Select" do
-        options.map do |label, path|
-          content_tag(:option, label, value: path, selected: current_page?(path))
-        end.join.html_safe
-      end
-
-      [select_tag, content_tag(:span, '', class: 'caret')].join.html_safe
+    options.each do |opt|
+      opt[:selected] = true if current_page?(opt[:path])
     end
+
+    create_selector(options: options)
   end
 end
