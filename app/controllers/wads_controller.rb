@@ -52,8 +52,8 @@ class WadsController < ApplicationController
       @demos = @demos.where(level: @level)
     end
 
-    if @demos.count > DEMO_RENDER_LIMIT && @level.nil?
-      @demos = @wad.demos.where(level: @demos.ils.first.level)
+    if @demos.count > DEMO_RENDER_LIMIT && @level.nil? && @category.nil?
+      @demos = @demos.where(level: @demos.ils.first.level)
     end
 
     @demos = @demos.includes(:players).includes(:demo_file)
@@ -166,7 +166,7 @@ class WadsController < ApplicationController
   def leaderboard
     @wad = Domain::Wad.single(short_name: params[:id], assert: true)
     @category = params[:category] || Domain::Category.list(iwad: @wad.iwad_short_name).first.name
-    @level = params[:level] || @wad.demos.first.level
+    @level = params[:level] || @wad.demos.ils.first.level
     @demos = Domain::Demo.list(
       wad_id: @wad.id, soft_category: @category, level: @level, standard: true
     ).to_a.sort_by { |d| d.tics }.uniq { |d| d.players.first.id }
