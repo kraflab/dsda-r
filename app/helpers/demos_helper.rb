@@ -1,11 +1,15 @@
 module DemosHelper
   def demo_feed_sub_header
-    content_tag :p do
-      [
-        link_to('Sort by Record Date', feed_path(sort_by: 'record_date')),
-        link_to('Sort by Upload Date', feed_path(sort_by: 'upload_date'))
-      ].join(' | ').html_safe
+    options = [
+      {label: "Sort by Upload Date", path: feed_path(sort_by: "upload_date"), selected: false},
+      {label: "Sort by Record Date", path: feed_path(sort_by: "record_date"), selected: false}
+    ]
+
+    options.each do |opt|
+      opt[:selected] = true if current_page?(opt[:path])
     end
+
+    create_selector(options: options)
   end
 
   def compare_movies_list(demos)
