@@ -39,6 +39,7 @@
   min-width: 0;
   background-color: rgba(50, 50, 50, 0.7);
   backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
 }
 
 .dropdown-menu a {
