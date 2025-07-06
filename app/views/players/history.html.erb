@@ -2,7 +2,7 @@
 <% provide(:description, "List of speedrun demos by #{@player.name} sorted by date") %>
 
 <div class="center-text">
-  <% cache ['player_history_header_v002', @player] do %>
+  <% cache ['player_history_header_v003', @player] do %>
     <%= player_header(@player) %>
     <%= player_history_sub_header(@player) %>
   <% end %>

@@ -1,10 +1,11 @@
 <% provide(:title, "#{@player.name} | Stats") %>
 <% provide(:description, "Detailed stats for #{@player.name} speedruns") %>
 
-<div class="page-header">
-  <h1>
-    <%= @player.name %> Stats & Charts
-  </h1>
+<div class="center-text">
+  <% cache ['player_stats_header_v001', @player] do %>
+    <%= player_header(@player) %>
+    <%= player_sub_header(@player) %>
+  <% end %>
 </div>
 
 <% demos = @player.demos %>

@@ -36,8 +36,6 @@ module PlayersHelper
       [
         demo_details(player),
         '|',
-        link_to('Stats', player_stats_path(player)),
-        '|',
         player_view_selector(player)
       ].join(' ').html_safe
     end
@@ -48,8 +46,6 @@ module PlayersHelper
       [
         demo_details(player),
         '|',
-        link_to('Stats', player_stats_path(player)),
-        '|',
         player_view_selector(player)
       ].join(' ').html_safe
     end
@@ -59,8 +55,6 @@ module PlayersHelper
     content_tag :p, class: 'p-short one-line' do
       [
         demo_details(player),
-        '|',
-        link_to('Stats', player_stats_path(player)),
         '|',
         player_view_selector(player)
       ].join(' ').html_safe
@@ -97,7 +91,8 @@ module PlayersHelper
     options = [
       {label: "Default View", path: player_path(player), selected: false},
       {label: "Record View", path: player_record_view_path(player), selected: false},
-      {label: "History View", path: player_history_path(player), selected: false}
+      {label: "History View", path: player_history_path(player), selected: false},
+      {label: "Stats", path: player_stats_path(player), selected: false}
     ]
 
     options.each do |opt|

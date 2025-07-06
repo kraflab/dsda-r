@@ -29,32 +29,11 @@ module WadsHelper
     ].join(' ').html_safe
   end
 
-  def table_view_wad_sub_header(wad)
-    content_tag :p, class: 'p-short one-line' do
+  def wad_header(wad)
+    content_tag :h1 do
       [
-        demo_details(wad),
-        '|',
-        link_to('Stats', wad_stats_path(wad)),
-        '|',
-        wad_view_selector(wad),
-        '|',
-        category_selector(wad)
-      ].join(' ').html_safe
-    end
-  end
-
-  def leaderboard_wad_sub_header(wad, category, level)
-    content_tag :p, class: 'p-short one-line' do
-      [
-        demo_details(wad),
-        '|',
-        link_to('Stats', wad_stats_path(wad)),
-        '|',
-        wad_view_selector(wad),
-        '|',
-        level_selector(wad, category: category),
-        '|',
-        category_selector(wad, level: level)
+        link_to(wad.name, wad.file_path),
+        content_tag(:small, wad.author)
       ].join(' ').html_safe
     end
   end
@@ -71,27 +50,52 @@ module WadsHelper
     end
   end
 
-  def wad_header(wad)
-    content_tag :h1 do
-      [
-        link_to(wad.name, wad.file_path),
-        content_tag(:small, wad.author)
-      ].join(' ').html_safe
-    end
-  end
-
   def wad_sub_header(wad, category, level)
     content_tag :p, class: 'p-short one-line' do
       [
         demo_details(wad),
-        '|',
-        link_to('Stats', wad_stats_path(wad)),
         '|',
         wad_view_selector(wad),
         '|',
         level_selector(wad, category: category),
         '|',
         category_selector(wad, level: level)
+      ].join(' ').html_safe
+    end
+  end
+
+  def table_view_wad_sub_header(wad)
+    content_tag :p, class: 'p-short one-line' do
+      [
+        demo_details(wad),
+        '|',
+        wad_view_selector(wad),
+        '|',
+        category_selector(wad)
+      ].join(' ').html_safe
+    end
+  end
+
+  def leaderboard_wad_sub_header(wad, category, level)
+    content_tag :p, class: 'p-short one-line' do
+      [
+        demo_details(wad),
+        '|',
+        wad_view_selector(wad),
+        '|',
+        level_selector(wad, category: category),
+        '|',
+        category_selector(wad, level: level)
+      ].join(' ').html_safe
+    end
+  end
+
+  def stats_wad_sub_header(wad, category, level)
+    content_tag :p, class: 'p-short one-line' do
+      [
+        demo_details(wad),
+        '|',
+        wad_view_selector(wad),
       ].join(' ').html_safe
     end
   end
@@ -143,7 +147,8 @@ module WadsHelper
     options = [
       {label: "Default View", path: wad_path(wad), selected: false},
       {label: "Table View",  path: wad_table_view_path(wad), selected: false},
-      {label: "Leaderboard",  path: wad_leaderboard_path(wad), selected: false}
+      {label: "Leaderboard",  path: wad_leaderboard_path(wad), selected: false},
+      {label: "Stats",  path: wad_stats_path(wad), selected: false}
     ]
     
     options.each do |opt|
