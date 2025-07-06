@@ -76,6 +76,11 @@ row-no-top {
   border-left: thin solid $table-border-color;
 }
 
+.wad-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .wad-letter {
   margin-left: -2px;
   margin-right: -2px;
