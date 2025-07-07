@@ -2,9 +2,9 @@
 <% provide(:description, "Table view of speedruns for #{@wad.name}") %>
 
 <div class="center-text">
-  <% cache ['wad_table_view_header_v004', @wad] do %>
+  <% cache ['wad_table_view_header_v004', @wad, @category] do %>
     <%= wad_header(@wad) %>
-    <%= table_view_wad_sub_header(@wad) %>
+    <%= table_view_wad_sub_header(@wad, category: @category) %>
   <% end %>
   <h3 class="list-title">
     <%= @category %>

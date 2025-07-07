@@ -50,47 +50,47 @@ module WadsHelper
     end
   end
 
-  def wad_sub_header(wad, category, level)
+  def wad_sub_header(wad, level: nil, category: nil)
     content_tag :p, class: 'p-short one-line' do
       [
         demo_details(wad),
         '|',
         wad_view_selector(wad),
         '|',
-        level_selector(wad, category: category),
+        level_selector(wad, level: level, category: category),
         '|',
-        category_selector(wad, level: level)
+        category_selector(wad, level: level, category: category)
       ].join(' ').html_safe
     end
   end
 
-  def table_view_wad_sub_header(wad)
+  def table_view_wad_sub_header(wad, level: nil, category: nil)
     content_tag :p, class: 'p-short one-line' do
       [
         demo_details(wad),
         '|',
         wad_view_selector(wad),
         '|',
-        category_selector(wad)
+        category_selector(wad, level: level, category: category)
       ].join(' ').html_safe
     end
   end
 
-  def leaderboard_wad_sub_header(wad, category, level)
+  def leaderboard_wad_sub_header(wad, level: nil, category: nil)
     content_tag :p, class: 'p-short one-line' do
       [
         demo_details(wad),
         '|',
         wad_view_selector(wad),
         '|',
-        level_selector(wad, category: category),
+        level_selector(wad, level: level, category: category),
         '|',
-        category_selector(wad, level: level)
+        category_selector(wad, level: level, category: category)
       ].join(' ').html_safe
     end
   end
 
-  def stats_wad_sub_header(wad, category, level)
+  def stats_wad_sub_header(wad, level: nil, category: nil)
     content_tag :p, class: 'p-short one-line' do
       [
         demo_details(wad),
@@ -150,20 +150,20 @@ module WadsHelper
       {label: "Leaderboard",  path: wad_leaderboard_path(wad), selected: false},
       {label: "Stats",  path: wad_stats_path(wad), selected: false}
     ]
-    
+
     options.each do |opt|
       opt[:selected] = true if current_page?(opt[:path])
     end
-    
+
     create_selector(options: options)
   end
 
-  def category_selector(wad, level: nil)
-    options = Domain::Category.list(iwad: wad.iwad_short_name).compact.map do |category|
+  def category_selector(wad, level: nil, category: nil)
+    options = Domain::Category.list(iwad: wad.iwad_short_name).compact.map do |cat|
       {
-        label: category.name,
-        path: path_from_selector(level: level, category: category.name),
-        selected: @category == category.name
+        label: cat.name,
+        path: path_from_selector(level: level, category: cat.name),
+        selected: category == cat.name
       }
     end
 
@@ -175,7 +175,7 @@ module WadsHelper
     create_selector(options: options)
   end
 
-  def level_selector(wad, category: nil)
+  def level_selector(wad, level: nil, category: nil)
     first = wad.demos.ils.select(:level).distinct.first
     first ||= wad.demos.movies.select(:level).distinct.first
     return '' if first.nil?
@@ -187,20 +187,20 @@ module WadsHelper
       options << {label: "Map Select", path: path_from_selector(category: category), selected: false}
 
       wad_episodes(wad).collect do |episode|
-        options << {label: episode, path: path_from_selector(level: episode, category: category), selected: @level == episode }
+        options << {label: episode, path: path_from_selector(level: episode, category: category), selected: level == episode }
       end
 
       if wad.demos.movies.any?
-        options << {label: "Movies", path: path_from_selector(level: "Movies", category: category), selected: @level == "movies"}
+        options << {label: "Movies", path: path_from_selector(level: "Movies", category: category), selected: level == "movies"}
       end
     end
 
     wad.demos.ils.select(:level).distinct.collect do |field|
-      options << {label: field.level, path: path_from_selector(level: field.level, category: category), selected: @level == field.level }
+      options << {label: field.level, path: path_from_selector(level: field.level, category: category), selected: level == field.level }
     end
 
     wad.demos.movies.select(:level).distinct.collect do |field|
-      options << {label: field.level, path: path_from_selector(level: field.level, category: category), selected: @level == field.level }
+      options << {label: field.level, path: path_from_selector(level: field.level, category: category), selected: level == field.level }
     end
 
     create_selector(options: options)
