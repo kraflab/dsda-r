@@ -40,6 +40,13 @@
   background-color: rgba(50, 50, 50, 0.7);
   backdrop-filter: blur(7px);
   -webkit-backdrop-filter: blur(7px);
+
+  max-height: 70vh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scroll-behavior: contain;
+  scrollbar-color: rgba(100, 100, 100, 0.6) transparent;
+  scrollbar-width: thin;
 }
 
 .dropdown-menu a {
