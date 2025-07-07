@@ -6,11 +6,11 @@ class Wad < ApplicationRecord
   has_many :demo_files
   default_scope -> { order(:short_name) }
   validates :iwad_id,    presence: true
-  validates :name,       presence: true, length: { maximum: 100 }
+  validates :name,       presence: true, length: { maximum: 255 }
   validates :short_name, presence: true, length: { maximum: 50 },
                          uniqueness: true,
                          format: { with: VALID_USERNAME_REGEX }
-  validates :author,     presence: true, length: { maximum: 50 }
+  validates :author,     presence: true, length: { maximum: 255 }
   validates_associated :wad_file
 
   delegate :longest_demo_time, :average_demo_time, :total_demo_time,

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_05_09_222144) do
+ActiveRecord::Schema[7.1].define(version: 2025_07_07_193133) do
   create_table "admins", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
@@ -174,9 +174,9 @@ ActiveRecord::Schema[7.0].define(version: 2025_05_09_222144) do
   end
 
   create_table "wads", force: :cascade do |t|
-    t.string "name"
+    t.string "name", limit: 255
     t.string "short_name"
-    t.string "author"
+    t.string "author", limit: 255
     t.string "year"
     t.string "compatibility"
     t.boolean "is_commercial"

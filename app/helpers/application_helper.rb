@@ -99,9 +99,7 @@ module ApplicationHelper
   # [label, path, selected]
   def create_selector(options:)
     selected = options.find { |opt| opt[:selected] }
-    if selected.nil?
-      options.first[:selected] = true
-    end
+    options.first[:selected] = true if selected.nil?
 
     content_tag :div, class: 'btn-group' do
       [
