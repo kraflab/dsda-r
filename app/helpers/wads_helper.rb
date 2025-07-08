@@ -57,9 +57,9 @@ module WadsHelper
         '|',
         wad_view_selector(wad),
         '|',
-        level_selector(wad, level: level, category: category),
+        level_selector(wad, level: level, category: category, allow_all: true),
         '|',
-        category_selector(wad, level: level, category: category)
+        category_selector(wad, level: level, category: category, allow_all: true)
       ].join(' ').html_safe
     end
   end
@@ -71,7 +71,7 @@ module WadsHelper
         '|',
         wad_view_selector(wad),
         '|',
-        category_selector(wad, level: level, category: category)
+        category_selector(wad, level: level, category: category, allow_all: false)
       ].join(' ').html_safe
     end
   end
@@ -83,9 +83,23 @@ module WadsHelper
         '|',
         wad_view_selector(wad),
         '|',
-        level_selector(wad, level: level, category: category),
+        level_selector(wad, level: level, category: category, allow_all: false),
         '|',
-        category_selector(wad, level: level, category: category)
+        category_selector(wad, level: level, category: category, allow_all: false)
+      ].join(' ').html_safe
+    end
+  end
+
+  def history_wad_sub_header(wad, level: nil, category: nil)
+    content_tag :p, class: 'p-short one-line' do
+      [
+        demo_details(wad),
+        '|',
+        wad_view_selector(wad),
+        '|',
+        level_selector(wad, level: level, category: category, allow_all: true),
+        '|',
+        category_selector(wad, level: level, category: category, allow_all: true)
       ].join(' ').html_safe
     end
   end
@@ -140,6 +154,10 @@ module WadsHelper
       wad_table_view_path(category: category)
     elsif action_name == "leaderboard" then
       wad_leaderboard_path(level: level, category: category)
+    elsif action_name == "history" then
+      wad_history_path(level: level, category: category)
+    elsif action_name == "stats" then
+      wad_history_path(level: level, category: category)
     end
   end
 
@@ -147,6 +165,7 @@ module WadsHelper
     options = [
       {label: "Default View", path: wad_path(wad), selected: false},
       {label: "Table View",  path: wad_table_view_path(wad), selected: false},
+      {label: "History View",  path: wad_history_path(wad), selected: false},
       {label: "Leaderboard",  path: wad_leaderboard_path(wad), selected: false},
       {label: "Stats",  path: wad_stats_path(wad), selected: false}
     ]
@@ -158,7 +177,7 @@ module WadsHelper
     create_selector(options: options)
   end
 
-  def category_selector(wad, level: nil, category: nil)
+  def category_selector(wad, level: nil, category: nil, allow_all: true)
     options = Domain::Category.list(iwad: wad.iwad_short_name).compact.map do |cat|
       {
         label: cat.name,
@@ -167,23 +186,21 @@ module WadsHelper
       }
     end
 
-    # Allow showing all categories in the default view
-    if action_name == "show"
+    if allow_all
       options.unshift({label: 'Category Select', path: path_from_selector(level: level), selected: false})
     end
 
     create_selector(options: options)
   end
 
-  def level_selector(wad, level: nil, category: nil)
+  def level_selector(wad, level: nil, category: nil, allow_all: true)
     first = wad.demos.ils.select(:level).distinct.first
     first ||= wad.demos.movies.select(:level).distinct.first
     return '' if first.nil?
 
     options = []
 
-    # Allow grouped levels only in the default view
-    if action_name == "show" then
+    if allow_all
       options << {label: "Map Select", path: path_from_selector(category: category), selected: false}
 
       wad_episodes(wad).collect do |episode|

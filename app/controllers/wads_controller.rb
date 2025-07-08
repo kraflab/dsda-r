@@ -152,15 +152,11 @@ class WadsController < ApplicationController
 
   def table_view
     @wad = Domain::Wad.single(short_name: params[:id], assert: true)
-    @category = params[:category] || default_table_view_category
+    @category = params[:category] || Domain::Category.list(iwad: @wad.iwad_short_name).first.name
     levels = Domain::Wad::TableLevelList.call(@wad, @category)
     @demos = Domain::Demo.standard_record_list(
       wad_id: @wad.id, levels: levels, category: @category, very_soft: true
     )
-  end
-
-  def default_table_view_category
-    Domain::Category.list(iwad: @wad.iwad_short_name).first.name
   end
 
   def leaderboard
@@ -170,5 +166,30 @@ class WadsController < ApplicationController
     @demos = Domain::Demo.list(
       wad_id: @wad.id, soft_category: @category, level: @level, standard: true
     ).to_a.sort_by { |d| d.tics }.uniq { |d| d.players.first.id }
+  end
+
+  def history
+    @wad = Domain::Wad.single(short_name: params[:id], assert: true)
+    @category = params[:category]
+    @level = params[:level]
+    @demos = Domain::Demo.list(
+      wad_id: @wad.id, soft_category: @category
+    )
+
+    if @level.is_a?(String) && @level.include?('ILs')
+      episode = @level.split(' ')[1].to_i
+      @demos = @demos.episode(episode)
+    elsif @level == 'Movies'
+      @demos = @demos.show_movies
+    elsif !@level.nil?
+      @demos = @demos.where(level: @level)
+    end
+
+    @demos = @demos.includes(:players)
+                    .includes(:demo_file)
+                    .includes(:wad)
+                    .reorder(recorded_at: :desc)
+                    .order('wads.short_name', :level, :category_id, :tics)
+                    .page(params[:page])
   end
 end

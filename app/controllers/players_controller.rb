@@ -46,6 +46,7 @@ class PlayersController < ApplicationController
                      .includes(:wad)
                      .reorder(recorded_at: :desc)
                      .order('wads.short_name', :level, :category_id, :tics)
+                     .page(params[:page])
   end
 
   def stats
