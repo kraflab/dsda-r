@@ -44,7 +44,7 @@ class PlayersController < ApplicationController
                      .includes(:category)
                      .includes(:demo_file)
                      .includes(:wad)
-                     .reorder(recorded_at: :desc)
+                     .reorder(Arel.sql('recorded_at DESC NULLS LAST'))
                      .order('wads.short_name', :level, :category_id, :tics)
                      .page(params[:page])
   end

@@ -188,7 +188,7 @@ class WadsController < ApplicationController
     @demos = @demos.includes(:players)
                     .includes(:demo_file)
                     .includes(:wad)
-                    .reorder(recorded_at: :desc)
+                    .reorder(Arel.sql('recorded_at DESC NULLS LAST'))
                     .order('wads.short_name', :level, :category_id, :tics)
                     .page(params[:page])
   end

@@ -1,8 +1,8 @@
 module DemosHelper
   def demo_feed_sub_header
     options = [
-      {label: "Sort by Upload Date", path: feed_path(sort_by: "upload_date"), selected: false},
-      {label: "Sort by Record Date", path: feed_path(sort_by: "record_date"), selected: false}
+      {label: "Sort by Upload Date", path: feed_path(sort_by: "upload_date", page: @page), selected: false},
+      {label: "Sort by Record Date", path: feed_path(sort_by: "record_date", page: @page), selected: false}
     ]
 
     options.each do |opt|

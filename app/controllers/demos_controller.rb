@@ -31,7 +31,8 @@ class DemosController < ApplicationController
                             else
                               [:order_by_id, :created_at]
                             end
-    @demos = Domain::Demo.list(page: params[:page] || 1, sort_key => :desc)
+    @page = params[:page]
+    @demos = Domain::Demo.list(page: @page || 1, sort_key => :desc)
                .includes(:players).includes(:category).includes(:demo_file)
                .includes(wad: :iwad)
   end
