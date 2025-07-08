@@ -19,3 +19,15 @@
 .toggle-search-results[aria-expanded="false"] .glyphicon-chevron-down {
   transform: rotate(-90deg);
 }
+
+.error-404 {
+  color: white;
+  font-size: 15em;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  white-space: nowrap;
+}
+
+.error-404 img {
+  height: 1em;
+}

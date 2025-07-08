@@ -56,4 +56,6 @@ Rails.application.routes.draw do
   resources :ports, only: [:index], :id => /([^\/])+/ do
     get :autocomplete_port_family, :on => :collection
   end
+
+  match '*unmatched', to: 'static_pages#not_found', via: :all
 end

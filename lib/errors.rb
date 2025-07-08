@@ -37,7 +37,10 @@ module Errors
       end
 
       base.rescue_from ActiveRecord::RecordNotFound do |e|
-        render json: { errors: 'Not Found' }, status: 404
+        respond_to do |format|
+          format.html { render 'static_pages/not_found', status: :not_found }
+          format.json { render json: { errors: 'Not found' }, status: :not_found }
+        end
       end
     end
   end
