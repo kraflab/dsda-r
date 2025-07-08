@@ -23,11 +23,13 @@
 .error-404 {
   color: white;
   font-size: 15em;
-  image-rendering: pixelated;
-  image-rendering: crisp-edges;
+  font-weight: bold;
   white-space: nowrap;
 }
 
 .error-404 img {
   height: 1em;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  padding: 0;
 }
