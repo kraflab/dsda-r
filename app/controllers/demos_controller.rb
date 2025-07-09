@@ -63,7 +63,7 @@ class DemosController < ApplicationController
     render json: { success: true }, status: :ok
   end
 
-  def record
+  def api_record
     wad = Domain::Wad.single(short_name: params[:wad])
     demo = wad.present? && Domain::Demo.standard_record(
       wad_id: wad.id,

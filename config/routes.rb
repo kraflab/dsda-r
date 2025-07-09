@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'changelog' => 'static_pages#changelog'
   get 'stream' => 'static_pages#stream'
   get 'advice' => 'static_pages#advice'
+  get 'api_docs' => 'static_pages#api_docs'
 
   get 'guides/crispy_doom' => 'guides#crispy_doom'
   get 'guides/prboom_plus' => 'guides#dsda_doom'
@@ -33,7 +34,7 @@ Rails.application.routes.draw do
   post  'api/tokens/'       => "tokens#api_create"
   post  'api/otp/'          => "otp#reset"
 
-  get 'api/demos/records' => 'demos#record'
+  get 'api/demos/records' => 'demos#api_record'
 
   get 'no_file' => "static_pages#no_file"
 

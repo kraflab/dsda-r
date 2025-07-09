@@ -42,6 +42,9 @@ class StaticPagesController < ApplicationController
   def advice
   end
 
+  def api_docs
+  end
+
   def not_found
   end
 end
