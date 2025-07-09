@@ -31,9 +31,9 @@ class WadsCreateTest < ActionDispatch::IntegrationTest
     assert created_wad.present?
     assert_equal created_wad.parent, wads(:wad_1)
     response_hash = JSON.parse(response.body)
-    assert response_hash['save']
-    assert_equal response_hash['id'], created_wad.id
-    assert_equal response_hash['file_id'], created_wad.wad_file.id
+    assert_equal response_hash['short_name'], created_wad.short_name
+    assert_equal response_hash['name'], created_wad.name
+    assert_equal response_hash['author'], created_wad.author
   end
 
   test 'invalid wad upload' do

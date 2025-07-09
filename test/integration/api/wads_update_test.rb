@@ -21,9 +21,9 @@ class WadsUpdateTest < ActionDispatch::IntegrationTest
     assert_equal @wad.author, 'fred'
     assert_equal @wad.parent, wads(:wad_1)
     response_hash = JSON.parse(response.body)
-    assert response_hash['save']
-    assert_equal response_hash['id'], @wad.id
-    assert_equal response_hash['file_id'], @wad.wad_file.id
+    assert_equal response_hash['short_name'], @wad.short_name
+    assert_equal response_hash['name'], @wad.name
+    assert_equal response_hash['author'], @wad.author
   end
 
   test 'invalid wad update' do

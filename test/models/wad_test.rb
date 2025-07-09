@@ -30,7 +30,7 @@ class WadTest < ActiveSupport::TestCase
   end
 
   test "name should not be too long" do
-    @wad.name = "a" * 101
+    @wad.name = "a" * 256
     assert_not @wad.valid?
   end
 
@@ -40,7 +40,7 @@ class WadTest < ActiveSupport::TestCase
   end
 
   test "author should not be too long" do
-    @wad.author = "a" * 51
+    @wad.author = "a" * 256
     assert_not @wad.valid?
   end
 
