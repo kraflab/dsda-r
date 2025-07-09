@@ -2,60 +2,39 @@
 <% provide(:description, 'Documentation for the DSDA API') %>
 
 <div class="center-text">
-  <details open class="docs-details left-text">
-    <summary class="docs-summary">GET /api/demos/records</summary>
-    <p>
-      Returns the record demo for a specific run
-    </p>
-    <br>
-    <table class="table docs-table">
-      <thead>
-        <tr>
-          <th>Parameter</th>
-          <th>Required</th>
-          <th>Type</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>wad</code></td>
-          <td>Yes</td>
-          <td>string</td>
-          <td>The WAD's short name</td>
-        </tr>
-        <tr>
-          <td><code>level</code></td>
-          <td>Yes</td>
-          <td>string</td>
-          <td>The level name</td>
-        </tr>
-        <tr>
-          <td><code>category</code></td>
-          <td>Yes</td>
-          <td>string</td>
-          <td>The category name</td>
-        </tr>
-      </tbody>
-    </table>
-    <hr>
-    <h5>Example Request</h5>
-    <pre class="docs-pre">https://dsdarchive.com/api/demos/records?wad=doom2&level=Map+01&category=UV+Speed</pre>
-    <hr>
-    <h5>Example Response (200 OK)</h5>
-<pre class="docs-pre">{
-  "player": "4shockblast",
-  "time": "0:04.97",
-  "category": "Pacifist",
-  "level": "Map 01",
-  "wad": "doom2",
-  "wad_name": "Doom II: Hell on Earth",
-  "engine": "DSDA-Doom v0.27.5cl2",
-  "date": "2024-04-06T03:46:50.000Z",
-  "notes": [
-    "Also Reality"
-  ],
-  "file": "http://dsdarchive.com/files/demos/doom2/88132/pa01-497.zip"
-}</pre>
-    </details
+  <div class="docs-container">
+    <% get_docs().map.with_index do |c, i| %>
+      <details <%= "open" if i == 0 %> class="docs-details left-text">
+        <summary class="docs-summary"><%= c[:endpoint] %></summary>
+        <p><%= c[:description] %></p>
+        <br>
+        <table class="table docs-table">
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Required</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% c[:parameters].map do |p| %>
+              <tr>
+                <td><code><%= p[:name] %></code></td>
+                <td><%= p[:required] %></td>
+                <td><%= p[:type] %></td>
+                <td><%= p[:description] %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <hr>
+        <h5>Example Request</h5>
+        <pre class="docs-pre"><%= c[:example_request] %></pre>
+        <hr>
+        <h5>Example Response (200 OK)</h5>
+        <pre class="docs-pre"><%= c[:example_response] %></pre>
+      </details>
+    <% end %>
+  </div>
 </div>
