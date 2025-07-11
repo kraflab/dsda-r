@@ -42,7 +42,7 @@ module Domain
       query = query.where(guys: guys) if guys
       query = query.standard if standard
       query = query.reorder(:tics) if order_by_tics
-      query = query.reorder(recorded_at: order_by_record_date) if order_by_record_date
+      query = query.reorder(Arel.sql('recorded_at DESC NULLS LAST')) if order_by_record_date
       query = query.reorder(id: order_by_id) if order_by_id
       query = query.page(page) if page
       query
