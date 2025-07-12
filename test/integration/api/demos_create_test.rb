@@ -35,9 +35,9 @@ class DemosCreateTest < ActionDispatch::IntegrationTest
     created_demo = Demo.find_by(tics: 7113)
     assert created_demo.present?
     response_hash = JSON.parse(response.body)
-    assert response_hash['save']
-    assert_equal response_hash['demo']['id'], created_demo.id
-    assert_equal response_hash['demo']['file_id'], created_demo.demo_file.id
+    assert_equal response_hash['players'], created_demo.players.map(&:name)
+    assert_equal response_hash['time'], created_demo.time
+    assert_equal response_hash['category'], created_demo.category_name
   end
 
   test 'invalid demo upload' do

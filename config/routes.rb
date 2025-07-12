@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   post  'api/otp/'          => "otp#reset"
 
   get 'api/demos/records' => 'demos#api_record'
+  get 'api/demos' => 'demos#api_demos'
   get 'api/wads/:id' => 'wads#api_get'
 
   get 'no_file' => "static_pages#no_file"

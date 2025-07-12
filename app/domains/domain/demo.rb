@@ -27,10 +27,9 @@ module Domain
 
     # Soft category pulls in related categories
     def list(
-      wad_id: nil, tas: nil, guys: nil, level: nil, standard: nil,
-      category: nil, soft_category: nil, categories: nil,
-      order_by_tics: nil, order_by_record_date: nil, order_by_id: nil,
-      solo_net: nil, page: nil
+      wad_id: nil, tas: nil, guys: nil, level: nil, standard: nil, only_records: nil,
+      category: nil, soft_category: nil, categories: nil, solo_net: nil,
+      order_by: nil, order_direction: nil, page: nil, per: nil
     )
       query = ::Demo.all
       query = query.where(wad_id: wad_id) if wad_id
@@ -41,10 +40,11 @@ module Domain
       query = query.where(solo_net: solo_net) if !solo_net.nil?
       query = query.where(guys: guys) if guys
       query = query.standard if standard
-      query = query.reorder(:tics) if order_by_tics
-      query = query.reorder(Arel.sql('recorded_at DESC NULLS LAST')) if order_by_record_date
-      query = query.reorder(id: order_by_id) if order_by_id
+      query = query.only_records if only_records
+      query = query.reorder((order_by || :tics) => (order_direction || :asc)) if order_by || order_direction
+      query = query.order(Arel.sql('recorded_at ASC NULLS LAST')) if order_by == :tics # Resolve tic ties
       query = query.page(page) if page
+      query = query.per(per) if per
       query
     end
 

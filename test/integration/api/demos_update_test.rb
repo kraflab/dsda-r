@@ -36,9 +36,9 @@ class DemosUpdateTest < ActionDispatch::IntegrationTest
     assert_equal @demo.players.first.name, 'elim'
     assert_equal @demo.sub_categories.map(&:name), ['Ballerina']
     response_hash = JSON.parse(response.body)
-    assert response_hash['save']
-    assert_equal response_hash['demo']['id'], @demo.id
-    assert_equal response_hash['demo']['file_id'], @demo.demo_file.id
+    assert_equal response_hash['players'], @demo.players.map(&:name)
+    assert_equal response_hash['time'], @demo.time
+    assert_equal response_hash['category'], @demo.category_name
   end
 
   test 'update via id' do

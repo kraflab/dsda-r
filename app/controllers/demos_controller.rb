@@ -27,12 +27,12 @@ class DemosController < ApplicationController
 
   def feed
     sort_key, @sort_field = if params[:sort_by] == 'record_date'
-                              [:order_by_record_date, :recorded_at]
+                              [:recorded_at, :recorded_at]
                             else
-                              [:order_by_id, :created_at]
+                              [:id, :created_at]
                             end
     @page = params[:page]
-    @demos = Domain::Demo.list(page: @page || 1, sort_key => :desc)
+    @demos = Domain::Demo.list(page: @page || 1, order_by: sort_key, order_direction: :desc)
                .includes(:players).includes(:category).includes(:demo_file)
                .includes(wad: :iwad)
   end
@@ -42,7 +42,7 @@ class DemosController < ApplicationController
 
     preprocess_api_request(require: [:demo])
     demo = Domain::Demo.create(**@request_hash[:demo])
-    render json: DemoSerializer.new(demo).call
+    render json: DemoSerializer.new(demo, request.base_url).call
   end
 
   def api_update
@@ -52,7 +52,7 @@ class DemosController < ApplicationController
     demo = find_demo
     params = @request_hash[:demo_update].slice(*ALLOWED_UPDATE_PARAMS)
     Domain::Demo.update(**params.merge(id: demo.id))
-    render json: DemoSerializer.new(demo).call
+    render json: DemoSerializer.new(demo.reload, request.base_url).call
   end
 
   def api_delete
@@ -71,6 +71,42 @@ class DemosController < ApplicationController
       category: params[:category]
     )
     render json: RecordSerializer.call(demo, wad, request.base_url)
+  end
+
+  def api_demos
+    wad = Domain::Wad.single(short_name: params[:wad])
+    level = params[:level]
+    category = params[:category]
+    only_records = params[:only_records] && ActiveModel::Type::Boolean.new.cast(params[:only_records])
+
+    order_param = params[:sort_by] || 'time:asc'
+    order_by, order_direction = order_param.split(':')
+    if order_by == 'date'
+      order_by = :recorded_at
+    elsif order_by == 'id'
+      order_by = :id
+    else
+      order_by = :tics
+    end
+    order_direction = order_direction&.downcase == 'desc' ? :desc : :asc
+
+    page = params[:page] || 1
+    per = params[:per] || 20
+    per = 200 if per.to_i > 200
+
+    demos = Domain::Demo.list(wad_id: wad&.id, level: level, category: category,
+                              only_records: only_records,
+                              page: page, per: per, order_by: order_by, order_direction: order_direction)
+                        .includes(:players).includes(:category).includes(:demo_file)
+                        .includes(wad: :iwad)
+
+    render json: {
+      demos: demos.map { |demo| DemoSerializer.call(demo, request.base_url) },
+      page: page,
+      per: per,
+      total_pages: demos.total_pages,
+      total_demos: demos.total_count
+    }
   end
 
   def hidden_tag

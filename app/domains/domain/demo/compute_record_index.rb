@@ -22,7 +22,7 @@ module Domain
         Demo.list(
           wad_id: demo.wad_id, level: demo.level, categories: categories,
           standard: true,
-          order_by_tics: true
+          order_by: :tics
         )
       end
 
