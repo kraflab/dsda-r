@@ -40,6 +40,15 @@
   display: inline-block;
 }
 
+.docs-intro {
+  color: #ccc;
+  background-color: $table-bg-accent;
+  border: 1px solid $table-border-color;
+  border-radius: 10px;
+  padding: 1em;
+  margin-top: 1em;
+}
+
 .docs-details {
   color: #ccc;
   background-color: $table-bg;

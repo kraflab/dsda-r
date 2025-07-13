@@ -91,7 +91,7 @@ class DemosController < ApplicationController
     order_direction = order_direction&.downcase == 'desc' ? :desc : :asc
 
     page = params[:page] || 1
-    per = params[:per] || 20
+    per = params[:per] || 50
     per = 200 if per.to_i > 200
 
     demos = Domain::Demo.list(wad_id: wad&.id, level: level, category: category,

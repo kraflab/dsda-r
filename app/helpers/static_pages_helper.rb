@@ -2,8 +2,57 @@ module StaticPagesHelper
   def get_docs()
     [
       {
+        endpoint: 'GET /api/demos',
+        description: 'This is the main endpoint to query demo lists. It can be used to get all demos from a wad for displaying tables, or getting the feed by sorting by last id.<br>
+                      It doesnt crosslist the record, so you are better off using /api/demos/records if you just need the record of a certain category (for example Doom2 Map01 UV will give you a list without any record, since the first place is in the Pacifist category).',
+        parameters: [
+          { name: 'wad', required: false, type: 'string', description: "The wad's short name" },
+          { name: 'level', required: false, type: 'string', description: "The level name" },
+          { name: 'category', required: false, type: 'string', description: "The category name" },
+          { name: 'only_records', required: false, type: 'bool', description: "Whether to only list demos that are records (default = <code>false</code>)" },
+          { name: 'sort_by', required: false, type: 'string', description: "The field to sort the list by and in what direction.<br> The allowed fields are <code>id</code>, <code>time</code> and <code>date</code>. The direction can be <code>asc</code> or <code>desc</code>. (default = <code>time:asc</code>)" },
+          { name: 'page', required: false, type: 'integer', description: "The page number (default = <code>1</code>)" },
+          { name: 'per', required: false, type: 'integer', description: "How many demos to show per page (default = <code>50</code>, max = <code>200</code>)" }
+        ],
+        example_request: 'https://dsdarchive.com/api/demos?wad=doom2&only_records=true&sort_by=date:asc&page=2',
+        example_response: <<~JSON
+        {
+          "demos": [
+            {
+              "id": 114,
+              "players": [
+                  "first"
+              ],
+              "time": "0:15.00",
+              "category": "NoMo",
+              "level": "Map 01",
+              "wad": "alpha",
+              "engine": "Heretic v1.3",
+              "date": "2003-04-09T02:39:12.000Z",
+              "tic_record": true,
+              "undisputed_record": false,
+              "second_barrier": false,
+              "tas": false,
+              "guys": 1,
+              "suspect": false,
+              "cheated": false,
+              "notes": [],
+              "file": "http://localhost:3000/files/demos/alpha/1/demo.zip",
+              "video_url": null
+            },
+
+            ...
+          ],
+          "page": 1,
+          "per": 50,
+          "total_pages": 2,
+          "total_demos": 25
+        }
+        JSON
+      },
+      {
         endpoint: 'GET /api/demos/records',
-        description: 'Returns the record demo for a specific run',
+        description: 'Returns the record demo for a specific run (crosslisted).',
         parameters: [
           { name: 'wad', required: true, type: 'string', description: "The wad's short name" },
           { name: 'level', required: true, type: 'string', description: "The level name" },
