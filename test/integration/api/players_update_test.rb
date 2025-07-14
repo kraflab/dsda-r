@@ -19,8 +19,8 @@ class PlayersUpdateTest < ActionDispatch::IntegrationTest
     @player.reload
     assert_equal @player.username, 'elim2'
     response_hash = JSON.parse(response.body)
-    assert response_hash['save']
-    assert_equal response_hash['player']['id'], @player.id
+    assert_equal response_hash['name'], @player.name
+    assert_equal response_hash['username'], @player.username
   end
 
   test 'invalid player update' do

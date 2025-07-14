@@ -20,9 +20,8 @@ class PlayersCreateTest < ActionDispatch::IntegrationTest
     created_player = Player.find_by(name: 'Bram Stoker')
     assert created_player.present?
     response_hash = JSON.parse(response.body)
-    assert response_hash['save']
-    assert_equal response_hash['player']['id'], created_player.id
-    assert_equal response_hash['player']['username'], created_player.username
+    assert_equal response_hash['name'], created_player.name
+    assert_equal response_hash['username'], created_player.username
   end
 
   test 'invalid player upload' do
