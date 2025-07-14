@@ -20,6 +20,7 @@ module Domain
           .where(category: categories)
           .standard
           .reorder(:tics)
+          .order(:recorded_at)
       end
     end
   end

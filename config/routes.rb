@@ -35,8 +35,8 @@ Rails.application.routes.draw do
   post  'api/otp/'          => "otp#reset"
 
   get 'api/demos' => 'demos#api_demos'
-  get 'api/demos/:id' => 'demos#api_get'
   get 'api/demos/records' => 'demos#api_records'
+  get 'api/demos/:id' => 'demos#api_get'
   get 'api/wads/:id' => 'wads#api_get'
   get 'api/players' => 'players#api_players'
   get 'api/players/:id' => 'players#api_get'

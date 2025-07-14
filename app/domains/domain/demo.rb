@@ -42,7 +42,7 @@ module Domain
       query = query.standard if standard
       query = query.only_records if only_records
       query = query.reorder((order_by || :tics) => (order_direction || :asc)) if order_by || order_direction
-      query = query.order(Arel.sql('recorded_at ASC NULLS LAST')) if order_by == :tics # Resolve tic ties
+      query = query.order(Arel.sql('recorded_at ASC NULLS LAST')) if order_by != :recorded_at # Resolve ties
       query = query.page(page) if page
       query = query.per(per) if per
       query
