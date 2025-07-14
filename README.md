@@ -45,7 +45,8 @@ The archive can be set up locally for testing purposes. The steps are relatively
     - `db:reset` resets the database, migrates it to the current schema, and adds seed data
 7) Run `bundle exec rails s` to start the server (`s` means server)
 8) Navigate a browser to `localhost:3000` (may take time to load)
-9) Click on Wads to see the list of wads
-10) Click on the one with lots of demos
-11) Download one of the demos to confirm everything is set up
-    - The files are plain text, so you can open the "zip" in any editor
+
+#### Some other helpful commands:
+- `bundle exec rails t` to run tests
+- `bundle exec cap production deploy` to deploy to production
+- `bundle exec cap production invoke:rake TASK=manual:update_records` to recalculate the records and record index of all demos (this can take more than an hour)
