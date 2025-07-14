@@ -29,9 +29,7 @@ class PlayerSerializer
       name: player.name,
       stats: {
         demo_count: player.demo_count,
-        total_demo_time: player.total_demo_time,
-        average_demo_time: player.average_demo_time,
-        longest_demo_time: player.longest_demo_time,
+        total_demo_time: player.total_demo_time
       }
     }
   end

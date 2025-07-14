@@ -11,6 +11,8 @@ module Service
       private
 
       def split_tics_time(cs)
+        return [0, 0, 0, 0] if cs.nil?
+
         s = cs / 100; cs %= 100
         m =  s / 60;   s %= 60
         h =  m / 60;   m %= 60

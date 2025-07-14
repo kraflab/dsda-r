@@ -6,7 +6,7 @@ class StaticPagesController < ApplicationController
 
   def stats
     @record_index_players =
-      Domain::Player.list(by_record_index: true, limit: RECORD_INDEX_LIMIT)
+      Domain::Player.list(by_record_index: true, page: 1, per: RECORD_INDEX_LIMIT)
   end
 
   def about

@@ -84,4 +84,20 @@ class PlayersController < ApplicationController
     player = Domain::Player.single(username: params[:id])
     render json: PlayerSerializer.call(player)
   end
+
+  def api_players
+    page = params[:page] || 1
+    per = params[:per] || 100
+    per = 50 if per.to_i > 200
+
+    players = Domain::Player.list(page: page, per: per)
+
+    render json: {
+      players: players.map { |player| PlayerSerializer.call(player) },
+      page: players.current_page,
+      per: players.limit_value,
+      total_pages: players.total_pages,
+      total_players: players.total_count
+    }
+  end
 end

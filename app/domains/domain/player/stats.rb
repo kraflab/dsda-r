@@ -34,6 +34,8 @@ module Domain
       end
 
       def average_demo_count(player)
+        return 0 if wad_count(player) == 0
+
         demo_count(player) / wad_count(player)
       end
 

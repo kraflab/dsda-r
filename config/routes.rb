@@ -38,6 +38,7 @@ Rails.application.routes.draw do
   get 'api/demos/:id' => 'demos#api_get'
   get 'api/demos/records' => 'demos#api_records'
   get 'api/wads/:id' => 'wads#api_get'
+  get 'api/players' => 'players#api_players'
   get 'api/players/:id' => 'players#api_get'
 
   get 'no_file' => "static_pages#no_file"

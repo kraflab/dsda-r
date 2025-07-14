@@ -2,10 +2,11 @@ module Domain
   module Player
     extend self
 
-    def list(by_record_index: false, limit: nil)
+    def list(by_record_index: false, page: nil, per: nil)
       query = ::Player.all
       query = query.record_index_order if by_record_index
-      query = query.limit(limit) if limit
+      query = query.page(page) if page
+      query = query.per(per) if per
       query
     end
 

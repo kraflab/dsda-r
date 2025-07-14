@@ -43,7 +43,7 @@ module StaticPagesHelper
 
             ...
           ],
-          "page": "4",
+          "page": 4,
           "per": 50,
           "total_pages": 7,
           "total_demos": 335
@@ -52,7 +52,7 @@ module StaticPagesHelper
       },
       { # GET /api/demos/{id}
         endpoint: 'GET /api/demos/{id}',
-        description: 'Returns a specific demo details',
+        description: 'Returns a specific demo details.',
         parameters: [
           { name: 'id', required: true, type: 'integer', description: "The demo's id" },
         ],
@@ -107,6 +107,35 @@ module StaticPagesHelper
         }
         JSON
       },
+      { # GET /api/players
+        endpoint: 'GET /api/players',
+        description: 'Returns an alphabetical list of players.',
+        parameters: [
+          { name: 'page', required: false, type: 'integer', description: "The page number (default = <code>1</code>)" },
+          { name: 'per', required: false, type: 'integer', description: "How many players to show per page (default = <code>50</code>, max = <code>200</code>)" }
+        ],
+        example_request: 'https://dsdarchive.com/api/players?page=4&per=200',
+        example_response: <<~JSON
+        {
+          "players": [
+            {
+              "username": "kyle_mcawesome",
+              "name": "Kyle McAwesome",
+              "stats": {
+                "demo_count": 1644,
+                "total_demo_time": "54:11:18.29",
+              }
+            },
+
+            ...
+          ],
+          "page": 4,
+          "per": 200,
+          "total_pages": 7,
+          "total_players": 1294
+        }
+        JSON
+      },
       { # GET /api/players/{username}
         endpoint: 'GET /api/players/{username}',
         description: 'Returns a specific players details',
@@ -121,15 +150,13 @@ module StaticPagesHelper
           "stats": {
             "demo_count": 1740,
             "total_demo_time": "153:39:19.78",
-            "average_demo_time": "5:17.90",
-            "longest_demo_time": "1:46:45.00"
           }
         }
         JSON
       },
       { # GET /api/wads/{short_name}
         endpoint: 'GET /api/wads/{short_name}',
-        description: 'Returns a specific wad details',
+        description: 'Returns a specific wad details.',
         parameters: [
           { name: 'short_name', required: true, type: 'string', description: "The wad's short name" },
         ],

@@ -107,8 +107,8 @@ class DemosController < ApplicationController
 
     render json: {
       demos: demos.map { |demo| DemoSerializer.call(demo, request.base_url) },
-      page: page,
-      per: per,
+      page: demos.current_page,
+      per: demos.limit_value,
       total_pages: demos.total_pages,
       total_demos: demos.total_count
     }
