@@ -14,21 +14,21 @@ module StaticPagesHelper
           { name: 'page', required: false, type: 'integer', description: "The page number (default = <code>1</code>)" },
           { name: 'per', required: false, type: 'integer', description: "How many demos to show per page (default = <code>50</code>, max = <code>200</code>)" }
         ],
-        example_request: 'https://dsdarchive.com/api/demos?wad=doom2&only_records=true&sort_by=date:asc&page=2',
+        example_request: 'https://dsdarchive.com/api/demos?wad=plutonia&only_records=true&sort_by=date:asc&page=4',
         example_response: <<~JSON
         {
           "demos": [
             {
-              "id": 114,
+              "id": 65897,
               "players": [
-                  "first"
+                  "aconfusedhuman"
               ],
-              "time": "0:15.00",
-              "category": "NoMo",
-              "level": "Map 01",
-              "wad": "alpha",
-              "engine": "Heretic v1.3",
-              "date": "2003-04-09T02:39:12.000Z",
+              "time": "1:32.94",
+              "category": "NM 100S",
+              "level": "Map 08",
+              "wad": "plutonia",
+              "engine": "DSDA-Doom v0.19.7cl4",
+              "date": "2021-09-12T23:28:06.000Z",
               "tic_record": true,
               "undisputed_record": false,
               "second_barrier": false,
@@ -37,16 +37,16 @@ module StaticPagesHelper
               "suspect": false,
               "cheated": false,
               "notes": [],
-              "file": "http://localhost:3000/files/demos/alpha/1/demo.zip",
-              "video_url": null
+              "file": "http://dsdarchive.com/files/demos/plutonia/55364/pl08ns132.zip",
+              "video_url": "https://www.youtube.com/watch?v=C16SKN69pWU"
             },
 
             ...
           ],
-          "page": 1,
+          "page": "4",
           "per": 50,
-          "total_pages": 2,
-          "total_demos": 25
+          "total_pages": 7,
+          "total_demos": 335
         }
         JSON
       },
