@@ -3,8 +3,8 @@
     <td class="wadfile"><%= link_to wad.short_name, wad %></td>
     <td><%= wad.name.truncate(25) %></td>
     <td><%= wad.author %></td>
-    <% data = count_and_total_time(wad, false) %>
-    <td><%= data.count %></td>
-    <td class="right-text demo-time"><%= data.total_time %></td>
+    <% data = FastStats.count_and_total_time(wad, false) %>
+    <td><%= data.demo_count %></td>
+    <td class="right-text demo-time"><%= data.total_demo_time %></td>
   </tr>
 <% end %>

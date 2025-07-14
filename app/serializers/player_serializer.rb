@@ -27,10 +27,7 @@ class PlayerSerializer
     {
       username: player.username,
       name: player.name,
-      stats: {
-        demo_count: player.demo_count,
-        total_demo_time: player.total_demo_time
-      }
+      stats: FastStats.count_and_total_time(player, false).table
     }
   end
 end
