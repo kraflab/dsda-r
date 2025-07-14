@@ -79,4 +79,9 @@ class PlayersController < ApplicationController
     Domain::Player.merge(from: params[:from], into: params[:into])
     render json: { merged: true }
   end
+
+  def api_get
+    player = Domain::Player.single(username: params[:id])
+    render json: PlayerSerializer.call(player)
+  end
 end

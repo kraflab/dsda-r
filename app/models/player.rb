@@ -26,6 +26,14 @@ class Player < ApplicationRecord
     'https://www.youtube.com/' + youtube if youtube.present?
   end
 
+  def links
+    l = []
+    l += [twitch_url] if twitch.present?
+    l += [youtube_url] if youtube.present?
+
+    l
+  end
+
   # Override path
   def to_param
     username

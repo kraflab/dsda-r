@@ -81,7 +81,7 @@ module StaticPagesHelper
           ],
           "file": "http://dsdarchive.com/files/demos/doom/57604/e1m1ox774.zip",
           "video_url": null
-      }
+        }
         JSON
       },
       { # GET /api/demos/records
@@ -104,6 +104,26 @@ module StaticPagesHelper
           "date": "2024-04-06T03:46:50.000Z",
           "notes": ["Also Reality"],
           "file": "http://dsdarchive.com/files/demos/doom2/88132/pa01-497.zip"
+        }
+        JSON
+      },
+      { # GET /api/players/{username}
+        endpoint: 'GET /api/players/{username}',
+        description: 'Returns a specific players details',
+        parameters: [
+          { name: 'username', required: true, type: 'string', description: "The player's short and URL friendly username" },
+        ],
+        example_request: 'https://dsdarchive.com/api/players/xit_vono',
+        example_response: <<~JSON
+        {
+          "username": "xit_vono",
+          "name": "Xit Vono",
+          "stats": {
+            "demo_count": 1740,
+            "total_demo_time": "153:39:19.78",
+            "average_demo_time": "5:17.90",
+            "longest_demo_time": "1:46:45.00"
+          }
         }
         JSON
       },
