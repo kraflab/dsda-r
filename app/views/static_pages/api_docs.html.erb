@@ -40,7 +40,7 @@
       </table>
     </div>
     <% get_docs().map.with_index do |c, i| %>
-      <details <%= "open" if i == 0 %> class="docs-details left-text">
+      <details class="docs-details left-text">
         <summary class="docs-summary"><%= c[:endpoint].html_safe %></summary>
         <p><%= c[:description].html_safe %></p>
         <br>

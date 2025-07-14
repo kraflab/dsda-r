@@ -1,7 +1,7 @@
 module StaticPagesHelper
   def get_docs()
     [
-      {
+      { # GET /api/demos
         endpoint: 'GET /api/demos',
         description: 'This is the main endpoint to query demo lists. It can be used to get all demos from a wad for displaying tables, or getting the feed by sorting by last id.<br>
                       It doesnt crosslist the record, so you are better off using /api/demos/records if you just need the record of a certain category (for example Doom2 Map01 UV will give you a list without any record, since the first place is in the Pacifist category).',
@@ -21,7 +21,7 @@ module StaticPagesHelper
             {
               "id": 65897,
               "players": [
-                  "aconfusedhuman"
+                "aconfusedhuman"
               ],
               "time": "1:32.94",
               "category": "NM 100S",
@@ -50,7 +50,41 @@ module StaticPagesHelper
         }
         JSON
       },
-      {
+      { # GET /api/demos/{id}
+        endpoint: 'GET /api/demos/{id}',
+        description: 'Returns a specific demo details',
+        parameters: [
+          { name: 'id', required: true, type: 'integer', description: "The demo's id" },
+        ],
+        example_request: 'https://dsdarchive.com/api/demos/68170',
+        example_response: <<~JSON
+        {
+          "id": 68170,
+          "players": [
+            "almostmatt1"
+          ],
+          "time": "0:07.74",
+          "category": "Other",
+          "level": "E1M1",
+          "wad": "doom",
+          "engine": "XDRE v2.22a",
+          "date": "2021-11-02T01:30:44.000Z",
+          "tic_record": false,
+          "undisputed_record": false,
+          "second_barrier": false,
+          "tas": true,
+          "guys": 1,
+          "suspect": false,
+          "cheated": false,
+          "notes": [
+            "Nomo. Uses player 3 starting position."
+          ],
+          "file": "http://dsdarchive.com/files/demos/doom/57604/e1m1ox774.zip",
+          "video_url": null
+      }
+        JSON
+      },
+      { # GET /api/demos/records
         endpoint: 'GET /api/demos/records',
         description: 'Returns the record demo for a specific run (crosslisted).',
         parameters: [
@@ -73,7 +107,7 @@ module StaticPagesHelper
         }
         JSON
       },
-      {
+      { # GET /api/wads/{short_name}
         endpoint: 'GET /api/wads/{short_name}',
         description: 'Returns a specific wad details',
         parameters: [

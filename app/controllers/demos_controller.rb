@@ -63,7 +63,7 @@ class DemosController < ApplicationController
     render json: { success: true }, status: :ok
   end
 
-  def api_record
+  def api_records
     wad = Domain::Wad.single(short_name: params[:wad])
     demo = wad.present? && Domain::Demo.standard_record(
       wad_id: wad.id,
@@ -71,6 +71,11 @@ class DemosController < ApplicationController
       category: params[:category]
     )
     render json: RecordSerializer.call(demo, wad, request.base_url)
+  end
+
+  def api_get
+    demo = Domain::Demo.single(id: params[:id])
+    render json: DemoSerializer.call(demo, request.base_url)
   end
 
   def api_demos
