@@ -2,14 +2,14 @@
 <% provide(:description, "Speedrunning leaderboard for #{@wad.name}") %>
 
 <div class="center-text">
-  <% cache ['wad_leaderboard_header_v004', @wad, @category, @level] do %>
+  <% cache ['wad_leaderboard_header_v004', @wad] do %>
     <%= wad_header(@wad) %>
     <%= leaderboard_wad_sub_header(@wad, category: @category, level: @level) %>
   <% end %>
   <h3 class="list-title">
     <%= @level %> <%= @category %> Leaderboard
   </h3>
-  <% cache ['wad_leaderboard_v004', @demos, @category, @level] do %>
+  <% cache ['wad_leaderboard_v004', @demos] do %>
     <div class="panel panel-default panel-modest left-text">
       <table class="table table-striped table-modest">
         <thead>
