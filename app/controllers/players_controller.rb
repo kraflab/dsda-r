@@ -13,7 +13,7 @@ class PlayersController < ApplicationController
   ].freeze
 
   def index
-    @players = Domain::Player.list
+    @players = Domain::Player.list.page(params[:page])
   end
 
   def show
