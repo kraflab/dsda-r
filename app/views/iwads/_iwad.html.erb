@@ -1,7 +1,5 @@
-<% cache iwad do %>
-  <tr>
-    <td><%= link_to iwad.name, Wad.find_by(short_name: iwad.short_name) %></td>
-    <td><%= iwad.author %></td>
-    <td><%= link_to iwad.wads.count, iwad %></td>
-  </tr>
-<% end %>
+<tr>
+  <td><%= link_to iwad.name, iwad_path(iwad.short_name) %></td>
+  <td><%= iwad.author %></td>
+  <td><%= link_to iwad.wads.count, iwad %></td>
+</tr>

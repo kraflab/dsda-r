@@ -1,8 +1,6 @@
-<% cache player do %>
-  <tr>
-    <td><%= link_to player.name, player %></td>
-    <% data = FastStats.count_and_total_time(player, false) %>
-    <td><%= data.demo_count %></td>
-    <td class="right-text demo-time"><%= data.total_demo_time %></td>
-  </tr>
-<% end %>
+<tr>
+  <td><%= link_to player.name, player %></td>
+  <% data = FastStats.count_and_total_time(player, false) %>
+  <td><%= data.demo_count %></td>
+  <td class="right-text demo-time"><%= data.total_demo_time %></td>
+</tr>

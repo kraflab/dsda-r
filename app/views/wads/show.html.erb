@@ -2,11 +2,9 @@
 <% provide(:description, "List of #{@wad.name} speedrun demos") %>
 
 <div class="center-text">
-  <% cache ['wad_header_v013', @wad] do %>
-    <%= wad_version_banner(@wad) %>
-    <%= wad_header(@wad) %>
-    <%= wad_sub_header(@wad, category: @category, level: @level) %>
-  <% end %>
+  <%= wad_version_banner(@wad) %>
+  <%= wad_header(@wad) %>
+  <%= wad_sub_header(@wad, category: @category, level: @level) %>
 
   <% cache ['wad_demo_table_v003', @demos] do %>
     <div class="panel panel-default panel-modest left-text">

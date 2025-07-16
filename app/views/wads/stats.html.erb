@@ -2,10 +2,8 @@
 <% provide(:description, "Detailed stats for #{@wad.name} speedruns") %>
 
 <div class="center-text">
-  <% cache ['wad_stats_header_v001', @wad] do %>
-    <%= wad_header(@wad) %>
-    <%= stats_wad_sub_header(@wad, category: @category, level: @level) %>
-  <% end %>
+  <%= wad_header(@wad) %>
+  <%= stats_wad_sub_header(@wad, category: @category, level: @level) %>
 </div>
 
 <% demos = Demo.where(wad: @wad) %>

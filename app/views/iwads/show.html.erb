@@ -1,28 +1,28 @@
 <% provide(:title, @iwad.name) %>
 <% provide(:description, "List of WADs for #{@iwad.name}") %>
 
-<% cache @iwad do %>
-  <div class="center-text">
-    <%= iwad_header(@iwad) %>
-    <%= iwad_sub_header(@iwad) %>
+<div class="center-text">
+  <%= iwad_header(@iwad) %>
+  <%= iwad_sub_header(@iwad) %>
 
-    <div class="panel panel-default panel-modest left-text">
-      <table class="table table-striped table-modest">
-        <thead>
-          <tr>
-            <th>File</th>
-            <th>Name</th>
-            <th>Author</th>
-            <th>Demos</th>
-            <th class="center-text">Time</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @wads.each do |wad| %>
-            <%= render partial: 'wads/wad_for_iwad', locals: {wad: wad} %>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
+  <div class="panel panel-default panel-modest left-text">
+    <table class="table table-striped table-modest">
+      <thead>
+        <tr>
+          <th>File</th>
+          <th>Name</th>
+          <th>Author</th>
+          <th>Demos</th>
+          <th class="center-text">Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @wads.each do |wad| %>
+          <%= render partial: 'wads/wad_for_iwad', locals: {wad: wad} %>
+        <% end %>
+      </tbody>
+    </table>
   </div>
-<% end %>
+  <br>
+  <%= paginate @wads %>
+</div>

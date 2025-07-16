@@ -2,10 +2,8 @@
 <% provide(:description, "List of speedrun demos by #{@player.name}") %>
 
 <div class="center-text">
-  <% cache ['player_header_v004', @player] do %>
-    <%= player_header(@player) %>
-    <%= player_sub_header(@player) %>
-  <% end %>
+  <%= player_header(@player) %>
+  <%= player_sub_header(@player) %>
 
   <% cache ['player_demo_table_v002', @demos] do %>
     <div class="panel panel-default panel-modest left-text">

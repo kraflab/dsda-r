@@ -2,10 +2,9 @@
 <% provide(:description, "List of speedrun records by #{@player.name}") %>
 
 <div class="center-text">
-  <% cache ['player_record_view_header_v004', @player] do %>
-    <%= player_header(@player) %>
-    <%= player_record_view_sub_header(@player) %>
-  <% end %>
+  <%= player_header(@player) %>
+  <%= player_record_view_sub_header(@player) %>
+
   <h3 class="list-title">
     Records
   </h3>

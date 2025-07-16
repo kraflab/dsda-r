@@ -5,7 +5,7 @@ class IwadsController < ApplicationController
 
   def show
     @iwad = Domain::Iwad.single(short_name: params[:id], assert: true)
-    @wads = @iwad.wads
+    @wads = @iwad.wads.page(params[:page])
   end
 
   def stats

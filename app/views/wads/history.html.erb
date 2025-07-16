@@ -2,10 +2,9 @@
 <% provide(:description, "History of demos by #{@wad.name}") %>
 
 <div class="center-text">
-  <% cache ['wad_history_header_v001', @wad] do %>
-    <%= wad_header(@wad) %>
-    <%= history_wad_sub_header(@wad, category: @category, level: @level) %>
-  <% end %>
+  <%= wad_header(@wad) %>
+  <%= history_wad_sub_header(@wad, category: @category, level: @level) %>
+
   <h3 class="list-title">
     <%= @level %> <%= @category %> History
   </h3>
