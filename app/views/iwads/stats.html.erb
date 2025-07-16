@@ -9,7 +9,7 @@
 
 <% demos = Demo.where(wad: @iwad.wads) %>
 
-<% cache @iwad do %>
+<% cache ['iwad_stats_v001', @iwad] do %>
   <% stats = iwad_stats(@iwad) %>
 
   <h4>Number of demos = <%= stats[:demo_count] %></h4>
