@@ -34,6 +34,7 @@ class DemoSerializer
       wad: demo.wad.short_name,
       engine: demo.engine,
       date: demo.recorded_at,
+      upload_date: demo.created_at,
       tic_record: demo.tic_record,
       undisputed_record: demo.undisputed_record,
       second_barrier: demo.second_record,
