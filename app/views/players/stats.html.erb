@@ -8,7 +8,7 @@
 
 <% demos = @player.demos %>
 
-<% cache ['player_stats_v001', @player] do %>
+<% cache ['player_stats_v001', @player, demos.maximum(:updated_at)] do %>
   <% stats = player_stats(@player) %>
   <h4>Number of demos = <%= stats[:demo_count] %></h4>
   <h4>Longest demo = <%= stats[:longest_demo] %></h4>

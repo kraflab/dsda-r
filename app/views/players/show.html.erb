@@ -5,7 +5,7 @@
   <%= player_header(@player) %>
   <%= player_sub_header(@player) %>
 
-  <% cache ['player_show_v001', @demos] do %>
+  <% cache ['player_show_v001', @player, @demos.maximum(:updated_at)] do %>
     <div class="panel panel-default panel-modest left-text">
       <table class="table table-striped table-modest">
         <thead>
