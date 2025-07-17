@@ -31,11 +31,10 @@ $body-bg:               #060606 !default;
 //** Global text color on `<body>`.
 $text-color:            $gray-light !default;
 
-//** Global textual link color.
+//** Global textual links.
 $link-color:            $brand-primary !default;
-//** Link hover color set via `darken()` function.
+$link-decoration:       none !default;
 $link-hover-color:      $link-color !default;
-//** Link hover decoration.
 $link-hover-decoration: underline !default;
 
 
@@ -127,6 +126,7 @@ $table-cell-padding:            8px !default;
 //** Padding for cells in `.table-condensed`.
 $table-condensed-cell-padding:  5px !default;
 
+$table-text-color:              #fff !default;
 //** Default background color used for all tables.
 $table-bg:                      darken($gray-darker, 4%) !default;
 //** Background color used for `.table-striped`.
@@ -491,6 +491,8 @@ $jumbotron-bg:                   darken($gray-darker, 5%) !default;
 $jumbotron-heading-color:        inherit !default;
 $jumbotron-font-size:            ceil(($font-size-base * 1.5)) !default;
 $jumbotron-heading-font-size:    ceil(($font-size-base * 4.5)) !default;
+$jumbotron-border:               none !default;
+$jumbotron-border-radius:        0px !default;
 
 
 //== Form states and alerts

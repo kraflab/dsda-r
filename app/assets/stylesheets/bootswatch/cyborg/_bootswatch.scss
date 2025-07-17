@@ -47,10 +47,10 @@ $web-font-path: "https://fonts.googleapis.com/css?family=Roboto:400,700" !defaul
 
 table,
 .table {
-  color: #fff;
+  color: $table-text-color;
 
   a:not(.btn) {
-    color: #fff;
+    color: $table-text-color;
     text-decoration: underline;
   }
 
@@ -239,4 +239,7 @@ a.list-group-item {
   h1, h2, h3, h4, h5, h6 {
     color: #fff;
   }
+
+  border: $jumbotron-border;
+  border-radius: $jumbotron-border-radius;
 }

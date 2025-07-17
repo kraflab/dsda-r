@@ -63,5 +63,7 @@ Rails.application.routes.draw do
     get :autocomplete_port_family, :on => :collection
   end
 
+  post '/set_theme', to: 'themes#set', as: :set_theme
+
   match '*unmatched', to: 'static_pages#not_found', via: :all
 end

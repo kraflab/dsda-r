@@ -17,4 +17,17 @@ class ApplicationController < ActionController::Base
   def preprocess_api_request(options)
     @request_hash = ApiRequestParser.new(options.merge(request: request)).parse_json
   end
+
+  THEMES = %w[Default Sandy].freeze
+
+  helper_method :themes
+  def themes
+    THEMES
+  end
+
+  before_action :set_theme
+  def set_theme
+    @current_theme = 'default'
+    @current_theme = cookies[:theme].downcase if themes.include?(cookies[:theme])
+  end
 end

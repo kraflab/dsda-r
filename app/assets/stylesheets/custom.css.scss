@@ -6,6 +6,16 @@
 @import "static_pages.scss";
 @import "wads.scss";
 
+a {
+  color: $link-color;
+  text-decoration: $link-decoration;
+}
+
+a:hover {
+  color: $link-hover-color;
+  text-decoration: $link-hover-decoration;
+}
+
 code {
   background-color: transparent;
   color: $link-color
@@ -91,7 +101,7 @@ row-no-top {
 
 table a:not(.btn), .table a:not(.btn) {
   color: $link-color;
-  text-decoration: none;
+  text-decoration: $link-decoration;
 }
 
 .p-short {
@@ -197,4 +207,9 @@ span.glyphicon {
 
 .pagination {
   margin: 0;
+}
+
+.unstyled-button {
+  all: unset;
+  cursor: pointer;
 }

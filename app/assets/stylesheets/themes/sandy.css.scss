@@ -1,0 +1,29 @@
+body {
+  background-image: image-url("redsand.jpg");
+}
+
+$brand-primary: white;
+$text-color: #eee;
+
+$link-color: $brand-primary;
+$link-decoration: underline;
+$link-hover-color: $brand-primary;
+$link-hover-decoration: underline;
+
+$table-text-color: $text-color;
+$table-bg: #660001;
+$table-bg-accent: #820000;
+$table-border-color: white;
+
+$panel-bg: $table-bg-accent;
+$panel-inner-border: white;
+$panel-border-radius: 0;
+
+$jumbotron-bg: $table-bg;
+$jumbotron-border: solid 1px $table-border-color;
+
+.panel-heading {
+  background-color: $table-bg !important;
+}
+
+@import "custom";
