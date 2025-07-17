@@ -42,7 +42,7 @@ class DemosController < ApplicationController
 
     preprocess_api_request(require: [:demo])
     demo = Domain::Demo.create(**@request_hash[:demo])
-    render json: DemoSerializer.new(demo, request.base_url).call
+    render json: DemoUploadSerializer.new(demo).call
   end
 
   def api_update
@@ -52,7 +52,7 @@ class DemosController < ApplicationController
     demo = find_demo
     params = @request_hash[:demo_update].slice(*ALLOWED_UPDATE_PARAMS)
     Domain::Demo.update(**params.merge(id: demo.id))
-    render json: DemoSerializer.new(demo.reload, request.base_url).call
+    render json: DemoUploadSerializer.new(demo.reload).call
   end
 
   def api_delete
