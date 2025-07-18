@@ -8,7 +8,7 @@
 
 <% demos = Demo.where(wad: @wad) %>
 
-<% cache ['wad_stats_v001', @wad, demos.maximum(:updated_at)] do %>
+<% cache ['wad_stats_v001', @wad] do %>
   <% stats = wad_stats(@wad) %>
 
   <h4>Number of demos = <%= stats[:demo_count] %></h4>
