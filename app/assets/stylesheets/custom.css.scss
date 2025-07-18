@@ -51,6 +51,14 @@ row-no-top {
   margin-left: 5px;
 }
 
+.navbar-fixed-top {
+  background-color: rgba($gray-base, 0.3);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+  padding-top: 500px;
+  top: -500px;
+}
+
 .navbar-form {
   margin-top: 6px;
   padding-right: 0;

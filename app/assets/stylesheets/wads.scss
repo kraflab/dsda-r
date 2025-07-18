@@ -22,6 +22,7 @@
   color: $link-color;
   background-color: transparent;
   border-color: transparent;
+  text-decoration: $link-decoration;
   cursor: pointer;
 }
 
@@ -52,10 +53,11 @@
 .dropdown-menu a {
   white-space: nowrap;
   border-radius: 5px;
+  text-decoration: none;
 }
 
 .dropdown-menu a:hover {
-  background-color: $link-hover-color !important;
+  background-color: $component-active-bg !important;
 }
 
 .dropdown-selected {
