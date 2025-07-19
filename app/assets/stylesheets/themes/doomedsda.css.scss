@@ -27,4 +27,12 @@ $jumbotron-border: solid 1px $table-border-color;
   background-color: $table-bg !important;
 }
 
+.navbar a:hover, .navbar li:hover {
+  text-decoration: $link-hover-decoration;
+}
+
+hr {
+  border-top: 1px solid white;
+}
+
 @import "custom";

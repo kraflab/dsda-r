@@ -63,7 +63,8 @@ Rails.application.routes.draw do
     get :autocomplete_port_family, :on => :collection
   end
 
-  post '/set_theme', to: 'themes#set', as: :set_theme
+  post 'cookies/accept', to: 'cookies#accept', as: 'cookies_accept'
+  post 'cookies/theme', to: 'cookies#theme', as: 'cookies_theme'
 
   match '*unmatched', to: 'static_pages#not_found', via: :all
 end

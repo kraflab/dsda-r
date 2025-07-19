@@ -15,6 +15,7 @@
     <div class="container">
       <%= render 'layouts/flash_messages' %>
       <%= yield %>
+      <%= render 'layouts/cookies' %>
       <%= render 'layouts/footer' %>
       <%= debug(params.to_unsafe_h) if Rails.env.development? %>
     </div>

@@ -16,6 +16,9 @@ a:hover {
   text-decoration: $link-hover-decoration;
 }
 
+hr {
+}
+
 code {
   background-color: transparent;
   color: $link-color
@@ -220,4 +223,28 @@ span.glyphicon {
 .unstyled-button {
   all: unset;
   cursor: pointer;
+}
+
+.cookie-banner {
+  position: fixed;
+  bottom: 2em;
+  background-color: rgba($gray-base, 0.5);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+  border: 2px solid $gray-light;
+  border-radius: 10px;
+  color: white;
+  padding: 1em;
+  z-index: 1000;
+  text-align: center;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: 90vw;
+}
+
+.cookie-banner .btn {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  background-color: $link-color;
 }
