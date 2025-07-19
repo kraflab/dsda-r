@@ -1,0 +1,6 @@
+<% if cookies[:accept] != 'true' %>
+  <div class=" cookie-banner">
+    This website uses cookies strictly to save your chosen theme and any other view user preferences.
+    <%= button_to 'Accept', cookies_accept_path(), method: :post, class: "btn" %>
+  </div>
+<% end %>

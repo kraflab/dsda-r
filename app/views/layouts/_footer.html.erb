@@ -2,6 +2,21 @@
 <footer class="footer">
   <small>
     <p class="pull-left"> © <%= Time.now.year %></p>
+    <p class="pull-left">&nbsp;|&nbsp;</p>
+    <div class="btn-group p-short">
+      <button class='dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+        Theme
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <% themes.each do |theme| %>
+          <li class=<%= @current_theme == theme.downcase ? 'dropdown-selected' : nil %>>
+            <a><%= button_to theme, cookies_theme_path(theme: theme), method: :post, class: "unstyled-button" %></a>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+
     <a class="pull-right" href="<%= about_url %>">About</a>
     <p class="pull-right">&nbsp;|&nbsp;</p>
     <a class="pull-right" href="<%= changelog_url %>">Changelog</a>

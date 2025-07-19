@@ -31,11 +31,10 @@ $body-bg:               #060606 !default;
 //** Global text color on `<body>`.
 $text-color:            $gray-light !default;
 
-//** Global textual link color.
+//** Global textual links.
 $link-color:            $brand-primary !default;
-//** Link hover color set via `darken()` function.
+$link-decoration:       none !default;
 $link-hover-color:      $link-color !default;
-//** Link hover decoration.
 $link-hover-decoration: underline !default;
 
 
@@ -127,6 +126,7 @@ $table-cell-padding:            8px !default;
 //** Padding for cells in `.table-condensed`.
 $table-condensed-cell-padding:  5px !default;
 
+$table-text-color:              #fff !default;
 //** Default background color used for all tables.
 $table-bg:                      darken($gray-darker, 4%) !default;
 //** Background color used for `.table-striped`.
@@ -421,7 +421,7 @@ $navbar-inverse-toggle-border-color:        #333 !default;
 
 //=== Shared nav styles
 $nav-link-padding:                          10px 15px !default;
-$nav-link-hover-bg:                         $gray-darker !default;
+$nav-link-hover-bg:                         none !default;
 
 $nav-disabled-link-color:                   $gray-light !default;
 $nav-disabled-link-hover-color:             $gray-light !default;
@@ -491,6 +491,8 @@ $jumbotron-bg:                   darken($gray-darker, 5%) !default;
 $jumbotron-heading-color:        inherit !default;
 $jumbotron-font-size:            ceil(($font-size-base * 1.5)) !default;
 $jumbotron-heading-font-size:    ceil(($font-size-base * 4.5)) !default;
+$jumbotron-border:               none !default;
+$jumbotron-border-radius:        0px !default;
 
 
 //== Form states and alerts
@@ -853,7 +855,7 @@ $text-muted:                  $gray-light !default;
 //** Abbreviations and acronyms border color
 $abbr-border-color:           $gray-light !default;
 //** Headings small color
-$headings-small-color:        $gray-light !default;
+$headings-small-color:        $text-color !default;
 //** Blockquote small color
 $blockquote-small-color:      $gray !default;
 //** Blockquote font size

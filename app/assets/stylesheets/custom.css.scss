@@ -6,6 +6,16 @@
 @import "static_pages.scss";
 @import "wads.scss";
 
+a {
+  color: $link-color;
+  text-decoration: $link-decoration;
+}
+
+a:hover {
+  color: $link-hover-color;
+  text-decoration: $link-hover-decoration;
+}
+
 code {
   background-color: transparent;
   color: $link-color
@@ -39,6 +49,14 @@ row-no-top {
 
 .shift-right {
   margin-left: 5px;
+}
+
+.navbar-fixed-top {
+  background-color: rgba($gray-base, 0.3);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+  padding-top: 500px;
+  top: -500px;
 }
 
 .navbar-form {
@@ -84,14 +102,18 @@ row-no-top {
   flex-wrap: wrap;
 }
 
-.wad-letter {
+.wad-letter a {
   margin-left: -2px;
   margin-right: -2px;
 }
 
+.wad-letter a:hover {
+  background-color: rgba($gray-light, 0.3);
+}
+
 table a:not(.btn), .table a:not(.btn) {
   color: $link-color;
-  text-decoration: none;
+  text-decoration: $link-decoration;
 }
 
 .p-short {
@@ -197,4 +219,33 @@ span.glyphicon {
 
 .pagination {
   margin: 0;
+}
+
+.unstyled-button {
+  all: unset;
+  cursor: pointer;
+}
+
+.cookie-banner {
+  position: fixed;
+  bottom: 2em;
+  background-color: rgba($gray-base, 0.5);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+  border: 2px solid $gray-light;
+  border-radius: 10px;
+  color: white;
+  padding: 1em;
+  z-index: 1000;
+  text-align: center;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: 90vw;
+}
+
+.cookie-banner .btn {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  background-color: $link-color;
 }

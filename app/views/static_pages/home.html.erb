@@ -21,9 +21,9 @@
       when starting out. Ready to start recording? Check out the recommended source port for doom speedrunning:
       <a href="https://github.com/kraflab/dsda-doom">DSDA-Doom</a>.
     </p>
-    <% cache "home_v001:#{last_update}" do %>
+    <% cache "home_v002:#{last_update}" do %>
       <h4>
-        Hosting <%= Demo.count %> demos, by <%= Player.count %> players, for
+        Proudly hosting <%= Demo.count %> demos, by <%= Player.count %> players, for
         <%= Wad.count %> wads, with a total time of
         <%= Service::Tics::ToString.call(Demo.all.sum(:tics), with_cs: false) %>
       </h4>

@@ -3,7 +3,9 @@
   <head>
     <title><%= full_title(yield(:title)) %></title>
     <meta name="description" content="<%= yield(:description) %>">
-    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <% if 0 %>
+      <%= stylesheet_link_tag "themes/#{@current_theme}", media: 'all'%>
+    <% end %>
     <%= javascript_include_tag 'application' %>
     <%= csrf_meta_tags %>
     <%= render 'layouts/shim' %>
@@ -13,6 +15,7 @@
     <div class="container">
       <%= render 'layouts/flash_messages' %>
       <%= yield %>
+      <%= render 'layouts/cookies' %>
       <%= render 'layouts/footer' %>
       <%= debug(params.to_unsafe_h) if Rails.env.development? %>
     </div>
