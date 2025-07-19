@@ -23,16 +23,14 @@ $panel-border-radius: 0;
 $jumbotron-bg: $table-bg;
 $jumbotron-border: solid 1px $table-border-color;
 
+$hr-border: darken($text-color, 50%);
+
 .panel-heading {
   background-color: $table-bg !important;
 }
 
 .navbar a:hover, .navbar li:hover {
   text-decoration: $link-hover-decoration;
-}
-
-hr {
-  border-top: 1px solid white;
 }
 
 @import "custom";

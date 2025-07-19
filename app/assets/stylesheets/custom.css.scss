@@ -16,9 +16,6 @@ a:hover {
   text-decoration: $link-hover-decoration;
 }
 
-hr {
-}
-
 code {
   background-color: transparent;
   color: $link-color
@@ -105,9 +102,13 @@ row-no-top {
   flex-wrap: wrap;
 }
 
-.wad-letter {
+.wad-letter a {
   margin-left: -2px;
   margin-right: -2px;
+}
+
+.wad-letter a:hover {
+  background-color: rgba($gray-light, 0.3);
 }
 
 table a:not(.btn), .table a:not(.btn) {
