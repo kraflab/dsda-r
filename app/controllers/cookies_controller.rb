@@ -1,4 +1,6 @@
 class CookiesController < ApplicationController
+  skip_before_action :verify_authenticity_token, only: [:accept, :theme]
+
   def accept
     cookies.permanent[:accept] = 'true'
     redirect_back(fallback_location: root_path)
