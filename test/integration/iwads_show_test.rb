@@ -13,7 +13,7 @@ class IwadsShowTest < ActionDispatch::IntegrationTest
     assert_select "h1 > small"
     assert_match @iwad.name, response.body
     assert_select "a[href=?]", iwad_stats_path(@iwad)
-    @iwad.wads.each do |wad|
+    @iwad.wads.page(1).each do |wad|
       assert_select "a[href=?]", wad_path(wad)
       assert_select "td", wad.name
       assert_select "td", wad.author
