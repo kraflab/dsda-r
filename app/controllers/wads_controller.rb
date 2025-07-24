@@ -92,7 +92,7 @@ class WadsController < ApplicationController
     category = params[:category]
     demos = Domain::Demo.list(
       wad_id: @wad.id, level: level, category: category, standard: true,
-      order_by_record_date: :asc
+      order_by: :recorded_at
     )
     data_full = demos.map { |i| [i.players.first.username, i.tics, i.time, i.recorded_at.to_date.to_s] }
     if data_full.empty?
