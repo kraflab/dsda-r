@@ -1,0 +1,24 @@
+$body-bg: #202020;
+$brand-primary: #A4DE64;
+$text-color: #ddd;
+$component-active-bg: darken($brand-primary, 15%);
+
+$link-color: $brand-primary;
+$link-decoration: none;
+$link-hover-color: $brand-primary;
+$link-hover-decoration: underline;
+
+$table-text-color: $text-color;
+$table-bg: #292929;
+$table-bg-accent: darken($table-bg, 2%);
+
+$panel-bg: $table-bg-accent;
+$panel-inner-border: none;
+$panel-border-radius: 0;
+
+$jumbotron-bg: $table-bg-accent;
+$jumbotron-border: none;
+
+$hr-border: darken(#ddd, 50%);
+
+@import "custom";

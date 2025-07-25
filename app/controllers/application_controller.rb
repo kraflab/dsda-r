@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
     @request_hash = ApiRequestParser.new(options.merge(request: request)).parse_json
   end
 
-  THEMES = %w[dsdarchive doomedsda].freeze
+  THEMES = %w[dsdarchive doomedsda compet-n].freeze
 
   helper_method :themes
   def themes
