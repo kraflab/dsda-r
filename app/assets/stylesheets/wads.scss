@@ -15,7 +15,7 @@
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  top: -1px;
+  top: -2px;
   left: 2px;
   margin: 0;
   padding: 0;
@@ -24,10 +24,12 @@
   border-color: transparent;
   text-decoration: $link-decoration;
   cursor: pointer;
+  vertical-align: baseline;
 }
 
 .dropdown-toggle:hover,
 .dropdown-toggle:focus {
+  color: $link-highlight;
   outline: none;
   text-decoration: underline;
 }
@@ -50,13 +52,20 @@
   scrollbar-width: thin;
 }
 
-.dropdown-menu a {
+.footer .dropdown-menu {
+  top: auto;
+  bottom: calc(100% - 24px);
+}
+
+.dropdown-menu a,
+.dropdown-menu .theme-dropdown-item {
   white-space: nowrap;
   border-radius: 5px;
   text-decoration: none;
 }
 
-.dropdown-menu a:hover {
+.dropdown-menu a:hover,
+.dropdown-menu .theme-dropdown-item:hover {
   background-color: $component-active-bg !important;
 }
 

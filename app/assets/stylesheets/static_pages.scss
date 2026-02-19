@@ -41,7 +41,7 @@
 }
 
 .docs-intro {
-  color: #ccc;
+  color: $panel-title-color;
   background-color: $table-bg-accent;
   border: 1px solid $table-border-color;
   border-radius: 10px;
@@ -58,7 +58,7 @@
 }
 
 .docs-summary {
-  color: white;
+  color: $docs-title-color;
   font-size: 1.5em;
   cursor: pointer;
   font-weight: bold;
