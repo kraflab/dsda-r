@@ -79,6 +79,18 @@ row-no-top {
   background: #383838;
 }
 
+@media (min-width: $screen-sm-max) {
+  .navbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+@media (max-width: $screen-sm-min) {
+  .navbar-fixed-top {
+    background-color: rgba($gray-base, 0.8) !important;
+  }
 .form-control:focus {
     box-shadow: none;
     -webkit-box-shadow: none;
@@ -145,12 +157,6 @@ row-no-top {
 
 .table-left {
   border-left: thin solid $table-border-color;
-}
-
-.navbar {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
 }
 
 .wad-list {
