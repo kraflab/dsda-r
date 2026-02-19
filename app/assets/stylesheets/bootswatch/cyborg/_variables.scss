@@ -145,7 +145,7 @@ $table-bg-hover:                $gray-dark !default;
 $table-bg-active:               $table-bg-hover !default;
 
 //** Border color for table and cell borders.
-$table-border-color:            $gray !default;
+$table-border-color:            $gray-dark !default;
 
 $docs-title-color:              #fff !default;
 
@@ -723,6 +723,7 @@ $panel-body-padding:          15px !default;
 $panel-heading-padding:       10px 15px !default;
 $panel-footer-padding:        $panel-heading-padding !default;
 $panel-border-radius:         $border-radius-base !default;
+$panel-border-color:          $gray-dark !default;
 
 //** Border color for elements within panels
 $panel-inner-border:          $gray-dark !default;

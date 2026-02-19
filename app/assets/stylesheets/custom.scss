@@ -204,6 +204,10 @@ table a:not(.btn):hover, .table a:not(.btn):hover {
   font-weight: 600;
 }
 
+.panel-default {
+  border-color: $panel-border-color;
+}
+
 .panel-default > .panel-heading > .panel-title {
   color: $panel-title-color;
 }

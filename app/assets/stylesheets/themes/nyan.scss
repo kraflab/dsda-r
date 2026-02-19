@@ -18,7 +18,8 @@ $table-bg-accent:               darken($brand-darker, 28px);
 $table-bg:                      darken($table-bg-accent, 5%);
 
 $hr-border: darken($brand-darker, 10px);
-$table-border-color: $table-bg-accent;
+$table-border-color: $table-bg;
+$panel-border-color: $table-bg;
 
 $border-radius-base:        6px;
 $border-radius-large:       10px;
