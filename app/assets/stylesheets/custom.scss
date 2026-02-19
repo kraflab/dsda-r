@@ -79,6 +79,20 @@ row-no-top {
   background: #383838;
 }
 
+@media (min-width: 800px) {
+  .navbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 801px) {
+  .navbar-fixed-top {
+    background-color: rgba($gray-base, 0.8) !important;
+  }
+}
+
 .btn-short {
   margin-top: -10px;
   margin-bottom: 10px;
@@ -130,12 +144,6 @@ row-no-top {
 
 .table-left {
   border-left: thin solid $table-border-color;
-}
-
-.navbar {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
 }
 
 .wad-list {
