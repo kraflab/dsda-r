@@ -11,7 +11,7 @@
       <ul class="dropdown-menu">
         <% themes.each do |theme| %>
           <li class=<%= @current_theme == theme.downcase ? 'dropdown-selected' : nil %>>
-            <a><%= button_to theme, cookies_theme_path(theme: theme), method: :post, class: "unstyled-button" %></a>
+            <%= link_to theme, cookies_theme_path(theme: theme), method: :post, class: "theme-dropdown-item unstyled-button" %>
           </li>
         <% end %>
       </ul>

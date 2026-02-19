@@ -1,0 +1,20 @@
+$body-bg: #060606;
+$brand-primary: #82d825;
+$brand-highlight: #9aff2d;
+$brand-darker: #436e12;
+
+$wad-letter-hover: #60823c;
+
+$input-border-focus: #41aa39;
+
+$font-size-base:          22px;
+$line-height-base:        1;
+
+$font-family-sans-serif:  "Jersey 15", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+//$font-family-serif:       Georgia, "Times New Roman", Times, serif;
+$font-family-monospace:   "Jersey 15", Menlo, Monaco, Consolas, "Courier New", monospace;
+
+$web-font-path: 'https://fonts.googleapis.com/css2?family=Jersey+15&display=swap';
+@import url($web-font-path);
+
+@import "custom";

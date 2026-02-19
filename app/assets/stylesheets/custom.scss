@@ -22,7 +22,16 @@ code {
 }
 
 body {
+  position: relative;
   padding-top: 60px;
+}
+
+.bg-image {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  inset: 0;
+  z-index: -10;
 }
 
 row-no-top {
@@ -66,7 +75,8 @@ row-no-top {
 }
 
 .form-control {
-  color: $gray-dark;
+  color: white;
+  background: #383838;
 }
 
 .btn-short {
@@ -90,6 +100,27 @@ row-no-top {
   display: inline-block;
 }
 
+.well {
+  background-color: $well-bg;
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+  border: $well-border;
+}
+
+.well-sm {
+  padding: 18px;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.port-allowed {
+  margin-bottom: 3em;
+}
+
+.port-allowed h4 {
+  line-height: $line-height-base;
+}
+
 .table-modest {
   width: auto;
   margin-left: auto;
@@ -101,9 +132,28 @@ row-no-top {
   border-left: thin solid $table-border-color;
 }
 
+.navbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 .wad-list {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+}
+
+.wads-brand {
+  font-size: $font-size-large;
+}
+
+.wad-letter:first-child a, .wad-letter:first-child a:hover {
+    border-radius: 5px 0px 0px 5px;
+}
+
+.wad-letter:last-child a, .wad-letter:last-child a:hover {
+    border-radius: 0px 5px 5px 0px;
 }
 
 .wad-letter a {
@@ -112,7 +162,12 @@ row-no-top {
 }
 
 .wad-letter a:hover {
-  background-color: rgba($gray-light, 0.3);
+  background-color: rgba($wad-letter-hover, 0.3);
+}
+
+.page-header {
+  margin-top: 21px;
+  border-bottom: 1px solid $hr-border;
 }
 
 table a:not(.btn), .table a:not(.btn) {
@@ -120,12 +175,41 @@ table a:not(.btn), .table a:not(.btn) {
   text-decoration: $link-decoration;
 }
 
+table a:not(.btn):hover, .table a:not(.btn):hover {
+  color: $link-hover-color;
+  text-decoration: $link-decoration;
+}
+
+.dropdown-item-form { margin: 0; }
+.dropdown-item-form,
+.dropdown-item-form .dropdown-item-button {
+  display: block;
+  width: 100%;
+}
+
+.dropdown-item-button{
+  text-align: left;
+  padding: 4px 10px;
+}
+
 .p-short {
   margin-top: -8px;
 }
 
+.panel-heading {
+  padding-top: 13px;
+}
+
+.panel-heading h3 {
+  font-weight: 600;
+}
+
 .panel-default > .panel-heading > .panel-title {
-  color: #ccc;
+  color: $panel-title-color;
+}
+
+.panel-default > .panel-heading {
+  background-color: $panel-title-bg;
 }
 
 .panel-modest {
@@ -173,6 +257,38 @@ span.glyphicon {
 .table > tbody > tr > th, .table > tbody > tr > td,
 .table > tfoot > tr > th, .table > tfoot > tr > td {
   vertical-align: middle;
+}
+
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th {
+  background-color: $table-title-bg;
+  color: $table-title-color;
+}
+
+.table {
+  border-radius: $border-radius-base;
+}
+
+.table > thead > tr > th {
+  padding-top: 11px;
+}
+
+/* make table use border radius globals */
+.table > thead:first-child > tr:first-child > th:first-child {
+    border-top-left-radius: $border-radius-base !important;
+}
+
+.table > thead:first-child > tr:first-child > th:last-child {
+    border-top-right-radius: $border-radius-base !important;
+}
+
+.table > tbody:last-child > tr:last-child > td:first-child {
+    border-bottom-left-radius: $border-radius-base !important;
+}
+
+.table > tbody:last-child > tr:last-child > td:last-child {
+    border-bottom-right-radius: $border-radius-base !important;
 }
 
 .no-stripe-panel {
@@ -252,4 +368,17 @@ span.glyphicon {
   padding-top: 4px;
   padding-bottom: 4px;
   background-color: $link-color;
+}
+
+.footer .p-short {
+  margin-top: -4px;
+  margin-top: 0px;
+  display: inline-block;
+  vertical-align: baseline;
+}
+
+.debug_dump {
+  background-color: $table-bg;
+  border: 1px solid $panel-inner-border;
+  color: $table-text-color;
 }

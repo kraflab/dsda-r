@@ -15,7 +15,10 @@ $gray:                   #555 !default; // #555
 $gray-light:             #888 !default;   // #999
 $gray-lighter:           #ADAFAE !default; // #eee
 
-$brand-primary:         #2A9FD6 !default;
+$brand-primary:         #2a9fd6 !default;
+$brand-highlight:       #32bdff !default;
+$brand-darker:          #21779f !default;
+
 $brand-success:         #77B300 !default;
 $brand-info:            #9933CC !default;
 $brand-warning:         #FF8800 !default;
@@ -33,10 +36,13 @@ $text-color:            $gray-light !default;
 
 //** Global textual links.
 $link-color:            $brand-primary !default;
+$link-highlight:        $brand-highlight !default;
 $link-decoration:       none !default;
-$link-hover-color:      $link-color !default;
+$link-hover-color:      $brand-highlight !default;
 $link-hover-decoration: underline !default;
 
+// Wad letter navigation
+$wad-letter-hover:      $brand-darker !default;
 
 //== Typography
 //
@@ -109,7 +115,7 @@ $border-radius-small:       3px !default;
 //** Global color for active items (e.g., navs or dropdowns).
 $component-active-color:    #fff !default;
 //** Global background color for active items (e.g., navs or dropdowns).
-$component-active-bg:       $brand-primary !default;
+$component-active-bg:       $brand-darker !default;
 
 //** Width of the `border` for generating carets that indicate dropdowns.
 $caret-width-base:          4px !default;
@@ -120,6 +126,9 @@ $caret-width-large:         5px !default;
 //== Tables
 //
 //## Customizes the `.table` component with basic values, each used across all table variations.
+
+$table-title-bg:                #3c3c3c !default;
+$table-title-color:             #eee !default;
 
 //** Padding for `<th>`s and `<td>`s.
 $table-cell-padding:            8px !default;
@@ -138,6 +147,7 @@ $table-bg-active:               $table-bg-hover !default;
 //** Border color for table and cell borders.
 $table-border-color:            $gray !default;
 
+$docs-title-color:              #fff !default;
 
 //== Buttons
 //
@@ -488,7 +498,7 @@ $pager-disabled-color:                 $gray-light !default;
 $jumbotron-padding:              30px !default;
 $jumbotron-color:                inherit !default;
 $jumbotron-bg:                   darken($gray-darker, 5%) !default;
-$jumbotron-heading-color:        inherit !default;
+$jumbotron-heading-color:        #fff !default;
 $jumbotron-font-size:            ceil(($font-size-base * 1.5)) !default;
 $jumbotron-heading-font-size:    ceil(($font-size-base * 4.5)) !default;
 $jumbotron-border:               none !default;
@@ -705,6 +715,9 @@ $list-group-link-heading-color: #fff !default;
 //
 //##
 
+$panel-title-color:           #eee !default;
+$panel-title-bg:         #3c3c3c !default;
+
 $panel-bg:                    $gray-darker !default;
 $panel-body-padding:          15px !default;
 $panel-heading-padding:       10px 15px !default;
@@ -764,7 +777,7 @@ $thumbnail-caption-padding:   9px !default;
 //##
 
 $well-bg:                     darken($gray-darker, 5%) !default;
-$well-border:                 darken($well-bg, 7%) !default;
+$well-border:                 1px solid darken($well-bg, 7%) !default;
 
 
 //== Badges

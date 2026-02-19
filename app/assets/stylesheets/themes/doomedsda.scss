@@ -1,8 +1,11 @@
-body {
+.bg-image {
   background-image: image-url("redsand.jpg");
 }
 
 $brand-primary: white;
+$brand-highlight: #e3e3e3;
+$brand-darker: #820000 !default;
+
 $text-color: #eee;
 $component-active-bg: #820000;
 
@@ -11,10 +14,17 @@ $link-decoration: underline;
 $link-hover-color: $brand-primary;
 $link-hover-decoration: underline;
 
+$wad-letter-hover: #888 !default;
+
 $table-text-color: $text-color;
 $table-bg: #660001;
 $table-bg-accent: #820000;
 $table-border-color: white;
+
+$panel-title-color: #eee;
+$panel-title-bg: $table-bg !important;
+$table-title-color: #eee;
+$table-title-bg: $table-bg !important;
 
 $panel-bg: $table-bg-accent;
 $panel-inner-border: white;
@@ -23,11 +33,15 @@ $panel-border-radius: 0;
 $jumbotron-bg: $table-bg;
 $jumbotron-border: solid 1px $table-border-color;
 
-$hr-border: darken($text-color, 50%);
+$well-bg: rgba(0, 0, 0, 0.6);
+$well-border: 1px solid #0e0e0e;
 
-.panel-heading {
-  background-color: $table-bg !important;
+.form-control {
+  color: #282828 !important;
+  background: white !important;
 }
+
+$hr-border: darken($text-color, 50%);
 
 .navbar a:hover, .navbar li:hover {
   text-decoration: $link-hover-decoration;

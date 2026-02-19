@@ -1,24 +1,72 @@
-$body-bg: #202020;
-$brand-primary: #A4DE64;
-$text-color: #ddd;
-$component-active-bg: darken($brand-primary, 15%);
+.bg-image {
+  position: fixed !important;
+  background-image: image-url("compet-n-bg.gif");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  opacity: 0.7;
+  //backdrop-filter: blur(2px);
+}
+
+$compet-n-primary: #22FF22;
+$compet-n-darker: #0d2801;
+$compet-n-bg: #103000;
+
+$compet-n-border: darken($compet-n-primary, 40%);
+
+$body-bg: $compet-n-bg;
+$brand-primary: #00c000;
+$brand-highlight: #64ef3d;
+$brand-darker: #4f8116;
+
+$input-border-focus: #41aa39;
+
+$text-color: #C0C0C0;
+$component-active-bg: $brand-darker;
+
+$wad-letter-hover: #60823c;
 
 $link-color: $brand-primary;
 $link-decoration: none;
-$link-hover-color: $brand-primary;
+$link-hover-color: $brand-highlight;
 $link-hover-decoration: underline;
 
+$panel-title-color: $compet-n-primary;
+$panel-title-bg: $compet-n-border;
+$panel-bg: $brand-darker;
+
+$table-title-color: darken($compet-n-primary, 10%);
+$table-title-bg: $compet-n-border;
 $table-text-color: $text-color;
-$table-bg: #292929;
+$table-bg: $compet-n-darker;
 $table-bg-accent: darken($table-bg, 2%);
+$table-border-color: $compet-n-border;
 
 $panel-bg: $table-bg-accent;
-$panel-inner-border: none;
-$panel-border-radius: 0;
+$panel-inner-border: darken($compet-n-primary, 40%);
+//$panel-border-radius: 0;
 
 $jumbotron-bg: $table-bg-accent;
-$jumbotron-border: none;
+$jumbotron-border: solid 2px $panel-inner-border;
+$jumbotron-heading-color: $compet-n-primary;
 
-$hr-border: darken(#ddd, 50%);
+$docs-title-color: $compet-n-primary;
+
+$headings-color: #eee;
+
+$well-bg: $table-bg;
+$well-border: 2px solid $compet-n-border;
+
+$hr-border: $compet-n-border;
 
 @import "custom";
+
+.form-control {
+  color: white;
+  background: #154000;
+}
+
+.panel, .docs-intro, .docs-details {
+  border: solid 2px $panel-inner-border;
+}
