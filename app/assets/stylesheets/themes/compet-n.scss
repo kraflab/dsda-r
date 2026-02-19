@@ -45,6 +45,7 @@ $table-border-color: $compet-n-border;
 
 $panel-bg: $table-bg-accent;
 $panel-inner-border: darken($compet-n-primary, 40%);
+$panel-border-color: $panel-inner-border;
 //$panel-border-radius: 0;
 
 $jumbotron-bg: $table-bg-accent;
@@ -67,6 +68,10 @@ $hr-border: $compet-n-border;
   background: #154000;
 }
 
+.form-control:focus {
+    background-color: lighten(#154000, 4%);
+}
+
 .panel, .docs-intro, .docs-details {
-  border: solid 2px $panel-inner-border;
+  border-width: 2px;
 }
