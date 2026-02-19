@@ -79,7 +79,7 @@ row-no-top {
   background: #383838;
 }
 
-@media (min-width: 800px) {
+@media (min-width: $screen-sm-max) {
   .navbar {
     display: flex;
     flex-wrap: wrap;
@@ -87,7 +87,7 @@ row-no-top {
   }
 }
 
-@media (max-width: 801px) {
+@media (max-width: $screen-sm-min) {
   .navbar-fixed-top {
     background-color: rgba($gray-base, 0.8) !important;
   }
