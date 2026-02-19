@@ -1,25 +1,58 @@
 <% provide(:title, 'Stats') %>
 <% provide(:description, "Detailed stats for the archive as a whole") %>
 
-<div class="page-header">
-  <h1>
-    Stats & Charts
-  </h1>
-</div>
-
 <% cache [:stats_v002, last_update] do %>
   <% time_sum = Demo.all.sum(:tics) %>
   <% demo_count = Demo.count %>
   <% player_count = Player.count %>
   <% wad_count = Wad.count %>
 
-  <h4>Number of demos = <%= demo_count %></h4>
-  <h4>Number of players = <%= player_count %></h4>
-  <h4>Number of wads = <%= wad_count %></h4>
-  <h4>Total demo time = <%= Service::Tics::ToString.call(time_sum, with_cs: false) %> </h4>
-  <h4>Average demos per player = <%= demo_count / player_count %></h4>
-  <h4>Average demos per wad = <%= demo_count/ wad_count %></h4>
-  <h4>Average demo time = <%= Service::Tics::ToString.call(time_sum / demo_count, with_cs: false) %></h4>
+<div class="center-text">
+  <div class="page-header">
+    <h1>
+      Stats & Charts
+    </h1>
+  </div>
+  <div class="panel panel-default panel-modest left-text">
+    <table class="table table-striped table-modest">
+      <div class="panel-heading">
+        <h3 class="panel-title center-text">Stats & Charts</h3>
+      </div>
+      <tbody>
+        <tr>
+          <td>Number of demos</td>
+          <td><%= demo_count %></td>
+        </tr>
+        <tr>
+          <td>Number of players</td>
+          <td><%= player_count %></td>
+        </tr>
+        <tr>
+          <td>Number of wads</td>
+          <td><%= wad_count %></td>
+        </tr>
+        <tr>
+          <td>Total demo time</td>
+          <td><%= Service::Tics::ToString.call(time_sum, with_cs: false) %> </td>
+        </tr>
+        <tr>
+          <td>Average demos per player</td>
+          <td><%= demo_count / player_count %></td>
+        </tr>
+        <tr>
+          <td>Average demos per wad</td>
+          <td><%= demo_count/ wad_count %></td>
+        </tr>
+        <tr>
+          <td>Average demo time</td>
+          <td><%= Service::Tics::ToString.call(time_sum / demo_count, with_cs: false) %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <br>
+</div>
+
 <% end %>
 
 <hr>
