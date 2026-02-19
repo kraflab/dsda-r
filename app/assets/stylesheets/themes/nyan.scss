@@ -88,3 +88,7 @@ hr, .page-header {
   color: white;
   background: #44234e;
 }
+
+.form-control:focus {
+    background-color: lighten(#44234e, 7%);
+}

@@ -68,6 +68,10 @@ $hr-border: $compet-n-border;
   background: #154000;
 }
 
+.form-control:focus {
+    background-color: lighten(#154000, 4%);
+}
+
 .panel, .docs-intro, .docs-details {
   border-width: 2px;
 }

@@ -79,6 +79,21 @@ row-no-top {
   background: #383838;
 }
 
+.form-control:focus {
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    border: 1px solid #282828;
+    background-color: $gray;
+}
+
+.form-control::placeholder {
+  color: darken(white, 40%);
+}
+
+.form-control:focus::placeholder {
+  color: darken(white, 20%);
+}
+
 .btn-short {
   margin-top: -10px;
   margin-bottom: 10px;

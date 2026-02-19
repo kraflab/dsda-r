@@ -42,6 +42,15 @@ $well-border: 1px solid #0e0e0e;
   background: white !important;
 }
 
+.form-control:focus {
+  color: #282828;
+  background: white;
+}
+
+.form-control::Placeholder {
+  color: #777 !important;
+}
+
 $hr-border: darken($text-color, 50%);
 
 .navbar a:hover, .navbar li:hover {
