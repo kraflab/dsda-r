@@ -9,7 +9,6 @@ gem 'jquery-rails'
 gem 'jbuilder',     '~> 2.5'
 gem 'jwt'
 gem 'bcrypt',       '~> 3.1.7'
-gem 'tzinfo-data'
 gem 'rotp'
 
 gem 'faker',                   '~> 3.5'
