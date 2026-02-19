@@ -55,8 +55,7 @@ module Domain
     private
 
     def number_regex_query(query)
-      return query.where('short_name ~ ?', '^[0-9]') if Rails.env.production?
-      query.where('short_name REGEXP ?', '^[0-9]')
+      query.where("substr(short_name, 1, 1) BETWEEN '0' AND '9'")
     end
 
     def find_by_either_name(either_name)
