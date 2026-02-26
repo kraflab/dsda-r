@@ -91,11 +91,12 @@ row-no-top {
   .navbar-fixed-top {
     background-color: rgba($gray-base, 0.8) !important;
   }
-.form-control:focus {
+  .form-control:focus {
     box-shadow: none;
     -webkit-box-shadow: none;
     border: 1px solid #282828;
     background-color: $gray;
+  }
 }
 
 .form-control::placeholder {
