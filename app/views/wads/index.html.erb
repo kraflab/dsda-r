@@ -7,21 +7,23 @@
   <%= wads_header(@wads) %>
 
   <div class="panel panel-default panel-modest left-text">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>File</th>
-          <th>Name</th>
-          <th>Author</th>
-          <th>Iwad</th>
-          <th>Demos</th>
-          <th class="center-text">Length</th>
-        </tr>
-      </thead>
-      <tbody>
-        <%= render @wads %>
-      </tbody>
-    </table>
+    <div class="table-wrapper">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>File</th>
+            <th>Name</th>
+            <th>Author</th>
+            <th>Iwad</th>
+            <th>Demos</th>
+            <th class="center-text">Length</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render @wads %>
+        </tbody>
+      </table>
+    </div>
   </div>
   <div class="short-pagination">
     <%= paginate @wads if @is_paginated %>

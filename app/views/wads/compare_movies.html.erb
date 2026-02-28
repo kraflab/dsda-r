@@ -17,23 +17,25 @@
   </div>
 
   <div class="panel panel-default panel-modest left-text">
-    <table class="table table-striped table-modest">
-      <thead>
-        <tr>
-          <th><%= @demos[0].movie_text %></th>
-          <th><%= @demos[1].movie_text %></th>
-          <th>Difference</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% compare_movies_pairs(@demos[0], @demos[1]).each do |fields| %>
+    <div class="table-wrapper">
+      <table class="table table-striped table-modest">
+        <thead>
           <tr>
-            <td class="right-text demo-time <%= fields[2] < 0 ? "better-time" : "" %>"><%= fields[0] %></td>
-            <td class="right-text demo-time <%= fields[2] > 0 ? "better-time" : "" %>"><%= fields[1] %></td>
-            <td class="right-text demo-time"><%= fields[2] %></td>
+            <th><%= @demos[0].movie_text %></th>
+            <th><%= @demos[1].movie_text %></th>
+            <th>Difference</th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <% compare_movies_pairs(@demos[0], @demos[1]).each do |fields| %>
+            <tr>
+              <td class="right-text demo-time <%= fields[2] < 0 ? "better-time" : "" %>"><%= fields[0] %></td>
+              <td class="right-text demo-time <%= fields[2] > 0 ? "better-time" : "" %>"><%= fields[1] %></td>
+              <td class="right-text demo-time"><%= fields[2] %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

@@ -10,32 +10,34 @@
   </h3>
   <% cache ['wad_history_v001', @demos] do %>
     <div class="panel panel-default panel-modest left-text">
-      <table class="table table-striped table-modest">
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Level</th>
-            <th>Category</th>
-            <th>Player(s)</th>
-            <th>Engine</th>
-            <th class="center-text">Note</th>
-            <th class="center-text">Time</th>
-            <th><span class="glyphicon glyphicon-play" aria-hidden="true" aria-label="video"></span></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @demos.each do |demo| %>
+      <div class="table-wrapper">
+        <table class="table table-striped table-modest">
+          <thead>
             <tr>
-              <td rowspan=3><%= safe_date(demo.recorded_at) %></td>
-              <td rowspan=3><%= demo.level %></td>
-              <td rowspan=3><%= demo.category.name %></td>
-              <%= render demo %>
-              <tr></tr>
-              <%= demo_tags(demo) %>
+              <th>Date</th>
+              <th>Level</th>
+              <th>Category</th>
+              <th>Player(s)</th>
+              <th>Engine</th>
+              <th class="center-text">Note</th>
+              <th class="center-text">Time</th>
+              <th><span class="glyphicon glyphicon-play" aria-hidden="true" aria-label="video"></span></th>
             </tr>
-          <% end %>
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            <% @demos.each do |demo| %>
+              <tr>
+                <td rowspan=3><%= safe_date(demo.recorded_at) %></td>
+                <td rowspan=3><%= demo.level %></td>
+                <td rowspan=3><%= demo.category.name %></td>
+                <%= render demo %>
+                <tr></tr>
+                <%= demo_tags(demo) %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
     </div>
   <% end %>
   <br>

@@ -40,11 +40,13 @@
         <div class="panel-heading">
           <h3 class="panel-title">Active Wads (last <%= day_range %> days)</h3>
         </div>
-        <table class="table">
-          <% active_wads(day_range).each do |wad_id, count| %>
-            <%= active_wad_entry(Wad.find(wad_id), count) %>
-          <% end %>
-        </table>
+        <div class="table-wrapper">
+          <table class="table">
+            <% active_wads(day_range).each do |wad_id, count| %>
+              <%= active_wad_entry(Wad.find(wad_id), count) %>
+            <% end %>
+          </table>
+        </div>
       </div>
     </div>
     <div class="center-text col-md-6">
@@ -52,11 +54,13 @@
         <div class="panel-heading">
           <h3 class="panel-title">Active Players (last <%= day_range %> days)</h3>
         </div>
-        <table class="table">
-          <% active_players(day_range).each do |player_id, count| %>
-            <%= active_player_entry(Player.find(player_id), count) %>
-          <% end %>
-        </table>
+        <div class="table-wrapper">
+          <table class="table">
+            <% active_players(day_range).each do |player_id, count| %>
+              <%= active_player_entry(Player.find(player_id), count) %>
+            <% end %>
+          </table>
+        </div>
       </div>
     </div>
   </div>

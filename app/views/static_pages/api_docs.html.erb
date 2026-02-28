@@ -7,66 +7,74 @@
 
   <div class="docs-container">
     <div class="docs-intro left-text" style="background-color: white;">
-      <table class="table docs-table">
-        <thead>
-          <tr>
-            <th>Term</th>
-            <th>Meaning</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>standard</code></td>
-            <td>A standard demo is a demo that is NOT coop, solo-net, TAS, cheated nor suspect.</td>
-          </tr>
-          <tr>
-            <td><code>record</code></td>
-            <td>The record is the standard demo with the fastest time for a certain category (either undisputed_record or tic_record are true).</td>
-          </tr>
-          <tr>
-            <td><code>undisputed_record</code></td>
-            <td>The record demo doesnt have any other standard demos in its category</td>
-          </tr>
-          <tr>
-            <td><code>tic_record</code></td>
-            <td>The record demo has competition in its category. In the tables these demos have a crown.</td>
-          </tr>
-          <tr>
-            <td><code>second_barrier</code></td>
-            <td>The demo was the first to beat the second barrier, but is slower than the tic_record. In the tables these demos have a clock.</td>
-          </tr>
-          <tr>
-            <td><code>guys</code></td>
-            <td>How many doomguys there are in the demo. May or may not be the same as the number of players.</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="panel-default">
+        <div class="table-wrapper">
+          <table class="table docs-table">
+            <thead>
+              <tr>
+                <th>Term</th>
+                <th>Meaning</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>standard</code></td>
+                <td>A standard demo is a demo that is NOT coop, solo-net, TAS, cheated nor suspect.</td>
+              </tr>
+              <tr>
+                <td><code>record</code></td>
+                <td>The record is the standard demo with the fastest time for a certain category (either undisputed_record or tic_record are true).</td>
+              </tr>
+              <tr>
+                <td><code>undisputed_record</code></td>
+                <td>The record demo doesnt have any other standard demos in its category</td>
+              </tr>
+              <tr>
+                <td><code>tic_record</code></td>
+                <td>The record demo has competition in its category. In the tables these demos have a crown.</td>
+              </tr>
+              <tr>
+                <td><code>second_barrier</code></td>
+                <td>The demo was the first to beat the second barrier, but is slower than the tic_record. In the tables these demos have a clock.</td>
+              </tr>
+              <tr>
+                <td><code>guys</code></td>
+                <td>How many doomguys there are in the demo. May or may not be the same as the number of players.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
     <% get_docs().map do |c| %>
       <details class="docs-details left-text">
         <summary class="docs-summary"><%= c[:endpoint].html_safe %></summary>
         <p><%= c[:description].html_safe %></p>
         <br>
-        <table class="table docs-table">
-          <thead>
-            <tr>
-              <th>Parameter</th>
-              <th>Required</th>
-              <th>Type</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% c[:parameters].map do |p| %>
-              <tr>
-                <td><code><%= p[:name] %></code></td>
-                <td><%= p[:required] ? "yes" : "no" %></td>
-                <td><%= p[:type] %></td>
-                <td><%= p[:description].html_safe %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
+        <div class="panel-default">
+          <div class="table-wrapper">
+            <table class="table docs-table">
+              <thead>
+                <tr>
+                  <th>Parameter</th>
+                  <th>Required</th>
+                  <th>Type</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% c[:parameters].map do |p| %>
+                  <tr>
+                    <td><code><%= p[:name] %></code></td>
+                    <td><%= p[:required] ? "yes" : "no" %></td>
+                    <td><%= p[:type] %></td>
+                    <td><%= p[:description].html_safe %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
         <hr>
         <h5>Example Request</h5>
         <pre class="docs-pre"><%= c[:example_request] %></pre>

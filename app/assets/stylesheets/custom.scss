@@ -152,6 +152,10 @@ row-no-top {
   line-height: $line-height-base;
 }
 
+.table, table {
+  margin-bottom: 0px !important;
+}
+
 .table-modest {
   width: auto;
   margin-left: auto;
@@ -233,10 +237,12 @@ table a:not(.btn):hover, .table a:not(.btn):hover {
   border-color: $panel-border-color;
 }
 
+.panel-heading > .panel-title,
 .panel-default > .panel-heading > .panel-title {
   color: $panel-title-color;
 }
 
+.panel-heading,
 .panel-default > .panel-heading {
   background-color: $panel-title-bg;
 }
