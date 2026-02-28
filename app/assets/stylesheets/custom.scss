@@ -169,6 +169,12 @@ row-no-top {
   line-height: $line-height-base;
 }
 
+// scrollbar colour
+pre, .table-wrapper {
+  scrollbar-color: darken($brand-primary, 20%) $table-bg;
+}
+
+
 .table-wrapper {
   display: block;
   overflow-x: auto;

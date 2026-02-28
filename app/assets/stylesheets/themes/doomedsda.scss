@@ -61,4 +61,9 @@ $hr-border: darken($text-color, 50%);
   border-radius: none !important;
 }
 
+// scrollbar colour
+pre, .table-wrapper {
+  scrollbar-color: white $table-bg !important;
+}
+
 @import "custom";
