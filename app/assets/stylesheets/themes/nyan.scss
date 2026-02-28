@@ -92,3 +92,13 @@ hr, .page-header {
 .form-control:focus {
     background-color: lighten(#44234e, 7%);
 }
+
+.table > thead > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > th,
+.table > tbody > tr > td,
+.table > tfoot > tr > th,
+.table > tfoot > tr > td {
+  border-top: 2px solid #360e42;
+}
+
