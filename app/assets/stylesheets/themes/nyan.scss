@@ -51,12 +51,19 @@ $input-border-focus: #c179e4;
   background: -webkit-linear-gradient(340deg, rgba(204, 204, 204, 0.01) 0%, rgba(89, 25, 131, 0.1) 100%);
   background: -moz-linear-gradient(340deg, rgba(204, 204, 204, 0.01) 0%, rgba(89, 25, 131, 0.1) 100%);
   box-shadow: 0 0 15px 0px rgba(0, 0, 0, 1);
+  -webkit-box-shadow: 0 0 15px 0px rgba(0, 0, 0, 1);
 }
 
 .panel-heading, .table > thead > tr {
   background: linear-gradient(340deg, rgb(128, 20, 181) 0%, rgb(89, 25, 131) 100%);
   background: -webkit-linear-gradient(340deg, rgb(128, 20, 181) 0%, rgb(89, 25, 131) 100%);
   background: -moz-linear-gradient(340deg, rgb(128, 20, 181) 0%, rgb(89, 25, 131) 100%);
+}
+
+.navbar-form .form-group,
+.navbar-form input {
+  box-shadow: 0 0 15px 0px rgba(0, 0, 0, 1);
+  -webkit-box-shadow: 0 0 15px 0px rgba(0, 0, 0, 1);
 }
 
 .table > thead > tr > th {
