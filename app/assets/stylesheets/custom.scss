@@ -93,8 +93,43 @@ row-no-top {
 
 /* Mobile Only */
 @media (max-width: $screen-sm-min) {
+
+  // top nav tweaks
   .navbar-fixed-top {
     background-color: rgba($gray-base, 0.8) !important;
+  }
+
+  .navbar-form .form-group {
+    margin-bottom: 5px;
+    width: 100%;
+    margin-right: 8px;
+    height: 30px;
+  }
+
+  form.navbar-form.navbar-left.form-inline {
+    padding: 3px 25px;
+    display: flex;
+  }
+
+  #header-navbar > .nav > li {
+    border-bottom: 1px solid $gray-dark;
+  }
+
+  #header-navbar > .nav:last-child > li:first-child {
+      border-top: 1px solid $gray-dark;
+  }
+
+  #header-navbar > .nav:last-child > li:last-child {
+      border-bottom: none;
+  }
+
+  #header-navbar > .navbar-nav {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+
+  #header-navbar {
+    margin-top: 50px;
   }
 
   // table tweaks
