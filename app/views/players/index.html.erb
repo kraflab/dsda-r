@@ -5,18 +5,20 @@
   <%= players_header(@players) %>
 
   <div class="panel panel-default panel-modest left-text">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Demos</th>
-          <th class="center-text">Length</th>
-        </tr>
-      </thead>
-      <tbody>
-        <%= render @players %>
-      </tbody>
-    </table>
+    <div class="table-wrapper">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Demos</th>
+            <th class="center-text">Length</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render @players %>
+        </tbody>
+      </table>
+    </div>
   </div>
   <br>
   <%= paginate @players %>

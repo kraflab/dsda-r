@@ -10,39 +10,41 @@
   </h3>
   <% cache ['wad_table_view_v003', @demos] do %>
     <div class="panel panel-default panel-modest left-text">
-      <table class="table table-striped table-modest">
-        <thead>
-          <tr>
-            <th>Level</th>
-            <th>Player</th>
-            <th class="center-text">Time</th>
-            <th><span class="glyphicon glyphicon-info-sign" aria-hidden="true" aria-label="cross-listed category" title="Cross-listed Category"></span></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @demos.each do |level, demo| %>
-            <% if demo %>
-              <tr>
-                <td><%= demo.level %></td>
-                <td class="player-cell"><%= demo.players_text %></td>
-                <%= demo_time_cell(demo) %>
-                <td>
-                  <% if @category != demo.category_name %>
-                  <span class="glyphicon glyphicon-info-sign" aria-hidden="true" aria-label="cross-listed category" title="<%= demo.category_name %>"></span>
-                  <% end %>
-                </td>
-              </tr>
-            <% else %>
-              <tr>
-                <td><%= level %></td>
-                <td class="player-cell"></td>
-                <td></td>
-                <td></td>
-              </tr>
+      <div class="table-wrapper">
+        <table class="table table-striped table-modest">
+          <thead>
+            <tr>
+              <th>Level</th>
+              <th>Player</th>
+              <th class="center-text">Time</th>
+              <th><span class="glyphicon glyphicon-info-sign" aria-hidden="true" aria-label="cross-listed category" title="Cross-listed Category"></span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @demos.each do |level, demo| %>
+              <% if demo %>
+                <tr>
+                  <td><%= demo.level %></td>
+                  <td class="player-cell"><%= demo.players_text %></td>
+                  <%= demo_time_cell(demo) %>
+                  <td>
+                    <% if @category != demo.category_name %>
+                    <span class="glyphicon glyphicon-info-sign" aria-hidden="true" aria-label="cross-listed category" title="<%= demo.category_name %>"></span>
+                    <% end %>
+                  </td>
+                </tr>
+              <% else %>
+                <tr>
+                  <td><%= level %></td>
+                  <td class="player-cell"></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              <% end %>
             <% end %>
-          <% end %>
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      </div>
     </div>
   <% end %>
 </div>

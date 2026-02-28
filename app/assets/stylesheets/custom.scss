@@ -72,6 +72,9 @@ row-no-top {
   margin-top: 6px;
   padding-right: 0;
   padding-left: 5px;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  border: none;
 }
 
 .form-control {
@@ -79,6 +82,7 @@ row-no-top {
   background: #383838;
 }
 
+/* Desktop */
 @media (min-width: $screen-sm-max) {
   .navbar {
     display: flex;
@@ -87,10 +91,61 @@ row-no-top {
   }
 }
 
+/* Mobile Only */
 @media (max-width: $screen-sm-min) {
+
+  // top nav tweaks
   .navbar-fixed-top {
     background-color: rgba($gray-base, 0.8) !important;
   }
+
+  .navbar-form .form-group {
+    margin-bottom: 5px;
+    width: 100%;
+    margin-right: 8px;
+    height: 30px;
+  }
+
+  form.navbar-form.navbar-left.form-inline {
+    padding: 3px 25px;
+    display: flex;
+  }
+
+  #header-navbar > .nav > li {
+    border-bottom: 1px solid $gray-dark;
+  }
+
+  #header-navbar > .nav:last-child > li:first-child {
+      border-top: 1px solid $gray-dark;
+  }
+
+  #header-navbar > .nav:last-child > li:last-child {
+      border-bottom: none;
+  }
+
+  #header-navbar > .navbar-nav {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+
+  #header-navbar {
+    margin-top: 50px;
+  }
+
+  // table tweaks
+  .table-modest,
+  .panel-modest {
+    max-width: 100% !important;
+  }
+
+  .table, table {
+    margin-bottom: 0px !important;
+  }
+
+  .col-md-6 {
+    padding: 0px !important;
+  }
+
   .form-control:focus {
     box-shadow: none;
     -webkit-box-shadow: none;
@@ -147,6 +202,22 @@ row-no-top {
 
 .port-allowed h4 {
   line-height: $line-height-base;
+}
+
+// scrollbar colour
+pre, .table-wrapper {
+  scrollbar-color: darken($brand-primary, 20%) $table-bg;
+}
+
+
+.table-wrapper {
+  display: block;
+  overflow-x: auto;
+  border-radius: $border-radius-base;
+}
+
+.table, table {
+  margin-bottom: 0px !important;
 }
 
 .table-modest {
@@ -230,10 +301,12 @@ table a:not(.btn):hover, .table a:not(.btn):hover {
   border-color: $panel-border-color;
 }
 
+.panel-heading > .panel-title,
 .panel-default > .panel-heading > .panel-title {
   color: $panel-title-color;
 }
 
+.panel-heading,
 .panel-default > .panel-heading {
   background-color: $panel-title-bg;
 }

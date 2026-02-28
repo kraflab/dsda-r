@@ -57,4 +57,13 @@ $hr-border: darken($text-color, 50%);
   text-decoration: $link-hover-decoration;
 }
 
+.table-wrapper {
+  border-radius: none !important;
+}
+
+// scrollbar colour
+pre, .table-wrapper {
+  scrollbar-color: white $table-bg !important;
+}
+
 @import "custom";

@@ -13,41 +13,43 @@
     </h1>
   </div>
   <div class="panel panel-default panel-modest left-text">
-    <table class="table table-striped table-modest">
-      <div class="panel-heading">
-        <h3 class="panel-title center-text">Iwad Stats</h3>
-      </div>
-      <tbody>
-        <tr>
-          <td>Number of demos</td>
-          <td><%= stats[:demo_count] %></td>
-        </tr>
-        <tr>
-          <td>Number of players</td>
-          <td><%= stats[:player_count] %></td>
-        </tr>
-        <tr>
-          <td>Number of wads</td>
-          <td><%= stats[:wad_count] %></td>
-        </tr>
-        <tr>
-          <td>Total demo time</td>
-          <td><%= stats[:total_time] %></td>
-        </tr>
-        <tr>
-          <td>Average demos per player</td>
-          <td><%= stats[:demo_count] / stats[:player_count] %></td>
-        </tr>
-        <tr>
-          <td>Average demos per wad</td>
-          <td><%= stats[:demo_count] / stats[:wad_count] %></td>
-        </tr>
-        <tr>
-          <td>Average demo time</td>
-          <td><%= stats[:average_time] %></td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-wrapper">
+      <table class="table table-striped table-modest">
+        <div class="panel-heading">
+          <h3 class="panel-title center-text">Iwad Stats</h3>
+        </div>
+        <tbody>
+          <tr>
+            <td>Number of demos</td>
+            <td><%= stats[:demo_count] %></td>
+          </tr>
+          <tr>
+            <td>Number of players</td>
+            <td><%= stats[:player_count] %></td>
+          </tr>
+          <tr>
+            <td>Number of wads</td>
+            <td><%= stats[:wad_count] %></td>
+          </tr>
+          <tr>
+            <td>Total demo time</td>
+            <td><%= stats[:total_time] %></td>
+          </tr>
+          <tr>
+            <td>Average demos per player</td>
+            <td><%= stats[:demo_count] / stats[:player_count] %></td>
+          </tr>
+          <tr>
+            <td>Average demos per wad</td>
+            <td><%= stats[:demo_count] / stats[:wad_count] %></td>
+          </tr>
+          <tr>
+            <td>Average demo time</td>
+            <td><%= stats[:average_time] %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
   <br>
 </div>

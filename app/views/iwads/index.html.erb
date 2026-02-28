@@ -5,17 +5,19 @@
   <%= iwads_header(@iwads) %>
 
   <div class="panel panel-default panel-modest left-text">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Author</th>
-          <th>Wads</th>
-        </tr>
-      </thead>
-      <tbody>
-        <%= render @iwads %>
-      </tbody>
-    </table>
+    <div class="table-wrapper">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Author</th>
+            <th>Wads</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render @iwads %>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
